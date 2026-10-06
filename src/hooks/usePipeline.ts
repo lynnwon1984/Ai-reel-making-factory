@@ -9,15 +9,23 @@ import type {
   SeedancePrompt,
   QualityReport,
   Storyboard,
+  DiagnosisResult,
+  RepairResult,
+  RepairFinalResult,
 } from '../lib/types';
 import { PIPELINE_STEPS, DEFAULT_SETTINGS } from '../lib/constants';
 
 const API_ENDPOINTS: Record<StageId, string> = {
   audit: '/api/pipeline/step1-audit',
   analyze: '/api/pipeline/step2-analyze',
+  diagnose: '/api/pipeline/step2-diagnose',
+  repair: '/api/pipeline/step2-repair',
   decompose: '/api/pipeline/step3-decompose',
   prompt_gen: '/api/pipeline/step4-prompt-gen',
   quality_check: '/api/pipeline/step5-quality',
+  decompose_check: '/api/pipeline/step3-decompose-check',
+  promptgen_check: '/api/pipeline/step4-check',
+  repair_final: '/api/pipeline/step5-repair',
 };
 
 function createInitialSteps(): PipelineStepState[] {
@@ -170,12 +178,15 @@ async function callStepSSE(
   });
 }
 
-interface PipelineResults {
+export interface PipelineResults {
   purifiedScript?: PurifiedScript;
   analysis?: ScriptAnalysis;
+  diagnosis?: DiagnosisResult;
+  repair?: RepairResult;
   shots?: Shot[];
   seedancePrompts?: SeedancePrompt[];
   qualityReport?: QualityReport;
+  repairFinal?: RepairFinalResult;
 }
 
 export function usePipeline() {
@@ -238,6 +249,25 @@ export function usePipeline() {
             customPrompt,
           };
           break;
+        case 'decompose_check':
+          if (!results.shots || !results.analysis) throw new Error('Missing data from previous steps');
+          body = { shots: results.shots, analysis: results.analysis, settings, customPrompt };
+          break;
+        case 'promptgen_check':
+          if (!results.seedancePrompts) throw new Error('Missing data from previous steps');
+          body = { seedancePrompts: results.seedancePrompts, settings, customPrompt };
+          break;
+        case 'repair_final':
+          if (!results.shots || !results.analysis || !results.qualityReport)
+            throw new Error('Missing data from previous steps');
+          body = {
+            shots: results.shots,
+            analysis: results.analysis,
+            qualityReport: results.qualityReport,
+            settings,
+            customPrompt,
+          };
+          break;
         default:
           throw new Error(`Unknown stage: ${stageId}`);
       }
@@ -284,6 +314,9 @@ export function usePipeline() {
             break;
           case 'quality_check':
             resultsRef.current.qualityReport = result as QualityReport;
+            break;
+          case 'repair_final':
+            resultsRef.current.repairFinal = result as RepairFinalResult;
             break;
         }
 
@@ -419,26 +452,41 @@ export function usePipeline() {
       if (stepIndex <= 0) {
         results.purifiedScript = undefined;
         results.analysis = undefined;
+        results.diagnosis = undefined;
+        results.repair = undefined;
         results.shots = undefined;
         results.seedancePrompts = undefined;
         results.qualityReport = undefined;
       } else if (stepIndex <= 1) {
         results.analysis = undefined;
+        results.diagnosis = undefined;
+        results.repair = undefined;
         results.shots = undefined;
         results.seedancePrompts = undefined;
         results.qualityReport = undefined;
       } else if (stepIndex <= 2) {
+        results.diagnosis = undefined;
+        results.repair = undefined;
         results.shots = undefined;
         results.seedancePrompts = undefined;
         results.qualityReport = undefined;
       } else if (stepIndex <= 3) {
+        results.repair = undefined;
+        results.shots = undefined;
+        results.seedancePrompts = undefined;
+        results.qualityReport = undefined;
+      } else if (stepIndex <= 4) {
+        results.shots = undefined;
+        results.seedancePrompts = undefined;
+        results.qualityReport = undefined;
+      } else if (stepIndex <= 5) {
         results.seedancePrompts = undefined;
         results.qualityReport = undefined;
       } else {
         results.qualityReport = undefined;
       }
 
-      if (stepIndex >= 4) {
+      if (stepIndex >= 6) {
         setStoryboard(null);
       }
 
@@ -473,6 +521,14 @@ export function usePipeline() {
     settingsRef.current = settings;
   }, []);
 
+  const setScriptText = useCallback((text: string) => {
+    scriptTextRef.current = text;
+  }, []);
+
+  const setPrevResults = useCallback((results: Partial<PipelineResults>) => {
+    resultsRef.current = { ...resultsRef.current, ...results };
+  }, []);
+
   return {
     steps,
     isRunning,
@@ -484,5 +540,8 @@ export function usePipeline() {
     abort,
     updateSettings,
     settingsRef,
+    setScriptText,
+    setPrevResults,
+    executeStep,
   };
 }

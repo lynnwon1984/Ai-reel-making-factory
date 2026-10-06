@@ -1,10 +1,14 @@
 import type { StageConfig, PipelineSettings, StageId } from './types.ts';
 import auditSkill from '../../skills/audit.md?raw';
 import analyzeSkill from '../../skills/analyze.md?raw';
+import diagnoseSkill from '../../skills/diagnose.md?raw';
+import repairSkill from '../../skills/repair.md?raw';
 import decomposeSkill from '../../skills/decompose.md?raw';
 import promptgenSkill from '../../skills/promptgen.md?raw';
 import qualitySkill from '../../skills/quality.md?raw';
-
+import decomposeCheckSkill from '../../skills/decompose-check.md?raw';
+import promptgenCheckSkill from '../../skills/promptgen-check.md?raw';
+import repairFinalSkill from '../../skills/repair_final.md?raw';
 // ===== Seedance 标准词汇表 =====
 
 export const SHOT_TYPES = [
@@ -44,7 +48,7 @@ export const STYLE_PRESETS = [
   { id: 'custom', name: '自定义', description: '用户自定义风格' },
 ] as const;
 
-// ===== 5 阶段默认配置 =====
+// ===== 7 阶段默认配置 =====
 
 export const STAGE_CONFIGS: StageConfig[] = [
   {
@@ -62,6 +66,22 @@ export const STAGE_CONFIGS: StageConfig[] = [
     defaultSystemPrompt: analyzeSkill,
     availableVariables: ['purifiedScript'],
     outputFormat: 'ScriptAnalysis JSON',
+  },
+  {
+    id: 'diagnose',
+    name: '剧本诊断',
+    description: '基于分析结果检测剧本中的逻辑断链、角色问题、节奏缺陷',
+    defaultSystemPrompt: diagnoseSkill,
+    availableVariables: ['analysis', 'scriptText'],
+    outputFormat: 'DiagnosisResult JSON',
+  },
+  {
+    id: 'repair',
+    name: '剧本修复',
+    description: '根据诊断结果自动修复剧本缺陷',
+    defaultSystemPrompt: repairSkill,
+    availableVariables: ['diagnosis', 'scriptText'],
+    outputFormat: 'RepairResult JSON',
   },
   {
     id: 'decompose',
@@ -86,6 +106,30 @@ export const STAGE_CONFIGS: StageConfig[] = [
     defaultSystemPrompt: qualitySkill,
     availableVariables: ['shots', 'analysis', 'seedancePrompts'],
     outputFormat: 'QualityReport JSON',
+  },
+  {
+    id: 'decompose_check',
+    name: '分镜质检',
+    description: '检查分镜设计结果的合规性和完整性',
+    defaultSystemPrompt: decomposeCheckSkill,
+    availableVariables: ['shots', 'analysis'],
+    outputFormat: 'DecomposeCheckResult JSON',
+  },
+  {
+    id: 'promptgen_check',
+    name: 'Seedance Prompt 质检',
+    description: '检查 Seedance Prompt 的格式合规性和可执行性',
+    defaultSystemPrompt: promptgenCheckSkill,
+    availableVariables: ['seedancePrompts', 'targetVersion'],
+    outputFormat: 'PromptgenCheckResult JSON',
+  },
+  {
+    id: 'repair_final',
+    name: '最终修复与格式化',
+    description: '基于质检报告修复分镜问题，并格式化为标准分镜头剧本输出',
+    defaultSystemPrompt: repairFinalSkill,
+    availableVariables: ['qualityReport', 'shots', 'analysis'],
+    outputFormat: 'RepairFinalResult JSON (fixedIssues + manualReviewItems + formatCompliance + finalStoryboardText)',
   },
 ];
 

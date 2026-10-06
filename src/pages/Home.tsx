@@ -60,7 +60,7 @@ export default function Home() {
 
   const handleModuleClick = (moduleId: string) => {
     const project = createProject(undefined, moduleId);
-    navigate(`/workspace/${project.id}`);
+    navigate(`/project/${project.id}/step1`);
   };
 
   const handleDelete = (id: string) => {
@@ -119,7 +119,7 @@ export default function Home() {
                 <div
                   key={project.id}
                   className="bg-gray-800/50 border border-gray-700/50 rounded-xl p-5 hover:border-gray-600/50 hover:shadow-md transition-all cursor-pointer group"
-                  onClick={() => navigate(`/workspace/${project.id}`)}
+                  onClick={() => navigate(`/project/${project.id}/step1`)}
                 >
                   <div className="flex items-start justify-between mb-3">
                     <h3 className="text-sm font-semibold text-gray-300 group-hover:text-blue-400 transition-colors truncate">

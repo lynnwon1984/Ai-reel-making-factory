@@ -1,4 +1,4 @@
-import type { Storyboard, SeedancePrompt, PurifiedScript } from '../lib/types';
+import type { Storyboard, SeedancePrompt, PurifiedScript, DiagnosisResult } from '../lib/types';
 
 export function exportToJSON(storyboard: Storyboard): string {
   return JSON.stringify(storyboard, null, 2);
@@ -169,6 +169,105 @@ export function exportAuditReport(
   const a = document.createElement('a');
   a.href = url;
   a.download = `${projectName || '未命名项目'}_审计报告.md`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+export function exportFinalStoryboard(text: string, projectName: string): void {
+  const content = `# ${projectName || '未命名项目'} — 最终分镜头剧本\n\n${text}`;
+  const blob = new Blob([content], { type: 'text/markdown;charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `${projectName || '未命名项目'}_最终分镜头剧本.md`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+export function exportFinalQualityReport(report: {
+  fixedIssues: number;
+  manualReviewItems: string[];
+  formatCompliance: number;
+}, projectName: string): void {
+  const lines: string[] = [];
+  lines.push(`# ${projectName || '未命名项目'} — 最终质检报告\n`);
+  lines.push(`## 修复摘要\n`);
+  lines.push(`- 已修复问题数：${report.fixedIssues}`);
+  lines.push(`- 格式合规度：${report.formatCompliance}/100\n`);
+  if (report.manualReviewItems.length > 0) {
+    lines.push(`## 需人工确认项（${report.manualReviewItems.length} 项）\n`);
+    report.manualReviewItems.forEach((item, i) => {
+      lines.push(`${i + 1}. ${item}`);
+    });
+  } else {
+    lines.push(`## 需人工确认项\n`);
+    lines.push(`无需人工确认的项目。\n`);
+  }
+  const content = lines.join('\n');
+  const blob = new Blob([content], { type: 'text/markdown;charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `${projectName || '未命名项目'}_最终质检报告.md`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+
+export function exportDiagnosisReport(diagnosis: DiagnosisResult, projectName: string): void {
+  const lines: string[] = [];
+  lines.push(`# ${projectName} — 剧本诊断报告\n`);
+  lines.push(`## 诊断摘要\n`);
+  lines.push(`- 问题总数：${diagnosis.summary.totalIssues}`);
+  lines.push(`- 严重问题：${diagnosis.summary.criticalCount}`);
+  lines.push(`- 中等问题：${diagnosis.summary.moderateCount}`);
+  lines.push(`- 轻微问题：${diagnosis.summary.minorCount}\n`);
+
+  if (diagnosis.issues.length > 0) {
+    lines.push(`## 问题列表\n`);
+
+    // Sort by severity: 严重 > 中等 > 轻微
+    const severityOrder: Record<string, number> = { '严重': 0, '中等': 1, '轻微': 2 };
+    const sorted = [...diagnosis.issues].sort(
+      (a, b) => (severityOrder[a.severity] ?? 3) - (severityOrder[b.severity] ?? 3)
+    );
+
+    sorted.forEach((issue, i) => {
+      const icon = issue.severity === '严重' ? '🔴' : issue.severity === '中等' ? '🟡' : '🔵';
+      lines.push(`### ${i + 1}. ${icon} [${issue.severity}] ${issue.type}`);
+      lines.push(`**位置**：${issue.location}`);
+      lines.push(`**描述**：${issue.description}`);
+      lines.push(`**建议**：${issue.suggestion}\n`);
+    });
+  } else {
+    lines.push(`## 问题列表\n`);
+    lines.push(`未检测到剧本问题。\n`);
+  }
+
+  const content = lines.join('\n');
+  const blob = new Blob([content], { type: 'text/markdown;charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `${projectName || '未命名项目'}_诊断报告.md`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+export function exportRepairedScript(repairedText: string, projectName: string): void {
+  const blob = new Blob([repairedText], { type: 'text/plain;charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `${projectName || '未命名项目'}_修复后剧本.txt`;
   document.body.appendChild(a);
   a.click();
   document.body.removeChild(a);

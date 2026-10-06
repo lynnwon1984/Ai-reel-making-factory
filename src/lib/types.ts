@@ -1,6 +1,6 @@
 // ===== Stage 配置相关 =====
 
-export type StageId = 'audit' | 'analyze' | 'decompose' | 'prompt_gen' | 'quality_check';
+export type StageId = 'audit' | 'analyze' | 'diagnose' | 'repair' | 'decompose' | 'prompt_gen' | 'quality_check' | 'decompose_check' | 'promptgen_check' | 'repair_final';
 
 export interface StageConfig {
   id: StageId;
@@ -102,6 +102,42 @@ export interface ScriptAnalysis {
   emotionalArc: string;            // 情绪曲线描述
   keyPropsTracking: Record<string, string>; // 关键道具追踪（道具名 → 描述）
   wardrobeTracking: Record<string, string[]>; // 服装追踪（角色名 → 服装列表）
+}
+
+// ===== Stage 2b 输出：诊断结果 =====
+
+export interface DiagnosisIssue {
+  type: '空间跳跃' | '情绪突变' | '信息断层' | '时间矛盾' | '角色消失' | '性格突变' | '节奏拖沓' | '结构缺陷';
+  severity: '严重' | '中等' | '轻微';
+  location: string;
+  description: string;
+  suggestion: string;
+}
+
+export interface DiagnosisResult {
+  issues: DiagnosisIssue[];
+  summary: {
+    totalIssues: number;
+    criticalCount: number;
+    moderateCount: number;
+    minorCount: number;
+  };
+}
+
+// ===== Stage 2c 输出：修复结果 =====
+
+export interface RepairResult {
+  repairedText: string;
+  fixCount: number;
+}
+
+// ===== Stage 2d 输出：最终修复结果 =====
+
+export interface RepairFinalResult {
+  fixedIssues: number;
+  manualReviewItems: string[];
+  formatCompliance: number;
+  finalStoryboardText: string;
 }
 
 // ===== Stage 3 输出：分镜 =====
