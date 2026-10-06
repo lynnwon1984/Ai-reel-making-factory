@@ -25,19 +25,6 @@ export default function Layout() {
             <span>首页</span>
           </NavLink>
           <NavLink
-            to="/workspace"
-            className={({ isActive }) =>
-              `flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm transition-colors ${
-                isActive
-                  ? 'bg-gray-700 text-white'
-                  : 'text-gray-400 hover:bg-gray-800 hover:text-white'
-              }`
-            }
-          >
-            <span>🎬</span>
-            <span>工作区</span>
-          </NavLink>
-          <NavLink
             to="/settings"
             className={({ isActive }) =>
               `flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm transition-colors ${

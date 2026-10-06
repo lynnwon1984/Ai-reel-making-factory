@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Layout from './components/Layout';
 import Home from './pages/Home';
-import Workspace from './pages/Workspace';
+
 import Settings from './pages/Settings';
 import Step1Page from './pages/steps/Step1Page';
 import Step2Page from './pages/steps/Step2Page';
@@ -16,7 +16,6 @@ function App() {
       <Routes>
         <Route element={<Layout />}>
           <Route path="/" element={<Home />} />
-          <Route path="/workspace" element={<Workspace />} />
           <Route path="/workspace/:id" element={<WorkspaceRedirect />} />
           <Route path="/settings" element={<Settings />} />
           <Route path="/project/:id/step1" element={<Step1Page />} />
