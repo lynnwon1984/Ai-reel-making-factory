@@ -73,40 +73,42 @@ export default function Step4Page() {
     finally { setIsChecking(false); }
   }, [seedancePrompts, settings]);
 
-  // ===== Left Panel =====
-  const leftPanel = (
-    <>
-      <InputSection stepNumber={4} projectId={pid} value={inputText} onChange={setInputText} />
-      <div className="px-4 py-3 flex-1 flex flex-col">
-        <div className="flex flex-col gap-2">
-          <button onClick={handleRun} disabled={isRunning || !inputText.trim()}
-            className={`w-full px-5 py-2.5 rounded-lg text-sm font-bold transition-all ${isRunning || !inputText.trim() ? 'bg-gray-800 text-gray-500 cursor-not-allowed' : 'bg-gradient-to-r from-blue-600 to-cyan-600 text-white hover:from-blue-500 hover:to-cyan-500 shadow-md active:scale-[0.98]'}`}>
-            {isRunning ? '⏳ 生成中...' : '▶ 生成 Prompt'}
-          </button>
-          <button onClick={handleComplianceCheck} disabled={isChecking || !seedancePrompts}
-            className={`w-full px-4 py-2 rounded-lg text-sm font-bold transition-all ${isChecking || !seedancePrompts ? 'bg-gray-800 text-gray-500 cursor-not-allowed' : 'bg-gradient-to-r from-green-600 to-emerald-600 text-white hover:from-green-500 hover:to-emerald-500 shadow-md active:scale-[0.98]'}`}>
-            {isChecking ? '⏳ 检查中...' : '✅ 合规检查'}
-          </button>
-        </div>
-        <button onClick={() => setShowPrompt(!showPrompt)} className={`mt-2 self-start px-3 py-1.5 text-xs rounded-lg transition-colors ${showPrompt ? 'bg-amber-600/20 text-amber-400' : 'text-gray-400 bg-gray-800 hover:bg-gray-700'}`}>P 提示词</button>
+  // ===== Input Section =====
+  const inputSection = (
+    <InputSection stepNumber={4} projectId={pid} value={inputText} onChange={setInputText} />
+  );
 
-        {promptGenStep?.status === 'running' && promptGenStep.streamText && (
-          <div className="mt-3 p-3 bg-gray-950 rounded-lg max-h-24 overflow-auto">
-            <pre className="text-xs text-green-400/80 font-mono whitespace-pre-wrap" style={{ textAlign: 'left' }}>{promptGenStep.streamText}</pre>
-          </div>
-        )}
-        {promptGenStep?.status === 'error' && promptGenStep.error && (
-          <div className="mt-3 p-3 bg-red-950/30 rounded-lg"><p className="text-xs text-red-400">{promptGenStep.error}</p></div>
-        )}
-
-        {showPrompt && stageConfig && (
-          <div className="mt-3 p-3 bg-gray-800/50 rounded-lg border border-gray-700/30">
-            <PromptEditor stageId="prompt_gen" defaultPrompt={stageConfig.defaultSystemPrompt} customPrompt={settings.customPrompts?.prompt_gen} onPromptChange={handlePromptChange} availableVariables={stageConfig.availableVariables}
-              onReset={() => { const next = { ...settings, customPrompts: { ...settings.customPrompts } }; (next.customPrompts as Record<string, string | undefined>)['prompt_gen'] = undefined; setSettings(next); updateSettings(next); }} />
-          </div>
-        )}
+  // ===== Operation Section =====
+  const operationSection = (
+    <div className="px-6 py-3 flex flex-col gap-2">
+      <div className="flex flex-wrap items-center gap-3">
+        <button onClick={handleRun} disabled={isRunning || !inputText.trim()}
+          className={`px-5 py-2.5 rounded-lg text-sm font-bold transition-all ${isRunning || !inputText.trim() ? 'bg-gray-800 text-gray-500 cursor-not-allowed' : 'bg-gradient-to-r from-blue-600 to-cyan-600 text-white hover:from-blue-500 hover:to-cyan-500 shadow-md active:scale-[0.98]'}`}>
+          {isRunning ? '⏳ 生成中...' : '▶ 生成 Prompt'}
+        </button>
+        <button onClick={handleComplianceCheck} disabled={isChecking || !seedancePrompts}
+          className={`px-4 py-2 rounded-lg text-sm font-bold transition-all ${isChecking || !seedancePrompts ? 'bg-gray-800 text-gray-500 cursor-not-allowed' : 'bg-gradient-to-r from-green-600 to-emerald-600 text-white hover:from-green-500 hover:to-emerald-500 shadow-md active:scale-[0.98]'}`}>
+          {isChecking ? '⏳ 检查中...' : '✅ 合规检查'}
+        </button>
+        <button onClick={() => setShowPrompt(!showPrompt)} className={`px-3 py-1.5 text-xs rounded-lg transition-colors ${showPrompt ? 'bg-amber-600/20 text-amber-400' : 'text-gray-400 bg-gray-800 hover:bg-gray-700'}`}>P 提示词</button>
       </div>
-    </>
+
+      {promptGenStep?.status === 'running' && promptGenStep.streamText && (
+        <div className="p-3 bg-gray-950 rounded-lg max-h-24 overflow-auto">
+          <pre className="text-xs text-green-400/80 font-mono whitespace-pre-wrap" style={{ textAlign: 'left' }}>{promptGenStep.streamText}</pre>
+        </div>
+      )}
+      {promptGenStep?.status === 'error' && promptGenStep.error && (
+        <div className="p-3 bg-red-950/30 rounded-lg"><p className="text-xs text-red-400">{promptGenStep.error}</p></div>
+      )}
+
+      {showPrompt && stageConfig && (
+        <div className="p-3 bg-gray-800/50 rounded-lg border border-gray-700/30">
+          <PromptEditor stageId="prompt_gen" defaultPrompt={stageConfig.defaultSystemPrompt} customPrompt={settings.customPrompts?.prompt_gen} onPromptChange={handlePromptChange} availableVariables={stageConfig.availableVariables}
+            onReset={() => { const next = { ...settings, customPrompts: { ...settings.customPrompts } }; (next.customPrompts as Record<string, string | undefined>)['prompt_gen'] = undefined; setSettings(next); updateSettings(next); }} />
+        </div>
+      )}
+    </div>
   );
 
   // ===== Download Buttons =====
@@ -117,8 +119,8 @@ export default function Step4Page() {
     </div>
   );
 
-  // ===== Right Panel Content =====
-  const rightContent = (
+  // ===== Output Content =====
+  const outputContent = (
     <div>
       {checkResult && (
         <div className="mb-6 p-5 bg-gray-800/40 rounded-xl border border-gray-700/30">
@@ -160,8 +162,8 @@ export default function Step4Page() {
   );
 
   return (
-    <StepLayout stepNumber={4} stepTitle="Seedance Prompt" projectId={pid} leftPanel={leftPanel} downloadButtons={downloadButtons}>
-      {rightContent}
+    <StepLayout stepNumber={4} stepTitle="Seedance Prompt" projectId={pid} inputSection={inputSection} operationSection={operationSection} downloadButtons={downloadButtons}>
+      {outputContent}
     </StepLayout>
   );
 }

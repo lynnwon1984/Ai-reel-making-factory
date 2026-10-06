@@ -52,69 +52,69 @@ export default function Step1Page() {
     return '未命名项目';
   })();
 
-  // ===== Left Panel =====
-  const leftPanel = (
-    <>
-      <InputSection stepNumber={1} projectId={pid} value={inputText} onChange={setInputText} />
+  // ===== Input Section =====
+  const inputSection = (
+    <InputSection stepNumber={1} projectId={pid} value={inputText} onChange={setInputText} />
+  );
 
-      {/* Operation Area */}
-      <div className="px-4 py-3 flex-1 flex flex-col">
-        <div className="flex items-center gap-3">
-          <button
-            onClick={handleRun}
-            disabled={isRunning || !inputText.trim()}
-            className={`flex-1 px-5 py-2.5 rounded-lg text-sm font-bold transition-all ${
-              isRunning || !inputText.trim()
-                ? 'bg-gray-800 text-gray-500 cursor-not-allowed'
-                : 'bg-gradient-to-r from-blue-600 to-cyan-600 text-white hover:from-blue-500 hover:to-cyan-500 shadow-md active:scale-[0.98]'
-            }`}
-          >
-            {isRunning ? '⏳ 执行中...' : '▶ 开始审计'}
-          </button>
-          <button
-            onClick={() => setShowPrompt(!showPrompt)}
-            className={`px-3 py-2.5 text-xs rounded-lg transition-colors ${
-              showPrompt ? 'bg-amber-600/20 text-amber-400' : 'text-gray-400 bg-gray-800 hover:bg-gray-700'
-            }`}
-          >
-            P 提示词
-          </button>
-        </div>
-
-        {/* Stream output */}
-        {auditStep?.status === 'running' && auditStep.streamText && (
-          <div className="mt-3 p-3 bg-gray-950 rounded-lg max-h-28 overflow-auto">
-            <pre className="text-xs text-green-400/80 font-mono whitespace-pre-wrap" style={{ textAlign: 'left' }}>
-              {auditStep.streamText}
-            </pre>
-          </div>
-        )}
-        {auditStep?.status === 'error' && auditStep.error && (
-          <div className="mt-3 p-3 bg-red-950/30 rounded-lg">
-            <p className="text-xs text-red-400" style={{ textAlign: 'left' }}>{auditStep.error}</p>
-          </div>
-        )}
-
-        {/* Prompt Editor */}
-        {showPrompt && stageConfig && (
-          <div className="mt-3 p-3 bg-gray-800/50 rounded-lg border border-gray-700/30">
-            <PromptEditor
-              stageId="audit"
-              defaultPrompt={stageConfig.defaultSystemPrompt}
-              customPrompt={settings.customPrompts?.audit}
-              onPromptChange={handlePromptChange}
-              availableVariables={stageConfig.availableVariables}
-              onReset={() => {
-                const next = { ...settings, customPrompts: { ...settings.customPrompts } };
-                (next.customPrompts as Record<string, string | undefined>)['audit'] = undefined;
-                setSettings(next);
-                updateSettings(next);
-              }}
-            />
-          </div>
-        )}
+  // ===== Operation Section =====
+  const operationSection = (
+    <div className="px-6 py-3 flex flex-col gap-3">
+      <div className="flex items-center gap-3">
+        <button
+          onClick={handleRun}
+          disabled={isRunning || !inputText.trim()}
+          className={`px-5 py-2.5 rounded-lg text-sm font-bold transition-all ${
+            isRunning || !inputText.trim()
+              ? 'bg-gray-800 text-gray-500 cursor-not-allowed'
+              : 'bg-gradient-to-r from-blue-600 to-cyan-600 text-white hover:from-blue-500 hover:to-cyan-500 shadow-md active:scale-[0.98]'
+          }`}
+        >
+          {isRunning ? '⏳ 执行中...' : '▶ 开始审计'}
+        </button>
+        <button
+          onClick={() => setShowPrompt(!showPrompt)}
+          className={`px-3 py-2.5 text-xs rounded-lg transition-colors ${
+            showPrompt ? 'bg-amber-600/20 text-amber-400' : 'text-gray-400 bg-gray-800 hover:bg-gray-700'
+          }`}
+        >
+          P 提示词
+        </button>
       </div>
-    </>
+
+      {/* Stream output */}
+      {auditStep?.status === 'running' && auditStep.streamText && (
+        <div className="p-3 bg-gray-950 rounded-lg max-h-28 overflow-auto">
+          <pre className="text-xs text-green-400/80 font-mono whitespace-pre-wrap" style={{ textAlign: 'left' }}>
+            {auditStep.streamText}
+          </pre>
+        </div>
+      )}
+      {auditStep?.status === 'error' && auditStep.error && (
+        <div className="p-3 bg-red-950/30 rounded-lg">
+          <p className="text-xs text-red-400" style={{ textAlign: 'left' }}>{auditStep.error}</p>
+        </div>
+      )}
+
+      {/* Prompt Editor */}
+      {showPrompt && stageConfig && (
+        <div className="p-3 bg-gray-800/50 rounded-lg border border-gray-700/30">
+          <PromptEditor
+            stageId="audit"
+            defaultPrompt={stageConfig.defaultSystemPrompt}
+            customPrompt={settings.customPrompts?.audit}
+            onPromptChange={handlePromptChange}
+            availableVariables={stageConfig.availableVariables}
+            onReset={() => {
+              const next = { ...settings, customPrompts: { ...settings.customPrompts } };
+              (next.customPrompts as Record<string, string | undefined>)['audit'] = undefined;
+              setSettings(next);
+              updateSettings(next);
+            }}
+          />
+        </div>
+      )}
+    </div>
   );
 
   // ===== Download Buttons =====
@@ -130,13 +130,13 @@ export default function Step1Page() {
         onClick={() => exportAuditReport(purifiedScript, projectName)}
         className="px-4 py-2 text-xs font-medium bg-teal-600 hover:bg-teal-700 rounded-lg text-white transition-colors"
       >
-        �� 审计报告 (.md)
+        📋 审计报告 (.md)
       </button>
     </div>
   ) : null;
 
-  // ===== Right Panel Content =====
-  const rightContent = purifiedScript ? (
+  // ===== Output Content =====
+  const outputContent = purifiedScript ? (
     <div>
       {/* Tabs */}
       <div className="flex gap-2 mb-5">
@@ -222,8 +222,8 @@ export default function Step1Page() {
   );
 
   return (
-    <StepLayout stepNumber={1} stepTitle="剧本审计与净化" projectId={pid} leftPanel={leftPanel} downloadButtons={downloadButtons}>
-      {rightContent}
+    <StepLayout stepNumber={1} stepTitle="剧本审计与净化" projectId={pid} inputSection={inputSection} operationSection={operationSection} downloadButtons={downloadButtons}>
+      {outputContent}
     </StepLayout>
   );
 }

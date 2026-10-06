@@ -23,11 +23,12 @@ interface StepLayoutProps {
   stepTitle: string;
   projectId: string;
   children: React.ReactNode;
-  leftPanel?: React.ReactNode;
+  inputSection?: React.ReactNode;
+  operationSection?: React.ReactNode;
   downloadButtons?: React.ReactNode;
 }
 
-export default function StepLayout({ stepNumber, projectId, children, leftPanel, downloadButtons }: StepLayoutProps) {
+export default function StepLayout({ stepNumber, projectId, children, inputSection, operationSection, downloadButtons }: StepLayoutProps) {
   const { getProject } = useProjects();
   const project = getProject(projectId);
   const moduleDef = project ? getModule(project.moduleId) : undefined;
@@ -98,33 +99,39 @@ export default function StepLayout({ stepNumber, projectId, children, leftPanel,
         </div>
       </header>
 
-      {/* ===== Main: Left-Right Split ===== */}
-      <div className="flex-1 flex min-h-0">
-        {/* Left Panel: Input + Operations (~25%) */}
-        <div className="w-[25%] min-w-[280px] border-r border-gray-700/60 flex flex-col overflow-y-auto bg-gray-900">
-          {leftPanel}
-        </div>
-
-        {/* Right Panel: Output + Download (~75%) */}
-        <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
-          {/* Output area */}
-          <div className="flex-1 overflow-y-auto p-6">
-            {children}
+      {/* ===== Main: Top-Bottom Single Column ===== */}
+      <div className="flex-1 flex flex-col min-h-0 overflow-hidden">
+        {/* Input area */}
+        {inputSection && (
+          <div className="shrink-0 border-b border-gray-700/60">
+            {inputSection}
           </div>
+        )}
 
-          {/* Download area */}
-          {downloadButtons && (
-            <div className="shrink-0 border-t border-gray-700/60 px-6 py-2 bg-gray-900/80">
-              {downloadButtons}
-            </div>
-          )}
+        {/* Operation area */}
+        {operationSection && (
+          <div className="shrink-0 border-b border-gray-700/60">
+            {operationSection}
+          </div>
+        )}
+
+        {/* Output area - fills remaining space */}
+        <div className="flex-1 overflow-y-auto p-6 min-h-0">
+          {children}
         </div>
+
+        {/* Download area */}
+        {downloadButtons && (
+          <div className="shrink-0 border-t border-gray-700/60 px-6 py-2 bg-gray-900/80">
+            {downloadButtons}
+          </div>
+        )}
       </div>
     </div>
   );
 }
 
-// ===== Shared Input Section Component (used inside leftPanel) =====
+// ===== Shared Input Section Component =====
 
 interface InputSectionProps {
   stepNumber: number;
@@ -189,7 +196,7 @@ export function InputSection({ stepNumber, projectId, value, onChange, headerExt
   };
 
   return (
-    <div className="px-4 py-3 border-b border-gray-700/40">
+    <div className="px-6 py-4">
       <div className="flex items-center justify-between mb-2">
         <span className="text-xs font-semibold text-gray-400 uppercase tracking-wider">输入</span>
         <div className="flex items-center gap-2">
@@ -254,7 +261,7 @@ export function InputSection({ stepNumber, projectId, value, onChange, headerExt
         onChange={(e) => handleTextChange(e.target.value)}
         readOnly={source === 'inherited'}
         placeholder={stepNumber === 1 ? '上传或粘贴剧本文本...' : '上传文件，或导入上一步输出...'}
-        className={`w-full h-28 resize-none rounded-lg px-3 py-2.5 text-sm font-mono bg-gray-950/60 border border-gray-700/40 text-gray-200 placeholder-gray-600 focus:outline-none focus:border-gray-600 transition-colors ${
+        className={`w-full h-36 resize-none rounded-lg px-3 py-2.5 text-sm font-mono bg-gray-950/60 border border-gray-700/40 text-gray-200 placeholder-gray-600 focus:outline-none focus:border-gray-600 transition-colors ${
           source === 'inherited' ? 'opacity-70 cursor-default' : ''
         }`}
         style={{ textAlign: 'left' }}

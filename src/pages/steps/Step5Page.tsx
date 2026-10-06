@@ -59,57 +59,57 @@ export default function Step5Page() {
   const qualityDone = qualityStep?.status === 'done';
   const repairRunning = repairStep?.status === 'running';
 
-  // ===== Left Panel =====
-  const leftPanel = (
-    <>
-      <InputSection stepNumber={5} projectId={pid} value={inputText} onChange={setInputText} />
-      <div className="px-4 py-3 flex-1 flex flex-col">
-        <div className="flex flex-col gap-2">
-          <button onClick={handleRunQuality} disabled={isRunning || !inputText.trim()}
-            className={`w-full px-5 py-2.5 rounded-lg text-sm font-bold transition-all ${isRunning || !inputText.trim() ? 'bg-gray-800 text-gray-500 cursor-not-allowed' : 'bg-gradient-to-r from-blue-600 to-cyan-600 text-white hover:from-blue-500 hover:to-cyan-500 shadow-md active:scale-[0.98]'}`}>
-            {isRunning && qualityStep?.status === 'running' ? '⏳ 质检中...' : '▶ 质检'}
-          </button>
-          <button onClick={handleRunRepair} disabled={isRunning || !qualityDone}
-            className={`w-full px-5 py-2 rounded-lg text-sm font-bold transition-all ${isRunning || !qualityDone ? 'bg-gray-800 text-gray-500 cursor-not-allowed' : 'bg-gradient-to-r from-amber-600 to-orange-600 text-white hover:from-amber-500 hover:to-orange-500 shadow-md active:scale-[0.98]'}`}>
-            {repairRunning ? '⏳ 修复格式化中...' : '🔧 修复 + 格式化'}
-          </button>
-        </div>
-        <div className="flex items-center gap-2 mt-2">
-          <button onClick={() => setShowPrompt(!showPrompt)} className={`px-3 py-1.5 text-xs rounded-lg transition-colors ${showPrompt ? 'bg-amber-600/20 text-amber-400' : 'text-gray-400 bg-gray-800 hover:bg-gray-700'}`}>P 质检提示词</button>
-          <button onClick={() => setShowRepairPrompt(!showRepairPrompt)} className={`px-3 py-1.5 text-xs rounded-lg transition-colors ${showRepairPrompt ? 'bg-orange-600/20 text-orange-400' : 'text-gray-400 bg-gray-800 hover:bg-gray-700'}`}>P 修复提示词</button>
-        </div>
+  // ===== Input Section =====
+  const inputSection = (
+    <InputSection stepNumber={5} projectId={pid} value={inputText} onChange={setInputText} />
+  );
 
-        {qualityStep?.status === 'running' && qualityStep.streamText && (
-          <div className="mt-3 p-3 bg-gray-950 rounded-lg max-h-24 overflow-auto">
-            <pre className="text-xs text-green-400/80 font-mono whitespace-pre-wrap" style={{ textAlign: 'left' }}>{qualityStep.streamText}</pre>
-          </div>
-        )}
-        {qualityStep?.status === 'error' && qualityStep.error && (
-          <div className="mt-2 p-2 bg-red-950/30 rounded-lg"><p className="text-xs text-red-400">{qualityStep.error}</p></div>
-        )}
-        {repairStep?.status === 'running' && repairStep.streamText && (
-          <div className="mt-3 p-3 bg-gray-950 rounded-lg max-h-24 overflow-auto">
-            <pre className="text-xs text-orange-400/80 font-mono whitespace-pre-wrap" style={{ textAlign: 'left' }}>{repairStep.streamText}</pre>
-          </div>
-        )}
-        {repairStep?.status === 'error' && repairStep.error && (
-          <div className="mt-2 p-2 bg-red-950/30 rounded-lg"><p className="text-xs text-red-400">{repairStep.error}</p></div>
-        )}
-
-        {showPrompt && qualityConfig && (
-          <div className="mt-3 p-3 bg-gray-800/50 rounded-lg border border-gray-700/30">
-            <PromptEditor stageId="quality_check" defaultPrompt={qualityConfig.defaultSystemPrompt} customPrompt={settings.customPrompts?.quality_check} onPromptChange={handleQualityPromptChange} availableVariables={qualityConfig.availableVariables}
-              onReset={() => { const next = { ...settings, customPrompts: { ...settings.customPrompts } }; (next.customPrompts as Record<string, string | undefined>)['quality_check'] = undefined; setSettings(next); updateSettings(next); }} />
-          </div>
-        )}
-        {showRepairPrompt && repairConfig && (
-          <div className="mt-3 p-3 bg-gray-800/50 rounded-lg border border-gray-700/30">
-            <PromptEditor stageId="repair_final" defaultPrompt={repairConfig.defaultSystemPrompt} customPrompt={settings.customPrompts?.repair_final} onPromptChange={handleRepairPromptChange} availableVariables={repairConfig.availableVariables}
-              onReset={() => { const next = { ...settings, customPrompts: { ...settings.customPrompts } }; (next.customPrompts as Record<string, string | undefined>)['repair_final'] = undefined; setSettings(next); updateSettings(next); }} />
-          </div>
-        )}
+  // ===== Operation Section =====
+  const operationSection = (
+    <div className="px-6 py-3 flex flex-col gap-2">
+      <div className="flex flex-wrap items-center gap-3">
+        <button onClick={handleRunQuality} disabled={isRunning || !inputText.trim()}
+          className={`px-5 py-2.5 rounded-lg text-sm font-bold transition-all ${isRunning || !inputText.trim() ? 'bg-gray-800 text-gray-500 cursor-not-allowed' : 'bg-gradient-to-r from-blue-600 to-cyan-600 text-white hover:from-blue-500 hover:to-cyan-500 shadow-md active:scale-[0.98]'}`}>
+          {isRunning && qualityStep?.status === 'running' ? '⏳ 质检中...' : '▶ 质检'}
+        </button>
+        <button onClick={handleRunRepair} disabled={isRunning || !qualityDone}
+          className={`px-5 py-2 rounded-lg text-sm font-bold transition-all ${isRunning || !qualityDone ? 'bg-gray-800 text-gray-500 cursor-not-allowed' : 'bg-gradient-to-r from-amber-600 to-orange-600 text-white hover:from-amber-500 hover:to-orange-500 shadow-md active:scale-[0.98]'}`}>
+          {repairRunning ? '⏳ 修复格式化中...' : '🔧 修复 + 格式化'}
+        </button>
+        <button onClick={() => setShowPrompt(!showPrompt)} className={`px-3 py-1.5 text-xs rounded-lg transition-colors ${showPrompt ? 'bg-amber-600/20 text-amber-400' : 'text-gray-400 bg-gray-800 hover:bg-gray-700'}`}>P 质检提示词</button>
+        <button onClick={() => setShowRepairPrompt(!showRepairPrompt)} className={`px-3 py-1.5 text-xs rounded-lg transition-colors ${showRepairPrompt ? 'bg-orange-600/20 text-orange-400' : 'text-gray-400 bg-gray-800 hover:bg-gray-700'}`}>P 修复提示词</button>
       </div>
-    </>
+
+      {qualityStep?.status === 'running' && qualityStep.streamText && (
+        <div className="p-3 bg-gray-950 rounded-lg max-h-24 overflow-auto">
+          <pre className="text-xs text-green-400/80 font-mono whitespace-pre-wrap" style={{ textAlign: 'left' }}>{qualityStep.streamText}</pre>
+        </div>
+      )}
+      {qualityStep?.status === 'error' && qualityStep.error && (
+        <div className="p-2 bg-red-950/30 rounded-lg"><p className="text-xs text-red-400">{qualityStep.error}</p></div>
+      )}
+      {repairStep?.status === 'running' && repairStep.streamText && (
+        <div className="p-3 bg-gray-950 rounded-lg max-h-24 overflow-auto">
+          <pre className="text-xs text-orange-400/80 font-mono whitespace-pre-wrap" style={{ textAlign: 'left' }}>{repairStep.streamText}</pre>
+        </div>
+      )}
+      {repairStep?.status === 'error' && repairStep.error && (
+        <div className="p-2 bg-red-950/30 rounded-lg"><p className="text-xs text-red-400">{repairStep.error}</p></div>
+      )}
+
+      {showPrompt && qualityConfig && (
+        <div className="p-3 bg-gray-800/50 rounded-lg border border-gray-700/30">
+          <PromptEditor stageId="quality_check" defaultPrompt={qualityConfig.defaultSystemPrompt} customPrompt={settings.customPrompts?.quality_check} onPromptChange={handleQualityPromptChange} availableVariables={qualityConfig.availableVariables}
+            onReset={() => { const next = { ...settings, customPrompts: { ...settings.customPrompts } }; (next.customPrompts as Record<string, string | undefined>)['quality_check'] = undefined; setSettings(next); updateSettings(next); }} />
+        </div>
+      )}
+      {showRepairPrompt && repairConfig && (
+        <div className="p-3 bg-gray-800/50 rounded-lg border border-gray-700/30">
+          <PromptEditor stageId="repair_final" defaultPrompt={repairConfig.defaultSystemPrompt} customPrompt={settings.customPrompts?.repair_final} onPromptChange={handleRepairPromptChange} availableVariables={repairConfig.availableVariables}
+            onReset={() => { const next = { ...settings, customPrompts: { ...settings.customPrompts } }; (next.customPrompts as Record<string, string | undefined>)['repair_final'] = undefined; setSettings(next); updateSettings(next); }} />
+        </div>
+      )}
+    </div>
   );
 
   // ===== Download Buttons =====
@@ -122,8 +122,8 @@ export default function Step5Page() {
     </div>
   );
 
-  // ===== Right Panel Content =====
-  const rightContent = (
+  // ===== Output Content =====
+  const outputContent = (
     <div>
       {/* Tabs */}
       <div className="flex gap-2 mb-5">
@@ -204,8 +204,8 @@ export default function Step5Page() {
   );
 
   return (
-    <StepLayout stepNumber={5} stepTitle="质检与输出" projectId={pid} leftPanel={leftPanel} downloadButtons={downloadButtons}>
-      {rightContent}
+    <StepLayout stepNumber={5} stepTitle="质检与输出" projectId={pid} inputSection={inputSection} operationSection={operationSection} downloadButtons={downloadButtons}>
+      {outputContent}
     </StepLayout>
   );
 }

@@ -145,60 +145,62 @@ export default function Step2Page() {
     switch (severity) { case '严重': return 'bg-red-600 text-white'; case '中等': return 'bg-yellow-600 text-white'; case '轻微': return 'bg-blue-600 text-white'; }
   };
 
-  // ===== Left Panel =====
-  const leftPanel = (
-    <>
-      <InputSection stepNumber={2} projectId={pid} value={inputText} onChange={setInputText} />
-      <div className="px-4 py-3 flex-1 flex flex-col">
-        <div className="flex flex-col gap-2">
-          <button onClick={handleRun} disabled={isRunning || !inputText.trim()}
-            className={`w-full px-5 py-2.5 rounded-lg text-sm font-bold transition-all ${isRunning || !inputText.trim() ? 'bg-gray-800 text-gray-500 cursor-not-allowed' : 'bg-gradient-to-r from-blue-600 to-cyan-600 text-white hover:from-blue-500 hover:to-cyan-500 shadow-md active:scale-[0.98]'}`}>
-            {analyzeStep?.status === 'done' ? '✅ 分析完成' : analyzeStep?.status === 'running' ? '⏳ 分析中...' : '▶ 分析'}
-          </button>
-          <button onClick={handleDiagnose} disabled={isRunning || !canDiagnose}
-            className={`w-full px-4 py-2 rounded-lg text-sm font-bold transition-all ${isRunning || !canDiagnose ? 'bg-gray-800 text-gray-500 cursor-not-allowed' : diagnoseState.status === 'done' ? 'bg-gradient-to-r from-green-600 to-emerald-600 text-white hover:from-green-500 hover:to-emerald-500 shadow-md' : 'bg-gradient-to-r from-amber-600 to-orange-600 text-white hover:from-amber-500 hover:to-orange-500 shadow-md active:scale-[0.98]'}`}>
-            {diagnoseState.status === 'done' ? '✅ 诊断完成' : diagnoseState.status === 'running' ? '⏳ 诊断中...' : '🔍 诊断'}
-          </button>
-          <button onClick={handleRepair} disabled={isRunning || !canRepair}
-            className={`w-full px-4 py-2 rounded-lg text-sm font-bold transition-all ${isRunning || !canRepair ? 'bg-gray-800 text-gray-500 cursor-not-allowed' : repairState.status === 'done' ? 'bg-gradient-to-r from-green-600 to-emerald-600 text-white hover:from-green-500 hover:to-emerald-500 shadow-md' : 'bg-gradient-to-r from-purple-600 to-pink-600 text-white hover:from-purple-500 hover:to-pink-500 shadow-md active:scale-[0.98]'}`}>
-            {repairState.status === 'done' ? '✅ 修复完成' : repairState.status === 'running' ? '⏳ 修复中...' : '🔧 修复'}
-          </button>
-        </div>
-        <button onClick={() => setShowPrompt(!showPrompt)} className={`mt-2 self-start px-3 py-1.5 text-xs rounded-lg transition-colors ${showPrompt ? 'bg-amber-600/20 text-amber-400' : 'text-gray-400 bg-gray-800 hover:bg-gray-700'}`}>
+  // ===== Input Section =====
+  const inputSection = (
+    <InputSection stepNumber={2} projectId={pid} value={inputText} onChange={setInputText} />
+  );
+
+  // ===== Operation Section =====
+  const operationSection = (
+    <div className="px-6 py-3 flex flex-col gap-2">
+      <div className="flex flex-wrap items-center gap-3">
+        <button onClick={handleRun} disabled={isRunning || !inputText.trim()}
+          className={`px-5 py-2.5 rounded-lg text-sm font-bold transition-all ${isRunning || !inputText.trim() ? 'bg-gray-800 text-gray-500 cursor-not-allowed' : 'bg-gradient-to-r from-blue-600 to-cyan-600 text-white hover:from-blue-500 hover:to-cyan-500 shadow-md active:scale-[0.98]'}`}>
+          {analyzeStep?.status === 'done' ? '✅ 分析完成' : analyzeStep?.status === 'running' ? '⏳ 分析中...' : '▶ 分析'}
+        </button>
+        <button onClick={handleDiagnose} disabled={isRunning || !canDiagnose}
+          className={`px-4 py-2 rounded-lg text-sm font-bold transition-all ${isRunning || !canDiagnose ? 'bg-gray-800 text-gray-500 cursor-not-allowed' : diagnoseState.status === 'done' ? 'bg-gradient-to-r from-green-600 to-emerald-600 text-white hover:from-green-500 hover:to-emerald-500 shadow-md' : 'bg-gradient-to-r from-amber-600 to-orange-600 text-white hover:from-amber-500 hover:to-orange-500 shadow-md active:scale-[0.98]'}`}>
+          {diagnoseState.status === 'done' ? '✅ 诊断完成' : diagnoseState.status === 'running' ? '⏳ 诊断中...' : '🔍 诊断'}
+        </button>
+        <button onClick={handleRepair} disabled={isRunning || !canRepair}
+          className={`px-4 py-2 rounded-lg text-sm font-bold transition-all ${isRunning || !canRepair ? 'bg-gray-800 text-gray-500 cursor-not-allowed' : repairState.status === 'done' ? 'bg-gradient-to-r from-green-600 to-emerald-600 text-white hover:from-green-500 hover:to-emerald-500 shadow-md' : 'bg-gradient-to-r from-purple-600 to-pink-600 text-white hover:from-purple-500 hover:to-pink-500 shadow-md active:scale-[0.98]'}`}>
+          {repairState.status === 'done' ? '✅ 修复完成' : repairState.status === 'running' ? '⏳ 修复中...' : '🔧 修复'}
+        </button>
+        <button onClick={() => setShowPrompt(!showPrompt)} className={`px-3 py-1.5 text-xs rounded-lg transition-colors ${showPrompt ? 'bg-amber-600/20 text-amber-400' : 'text-gray-400 bg-gray-800 hover:bg-gray-700'}`}>
           P 提示词
         </button>
-
-        {/* Stream outputs */}
-        {analyzeStep?.status === 'running' && analyzeStep.streamText && (
-          <div className="mt-3 p-3 bg-gray-950 rounded-lg max-h-24 overflow-auto">
-            <pre className="text-xs text-green-400/80 font-mono whitespace-pre-wrap" style={{ textAlign: 'left' }}>{analyzeStep.streamText}</pre>
-          </div>
-        )}
-        {diagnoseState.status === 'running' && diagnoseState.streamText && (
-          <div className="mt-3 p-3 bg-gray-950 rounded-lg max-h-24 overflow-auto">
-            <pre className="text-xs text-green-400/80 font-mono whitespace-pre-wrap" style={{ textAlign: 'left' }}>{diagnoseState.streamText}</pre>
-          </div>
-        )}
-        {repairState.status === 'running' && repairState.streamText && (
-          <div className="mt-3 p-3 bg-gray-950 rounded-lg max-h-24 overflow-auto">
-            <pre className="text-xs text-orange-400/80 font-mono whitespace-pre-wrap" style={{ textAlign: 'left' }}>{repairState.streamText}</pre>
-          </div>
-        )}
-
-        {/* Errors */}
-        {analyzeStep?.status === 'error' && analyzeStep.error && <div className="mt-2 p-2 bg-red-950/30 rounded-lg"><p className="text-xs text-red-400">分析错误: {analyzeStep.error}</p></div>}
-        {diagnoseState.status === 'error' && diagnoseState.error && <div className="mt-2 p-2 bg-red-950/30 rounded-lg"><p className="text-xs text-red-400">诊断错误: {diagnoseState.error}</p></div>}
-        {repairState.status === 'error' && repairState.error && <div className="mt-2 p-2 bg-red-950/30 rounded-lg"><p className="text-xs text-red-400">修复错误: {repairState.error}</p></div>}
-
-        {showPrompt && (
-          <div className="mt-3 p-3 bg-gray-800/50 rounded-lg border border-gray-700/30 space-y-3">
-            {analyzeConfig && <PromptEditor stageId="analyze" defaultPrompt={analyzeConfig.defaultSystemPrompt} customPrompt={settings.customPrompts?.analyze} onPromptChange={(p) => handlePromptChange(p, 'analyze')} availableVariables={analyzeConfig.availableVariables} onReset={() => { const next = { ...settings, customPrompts: { ...settings.customPrompts } }; (next.customPrompts as Record<string, string | undefined>)['analyze'] = undefined; setSettings(next); updateSettings(next); }} />}
-            {diagnoseConfig && <PromptEditor stageId="diagnose" defaultPrompt={diagnoseConfig.defaultSystemPrompt} customPrompt={settings.customPrompts?.diagnose} onPromptChange={(p) => handlePromptChange(p, 'diagnose')} availableVariables={diagnoseConfig.availableVariables} onReset={() => { const next = { ...settings, customPrompts: { ...settings.customPrompts } }; (next.customPrompts as Record<string, string | undefined>)['diagnose'] = undefined; setSettings(next); updateSettings(next); }} />}
-            {repairConfig && <PromptEditor stageId="repair" defaultPrompt={repairConfig.defaultSystemPrompt} customPrompt={settings.customPrompts?.repair} onPromptChange={(p) => handlePromptChange(p, 'repair')} availableVariables={repairConfig.availableVariables} onReset={() => { const next = { ...settings, customPrompts: { ...settings.customPrompts } }; (next.customPrompts as Record<string, string | undefined>)['repair'] = undefined; setSettings(next); updateSettings(next); }} />}
-          </div>
-        )}
       </div>
-    </>
+
+      {/* Stream outputs */}
+      {analyzeStep?.status === 'running' && analyzeStep.streamText && (
+        <div className="p-3 bg-gray-950 rounded-lg max-h-24 overflow-auto">
+          <pre className="text-xs text-green-400/80 font-mono whitespace-pre-wrap" style={{ textAlign: 'left' }}>{analyzeStep.streamText}</pre>
+        </div>
+      )}
+      {diagnoseState.status === 'running' && diagnoseState.streamText && (
+        <div className="p-3 bg-gray-950 rounded-lg max-h-24 overflow-auto">
+          <pre className="text-xs text-green-400/80 font-mono whitespace-pre-wrap" style={{ textAlign: 'left' }}>{diagnoseState.streamText}</pre>
+        </div>
+      )}
+      {repairState.status === 'running' && repairState.streamText && (
+        <div className="p-3 bg-gray-950 rounded-lg max-h-24 overflow-auto">
+          <pre className="text-xs text-orange-400/80 font-mono whitespace-pre-wrap" style={{ textAlign: 'left' }}>{repairState.streamText}</pre>
+        </div>
+      )}
+
+      {/* Errors */}
+      {analyzeStep?.status === 'error' && analyzeStep.error && <div className="p-2 bg-red-950/30 rounded-lg"><p className="text-xs text-red-400">分析错误: {analyzeStep.error}</p></div>}
+      {diagnoseState.status === 'error' && diagnoseState.error && <div className="p-2 bg-red-950/30 rounded-lg"><p className="text-xs text-red-400">诊断错误: {diagnoseState.error}</p></div>}
+      {repairState.status === 'error' && repairState.error && <div className="p-2 bg-red-950/30 rounded-lg"><p className="text-xs text-red-400">修复错误: {repairState.error}</p></div>}
+
+      {showPrompt && (
+        <div className="p-3 bg-gray-800/50 rounded-lg border border-gray-700/30 space-y-3">
+          {analyzeConfig && <PromptEditor stageId="analyze" defaultPrompt={analyzeConfig.defaultSystemPrompt} customPrompt={settings.customPrompts?.analyze} onPromptChange={(p) => handlePromptChange(p, 'analyze')} availableVariables={analyzeConfig.availableVariables} onReset={() => { const next = { ...settings, customPrompts: { ...settings.customPrompts } }; (next.customPrompts as Record<string, string | undefined>)['analyze'] = undefined; setSettings(next); updateSettings(next); }} />}
+          {diagnoseConfig && <PromptEditor stageId="diagnose" defaultPrompt={diagnoseConfig.defaultSystemPrompt} customPrompt={settings.customPrompts?.diagnose} onPromptChange={(p) => handlePromptChange(p, 'diagnose')} availableVariables={diagnoseConfig.availableVariables} onReset={() => { const next = { ...settings, customPrompts: { ...settings.customPrompts } }; (next.customPrompts as Record<string, string | undefined>)['diagnose'] = undefined; setSettings(next); updateSettings(next); }} />}
+          {repairConfig && <PromptEditor stageId="repair" defaultPrompt={repairConfig.defaultSystemPrompt} customPrompt={settings.customPrompts?.repair} onPromptChange={(p) => handlePromptChange(p, 'repair')} availableVariables={repairConfig.availableVariables} onReset={() => { const next = { ...settings, customPrompts: { ...settings.customPrompts } }; (next.customPrompts as Record<string, string | undefined>)['repair'] = undefined; setSettings(next); updateSettings(next); }} />}
+        </div>
+      )}
+    </div>
   );
 
   // ===== Download Buttons =====
@@ -211,8 +213,8 @@ export default function Step2Page() {
     </div>
   );
 
-  // ===== Right Panel Content =====
-  const rightContent = (
+  // ===== Output Content =====
+  const outputContent = (
     <div>
       {/* Tabs */}
       <div className="flex gap-2 mb-5">
@@ -332,8 +334,8 @@ export default function Step2Page() {
   );
 
   return (
-    <StepLayout stepNumber={2} stepTitle="剧本深度分析" projectId={pid} leftPanel={leftPanel} downloadButtons={downloadButtons}>
-      {rightContent}
+    <StepLayout stepNumber={2} stepTitle="剧本深度分析" projectId={pid} inputSection={inputSection} operationSection={operationSection} downloadButtons={downloadButtons}>
+      {outputContent}
     </StepLayout>
   );
 }
