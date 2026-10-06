@@ -5,7 +5,7 @@ import PromptEditor from '../../components/PromptEditor';
 import { usePipeline } from '../../hooks/usePipeline';
 import { useStepData } from '../../hooks/useStepData';
 import { loadSettings } from '../../components/SettingsPanel';
-import type { PipelineSettings, Shot, ScriptAnalysis, SeedancePrompt, QualityReport, RepairFinalResult } from '../../lib/types';
+import type { PipelineSettings, Shot, ScriptAnalysis, StoryboardScript, QualityReport, RepairFinalResult } from '../../lib/types';
 import { STAGE_CONFIGS } from '../../lib/constants';
 import { downloadFile, exportFinalStoryboard, exportFinalQualityReport } from '../../utils/exporter';
 
@@ -34,20 +34,21 @@ export default function Step5Page() {
     const prev: Record<string, unknown> = {};
     if (step2Output) prev.analysis = step2Output.data;
     if (step3Output) { const step3Data = step3Output.data as { shots?: Shot[] }; if (step3Data.shots) prev.shots = step3Data.shots; }
-    if (step4Output) prev.seedancePrompts = step4Output.data;
-    setPrevResults(prev as { shots?: Shot[]; analysis?: ScriptAnalysis; seedancePrompts?: SeedancePrompt[] });
+    if (step4Output) prev.storyboardScript = step4Output.data;
+    setPrevResults(prev as { shots?: Shot[]; analysis?: ScriptAnalysis; storyboardScript?: StoryboardScript });
     setScriptText(inputText);
     executeStep('quality_check');
   }, [inputText, setScriptText, setPrevResults, executeStep, getStepOutput]);
 
   const handleRunRepair = useCallback(() => {
     if (!qualityReport) return;
-    const step2Output = getStepOutput(2); const step3Output = getStepOutput(3);
+    const step2Output = getStepOutput(2); const step3Output = getStepOutput(3); const step4Output = getStepOutput(4);
     const prev: Record<string, unknown> = {};
     if (step2Output) prev.analysis = step2Output.data;
     if (step3Output) { const step3Data = step3Output.data as { shots?: Shot[] }; if (step3Data.shots) prev.shots = step3Data.shots; }
     prev.qualityReport = qualityReport;
-    setPrevResults(prev as { shots?: Shot[]; analysis?: ScriptAnalysis; seedancePrompts?: SeedancePrompt[] });
+    if (step4Output) prev.storyboardScript = step4Output.data;
+    setPrevResults(prev as { shots?: Shot[]; analysis?: ScriptAnalysis; storyboardScript?: StoryboardScript });
     executeStep('repair_final');
   }, [qualityReport, setPrevResults, executeStep, getStepOutput]);
 
@@ -115,10 +116,11 @@ export default function Step5Page() {
   // ===== Download Buttons =====
   const downloadButtons = (
     <div className="flex gap-3 flex-wrap">
-      {qualityReport && <button onClick={() => { const lines: string[] = ['# 质检报告', '', `- 总镜头数: ${qualityReport.totalShots}`, `- 总时长: ${qualityReport.totalDuration}s`, `- 质量评分: ${qualityReport.seedanceQualityScore}/100`]; downloadFile(lines.join('\n'), 'quality-report.md', 'text/markdown'); }} className="px-4 py-2 text-xs font-medium bg-cyan-600 hover:bg-cyan-700 rounded-lg text-white transition-colors">📥 质检报告 MD</button>}
+      {qualityReport && <button onClick={() => { const lines: string[] = ['# 分镜头剧本质检报告', '', `- 总 Clip 数: ${qualityReport.totalClips}`, `- 总时长: ${qualityReport.totalDuration}s`, `- 质量评分: ${qualityReport.overallScore}/100`, `- 格式合规率: ${qualityReport.formatCompliance}%`]; if (qualityReport.continuityIssues.length > 0) { lines.push('', '## 连贯性问题'); qualityReport.continuityIssues.forEach(i => lines.push(`- ${i}`)); } downloadFile(lines.join('\n'), 'quality-report.md', 'text/markdown'); }} className="px-4 py-2 text-xs font-medium bg-cyan-600 hover:bg-cyan-700 rounded-lg text-white transition-colors">📥 质检报告 MD</button>}
       {qualityReport && <button onClick={() => downloadFile(JSON.stringify(qualityReport, null, 2), 'quality-report.json', 'application/json')} className="px-4 py-2 text-xs font-medium bg-blue-600 hover:bg-blue-700 rounded-lg text-white transition-colors">📥 质检 JSON</button>}
-      {repairResult && <button onClick={() => exportFinalStoryboard(repairResult.finalStoryboardText, '分镜项目')} className="px-4 py-2 text-xs font-medium bg-orange-600 hover:bg-orange-700 rounded-lg text-white transition-colors">📥 最终分镜头剧本</button>}
-      {repairResult && <button onClick={() => exportFinalQualityReport({ fixedIssues: repairResult.fixedIssues, manualReviewItems: repairResult.manualReviewItems, formatCompliance: repairResult.formatCompliance }, '分镜项目')} className="px-4 py-2 text-xs font-medium bg-amber-600 hover:bg-amber-700 rounded-lg text-white transition-colors">📥 最终质检报告</button>}
+      {repairResult && <button onClick={() => exportFinalStoryboard(repairResult.finalStoryboardText, '分镜项目')} className="px-4 py-2 text-xs font-medium bg-orange-600 hover:bg-orange-700 rounded-lg text-white transition-colors">📥 最终分镜头剧本 .md</button>}
+      {repairResult && <button onClick={() => { const blob = new Blob([repairResult.finalStoryboardText], { type: 'text/plain;charset=utf-8' }); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = '分镜项目_分镜头剧本.txt'; document.body.appendChild(a); a.click(); document.body.removeChild(a); URL.revokeObjectURL(url); }} className="px-4 py-2 text-xs font-medium bg-amber-600 hover:bg-amber-700 rounded-lg text-white transition-colors">📥 最终分镜头剧本 .txt</button>}
+      {repairResult && <button onClick={() => exportFinalQualityReport({ fixedIssues: repairResult.fixedIssues, manualReviewItems: repairResult.manualReviewItems, formatCompliance: repairResult.formatCompliance }, '分镜项目')} className="px-4 py-2 text-xs font-medium bg-green-600 hover:bg-green-700 rounded-lg text-white transition-colors">📥 质检报告</button>}
     </div>
   );
 
@@ -144,24 +146,52 @@ export default function Step5Page() {
             <div className="bg-gray-800/40 rounded-xl border border-cyan-500/20 p-5">
               <h4 className="text-xs font-semibold text-cyan-400 mb-3">总览</h4>
               <div className="text-xs text-gray-400 space-y-1.5">
-                <p>总镜头数: <span className="text-gray-200">{qualityReport.totalShots}</span></p>
+                <p>总 Clip 数: <span className="text-gray-200">{qualityReport.totalClips}</span></p>
                 <p>总时长: <span className="text-gray-200">{qualityReport.totalDuration}s</span></p>
-                <p>质量评分: <span className={`font-bold ${qualityReport.seedanceQualityScore >= 80 ? 'text-green-400' : qualityReport.seedanceQualityScore >= 60 ? 'text-amber-400' : 'text-red-400'}`}>{qualityReport.seedanceQualityScore}/100</span></p>
+                <p>质量评分: <span className={`font-bold ${qualityReport.overallScore >= 80 ? 'text-green-400' : qualityReport.overallScore >= 60 ? 'text-amber-400' : 'text-red-400'}`}>{qualityReport.overallScore}/100</span></p>
+                <p>格式合规率: <span className="text-gray-200">{qualityReport.formatCompliance}%</span></p>
+                {qualityReport.summary && <p className="text-gray-300 mt-2">{qualityReport.summary}</p>}
               </div>
             </div>
+            {/* Per-Clip checks */}
+            {qualityReport.clipChecks && qualityReport.clipChecks.length > 0 && (
+              <div className="bg-gray-800/40 rounded-xl border border-gray-600/20 p-5">
+                <h4 className="text-xs font-semibold text-gray-400 mb-3">
+                  逐 Clip 检查 ({qualityReport.clipChecks.filter(c => !c.compliant).length} 个不合规)
+                </h4>
+                <div className="space-y-2 max-h-80 overflow-auto">
+                  {qualityReport.clipChecks.map((clip, i) => (
+                    <div key={i} className={`p-2.5 rounded-lg text-xs ${clip.compliant ? 'bg-green-900/10 border border-green-500/10' : 'bg-red-900/10 border border-red-500/20'}`}>
+                      <div className="flex items-center gap-2 mb-1">
+                        <span className={`px-1.5 py-0.5 rounded font-mono ${clip.compliant ? 'bg-green-900/30 text-green-400' : 'bg-red-900/30 text-red-400'}`}>
+                          {clip.compliant ? '✓' : '✗'} Clip {String(clip.clipNumber).padStart(2, '0')}
+                        </span>
+                        <span className="text-gray-500">{clip.shotType}</span>
+                        <span className="text-gray-500">{clip.duration}s</span>
+                        <span className="text-gray-500">{clip.charCount}字</span>
+                        {clip.cameraMovements.length > 0 && <span className="text-gray-600">运镜: {clip.cameraMovements.join(', ')}</span>}
+                      </div>
+                      {!clip.compliant && clip.issues.length > 0 && (
+                        <div className="mt-1 space-y-0.5">
+                          {clip.issues.map((issue, j) => (
+                            <div key={j} className="flex items-start gap-1.5">
+                              <span className={`px-1 py-0.5 rounded text-[10px] shrink-0 ${issue.severity === '严重' ? 'bg-red-900/50 text-red-400' : issue.severity === '中等' ? 'bg-yellow-900/50 text-yellow-400' : 'bg-gray-700 text-gray-400'}`}>{issue.severity}</span>
+                              <span className="text-gray-400">{issue.type}：{issue.description}</span>
+                              <span className="text-gray-600 ml-auto shrink-0">→ {issue.suggestion}</span>
+                            </div>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
             {qualityReport.continuityIssues.length > 0 && (
               <div className="bg-gray-800/40 rounded-xl border border-amber-500/20 p-5">
                 <h4 className="text-xs font-semibold text-amber-400 mb-3">连贯性问题 ({qualityReport.continuityIssues.length})</h4>
                 <div className="text-xs text-gray-400 space-y-1.5">
                   {qualityReport.continuityIssues.map((issue, i) => (<p key={i} style={{ textAlign: 'left' }}>{i + 1}. {issue}</p>))}
-                </div>
-              </div>
-            )}
-            {qualityReport.qualityNotes.length > 0 && (
-              <div className="bg-gray-800/40 rounded-xl border border-gray-600/20 p-5">
-                <h4 className="text-xs font-semibold text-gray-400 mb-3">质量备注</h4>
-                <div className="text-xs text-gray-400 space-y-1.5">
-                  {qualityReport.qualityNotes.map((note, i) => (<p key={i} style={{ textAlign: 'left' }}>{i + 1}. {note}</p>))}
                 </div>
               </div>
             )}
@@ -204,7 +234,7 @@ export default function Step5Page() {
   );
 
   return (
-    <StepLayout stepNumber={5} stepTitle="质检与输出" projectId={pid} inputSection={inputSection} operationSection={operationSection} downloadButtons={downloadButtons}>
+    <StepLayout stepNumber={5} stepTitle="质检与导出" projectId={pid} inputSection={inputSection} operationSection={operationSection} downloadButtons={downloadButtons}>
       {outputContent}
     </StepLayout>
   );

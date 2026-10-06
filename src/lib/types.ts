@@ -185,16 +185,60 @@ export interface SeedancePrompt {
   shotLabel?: string;              // 2.0 格式的镜头编号（如 "镜头一"）
 }
 
+
+// ===== Stage 4 输出：分镜头剧本 =====
+
+export interface StoryboardClip {
+  clipNumber: number;              // Clip 编号
+  shotType: string;                // 景别
+  duration: number;                // 时长（秒）
+  description: string;             // 60-100字自然语言描述
+  promptText: string;              // Seedance 2.0 友好文本
+}
+
+export interface StoryboardScript {
+  projectName: string;             // 项目名称
+  totalClips: number;              // 总镜头数
+  totalDuration: number;           // 总时长（秒）
+  formattedText: string;           // 完整分镜头剧本文本
+  clips: StoryboardClip[];         // Clip 列表
+}
+
+// ===== 质检 Clip 检查项 =====
+
+export interface ClipCheckIssue {
+  type: string;
+  severity: '严重' | '中等' | '轻微';
+  description: string;
+  suggestion: string;
+}
+
+export interface ClipCheck {
+  clipNumber: number;
+  shotType: string;
+  duration: number;
+  charCount: number;
+  cameraMovements: string[];
+  compliant: boolean;
+  issues: ClipCheckIssue[];
+}
+
 // ===== Stage 5 输出：最终 Storyboard =====
 
 export interface QualityReport {
-  totalShots: number;
+  totalClips: number;
   totalDuration: number;           // 总时长（秒）
-  sceneDistribution: Record<number, number>; // 场景号 → 镜头数
-  characterAppearanceCount: Record<string, number>; // 角色 → 出场次数
+  formatCompliance: number;        // 格式合规率（0-100）
+  clipChecks: ClipCheck[];         // 逐 Clip 检查结果
   continuityIssues: string[];      // 连贯性问题
-  seedanceQualityScore: number;    // Seedance prompt 质量评分（0-100）
-  qualityNotes: string[];          // 质量备注
+  overallScore: number;            // 总评分（0-100）
+  summary: string;                 // 质检摘要
+  // Legacy fields for backward compat
+  totalShots?: number;
+  sceneDistribution?: Record<number, number>;
+  characterAppearanceCount?: Record<string, number>;
+  seedanceQualityScore?: number;
+  qualityNotes?: string[];
 }
 
 export interface Storyboard {

@@ -8,11 +8,11 @@ export const STEP_TITLES = [
   '剧本审计与净化',
   '剧本深度分析',
   '分镜设计',
-  'Seedance Prompt',
+  'Seedance 分镜头剧本',
   '质检与输出',
 ];
 
-export const STEP_SHORT_NAMES = ['审计', '分析', '分镜', 'Prompt', '质检'];
+export const STEP_SHORT_NAMES = ['审计', '分析', '分镜', '剧本', '质检'];
 
 export const STEP_IDS = ['audit', 'analyze', 'decompose', 'prompt_gen', 'quality_check'] as const;
 

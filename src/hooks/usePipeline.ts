@@ -7,6 +7,7 @@ import type {
   ScriptAnalysis,
   Shot,
   SeedancePrompt,
+  StoryboardScript,
   QualityReport,
   Storyboard,
   DiagnosisResult,
@@ -185,6 +186,7 @@ export interface PipelineResults {
   repair?: RepairResult;
   shots?: Shot[];
   seedancePrompts?: SeedancePrompt[];
+  storyboardScript?: StoryboardScript;
   qualityReport?: QualityReport;
   repairFinal?: RepairFinalResult;
 }
@@ -239,12 +241,12 @@ export function usePipeline() {
           body = { shots: results.shots, analysis: results.analysis, settings, customPrompt };
           break;
         case 'quality_check':
-          if (!results.shots || !results.analysis || !results.seedancePrompts)
+          if (!results.shots || !results.analysis || !results.storyboardScript)
             throw new Error('Missing data from previous steps');
           body = {
             shots: results.shots,
             analysis: results.analysis,
-            seedancePrompts: results.seedancePrompts,
+            storyboardScript: results.storyboardScript,
             settings,
             customPrompt,
           };
@@ -254,8 +256,8 @@ export function usePipeline() {
           body = { shots: results.shots, analysis: results.analysis, settings, customPrompt };
           break;
         case 'promptgen_check':
-          if (!results.seedancePrompts) throw new Error('Missing data from previous steps');
-          body = { seedancePrompts: results.seedancePrompts, settings, customPrompt };
+          if (!results.storyboardScript) throw new Error('Missing data from previous steps');
+          body = { storyboardScript: results.storyboardScript, settings, customPrompt };
           break;
         case 'repair_final':
           if (!results.shots || !results.analysis || !results.qualityReport)
@@ -264,6 +266,7 @@ export function usePipeline() {
             shots: results.shots,
             analysis: results.analysis,
             qualityReport: results.qualityReport,
+            storyboardScript: results.storyboardScript,
             settings,
             customPrompt,
           };
@@ -310,7 +313,7 @@ export function usePipeline() {
             break;
           }
           case 'prompt_gen':
-            resultsRef.current.seedancePrompts = result as SeedancePrompt[];
+            resultsRef.current.storyboardScript = result as StoryboardScript;
             break;
           case 'quality_check':
             resultsRef.current.qualityReport = result as QualityReport;
@@ -334,12 +337,12 @@ export function usePipeline() {
   // Assemble final storyboard from all results
   const assembleStoryboard = useCallback(() => {
     const r = resultsRef.current;
-    if (r.purifiedScript && r.analysis && r.shots && r.seedancePrompts && r.qualityReport) {
+    if (r.purifiedScript && r.analysis && r.shots && r.qualityReport) {
       const sb: Storyboard = {
         purifiedScript: r.purifiedScript,
         analysis: r.analysis,
         shots: r.shots,
-        seedancePrompts: r.seedancePrompts,
+        seedancePrompts: r.seedancePrompts || [],
         qualityReport: r.qualityReport,
         metadata: {
           title: '未命名分镜',
@@ -456,6 +459,7 @@ export function usePipeline() {
         results.repair = undefined;
         results.shots = undefined;
         results.seedancePrompts = undefined;
+        results.storyboardScript = undefined;
         results.qualityReport = undefined;
       } else if (stepIndex <= 1) {
         results.analysis = undefined;
@@ -463,24 +467,29 @@ export function usePipeline() {
         results.repair = undefined;
         results.shots = undefined;
         results.seedancePrompts = undefined;
+        results.storyboardScript = undefined;
         results.qualityReport = undefined;
       } else if (stepIndex <= 2) {
         results.diagnosis = undefined;
         results.repair = undefined;
         results.shots = undefined;
         results.seedancePrompts = undefined;
+        results.storyboardScript = undefined;
         results.qualityReport = undefined;
       } else if (stepIndex <= 3) {
         results.repair = undefined;
         results.shots = undefined;
         results.seedancePrompts = undefined;
+        results.storyboardScript = undefined;
         results.qualityReport = undefined;
       } else if (stepIndex <= 4) {
         results.shots = undefined;
         results.seedancePrompts = undefined;
+        results.storyboardScript = undefined;
         results.qualityReport = undefined;
       } else if (stepIndex <= 5) {
         results.seedancePrompts = undefined;
+        results.storyboardScript = undefined;
         results.qualityReport = undefined;
       } else {
         results.qualityReport = undefined;

@@ -1,4 +1,4 @@
-import type { Storyboard, SeedancePrompt, PurifiedScript, DiagnosisResult } from '../lib/types';
+import type { Storyboard, SeedancePrompt, PurifiedScript, DiagnosisResult, StoryboardScript } from '../lib/types';
 
 export function exportToJSON(storyboard: Storyboard): string {
   return JSON.stringify(storyboard, null, 2);
@@ -173,6 +173,60 @@ export function exportAuditReport(
   a.click();
   document.body.removeChild(a);
   URL.revokeObjectURL(url);
+}
+
+
+export function exportStoryboardScript(script: StoryboardScript, projectName?: string): void {
+  const name = projectName || script.projectName || '未命名项目';
+  // Export as .md
+  const mdContent = `# ${name} — 分镜头剧本\n\n${script.formattedText}`;
+  const mdBlob = new Blob([mdContent], { type: 'text/markdown;charset=utf-8' });
+  const mdUrl = URL.createObjectURL(mdBlob);
+  const mdA = document.createElement('a');
+  mdA.href = mdUrl;
+  mdA.download = `${name}_分镜头剧本.md`;
+  document.body.appendChild(mdA);
+  mdA.click();
+  document.body.removeChild(mdA);
+  URL.revokeObjectURL(mdUrl);
+}
+
+export function exportStoryboardScriptTxt(script: StoryboardScript, projectName?: string): void {
+  const name = projectName || script.projectName || '未命名项目';
+  const blob = new Blob([script.formattedText], { type: 'text/plain;charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `${name}_分镜头剧本.txt`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+export function exportStoryboardText(formattedText: string, projectName: string): void {
+  // Export as .md
+  const mdContent = `# ${projectName} — 分镜头剧本\n\n${formattedText}`;
+  const mdBlob = new Blob([mdContent], { type: 'text/markdown;charset=utf-8' });
+  const mdUrl = URL.createObjectURL(mdBlob);
+  const mdA = document.createElement('a');
+  mdA.href = mdUrl;
+  mdA.download = `${projectName}_分镜头剧本.md`;
+  document.body.appendChild(mdA);
+  mdA.click();
+  document.body.removeChild(mdA);
+  URL.revokeObjectURL(mdUrl);
+
+  // Export as .txt
+  const txtBlob = new Blob([formattedText], { type: 'text/plain;charset=utf-8' });
+  const txtUrl = URL.createObjectURL(txtBlob);
+  const txtA = document.createElement('a');
+  txtA.href = txtUrl;
+  txtA.download = `${projectName}_分镜头剧本.txt`;
+  document.body.appendChild(txtA);
+  txtA.click();
+  document.body.removeChild(txtA);
+  URL.revokeObjectURL(txtUrl);
 }
 
 export function exportFinalStoryboard(text: string, projectName: string): void {
