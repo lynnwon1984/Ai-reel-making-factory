@@ -7,6 +7,7 @@ export interface ProjectMeta {
   scriptText: string;
   status: string;
   scriptType: string;
+  moduleId: string;
   createdAt: string;
   updatedAt: string;
 }
@@ -34,7 +35,7 @@ export function useProjects() {
     persistProjects(updated);
   }, []);
 
-  const createProject = useCallback((name?: string): ProjectMeta => {
+  const createProject = useCallback((name?: string, moduleId?: string): ProjectMeta => {
     const now = new Date().toISOString();
     const project: ProjectMeta = {
       id: uuidv4(),
@@ -42,6 +43,7 @@ export function useProjects() {
       scriptText: '',
       status: 'draft',
       scriptType: '短剧',
+      moduleId: moduleId || 'overseas-drama-vertical',
       createdAt: now,
       updatedAt: now,
     };

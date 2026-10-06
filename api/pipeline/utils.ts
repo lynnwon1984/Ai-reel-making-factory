@@ -110,6 +110,9 @@ export function createSSE(res: VercelResponse) {
     sendToken(token: string) {
       res.write(`data: ${JSON.stringify({ token })}\n\n`);
     },
+    sendProgress(data: unknown) {
+      res.write(`event: progress\ndata: ${JSON.stringify(data)}\n\n`);
+    },
     sendDone(result: unknown) {
       res.write(`event: done\ndata: ${JSON.stringify(result)}\n\n`);
       res.end();
@@ -127,4 +130,44 @@ export function parseBody<T>(req: VercelRequest): T | null {
   } catch {
     return null;
   }
+}
+
+/**
+ * 从 AI 返回的文本中提取 JSON（处理 markdown 代码块包裹等情况）
+ */
+export function parseJSONResponse<T>(text: string): T {
+  // 尝试直接解析
+  try {
+    return JSON.parse(text) as T;
+  } catch {
+    // continue
+  }
+
+  // 尝试提取 markdown 代码块中的 JSON
+  const codeBlockMatch = text.match(/```(?:json)?\s*\n?([\s\S]*?)\n?```/);
+  if (codeBlockMatch) {
+    try {
+      return JSON.parse(codeBlockMatch[1].trim()) as T;
+    } catch {
+      // continue
+    }
+  }
+
+  // 尝试提取最外层的 {} 或 []
+  const objMatch = text.match(/\{[\s\S]*\}/);
+  const arrMatch = text.match(/\[[\s\S]*\]/);
+
+  // 取较长的匹配
+  const candidates = [objMatch, arrMatch].filter(Boolean);
+  for (const match of candidates) {
+    if (match) {
+      try {
+        return JSON.parse(match[0]) as T;
+      } catch {
+        // continue
+      }
+    }
+  }
+
+  throw new Error(`无法从 AI 响应中解析 JSON。原始文本前 500 字符：\n${text.slice(0, 500)}`);
 }

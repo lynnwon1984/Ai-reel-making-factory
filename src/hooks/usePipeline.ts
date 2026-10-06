@@ -1,49 +1,43 @@
 import { useState, useCallback, useRef } from 'react';
 import type {
-  PipelineStep,
+  StageId,
+  PipelineStepState,
   PipelineSettings,
+  PurifiedScript,
   ScriptAnalysis,
-  Scene,
   Shot,
+  SeedancePrompt,
+  QualityReport,
   Storyboard,
 } from '../lib/types';
 import { PIPELINE_STEPS, DEFAULT_SETTINGS } from '../lib/constants';
 
-const API_ENDPOINTS = [
-  '/api/pipeline/step1-analyze',
-  '/api/pipeline/step2-scene-break',
-  '/api/pipeline/step3-shot-decompose',
-  '/api/pipeline/step4-format',
-];
+const API_ENDPOINTS: Record<StageId, string> = {
+  audit: '/api/pipeline/step1-audit',
+  analyze: '/api/pipeline/step2-analyze',
+  decompose: '/api/pipeline/step3-decompose',
+  prompt_gen: '/api/pipeline/step4-prompt-gen',
+  quality_check: '/api/pipeline/step5-quality',
+};
 
-const MAX_RETRIES = 2;
-
-/** Internal step type with streaming text support */
-interface StepState extends PipelineStep {
-  streamText?: string;
-}
-
-interface StepResult {
-  analysis?: ScriptAnalysis;
-  scenes?: Scene[];
-  shots?: Shot[];
-  storyboard?: Storyboard;
-}
-
-function createInitialSteps(): StepState[] {
+function createInitialSteps(): PipelineStepState[] {
   return PIPELINE_STEPS.map((s) => ({
-    ...s,
+    id: s.id,
+    name: s.name,
     status: 'idle' as const,
-    output: undefined,
+    streamText: '',
+    result: undefined,
     error: undefined,
-    streamText: undefined,
+    customPrompt: undefined,
   }));
 }
 
+/** SSE streaming call — handles token, progress, done, error events */
 async function callStepSSE(
   endpoint: string,
   body: Record<string, unknown>,
   onToken: (token: string) => void,
+  onProgress?: (data: unknown) => void,
   signal?: AbortSignal,
 ): Promise<unknown> {
   const response = await fetch(endpoint, {
@@ -67,7 +61,6 @@ async function callStepSSE(
     const decoder = new TextDecoder();
     let buffer = '';
 
-    // Warning 5 fix: use { once: true } and clean up on settle
     const abortHandler = () => {
       reader.cancel().catch(() => {});
       reject(new Error('Operation cancelled'));
@@ -92,7 +85,7 @@ async function callStepSSE(
 
         buffer += decoder.decode(value, { stream: true });
 
-        // Critical 1 fix: detect done/error events BEFORE for-loop consumes lines
+        // Check for done event
         const doneIdx = buffer.indexOf('event: done');
         if (doneIdx !== -1) {
           const afterDone = buffer.slice(doneIdx);
@@ -109,6 +102,7 @@ async function callStepSSE(
           }
         }
 
+        // Check for error event
         const errorIdx = buffer.indexOf('event: error');
         if (errorIdx !== -1) {
           const afterError = buffer.slice(errorIdx);
@@ -121,6 +115,26 @@ async function callStepSSE(
               return;
             } catch {
               // continue
+            }
+          }
+        }
+
+        // Check for progress events (step3 batching)
+        const progressIdx = buffer.indexOf('event: progress');
+        if (progressIdx !== -1) {
+          const afterProgress = buffer.slice(progressIdx);
+          const dataMatch = afterProgress.match(/data:\s*(.+)/);
+          if (dataMatch) {
+            try {
+              const progressData = JSON.parse(dataMatch[1]);
+              onProgress?.(progressData);
+              // Remove processed progress event from buffer
+              const endOfData = afterProgress.indexOf('\n\n');
+              if (endOfData !== -1) {
+                buffer = buffer.slice(0, progressIdx) + afterProgress.slice(endOfData + 2);
+              }
+            } catch {
+              // skip malformed progress
             }
           }
         }
@@ -156,51 +170,76 @@ async function callStepSSE(
   });
 }
 
+interface PipelineResults {
+  purifiedScript?: PurifiedScript;
+  analysis?: ScriptAnalysis;
+  shots?: Shot[];
+  seedancePrompts?: SeedancePrompt[];
+  qualityReport?: QualityReport;
+}
+
 export function usePipeline() {
-  const [steps, setSteps] = useState<StepState[]>(createInitialSteps);
+  const [steps, setSteps] = useState<PipelineStepState[]>(createInitialSteps);
   const [isRunning, setIsRunning] = useState(false);
   const [storyboard, setStoryboard] = useState<Storyboard | null>(null);
-  const resultsRef = useRef<StepResult>({});
+  const resultsRef = useRef<PipelineResults>({});
   const scriptTextRef = useRef<string>('');
   const settingsRef = useRef<PipelineSettings>(DEFAULT_SETTINGS);
   const abortRef = useRef<AbortController | null>(null);
 
-  const updateStep = useCallback((stepIndex: number, updates: Partial<StepState>) => {
+  const updateStep = useCallback((stepId: StageId, updates: Partial<PipelineStepState>) => {
     setSteps((prev) =>
-      prev.map((step, i) => (i === stepIndex ? { ...step, ...updates } : step)),
+      prev.map((step) => (step.id === stepId ? { ...step, ...updates } : step)),
     );
   }, []);
 
-  const executeStep = useCallback(
-    async (stepIndex: number, retries = 0): Promise<void> => {
-      const endpoint = API_ENDPOINTS[stepIndex];
-      if (!endpoint) throw new Error(`Invalid step index: ${stepIndex}`);
+  const getCustomPrompt = useCallback((stageId: StageId): string | undefined => {
+    const cp = settingsRef.current.customPrompts;
+    return cp?.[stageId] || undefined;
+  }, []);
 
-      updateStep(stepIndex, { status: 'running', error: undefined, streamText: '' });
+  const executeStep = useCallback(
+    async (stageId: StageId): Promise<unknown> => {
+      const endpoint = API_ENDPOINTS[stageId];
+      if (!endpoint) throw new Error(`Unknown stage: ${stageId}`);
+
+      updateStep(stageId, { status: 'running', streamText: '', error: undefined });
 
       const results = resultsRef.current;
       const settings = settingsRef.current;
+      const customPrompt = getCustomPrompt(stageId);
+
       let body: Record<string, unknown>;
 
-      switch (stepIndex) {
-        case 0:
-          body = { scriptText: scriptTextRef.current, settings };
+      switch (stageId) {
+        case 'audit':
+          body = { scriptText: scriptTextRef.current, settings, customPrompt };
           break;
-        case 1:
-          if (!results.analysis) throw new Error('Missing analysis from step 1');
-          body = { scriptText: scriptTextRef.current, analysis: results.analysis, settings };
+        case 'analyze':
+          if (!results.purifiedScript) throw new Error('Missing purifiedScript from audit step');
+          body = { purifiedScript: results.purifiedScript, settings, customPrompt };
           break;
-        case 2:
-          if (!results.scenes || !results.analysis) throw new Error('Missing data from previous steps');
-          body = { scenes: results.scenes, analysis: results.analysis, settings };
+        case 'decompose':
+          if (!results.purifiedScript || !results.analysis) throw new Error('Missing data from previous steps');
+          body = { purifiedScript: results.purifiedScript, analysis: results.analysis, settings, customPrompt };
           break;
-        case 3:
-          if (!results.shots || !results.scenes || !results.analysis)
+        case 'prompt_gen':
+          if (!results.shots || !results.analysis) throw new Error('Missing data from previous steps');
+          body = { shots: results.shots, analysis: results.analysis, settings, customPrompt };
+          break;
+        case 'quality_check':
+          if (!results.shots || !results.analysis || !results.seedancePrompts)
             throw new Error('Missing data from previous steps');
-          body = { shots: results.shots, scenes: results.scenes, analysis: results.analysis, settings };
+          body = {
+            shots: results.shots,
+            analysis: results.analysis,
+            seedancePrompts: results.seedancePrompts,
+            settings,
+            customPrompt,
+          };
           break;
         default:
-          throw new Error(`Unknown step: ${stepIndex}`);
+          throw new Error(`Unknown stage: ${stageId}`);
       }
 
       const controller = new AbortController();
@@ -214,45 +253,73 @@ export function usePipeline() {
           body,
           (token: string) => {
             accumulatedText += token;
-            updateStep(stepIndex, { streamText: accumulatedText });
+            updateStep(stageId, { streamText: accumulatedText });
+          },
+          (progressData: unknown) => {
+            const pd = progressData as { batchIndex?: number; totalBatches?: number; totalShotsSoFar?: number };
+            if (pd.batchIndex !== undefined && pd.totalBatches !== undefined) {
+              const batchInfo = `[批次 ${pd.batchIndex + 1}/${pd.totalBatches}] 已完成 ${pd.totalShotsSoFar ?? '?'} 个镜头\n`;
+              accumulatedText += batchInfo;
+              updateStep(stageId, { streamText: accumulatedText });
+            }
           },
           controller.signal,
         );
 
-        switch (stepIndex) {
-          case 0:
+        // Store result
+        switch (stageId) {
+          case 'audit':
+            resultsRef.current.purifiedScript = result as PurifiedScript;
+            break;
+          case 'analyze':
             resultsRef.current.analysis = result as ScriptAnalysis;
             break;
-          case 1:
-            resultsRef.current.scenes = result as Scene[];
+          case 'decompose': {
+            const decomposeResult = result as { shots: Shot[]; totalBatches: number };
+            resultsRef.current.shots = decomposeResult.shots;
             break;
-          case 2:
-            resultsRef.current.shots = result as Shot[];
+          }
+          case 'prompt_gen':
+            resultsRef.current.seedancePrompts = result as SeedancePrompt[];
             break;
-          case 3:
-            resultsRef.current.storyboard = result as Storyboard;
-            setStoryboard(result as Storyboard);
+          case 'quality_check':
+            resultsRef.current.qualityReport = result as QualityReport;
             break;
         }
 
-        updateStep(stepIndex, { status: 'done', output: result });
+        updateStep(stageId, { status: 'done', result, streamText: accumulatedText });
+        return result;
       } catch (err) {
-        if (err instanceof Error && err.message === 'Operation cancelled') return;
-
         const message = err instanceof Error ? err.message : 'Unknown error';
-
-        if (retries < MAX_RETRIES) {
-          await new Promise((r) => setTimeout(r, 1000 * (retries + 1)));
-          return executeStep(stepIndex, retries + 1);
-        }
-
-        updateStep(stepIndex, { status: 'error', error: message });
+        updateStep(stageId, { status: 'error', error: message, streamText: accumulatedText });
         throw err;
       }
     },
-    [updateStep],
+    [updateStep, getCustomPrompt],
   );
 
+  // Assemble final storyboard from all results
+  const assembleStoryboard = useCallback(() => {
+    const r = resultsRef.current;
+    if (r.purifiedScript && r.analysis && r.shots && r.seedancePrompts && r.qualityReport) {
+      const sb: Storyboard = {
+        purifiedScript: r.purifiedScript,
+        analysis: r.analysis,
+        shots: r.shots,
+        seedancePrompts: r.seedancePrompts,
+        qualityReport: r.qualityReport,
+        metadata: {
+          title: '未命名分镜',
+          createdAt: new Date().toISOString(),
+          seedanceVersion: settingsRef.current.targetSeedanceVersion || '2.5',
+          totalBatches: Math.ceil(r.purifiedScript.totalScenes / (settingsRef.current.batchSize || 3)),
+        },
+      };
+      setStoryboard(sb);
+    }
+  }, []);
+
+  // Only execute first step (audit), then pause
   const startPipeline = useCallback(
     async (scriptText: string, settings?: PipelineSettings) => {
       scriptTextRef.current = scriptText;
@@ -263,11 +330,9 @@ export function usePipeline() {
       setIsRunning(true);
 
       try {
-        for (let i = 0; i < 4; i++) {
-          await executeStep(i);
-        }
+        await executeStep('audit');
       } catch {
-        // Error already captured in step state
+        // Error captured in step state
       } finally {
         setIsRunning(false);
       }
@@ -275,77 +340,137 @@ export function usePipeline() {
     [executeStep],
   );
 
-  const executePipeline = startPipeline;
+  // Execute next idle step, then pause
+  const continueStep = useCallback(async () => {
+    if (isRunning) return;
 
-  const resetPipeline = useCallback(() => {
-    abortRef.current?.abort();
-    abortRef.current = null;
-    resultsRef.current = {};
-    scriptTextRef.current = '';
-    settingsRef.current = DEFAULT_SETTINGS;
-    setStoryboard(null);
-    setSteps(createInitialSteps());
-    setIsRunning(false);
-  }, []);
+    const stepOrder: StageId[] = ['audit', 'analyze', 'decompose', 'prompt_gen', 'quality_check'];
+    const nextStep = steps.find((s) => s.status === 'idle');
+    if (!nextStep) return; // All steps done
 
+    setIsRunning(true);
+    try {
+      await executeStep(nextStep.id);
+
+      // If this was the last step, assemble storyboard
+      const allDone = stepOrder.every((id) => {
+        if (id === nextStep.id) return true; // current step just finished
+        const step = steps.find((s) => s.id === id);
+        return step?.status === 'done';
+      });
+
+      if (allDone && nextStep.id === 'quality_check') {
+        assembleStoryboard();
+      }
+    } catch {
+      // Error captured in step state
+    } finally {
+      setIsRunning(false);
+    }
+  }, [isRunning, steps, executeStep, assembleStoryboard]);
+
+  // Execute all remaining steps to completion
+  const continueAll = useCallback(async () => {
+    if (isRunning) return;
+
+    const stepOrder: StageId[] = ['audit', 'analyze', 'decompose', 'prompt_gen', 'quality_check'];
+    const remainingSteps = stepOrder.filter((id) => {
+      const step = steps.find((s) => s.id === id);
+      return step?.status === 'idle';
+    });
+
+    if (remainingSteps.length === 0) return;
+
+    setIsRunning(true);
+    try {
+      for (const stepId of remainingSteps) {
+        await executeStep(stepId);
+      }
+      assembleStoryboard();
+    } catch {
+      // Error captured in step state
+    } finally {
+      setIsRunning(false);
+    }
+  }, [isRunning, steps, executeStep, assembleStoryboard]);
+
+  // Retry: auto-execute remaining steps (user confirmed retry)
   const retryStep = useCallback(
-    async (stepId: number, newScriptText?: string) => {
+    async (stepIndex: number, newScriptText?: string) => {
       if (isRunning) return;
 
-      const stepIndex = stepId - 1;
+      const stepOrder: StageId[] = ['audit', 'analyze', 'decompose', 'prompt_gen', 'quality_check'];
 
       if (newScriptText !== undefined) {
         scriptTextRef.current = newScriptText;
       }
 
-      setIsRunning(true);
-
+      // Reset this step and all subsequent steps
       setSteps((prev) =>
         prev.map((step, i) =>
           i >= stepIndex
-            ? { ...step, status: 'idle' as const, output: undefined, error: undefined, streamText: undefined }
+            ? { ...step, status: 'idle' as const, result: undefined, error: undefined, streamText: '' }
             : step,
         ),
       );
 
+      // Clear results from this step onward
       const results = resultsRef.current;
       if (stepIndex <= 0) {
+        results.purifiedScript = undefined;
         results.analysis = undefined;
-        results.scenes = undefined;
         results.shots = undefined;
-        results.storyboard = undefined;
+        results.seedancePrompts = undefined;
+        results.qualityReport = undefined;
       } else if (stepIndex <= 1) {
-        results.scenes = undefined;
+        results.analysis = undefined;
         results.shots = undefined;
-        results.storyboard = undefined;
+        results.seedancePrompts = undefined;
+        results.qualityReport = undefined;
       } else if (stepIndex <= 2) {
         results.shots = undefined;
-        results.storyboard = undefined;
+        results.seedancePrompts = undefined;
+        results.qualityReport = undefined;
+      } else if (stepIndex <= 3) {
+        results.seedancePrompts = undefined;
+        results.qualityReport = undefined;
       } else {
-        results.storyboard = undefined;
+        results.qualityReport = undefined;
       }
 
-      if (stepIndex === 3) {
+      if (stepIndex >= 4) {
         setStoryboard(null);
       }
 
+      setIsRunning(true);
+
       try {
-        for (let i = stepIndex; i < 4; i++) {
-          await executeStep(i);
+        for (let i = stepIndex; i < stepOrder.length; i++) {
+          await executeStep(stepOrder[i]);
         }
+        assembleStoryboard();
       } catch {
         // Error already captured in step state
       } finally {
         setIsRunning(false);
       }
     },
-    [isRunning, executeStep],
+    [isRunning, executeStep, assembleStoryboard],
   );
 
   const abort = useCallback(() => {
     abortRef.current?.abort();
     abortRef.current = null;
+    setSteps(prev => prev.map(step =>
+      step.status === 'running'
+        ? { ...step, status: 'error', error: '用户取消' }
+        : step
+    ));
     setIsRunning(false);
+  }, []);
+
+  const updateSettings = useCallback((settings: PipelineSettings) => {
+    settingsRef.current = settings;
   }, []);
 
   return {
@@ -353,9 +478,11 @@ export function usePipeline() {
     isRunning,
     storyboard,
     startPipeline,
-    executePipeline,
-    resetPipeline,
+    continueStep,
+    continueAll,
     retryStep,
     abort,
+    updateSettings,
+    settingsRef,
   };
 }

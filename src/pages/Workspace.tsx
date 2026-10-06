@@ -4,11 +4,15 @@ import ScriptEditor from '../components/ScriptEditor';
 import PipelineProgress from '../components/PipelineProgress';
 import StoryboardTable from '../components/StoryboardTable';
 import StoryboardCard from '../components/StoryboardCard';
+import SeedancePreview from '../components/SeedancePreview';
 import { usePipeline } from '../hooks/usePipeline';
-import { downloadJSON, downloadMarkdown } from '../utils/exporter';
-import type { Shot } from '../lib/types';
+import { useProjects } from '../hooks/useProjects';
+import { getModule } from '../modules/registry';
+import { loadSettings } from '../components/SettingsPanel';
+import { downloadJSON, downloadMarkdown, exportSeedancePrompts } from '../utils/exporter';
+import type { Shot, PipelineSettings } from '../lib/types';
 
-type ViewMode = 'table' | 'card';
+type ResultTab = 'table' | 'card' | 'seedance';
 
 interface ProjectData {
   name: string;
@@ -33,11 +37,16 @@ export default function Workspace() {
   const projectId = id || `proj-${Date.now()}`;
 
   const [scriptText, setScriptText] = useState('');
-  const [viewMode, setViewMode] = useState<ViewMode>('table');
+  const [resultTab, setResultTab] = useState<ResultTab>('table');
   const [projectName, setProjectName] = useState('未命名项目');
   const [showExportMenu, setShowExportMenu] = useState(false);
+  const [settings, setSettings] = useState<PipelineSettings>(loadSettings);
+  const [seedanceVersion, setSeedanceVersion] = useState<'2.0' | '2.5'>(settings.targetSeedanceVersion);
 
-  const { steps, isRunning, storyboard, startPipeline, retryStep } = usePipeline();
+  const { steps, isRunning, storyboard, startPipeline, continueStep, continueAll, retryStep, updateSettings } = usePipeline();
+  const { getProject } = useProjects();
+  const project = getProject(projectId);
+  const moduleDef = project ? getModule(project.moduleId) : undefined;
 
   // Load project on mount
   useEffect(() => {
@@ -52,59 +61,93 @@ export default function Workspace() {
   }, [projectId, projectName, scriptText]);
 
   const handleStart = useCallback(() => {
-    startPipeline(scriptText);
-  }, [startPipeline, scriptText]);
+    startPipeline(scriptText, settings);
+  }, [startPipeline, scriptText, settings]);
 
   const handleRetryStep = useCallback(
-    (stepId: number) => {
-      retryStep(stepId, scriptText);
+    (stepIndex: number) => {
+      retryStep(stepIndex, scriptText);
     },
-    [retryStep, scriptText]
+    [retryStep, scriptText],
   );
 
+  const handleContinueStep = useCallback(() => {
+    continueStep();
+  }, [continueStep]);
+
+  const handleContinueAll = useCallback(() => {
+    continueAll();
+  }, [continueAll]);
+
   const handleShotUpdate = useCallback(
-    (sceneIdx: number, shotIdx: number, field: keyof Shot, value: string | number) => {
+    (shotIdx: number, field: keyof Shot, value: string | number) => {
       if (!storyboard) return;
-      // Update is local-only for now; in future, persist to backend
-      const scene = storyboard.scenes[sceneIdx];
-      if (scene?.shots[shotIdx]) {
-        (scene.shots[shotIdx] as unknown as Record<string, unknown>)[field] = value;
+      const shot = storyboard.shots[shotIdx];
+      if (shot) {
+        (shot as unknown as Record<string, unknown>)[field] = value;
       }
     },
-    [storyboard]
+    [storyboard],
+  );
+
+  const handleSettingsChange = useCallback(
+    (newSettings: PipelineSettings) => {
+      setSettings(newSettings);
+      updateSettings(newSettings);
+    },
+    [updateSettings],
   );
 
   return (
-    <div className="h-full flex flex-col">
+    <div className="h-full flex flex-col bg-gray-900">
       {/* Top Toolbar */}
-      <div className="flex items-center justify-between px-4 py-2.5 border-b border-gray-200 bg-white shrink-0">
+      <div className="flex items-center justify-between px-4 py-2 border-b border-gray-700/50 bg-gray-900 shrink-0">
         <div className="flex items-center gap-3">
           <input
             value={projectName}
             onChange={(e) => setProjectName(e.target.value)}
-            className="text-sm font-semibold text-gray-800 bg-transparent border-none focus:outline-none focus:ring-1 focus:ring-blue-400 rounded px-2 py-1"
+            className="text-sm font-semibold text-gray-200 bg-transparent border-none focus:outline-none focus:ring-1 focus:ring-blue-500 rounded px-2 py-1"
             placeholder="项目名称"
           />
-          {id && <span className="text-xs text-gray-400">#{id}</span>}
+          {id && <span className="text-xs text-gray-600">#{id}</span>}
+          {/* Module info */}
+          {moduleDef && (
+            <div className="flex items-center gap-2 text-sm text-gray-400 ml-2">
+              <span className="text-lg">{moduleDef.icon}</span>
+              <span>{moduleDef.name}</span>
+              <span className="text-gray-600">·</span>
+              <span>{moduleDef.subtitle}</span>
+              <span className="text-gray-600">·</span>
+              <span>{moduleDef.aspectRatio}</span>
+            </div>
+          )}
         </div>
         <div className="flex items-center gap-2">
-          {/* View Toggle */}
-          <div className="flex items-center bg-gray-100 rounded-md p-0.5">
+          {/* Result Tab Toggle */}
+          <div className="flex items-center bg-gray-800 rounded-md p-0.5">
             <button
-              onClick={() => setViewMode('table')}
+              onClick={() => setResultTab('table')}
               className={`px-3 py-1 text-xs font-medium rounded transition-colors ${
-                viewMode === 'table' ? 'bg-white text-gray-800 shadow-sm' : 'text-gray-500 hover:text-gray-700'
+                resultTab === 'table' ? 'bg-gray-700 text-gray-200 shadow-sm' : 'text-gray-500 hover:text-gray-300'
               }`}
             >
-              📋 表格
+              �� 表格
             </button>
             <button
-              onClick={() => setViewMode('card')}
+              onClick={() => setResultTab('card')}
               className={`px-3 py-1 text-xs font-medium rounded transition-colors ${
-                viewMode === 'card' ? 'bg-white text-gray-800 shadow-sm' : 'text-gray-500 hover:text-gray-700'
+                resultTab === 'card' ? 'bg-gray-700 text-gray-200 shadow-sm' : 'text-gray-500 hover:text-gray-300'
               }`}
             >
               🃏 卡片
+            </button>
+            <button
+              onClick={() => setResultTab('seedance')}
+              className={`px-3 py-1 text-xs font-medium rounded transition-colors ${
+                resultTab === 'seedance' ? 'bg-gray-700 text-cyan-400 shadow-sm' : 'text-gray-500 hover:text-gray-300'
+              }`}
+            >
+              🎬 Seedance
             </button>
           </div>
           {/* Export */}
@@ -112,23 +155,38 @@ export default function Workspace() {
             <div className="relative">
               <button
                 onClick={() => setShowExportMenu(!showExportMenu)}
-                className="px-3 py-1.5 text-xs font-medium text-gray-600 bg-gray-100 rounded-md hover:bg-gray-200 transition-colors"
+                className="px-3 py-1.5 text-xs font-medium text-gray-400 bg-gray-800 rounded-md hover:bg-gray-700 transition-colors"
               >
                 📥 导出
               </button>
               {showExportMenu && (
-                <div className="absolute right-0 top-full mt-1 w-36 bg-white border border-gray-200 rounded-lg shadow-lg z-20 py-1">
+                <div className="absolute right-0 top-full mt-1 w-44 bg-gray-800 border border-gray-700 rounded-lg shadow-xl z-20 py-1">
                   <button
-                    onClick={() => { downloadJSON(storyboard); setShowExportMenu(false); }}
-                    className="w-full px-3 py-2 text-left text-xs text-gray-700 hover:bg-gray-50"
+                    onClick={() => {
+                      downloadJSON(storyboard);
+                      setShowExportMenu(false);
+                    }}
+                    className="w-full px-3 py-2 text-left text-xs text-gray-300 hover:bg-gray-700/50"
                   >
                     导出 JSON
                   </button>
                   <button
-                    onClick={() => { downloadMarkdown(storyboard); setShowExportMenu(false); }}
-                    className="w-full px-3 py-2 text-left text-xs text-gray-700 hover:bg-gray-50"
+                    onClick={() => {
+                      downloadMarkdown(storyboard);
+                      setShowExportMenu(false);
+                    }}
+                    className="w-full px-3 py-2 text-left text-xs text-gray-300 hover:bg-gray-700/50"
                   >
                     导出 Markdown
+                  </button>
+                  <button
+                    onClick={() => {
+                      exportSeedancePrompts(storyboard.seedancePrompts, seedanceVersion);
+                      setShowExportMenu(false);
+                    }}
+                    className="w-full px-3 py-2 text-left text-xs text-cyan-400 hover:bg-gray-700/50"
+                  >
+                    导出 Seedance Prompt
                   </button>
                 </div>
               )}
@@ -137,29 +195,41 @@ export default function Workspace() {
         </div>
       </div>
 
-      {/* Three-column Layout */}
-      <div className="flex-1 flex min-h-0">
-        {/* Left: Script Editor (30%) */}
-        <div className="w-[30%] border-r border-gray-200 flex flex-col min-h-0">
+      {/* Vertical Top-Middle-Bottom Layout */}
+      <div className="flex flex-col h-[calc(100vh-64px)]">
+        {/* Top: Script Editor (~20vh) */}
+        <div className="h-[20vh] min-h-[150px] border-b border-gray-700 overflow-y-auto">
           <ScriptEditor value={scriptText} onChange={setScriptText} />
         </div>
 
-        {/* Center: Pipeline (25%) */}
-        <div className="w-[25%] border-r border-gray-200 flex flex-col min-h-0">
+        {/* Middle: Pipeline Control (~40vh) */}
+        <div className="h-[40vh] min-h-[280px] border-b border-gray-700 overflow-y-auto">
           <PipelineProgress
             steps={steps}
             isRunning={isRunning}
+            settings={settings}
             onStart={handleStart}
             onRetryStep={handleRetryStep}
+            onSettingsChange={handleSettingsChange}
+            onContinueStep={handleContinueStep}
+            onContinueAll={handleContinueAll}
           />
         </div>
 
-        {/* Right: Storyboard Result (45%) */}
-        <div className="w-[45%] flex flex-col min-h-0">
-          {viewMode === 'table' ? (
+        {/* Bottom: Results (flex-1) */}
+        <div className="flex-1 overflow-y-auto">
+          {resultTab === 'table' && (
             <StoryboardTable storyboard={storyboard} onShotUpdate={handleShotUpdate} />
-          ) : (
+          )}
+          {resultTab === 'card' && (
             <StoryboardCard storyboard={storyboard} onShotUpdate={handleShotUpdate} />
+          )}
+          {resultTab === 'seedance' && (
+            <SeedancePreview
+              prompts={storyboard?.seedancePrompts ?? []}
+              version={seedanceVersion}
+              onVersionChange={setSeedanceVersion}
+            />
           )}
         </div>
       </div>

@@ -87,24 +87,24 @@ export default function ScriptEditor({ value, onChange }: ScriptEditorProps) {
   return (
     <div className="flex flex-col h-full">
       {/* Toolbar */}
-      <div className="flex items-center justify-between px-4 py-3 border-b border-gray-200 bg-white">
+      <div className="flex items-center justify-between px-4 py-2.5 border-b border-gray-700/50 bg-gray-900">
         <div className="flex items-center gap-2">
           <button
             onClick={() => fileInputRef.current?.click()}
-            className="px-3 py-1.5 text-xs font-medium text-gray-600 bg-gray-100 rounded-md hover:bg-gray-200 transition-colors"
+            className="px-3 py-1.5 text-xs font-medium text-gray-400 bg-gray-800 rounded-md hover:bg-gray-700 transition-colors"
           >
             📂 上传文件
           </button>
           <button
             onClick={fillSample}
-            className="px-3 py-1.5 text-xs font-medium text-blue-600 bg-blue-50 rounded-md hover:bg-blue-100 transition-colors"
+            className="px-3 py-1.5 text-xs font-medium text-blue-400 bg-blue-900/20 rounded-md hover:bg-blue-900/30 transition-colors"
           >
             📝 示例剧本
           </button>
           <button
             onClick={clearAll}
             disabled={!value}
-            className="px-3 py-1.5 text-xs font-medium text-red-600 bg-red-50 rounded-md hover:bg-red-100 transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+            className="px-3 py-1.5 text-xs font-medium text-red-400 bg-red-900/20 rounded-md hover:bg-red-900/30 transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
           >
             🗑️ 清空
           </button>
@@ -116,7 +116,7 @@ export default function ScriptEditor({ value, onChange }: ScriptEditorProps) {
             className="hidden"
           />
         </div>
-        <div className="text-xs text-gray-400">
+        <div className="text-xs text-gray-500">
           {charCount} 字符 · {wordCount} 词
         </div>
       </div>
@@ -130,14 +130,14 @@ export default function ScriptEditor({ value, onChange }: ScriptEditorProps) {
           onDragLeave={handleDragLeave}
           onDrop={handleDrop}
           placeholder={'在此粘贴或输入您的剧本文本...\n\n支持拖拽 .txt / .md 文件到此处'}
-          className={`w-full h-full resize-none p-4 text-sm leading-relaxed font-mono bg-gray-900 text-gray-100 placeholder-gray-500 focus:outline-none ${
+          className={`w-full h-full resize-none p-4 text-sm leading-relaxed font-mono bg-gray-950 text-gray-200 placeholder-gray-600 focus:outline-none ${
             isDragging ? 'ring-2 ring-blue-500 ring-inset' : ''
           }`}
           style={{ textAlign: 'left' }}
         />
         {isDragging && (
           <div className="absolute inset-0 bg-blue-500/20 flex items-center justify-center pointer-events-none">
-            <div className="bg-white/90 rounded-lg px-6 py-3 text-sm font-medium text-blue-700 shadow-lg">
+            <div className="bg-gray-800/90 rounded-lg px-6 py-3 text-sm font-medium text-blue-400 shadow-lg">
               释放文件以上传
             </div>
           </div>
