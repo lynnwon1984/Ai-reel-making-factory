@@ -1,12 +1,14 @@
 import { useState } from 'react';
-import type { PipelineStepState, PipelineStepStatus, PipelineSettings, StageId } from '../lib/types';
+import type { PipelineStepState, PipelineStepStatus, PipelineSettings, StageId, PurifiedScript } from '../lib/types';
 import { STAGE_CONFIGS } from '../lib/constants';
 import PromptEditor from './PromptEditor';
+import { exportPurifiedScript, exportAuditReport } from '../utils/exporter';
 
 interface PipelineProgressProps {
   steps: PipelineStepState[];
   isRunning: boolean;
   settings: PipelineSettings;
+  projectName: string;
   onStart: () => void;
   onRetryStep: (stepIndex: number) => void;
   onSettingsChange: (settings: PipelineSettings) => void;
@@ -46,6 +48,7 @@ export default function PipelineProgress({
   steps,
   isRunning,
   settings,
+  projectName,
   onStart,
   onRetryStep,
   onSettingsChange,
@@ -58,6 +61,12 @@ export default function PipelineProgress({
   const hasDoneSteps = steps.some((s) => s.status === 'done');
   const hasIdleSteps = steps.some((s) => s.status === 'idle');
   const allDone = steps.every((s) => s.status === 'done');
+
+  const auditStep = steps.find((s) => s.id === 'audit');
+  const purifiedScript: PurifiedScript | null =
+    auditStep?.status === 'done' && auditStep.result
+      ? (auditStep.result as PurifiedScript)
+      : null;
 
   const handleCustomPromptChange = (stageId: StageId, prompt: string) => {
     const next = {
@@ -129,6 +138,7 @@ export default function PipelineProgress({
           const isPromptExpanded = expandedPrompt === step.id;
           const isLastStep = index === steps.length - 1;
           const showContinueBtn = step.status === 'done' && !isLastStep && !isRunning && hasIdleSteps;
+          const showAuditDownloads = step.id === 'audit' && step.status === 'done' && purifiedScript;
 
           return (
             <div
@@ -194,6 +204,24 @@ export default function PipelineProgress({
                   </button>
                 )}
               </div>
+
+              {/* Audit Download Buttons */}
+              {showAuditDownloads && (
+                <div className="mx-2.5 mb-2.5 flex gap-2">
+                  <button
+                    onClick={() => exportPurifiedScript(purifiedScript!.fullText, projectName)}
+                    className="flex-1 px-3 py-1.5 text-xs font-medium bg-emerald-600 hover:bg-emerald-700 rounded text-white transition-colors active:scale-[0.98]"
+                  >
+                    �� 下载净化剧本 (.txt)
+                  </button>
+                  <button
+                    onClick={() => exportAuditReport(purifiedScript!, projectName)}
+                    className="flex-1 px-3 py-1.5 text-xs font-medium bg-teal-600 hover:bg-teal-700 rounded text-white transition-colors active:scale-[0.98]"
+                  >
+                    📥 下载审计报告 (.md)
+                  </button>
+                </div>
+              )}
 
               {/* Continue to next step button */}
               {showContinueBtn && (

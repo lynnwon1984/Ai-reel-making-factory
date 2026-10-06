@@ -1,4 +1,4 @@
-import type { Storyboard, SeedancePrompt } from '../lib/types';
+import type { Storyboard, SeedancePrompt, PurifiedScript } from '../lib/types';
 
 export function exportToJSON(storyboard: Storyboard): string {
   return JSON.stringify(storyboard, null, 2);
@@ -122,6 +122,53 @@ export function exportPurifiedScript(fullText: string, projectName: string): voi
   const a = document.createElement('a');
   a.href = url;
   a.download = `${projectName || '未命名项目'}_净化剧本.txt`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+export function exportAuditReport(
+  purifiedScript: PurifiedScript,
+  projectName: string,
+): void {
+  const lines: string[] = [];
+  lines.push(`# ${projectName} — 审计报告\n`);
+
+  // Part 1: 审计摘要
+  lines.push(`## 审计摘要\n`);
+  lines.push(`- 原始行数：${purifiedScript.auditNotes.originalLineCount}`);
+  lines.push(`- 净化后行数：${purifiedScript.auditNotes.purifiedLineCount}`);
+  lines.push(`- 去重段落：${purifiedScript.auditNotes.duplicatesRemoved}`);
+  lines.push(`- 噪音标记清除：${purifiedScript.auditNotes.noiseMarkersRemoved}`);
+  lines.push(`- 场景合并：${purifiedScript.auditNotes.scenesMerged}`);
+  lines.push(`- 总场景数：${purifiedScript.totalScenes}`);
+  lines.push(`- 角色列表：${purifiedScript.characterNames.join('、')}\n`);
+
+  // Part 2: 逻辑断链检测
+  if (purifiedScript.logicIssues && purifiedScript.logicIssues.length > 0) {
+    lines.push(`## 逻辑断链检测（${purifiedScript.logicIssues.length} 项）\n`);
+    purifiedScript.logicIssues.forEach((issue, i) => {
+      lines.push(`### ${i + 1}. [${issue.severity}] ${issue.type}`);
+      lines.push(`**位置**：${issue.location}`);
+      lines.push(`**描述**：${issue.description}`);
+      lines.push(`**建议**：${issue.suggestion}\n`);
+    });
+  } else {
+    lines.push(`## 逻辑断链检测\n`);
+    lines.push(`未检测到逻辑断链问题。\n`);
+  }
+
+  // Part 3: 净化后连续剧本
+  lines.push(`## 净化后连续剧本\n`);
+  lines.push(purifiedScript.fullText);
+
+  const content = lines.join('\n');
+  const blob = new Blob([content], { type: 'text/markdown;charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `${projectName || '未命名项目'}_审计报告.md`;
   document.body.appendChild(a);
   a.click();
   document.body.removeChild(a);

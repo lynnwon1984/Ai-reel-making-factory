@@ -9,8 +9,8 @@ import { usePipeline } from '../hooks/usePipeline';
 import { useProjects } from '../hooks/useProjects';
 import { getModule } from '../modules/registry';
 import { loadSettings } from '../components/SettingsPanel';
-import { downloadJSON, downloadMarkdown, exportSeedancePrompts } from '../utils/exporter';
-import type { Shot, PipelineSettings } from '../lib/types';
+import { downloadJSON, downloadMarkdown, exportSeedancePrompts, exportPurifiedScript, exportAuditReport } from '../utils/exporter';
+import type { Shot, PipelineSettings, PurifiedScript } from '../lib/types';
 
 type ResultTab = 'table' | 'card' | 'seedance';
 
@@ -47,6 +47,13 @@ export default function Workspace() {
   const { getProject } = useProjects();
   const project = getProject(projectId);
   const moduleDef = project ? getModule(project.moduleId) : undefined;
+
+  // Derive purifiedScript from audit step
+  const auditStep = steps.find((s) => s.id === 'audit');
+  const purifiedScript: PurifiedScript | null =
+    auditStep?.status === 'done' && auditStep.result
+      ? (auditStep.result as PurifiedScript)
+      : null;
 
   // Load project on mount
   useEffect(() => {
@@ -98,6 +105,8 @@ export default function Workspace() {
     [updateSettings],
   );
 
+  const showExportButton = storyboard || purifiedScript;
+
   return (
     <div className="h-full flex flex-col bg-gray-900">
       {/* Top Toolbar */}
@@ -131,7 +140,7 @@ export default function Workspace() {
                 resultTab === 'table' ? 'bg-gray-700 text-gray-200 shadow-sm' : 'text-gray-500 hover:text-gray-300'
               }`}
             >
-              �� 表格
+              📋 表格
             </button>
             <button
               onClick={() => setResultTab('card')}
@@ -151,7 +160,7 @@ export default function Workspace() {
             </button>
           </div>
           {/* Export */}
-          {storyboard && (
+          {showExportButton && (
             <div className="relative">
               <button
                 onClick={() => setShowExportMenu(!showExportMenu)}
@@ -160,34 +169,63 @@ export default function Workspace() {
                 📥 导出
               </button>
               {showExportMenu && (
-                <div className="absolute right-0 top-full mt-1 w-44 bg-gray-800 border border-gray-700 rounded-lg shadow-xl z-20 py-1">
-                  <button
-                    onClick={() => {
-                      downloadJSON(storyboard);
-                      setShowExportMenu(false);
-                    }}
-                    className="w-full px-3 py-2 text-left text-xs text-gray-300 hover:bg-gray-700/50"
-                  >
-                    导出 JSON
-                  </button>
-                  <button
-                    onClick={() => {
-                      downloadMarkdown(storyboard);
-                      setShowExportMenu(false);
-                    }}
-                    className="w-full px-3 py-2 text-left text-xs text-gray-300 hover:bg-gray-700/50"
-                  >
-                    导出 Markdown
-                  </button>
-                  <button
-                    onClick={() => {
-                      exportSeedancePrompts(storyboard.seedancePrompts, seedanceVersion);
-                      setShowExportMenu(false);
-                    }}
-                    className="w-full px-3 py-2 text-left text-xs text-cyan-400 hover:bg-gray-700/50"
-                  >
-                    导出 Seedance Prompt
-                  </button>
+                <div className="absolute right-0 top-full mt-1 w-52 bg-gray-800 border border-gray-700 rounded-lg shadow-xl z-20 py-1">
+                  {/* Step 1 exports: visible once audit step is done */}
+                  {purifiedScript && (
+                    <>
+                      <button
+                        onClick={() => {
+                          exportPurifiedScript(purifiedScript.fullText, projectName);
+                          setShowExportMenu(false);
+                        }}
+                        className="w-full px-3 py-2 text-left text-xs text-emerald-400 hover:bg-gray-700/50"
+                      >
+                        📥 净化剧本 (.txt)
+                      </button>
+                      <button
+                        onClick={() => {
+                          exportAuditReport(purifiedScript, projectName);
+                          setShowExportMenu(false);
+                        }}
+                        className="w-full px-3 py-2 text-left text-xs text-teal-400 hover:bg-gray-700/50"
+                      >
+                        📥 审计报告 (.md)
+                      </button>
+                      {storyboard && <div className="border-t border-gray-700 my-1" />}
+                    </>
+                  )}
+                  {/* Full pipeline exports */}
+                  {storyboard && (
+                    <>
+                      <button
+                        onClick={() => {
+                          downloadJSON(storyboard);
+                          setShowExportMenu(false);
+                        }}
+                        className="w-full px-3 py-2 text-left text-xs text-gray-300 hover:bg-gray-700/50"
+                      >
+                        导出 JSON
+                      </button>
+                      <button
+                        onClick={() => {
+                          downloadMarkdown(storyboard);
+                          setShowExportMenu(false);
+                        }}
+                        className="w-full px-3 py-2 text-left text-xs text-gray-300 hover:bg-gray-700/50"
+                      >
+                        导出 Markdown
+                      </button>
+                      <button
+                        onClick={() => {
+                          exportSeedancePrompts(storyboard.seedancePrompts, seedanceVersion);
+                          setShowExportMenu(false);
+                        }}
+                        className="w-full px-3 py-2 text-left text-xs text-cyan-400 hover:bg-gray-700/50"
+                      >
+                        导出 Seedance Prompt
+                      </button>
+                    </>
+                  )}
                 </div>
               )}
             </div>
@@ -208,6 +246,7 @@ export default function Workspace() {
             steps={steps}
             isRunning={isRunning}
             settings={settings}
+            projectName={projectName}
             onStart={handleStart}
             onRetryStep={handleRetryStep}
             onSettingsChange={handleSettingsChange}
