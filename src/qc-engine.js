@@ -110,9 +110,16 @@ export function runEngineQc(sourceText, outputText) {
       }
 
       // 2) 人物：产出里出现的人，原文提都没提过
+      // 「酒客群像」原文写「酒客」属于同一批人，尾部子串命中就算已知
       for (const c of shot.cast) {
         const key = flatten(c.name);
-        if (key && !flatSrc.includes(key)) {
+        if (!key) continue;
+        const known =
+          flatSrc.includes(key) ||
+          Array.from({ length: Math.max(0, key.length - 1) }, (_, i) => key.slice(i + 1)).some(
+            (suffix) => suffix.length >= 2 && flatSrc.includes(suffix),
+          );
+        if (!known) {
           add("高", where, "新增人物", `「${c.name}」原文中未出现`);
         }
       }
