@@ -1496,3 +1496,143 @@ textarea.script:focus-visible {
     font-size: 14.5px;
   }
 }
+
+/* ---------- 流程三：镜头列表 ---------- */
+
+.shot-list {
+  margin-top: 6px;
+  border-top: 1px solid var(--line);
+}
+
+.shot-ep {
+  margin-bottom: 18px;
+}
+
+.shot-ep-head {
+  padding: 10px 4px 8px;
+  font-size: 13px;
+  color: var(--muted);
+  border-bottom: 1px solid var(--line);
+}
+
+.shot-row {
+  border-bottom: 1px solid var(--line);
+}
+
+.shot-row-head {
+  display: grid;
+  grid-template-columns: 88px 64px minmax(0, 1fr) 76px 44px;
+  gap: 10px;
+  align-items: center;
+  width: 100%;
+  padding: 9px 6px;
+  background: none;
+  border: 0;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  border-radius: 6px;
+}
+
+.shot-row-head:hover {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.shot-row.open .shot-row-head {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.shot-no {
+  color: var(--accent);
+  font-variant-numeric: tabular-nums;
+}
+
+.shot-meta {
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.shot-scene {
+  color: var(--text);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.shot-count {
+  color: var(--muted);
+  text-align: right;
+}
+
+.shot-caret {
+  color: var(--muted-2);
+  text-align: right;
+  font-size: 12px;
+}
+
+.shot-row-body {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 2px 8px 14px 18px;
+}
+
+.shot-pos {
+  margin: 0;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.clip-line {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 8px;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.clip-tag {
+  flex: 0 0 auto;
+  color: #fbbf24;
+}
+
+.clip-meta {
+  flex: 0 0 auto;
+  color: var(--muted);
+}
+
+.clip-cam {
+  flex: 1 1 340px;
+  color: #c9d6cf;
+}
+
+.clip-dlg {
+  flex: 1 1 100%;
+  color: var(--text);
+}
+
+.preview-toggle {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.l1-style {
+  margin: 8px 0 4px;
+  padding: 10px 12px;
+  border-left: 2px solid var(--accent);
+  background: var(--accent-soft);
+  border-radius: 0 var(--r-sm) var(--r-sm) 0;
+  font-size: 13px;
+  line-height: 1.65;
+  color: #c9d6cf;
+}
+
+.l1-style b {
+  color: var(--accent);
+  font-weight: 600;
+}

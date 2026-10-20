@@ -105,6 +105,56 @@ function batchUp(eps, size) {
   return out;
 }
 
+/** L1 每条都重复同一段风格约束，抽出来只写一次 */
+function splitL1(text) {
+  const lines = String(text || "").split("\n");
+  const body = [];
+  let style = "";
+  for (const line of lines) {
+    if (line.startsWith("风格与约束：")) {
+      if (!style) style = line.replace(/^风格与约束：/, "").trim();
+      continue;
+    }
+    body.push(line);
+  }
+  return { style, body: body.join("\n").replace(/\n{3,}/g, "\n\n").trim() };
+}
+
+function ShotRow({ shot }) {
+  const [open, setOpen] = useState(false);
+  return (
+    <div className={`shot-row ${open ? "open" : ""}`}>
+      <button type="button" className="shot-row-head" onClick={() => setOpen((v) => !v)}>
+        <span className="shot-no">分镜{String(shot.no).padStart(2, "0")}</span>
+        <span className="shot-meta">{shot.duration ? `${shot.duration} 秒` : "—"}</span>
+        <span className="shot-scene">{shot.scene || "（未标场景）"}</span>
+        <span className="shot-count">{shot.clips.length} Clip</span>
+        <span className="shot-caret">{open ? "收起" : "展开"}</span>
+      </button>
+      {open ? (
+        <div className="shot-row-body">
+          {shot.position ? <p className="shot-pos">人物空间位置：{shot.position}</p> : null}
+          {shot.clips.map((c) => (
+            <div className="clip-line" key={c.letter}>
+              <span className="clip-tag">Clip {c.letter}</span>
+              <span className="clip-meta">
+                {c.duration ? `${c.duration} 秒` : ""} {c.size}
+              </span>
+              <span className="clip-cam">{c.camera}</span>
+              {c.dialogue.map((d, i) => (
+                <span className="clip-dlg" key={i}>
+                  {d.speaker}
+                  {d.mode ? `（${d.mode}）` : ""}: “{d.text}”
+                </span>
+              ))}
+            </div>
+          ))}
+        </div>
+      ) : null}
+    </div>
+  );
+}
+
 export function StoryboardFlow() {
   const [state, setState] = useState(load);
   const [live, setLive] = useState("");
@@ -134,6 +184,9 @@ export function StoryboardFlow() {
   const check = useMemo(() => validateStoryboard(parsed), [parsed]);
   const units = useMemo(() => compileToL1(parsed), [parsed]);
   const l1 = useMemo(() => renderL1(units), [units]);
+  const l1View = useMemo(() => splitL1(l1), [l1]);
+  const [showL1, setShowL1] = useState(false);
+  const [showRaw, setShowRaw] = useState(false);
 
   const run = async () => {
     if (!state.text.trim()) return patch({ error: "请先粘贴或上传剧本。" });
@@ -369,6 +422,12 @@ export function StoryboardFlow() {
                       ? `第 ${batchInfo.index}/${batchInfo.total} 批 · 第 ${batchInfo.round} 轮`
                       : `已完成 ${state.doneBatches}/${batches.length} 批`}
                   </div>
+                  {state.stage !== "running" && state.output ? (
+                    <span className="hint">
+                      {parsed.episodes.length} 集 · {check.stats.shots} 分镜 ·{" "}
+                      {check.stats.clips} Clip
+                    </span>
+                  ) : null}
                 </div>
                 <div className="spacer" />
                 {state.stage === "running" ? (
@@ -393,9 +452,43 @@ export function StoryboardFlow() {
                   }}
                 />
               </div>
-              <div className="preview script-preview">
-                <pre>{shown || "（还没有输出）"}</pre>
-              </div>
+              {state.stage === "running" ? (
+                <div className="preview script-preview">
+                  <pre>{shown || "（还没有输出）"}</pre>
+                </div>
+              ) : (
+                <>
+                  <div className="shot-list">
+                    {parsed.episodes.map((ep) => (
+                      <div className="shot-ep" key={ep.no}>
+                        <div className="shot-ep-head">
+                          第{ep.no}集{ep.title ? `：${ep.title}` : ""} · {ep.shots.length} 分镜
+                        </div>
+                        {ep.shots.map((s) => (
+                          <ShotRow key={s.no} shot={s} />
+                        ))}
+                      </div>
+                    ))}
+                  </div>
+                  <div className="preview-toggle">
+                    <button
+                      className="btn ghost sm"
+                      type="button"
+                      onClick={() => setShowRaw((v) => !v)}
+                    >
+                      {showRaw ? "收起原始文本" : "查看原始文本"}
+                    </button>
+                    <span className="hint">
+                      交付物原文，逐字未改；上面是同一份内容的结构化视图。
+                    </span>
+                  </div>
+                  {showRaw ? (
+                    <div className="preview script-preview">
+                      <pre>{shown}</pre>
+                    </div>
+                  ) : null}
+                </>
+              )}
             </section>
           ) : null}
         </>
@@ -469,9 +562,30 @@ export function StoryboardFlow() {
               标签占位（<code>&lt;C01-角色·妆造&gt;</code>），不含秒数，不写 <code>@图片N</code> ——
               素材绑定由下游完成。duration 只出现在参数行。
             </p>
-            <div className="preview script-preview">
-              <pre>{l1 || "（无）"}</pre>
+            {l1View.style ? (
+              <div className="l1-style">
+                <b>全局风格约束</b>（每条通用，这里只写一次）：{l1View.style}
+              </div>
+            ) : null}
+            <div className="preview-toggle">
+              <button
+                className="btn ghost sm"
+                type="button"
+                disabled={!l1View.body}
+                onClick={() => setShowL1((v) => !v)}
+              >
+                {showL1 ? "收起预览" : "展开预览"}
+              </button>
+              <span className="hint">
+                原文 {l1.length.toLocaleString()} 字 → 去重后{" "}
+                {l1View.body.length.toLocaleString()} 字
+              </span>
             </div>
+            {showL1 ? (
+              <div className="preview script-preview">
+                <pre>{l1View.body || "（无）"}</pre>
+              </div>
+            ) : null}
           </section>
         </>
       ) : null}
