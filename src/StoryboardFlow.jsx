@@ -42,11 +42,11 @@ const INITIAL = {
 };
 
 const STEPS = [
-  { n: 1, label: "输入 · 分集剧本" },
-  { n: 2, label: "提示词 · 可替换" },
-  { n: 3, label: "生成 · 每批 N 集" },
-  { n: 4, label: "校验 · 只报告" },
-  { n: 5, label: "可选 · 机读层" },
+  { n: 1, label: "输入" },
+  { n: 2, label: "提示词" },
+  { n: 3, label: "生成" },
+  { n: 4, label: "校验" },
+  { n: 5, label: "机读层" },
 ];
 
 /** 步骤条状态：任何时刻只有一步是 active */
@@ -294,22 +294,13 @@ export function StoryboardFlow() {
         </div>
       ) : null}
 
-      {state.stage === "done" ? (
-        <div className="howto">
-          <div className="howto-title">这一步就三件事</div>
-          <ol>
-            <li>
-              <b>看校验</b> —— 高优先级问题必须处理；中优先级看一眼。
-            </li>
-            <li>
-              <b>看分镜</b> —— 这就是交付物；不满意就改进提示词重跑。
-            </li>
-            <li>
-              <b>（可选）机读层</b> —— 需要的话再导出，给下游制作工具用。
-            </li>
-          </ol>
-        </div>
-      ) : null}
+      <div className="flow-hint">
+        {state.stage === "input"
+          ? "载入分集剧本 → 需要的话替换提示词 → 点「开始生成」。"
+          : state.stage === "running"
+            ? `正在生成第 ${batchInfo.index}/${batchInfo.total} 批…`
+            : "先看校验，再看分镜；不满意就回步骤 02 改提示词重跑，需要机读层再导。"}
+      </div>
 
       <section className={`card ${state.stage === "input" ? "hi" : ""}`}>
         <div className="card-head">
@@ -540,6 +531,26 @@ export function StoryboardFlow() {
             {check.issues.length > 200 ? (
               <p className="hint">只显示前 200 条，共 {check.issues.length} 条。</p>
             ) : null}
+            <div className="row" style={{ marginTop: 12 }}>
+              {!check.issues.length ? (
+                <>
+                  <button
+                    className="btn primary sm"
+                    type="button"
+                    onClick={() =>
+                      download(`${state.fileName || "剧本"}-分镜.md`, state.output)
+                    }
+                  >
+                    <DownloadSimple size={14} /> 下载分镜
+                  </button>
+                  <span className="hint">这就是交付物，直接交给制作。</span>
+                </>
+              ) : (
+                <span className="hint">
+                  先处理高优先级问题；改完回步骤 02 更新提示词，再重跑一次。
+                </span>
+              )}
+            </div>
           </section>
 
           <section className="card">

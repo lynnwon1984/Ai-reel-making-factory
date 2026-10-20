@@ -1636,3 +1636,30 @@ textarea.script:focus-visible {
   color: var(--accent);
   font-weight: 600;
 }
+
+/* ---------- 功能说明：默认两行，可展开 ---------- */
+
+.note-body {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.note.open .note-body {
+  display: block;
+  -webkit-line-clamp: unset;
+  overflow: visible;
+}
+
+.note-toggle {
+  flex: 0 0 auto;
+}
+
+.flow-hint {
+  margin: -6px 0 16px;
+  font-size: 13px;
+  color: var(--muted);
+}

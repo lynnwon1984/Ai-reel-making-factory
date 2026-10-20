@@ -54,6 +54,22 @@ function readHash() {
   return PAGES[key] ? key : "clean";
 }
 
+/** 功能说明：默认收成两行，需要时再展开 */
+function Note({ children }) {
+  const [open, setOpen] = useState(false);
+  return (
+    <div className={`note ${open ? "open" : ""}`}>
+      <span className="note-ico">
+        <Info size={17} weight="fill" />
+      </span>
+      <div className="note-body">{children}</div>
+      <button className="btn ghost sm note-toggle" type="button" onClick={() => setOpen((v) => !v)}>
+        {open ? "收起" : "展开说明"}
+      </button>
+    </div>
+  );
+}
+
 export function App() {
   const [active, setActive] = useState(readHash);
 
@@ -80,12 +96,7 @@ export function App() {
           <p className="page-sub">{page.sub}</p>
         </header>
 
-        <div className="note">
-          <span className="note-ico">
-            <Info size={17} weight="fill" />
-          </span>
-          <div>{page.note}</div>
-        </div>
+        <Note>{page.note}</Note>
 
         <page.Flow />
 
