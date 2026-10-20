@@ -1663,3 +1663,37 @@ textarea.script:focus-visible {
   font-size: 13px;
   color: var(--muted);
 }
+
+/* ---------- 流程三：检查点 ---------- */
+
+.cp-body {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 14px;
+  margin: 14px 0 16px;
+}
+
+.cp-col {
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+  background: var(--card-2);
+  min-width: 0;
+}
+
+.cp-label {
+  font-size: 12px;
+  color: var(--muted);
+  margin-bottom: 6px;
+}
+
+.cp-value {
+  font-size: 13.5px;
+  color: var(--text);
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+
+.cp-actions {
+  gap: 10px;
+}

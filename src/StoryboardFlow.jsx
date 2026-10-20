@@ -11,6 +11,7 @@ import {
 } from "@phosphor-icons/react";
 import { runStream } from "./api.js";
 import { PromptSlot } from "./PromptSlot.jsx";
+import { buildLedger, ledgerSeed, shouldPause, segmentStart } from "./relay.js";
 import { runChunked } from "./chunked.js";
 import {
   parseStoryboard,
@@ -30,14 +31,20 @@ const defaultPromptBody = (() => {
 })();
 
 const INITIAL = {
-  stage: "input", // input | running | done
+  stage: "input", // input | running | paused | done
   mode: "paste",
   text: "",
   fileName: "",
   customPrompt: "",
   batchSize: 3,
-  output: "",
-  doneBatches: 0,
+  /** 每批单独存，重跑才有粒度可谈 */
+  batches: [],
+  /** 下一批要跑的索引 */
+  cursor: 0,
+  /** 每 N 批停一次；0 = 不停 */
+  checkpoint: 2,
+  /** 停在检查点时已完成多少批 */
+  pausedAt: 0,
   error: "",
 };
 
@@ -52,7 +59,9 @@ const STEPS = [
 /** 步骤条状态：任何时刻只有一步是 active */
 function stepState(stage, n) {
   if (stage === "input") return n === 1 ? "active" : "";
-  if (stage === "running") return n < 3 ? "done" : n === 3 ? "active" : "";
+  if (stage === "running" || stage === "paused") {
+    return n < 3 ? "done" : n === 3 ? "active" : "";
+  }
   // done：1–4 已完成，5 是还剩的那件可选事
   return n <= 4 ? "done" : "active";
 }
@@ -80,7 +89,19 @@ CAMERA: 固定机位 / CU. 村长抬头看向前方。
 function load() {
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
-    if (raw) return { ...INITIAL, ...JSON.parse(raw) };
+    if (!raw) return INITIAL;
+    const saved = { ...INITIAL, ...JSON.parse(raw) };
+    // 旧存档只有一个 output 字符串，迁移成一批，避免进度丢失
+    if (!Array.isArray(saved.batches)) {
+      saved.batches = saved.output
+        ? [{ from: 1, to: 0, text: saved.output, legacy: true }]
+        : [];
+    }
+    if (!saved.batches.length) saved.stage = "input";
+    else if (saved.stage === "running") saved.stage = "paused";
+    saved.cursor = saved.batches.length;
+    saved.pausedAt = saved.stage === "paused" ? saved.batches.length : saved.pausedAt || 0;
+    return saved;
   } catch (err) {
     /* ignore */
   }
@@ -103,6 +124,20 @@ function batchUp(eps, size) {
     out.push(eps.slice(i, i + size));
   }
   return out;
+}
+
+/** 把一段已有的分镜文本按「第N集」切开，用于导入历史结果 */
+function splitOutputByEpisode(text) {
+  const parts = String(text || "")
+    .split(/\n(?=第\s*\d+\s*集)/)
+    .map((p) => p.trim())
+    .filter(Boolean);
+  if (!parts.length) return [];
+  return parts.map((p) => {
+    const m = p.match(/第\s*(\d+)\s*集/);
+    const no = m ? Number(m[1]) : 0;
+    return { from: no, to: no, text: p };
+  });
 }
 
 /** L1 每条都重复同一段风格约束，抽出来只写一次 */
@@ -161,6 +196,7 @@ export function StoryboardFlow() {
   const [reason, setReason] = useState(0);
   const [batchInfo, setBatchInfo] = useState({ index: 0, total: 0, round: 0 });
   const ctrlRef = useRef(null);
+  const importRef = useRef(null);
 
   const patch = (next) =>
     setState((s) => {
@@ -180,41 +216,62 @@ export function StoryboardFlow() {
     [episodes, state.batchSize],
   );
 
-  const parsed = useMemo(() => parseStoryboard(state.output), [state.output]);
+  const output = useMemo(
+    () =>
+      state.batches
+        .map((b) => b.text)
+        .filter(Boolean)
+        .join("\n\n"),
+    [state.batches],
+  );
+  /** 导入的历史结果不一定和当前批数对得上，取大值避免出现「3/1 批」 */
+  const totalBatches = Math.max(batches.length, state.batches.length);
+  const parsed = useMemo(() => parseStoryboard(output), [output]);
   const check = useMemo(() => validateStoryboard(parsed), [parsed]);
   const units = useMemo(() => compileToL1(parsed), [parsed]);
   const l1 = useMemo(() => renderL1(units), [units]);
   const l1View = useMemo(() => splitL1(l1), [l1]);
+  const ledger = useMemo(() => buildLedger(parsed), [parsed]);
   const [showL1, setShowL1] = useState(false);
   const [showRaw, setShowRaw] = useState(false);
 
-  const run = async () => {
+  /** 从第 start 批开始跑；每到检查点就停下等确认 */
+  const runFrom = async (start) => {
     if (!state.text.trim()) return patch({ error: "请先粘贴或上传剧本。" });
     if (!batches.length) return patch({ error: "没有识别到可处理的集。" });
 
     ctrlRef.current = new AbortController();
-    patch({ stage: "running", error: "", output: "", doneBatches: 0 });
+    const every = Number(state.checkpoint) || 0;
+    let acc = state.batches.slice(0, start);
+    patch({ stage: "running", error: "", batches: acc, cursor: start });
     setLive("");
     setReason(0);
-    setBatchInfo({ index: 0, total: batches.length, round: 0 });
+    setBatchInfo({ index: start + 1, total: batches.length, round: 0 });
 
-    let acc = "";
     try {
-      for (let bi = 0; bi < batches.length; bi += 1) {
+      for (let bi = start; bi < batches.length; bi += 1) {
         const batch = batches[bi];
         const from = batch[0].no;
         const to = batch[batch.length - 1].no;
         setBatchInfo({ index: bi + 1, total: batches.length, round: 0 });
         setLive("");
 
+        // 接力包：只用已产出的批次建表，绝不预支后面的
+        const seedLedger = ledgerSeed(
+          buildLedger(parseStoryboard(acc.map((b) => b.text).filter(Boolean).join("\n\n"))),
+        );
         const body = batch.map((e) => e.text).join("\n\n");
+        const ledgerPart = seedLedger ? `${seedLedger}\n\n` : "";
+
         const { text } = await runChunked({
-          seed: `【本批】第${from}–${to}集\n\n${body}\n\n请按协议把以上内容转成分镜头剧本。`,
+          seed: `${ledgerPart}【本批】第${from}–${to}集\n\n${body}\n\n请按协议把以上内容转成分镜头剧本。`,
           next: "请继续输出剩余部分。",
           maxRounds: 6,
           onRound: (n) => setBatchInfo({ index: bi + 1, total: batches.length, round: n }),
           onProgress: (full) => {
-            patch({ output: acc + full, doneBatches: bi });
+            patch({
+              batches: [...acc, { from, to, text: full, streaming: true }],
+            });
           },
           callModel: ({ input, round: r }) =>
             runStream({
@@ -228,14 +285,20 @@ export function StoryboardFlow() {
             }),
         });
 
-        acc += (acc ? "\n\n" : "") + text.trim();
-        patch({ output: acc, doneBatches: bi + 1 });
+        acc = [...acc, { from, to, text: text.trim(), at: Date.now() }];
+        patch({ batches: acc, cursor: bi + 1 });
         setLive("");
+
+        if (shouldPause({ done: acc.length, total: batches.length, every })) {
+          patch({ stage: "paused", pausedAt: acc.length });
+          return;
+        }
       }
-      patch({ stage: "done" });
+      patch({ stage: "done", pausedAt: 0 });
     } catch (err) {
       patch({
-        stage: "input",
+        stage: acc.length ? "paused" : "input",
+        pausedAt: acc.length,
         error: String(err?.message || err),
       });
     } finally {
@@ -243,15 +306,36 @@ export function StoryboardFlow() {
     }
   };
 
+  const run = () => runFrom(0);
+  const resume = () => runFrom(state.cursor);
+
+  /** 重跑这一段：回到本段起点，级联跑到下一个检查点 */
+  const rerunSegment = () =>
+    runFrom(
+      segmentStart({ done: state.pausedAt || state.batches.length, every: Number(state.checkpoint) || 0 }),
+    );
+
+  /** 只重跑最后一批：后续批次的前缀会过期，界面上要说明 */
+  const rerunLastBatch = () => runFrom(Math.max(0, state.batches.length - 1));
+
   const stop = () => {
     ctrlRef.current?.abort();
     ctrlRef.current = null;
-    patch({ stage: state.output ? "done" : "input" });
+    patch({
+      stage: state.batches.length ? "paused" : "input",
+      pausedAt: state.batches.length,
+    });
   };
 
   const reset = () => {
     stop();
-    patch({ ...INITIAL, text: state.text, fileName: state.fileName, mode: state.mode });
+    patch({
+      ...INITIAL,
+      checkpoint: state.checkpoint,
+      text: state.text,
+      fileName: state.fileName,
+      mode: state.mode,
+    });
     setLive("");
   };
 
@@ -261,7 +345,22 @@ export function StoryboardFlow() {
     patch({ text: content, fileName: file.name.replace(/\.[^.]+$/, "") });
   };
 
-  const shown = state.stage === "running" ? state.output + live : state.output;
+  /** 导入已经生成好的分镜（比如 web 端跑出来的），直接进校验和机读层 */
+  const onImportStoryboard = async (file) => {
+    if (!file) return;
+    const content = await file.text();
+    const parts = splitOutputByEpisode(content);
+    const nextBatches = parts.length ? parts : [{ from: 0, to: 0, text: content }];
+    patch({
+      batches: nextBatches,
+      cursor: nextBatches.length,
+      pausedAt: 0,
+      stage: "done",
+      error: "",
+    });
+  };
+
+  const shown = state.stage === "running" ? output + live : output;
 
   return (
     <>
@@ -279,7 +378,7 @@ export function StoryboardFlow() {
               <Stop size={14} /> 停止
             </button>
           ) : null}
-          {state.stage !== "input" || state.output ? (
+          {output ? (
             <button className="btn ghost sm" type="button" onClick={reset}>
               <ArrowsClockwise size={14} /> 重新开始
             </button>
@@ -364,9 +463,33 @@ export function StoryboardFlow() {
           <button
             className="btn ghost sm"
             type="button"
-            onClick={() => patch({ output: SAMPLE_STORYBOARD, stage: "done", doneBatches: 1 })}
+            onClick={() =>
+              patch({
+                batches: [{ from: 1, to: 0, text: SAMPLE_STORYBOARD }],
+                cursor: 1,
+                pausedAt: 0,
+                stage: "done",
+              })
+            }
           >
             载入示例分镜
+          </button>
+          <input
+            ref={importRef}
+            type="file"
+            accept=".md,.txt"
+            style={{ display: "none" }}
+            onChange={(e) => {
+              onImportStoryboard(e.target.files?.[0]);
+              e.target.value = "";
+            }}
+          />
+          <button
+            className="btn ghost sm"
+            type="button"
+            onClick={() => importRef.current?.click()}
+          >
+            导入已有分镜
           </button>
           <label className="hint">
             每批{" "}
@@ -380,6 +503,20 @@ export function StoryboardFlow() {
             />{" "}
             集
           </label>
+          <label className="hint">
+            每{" "}
+            <select
+              className="sec-input"
+              value={state.checkpoint}
+              onChange={(e) => patch({ checkpoint: Number(e.target.value) })}
+            >
+              <option value={1}>1</option>
+              <option value={2}>2</option>
+              <option value={3}>3</option>
+              <option value={0}>不限</option>
+            </select>{" "}
+            批停一次
+          </label>
           <button
             className="btn primary"
             type="button"
@@ -391,7 +528,7 @@ export function StoryboardFlow() {
         </div>
       </section>
 
-      {state.stage !== "input" || state.output ? (
+      {output ? (
         <>
           <section className="card">
             <div className="card-kicker">步骤 02 · 提示词</div>
@@ -403,7 +540,7 @@ export function StoryboardFlow() {
             />
           </section>
 
-          {state.stage === "running" || state.output ? (
+          {state.stage === "running" || output ? (
             <section className="card hi">
               <div className="card-head">
                 <div>
@@ -411,9 +548,9 @@ export function StoryboardFlow() {
                   <div className="card-title">
                     {state.stage === "running"
                       ? `第 ${batchInfo.index}/${batchInfo.total} 批 · 第 ${batchInfo.round} 轮`
-                      : `已完成 ${state.doneBatches}/${batches.length} 批`}
+                      : `已完成 ${state.batches.length}/${totalBatches} 批`}
                   </div>
-                  {state.stage !== "running" && state.output ? (
+                  {state.stage !== "running" && output ? (
                     <span className="hint">
                       {parsed.episodes.length} 集 · {check.stats.shots} 分镜 ·{" "}
                       {check.stats.clips} Clip
@@ -427,9 +564,9 @@ export function StoryboardFlow() {
                 <button
                   className="btn sm"
                   type="button"
-                  disabled={!state.output}
+                  disabled={!output}
                   onClick={() =>
-                    download(`${state.fileName || "剧本"}-分镜.md`, state.output)
+                    download(`-分镜.md`, output)
                   }
                 >
                   <DownloadSimple size={14} /> 下载分镜
@@ -439,7 +576,7 @@ export function StoryboardFlow() {
                 <div
                   className="bar"
                   style={{
-                    width: `${batches.length ? (state.doneBatches / batches.length) * 100 : 0}%`,
+                    width: `${totalBatches ? (state.batches.length / totalBatches) * 100 : 0}%`,
                   }}
                 />
               </div>
@@ -485,7 +622,64 @@ export function StoryboardFlow() {
         </>
       ) : null}
 
-      {state.output ? (
+      {state.stage === "paused" ? (
+        <section className="card hi checkpoint">
+          <div className="card-head">
+            <div>
+              <div className="card-kicker">检查点 · 停在这里等你看一眼</div>
+              <div className="card-title">
+                已生成 {state.batches.length}/{batches.length} 批
+              </div>
+            </div>
+            <div className="spacer" />
+            <span className="pill">
+              {Number(state.checkpoint) > 0 ? `每 ${state.checkpoint} 批一停` : "不停"}
+            </span>
+          </div>
+
+          <div className="cp-body">
+            <div className="cp-col">
+              <div className="cp-label">已产出的集</div>
+              <div className="cp-value">
+                {state.batches.length
+                  ? `第 ${state.batches[0].from}–${state.batches[state.batches.length - 1].to} 集`
+                  : "—"}
+              </div>
+            </div>
+            <div className="cp-col">
+              <div className="cp-label">角色编号（下一批沿用）</div>
+              <div className="cp-value mono">
+                {ledger.characters.length
+                  ? ledger.characters.map((c) => c.code).join(" · ")
+                  : "—"}
+              </div>
+            </div>
+            <div className="cp-col">
+              <div className="cp-label">场景</div>
+              <div className="cp-value">
+                {ledger.scenes.length ? ledger.scenes.join(" · ") : "—"}
+              </div>
+            </div>
+          </div>
+
+          <div className="row cp-actions">
+            <button className="btn primary" type="button" onClick={resume}>
+              <Play size={15} /> 继续下一段
+            </button>
+            <button className="btn ghost sm" type="button" onClick={rerunSegment}>
+              <ArrowsClockwise size={14} /> 重跑这一段
+            </button>
+            <button className="btn ghost sm" type="button" onClick={rerunLastBatch}>
+              只重跑最后一批
+            </button>
+          </div>
+          <p className="hint">
+            「只重跑最后一批」之后，后面的批次仍按旧接力包接续，可能出现编号或称呼不一致。
+          </p>
+        </section>
+      ) : null}
+
+      {output ? (
         <>
           <section className="card">
             <div className="card-head">
@@ -538,7 +732,7 @@ export function StoryboardFlow() {
                     className="btn primary sm"
                     type="button"
                     onClick={() =>
-                      download(`${state.fileName || "剧本"}-分镜.md`, state.output)
+                      download(`-分镜.md`, output)
                     }
                   >
                     <DownloadSimple size={14} /> 下载分镜
