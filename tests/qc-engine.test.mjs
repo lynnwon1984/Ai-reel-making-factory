@@ -63,3 +63,23 @@ test("引擎：空镜命中", () => {
 test("引擎：flatten 去掉标点空白", () => {
   assert.equal(flatten('Run! "Go"'), "rungo");
 });
+
+test("引擎：两句原文拼成一句 → 中危台词合并，不是篡改", () => {
+  const src = `第1集：测试
+**村长**（高声）：Run!
+**村长**（低声）：Thank you.
+`;
+  const out = `第1集：测试
+【分镜01】
+[shot01 | 时长：8秒 | 场景：广场 外 雪天 | 人物：村长 | 道具：无]
+人物空间位置：
+村长站在广场中央。
+Clip A | 时长：8秒 | 景别：MS
+CAMERA: 固定机位 / MS. 村长抬头看天，大喊。
+EN: 村长: "Run! Thank you."
+`;
+  const issues = runEngineQc(src, out);
+  assert.equal(issues.filter((i) => i.rule === "台词篡改").length, 0);
+  assert.equal(issues.filter((i) => i.rule === "台词合并").length, 1);
+  assert.equal(issues.find((i) => i.rule === "台词合并").level, "中");
+});

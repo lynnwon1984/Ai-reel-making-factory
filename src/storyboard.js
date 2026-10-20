@@ -394,7 +394,8 @@ export function splitEpisodes(text) {
   let cur = null;
   const preamble = [];
   for (const line of lines) {
-    const m = line.match(/^\s*(?:\*\*)?第\s*(\d+)\s*集/);
+    // 只认真正的集标题：「第11集：标题」，不认「第11集后半缺失：…」这种正文
+    const m = line.match(/^\s*(?:\*\*)?第\s*(\d+)\s*集(?:\s*[：:].*?)?\s*(?:\*\*)?\s*$/);
     if (m) {
       if (cur) eps.push(cur);
       cur = { no: Number(m[1]), lines: [line] };

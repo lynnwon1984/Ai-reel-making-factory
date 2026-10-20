@@ -17,6 +17,46 @@ const pad = (n) => String(n).padStart(2, "0");
 const MOTION =
   /(走|跑|推|拉|抬|放|抓|扔|转|坐|站|跪|倒|冲|挥|举|按|打|踢|拿|递|接|点|开|关|爬|跃|跳|扑|抱|扯|撕|翻|蹲|退|进|出|入)/;
 
+/** 从原剧本里抽出所有台词（去掉引号、统一扁平化） */
+function sourceDialogues(src) {
+  const out = [];
+  for (const raw of String(src || "").split(/\r?\n/)) {
+    const line = raw.trim();
+    if (!line || line.startsWith("△")) continue;
+    const m = line.match(/^\*{0,2}([^：:*\n]{1,24})\*{0,2}\s*(?:（[^）]*）)?\s*[：:]\s*(.+)$/);
+    if (!m) continue;
+    const text = m[2].replace(/^["“「]|["”」]$/g, "").trim();
+    const key = flatten(text);
+    if (key) out.push(key);
+  }
+  return out;
+}
+
+/**
+ * 判断一句产出台词和原文的关系：
+ * exact  = 原文里能找到（或被原文某句包含）
+ * merged = 由多句原文拼接而成
+ * changed = 找不到
+ */
+export function classifyDialogue(text, srcList) {
+  const key = flatten(text);
+  if (!key) return "exact";
+  if (srcList.some((s) => s.includes(key))) return "exact";
+
+  let rest = key;
+  let parts = 0;
+  while (rest) {
+    let best = "";
+    for (const s of srcList) {
+      if (s.length > best.length && rest.startsWith(s)) best = s;
+    }
+    if (!best) return "changed";
+    rest = rest.slice(best.length);
+    parts += 1;
+  }
+  return parts > 1 ? "merged" : "exact";
+}
+
 /** 相邻 Clip 的机位描述相似度（字符二元组 Jaccard） */
 function similarity(a, b) {
   const grams = (s) => {
@@ -36,6 +76,7 @@ function similarity(a, b) {
 export function runEngineQc(sourceText, outputText) {
   const issues = [];
   const flatSrc = flatten(sourceText);
+  const srcList = sourceDialogues(sourceText);
   const parsed = parseStoryboard(outputText);
   if (!flatSrc || !parsed.episodes.length) return issues;
 
@@ -49,13 +90,20 @@ export function runEngineQc(sourceText, outputText) {
       // 1) 台词：产出里的每一句都得在原文里找得到
       for (const clip of shot.clips) {
         for (const d of clip.dialogue) {
-          const key = flatten(d.text);
-          if (key && !flatSrc.includes(key)) {
+          const kind = classifyDialogue(d.text, srcList);
+          if (kind === "changed") {
             add(
               "高",
               `${where} Clip${clip.letter}`,
               "台词篡改",
               `产出「${d.text}」在原文中找不到`,
+            );
+          } else if (kind === "merged") {
+            add(
+              "中",
+              `${where} Clip${clip.letter}`,
+              "台词合并",
+              `产出「${d.text}」由多句原文拼成，应拆回多条 EN 行`,
             );
           }
         }
@@ -79,7 +127,14 @@ export function runEngineQc(sourceText, outputText) {
           .pop()
           .replace(/^[0-9一二三四五六七八九十百千]+[个只把杯扎瓶盒张份条根块串]?/, "");
         const key = flatten(head) || flatten(name);
-        if (key.length >= 2 && !flatSrc.includes(key)) {
+        // 「木招牌」原文写的是「招牌」：从尾部找 2 字以上的子串，命中就不算新道具
+        const known =
+          key.length < 2 ||
+          flatSrc.includes(key) ||
+          Array.from({ length: Math.max(0, key.length - 1) }, (_, i) => key.slice(i + 1)).some(
+            (suffix) => suffix.length >= 2 && flatSrc.includes(suffix),
+          );
+        if (!known) {
           add("中", where, "新增道具", `「${name}」原文中未出现`);
         }
       }
