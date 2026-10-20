@@ -1,0 +1,113 @@
+import { parseStoryboard } from "./storyboard.js";
+
+/**
+ * 确定性质检引擎：能算出来的都算出来，不调模型、可复现。
+ * 判不了的（关系、结局、节奏）留给上层，不在这里猜。
+ */
+
+/** 去掉标点、空白、引号，统一小写，用于包含性比对 */
+export function flatten(text) {
+  return String(text || "")
+    .toLowerCase()
+    .replace(/[^\p{L}\p{N}]+/gu, "");
+}
+
+const pad = (n) => String(n).padStart(2, "0");
+
+const MOTION =
+  /(走|跑|推|拉|抬|放|抓|扔|转|坐|站|跪|倒|冲|挥|举|按|打|踢|拿|递|接|点|开|关|爬|跃|跳|扑|抱|扯|撕|翻|蹲|退|进|出|入)/;
+
+/** 相邻 Clip 的机位描述相似度（字符二元组 Jaccard） */
+function similarity(a, b) {
+  const grams = (s) => {
+    const t = flatten(s);
+    const out = new Set();
+    for (let i = 0; i < t.length - 1; i += 1) out.add(t.slice(i, i + 2));
+    return out;
+  };
+  const A = grams(a);
+  const B = grams(b);
+  if (!A.size || !B.size) return 0;
+  let inter = 0;
+  for (const g of A) if (B.has(g)) inter += 1;
+  return inter / (A.size + B.size - inter);
+}
+
+export function runEngineQc(sourceText, outputText) {
+  const issues = [];
+  const flatSrc = flatten(sourceText);
+  const parsed = parseStoryboard(outputText);
+  if (!flatSrc || !parsed.episodes.length) return issues;
+
+  const add = (level, where, rule, evidence) =>
+    issues.push({ level, where, rule, evidence, source: "engine" });
+
+  for (const ep of parsed.episodes) {
+    for (const shot of ep.shots) {
+      const where = `第${ep.no}集 分镜${pad(shot.no)}`;
+
+      // 1) 台词：产出里的每一句都得在原文里找得到
+      for (const clip of shot.clips) {
+        for (const d of clip.dialogue) {
+          const key = flatten(d.text);
+          if (key && !flatSrc.includes(key)) {
+            add(
+              "高",
+              `${where} Clip${clip.letter}`,
+              "台词篡改",
+              `产出「${d.text}」在原文中找不到`,
+            );
+          }
+        }
+      }
+
+      // 2) 人物：产出里出现的人，原文提都没提过
+      for (const c of shot.cast) {
+        const key = flatten(c.name);
+        if (key && !flatSrc.includes(key)) {
+          add("高", where, "新增人物", `「${c.name}」原文中未出现`);
+        }
+      }
+
+      // 3) 道具：同理，但只算中危
+      for (const raw of String(shot.props || "").split(/[、,，]/)) {
+        const name = raw.trim();
+        if (!name || /^(无|—|-)$/.test(name)) continue;
+        // 「咬过一口的苹果」→ 苹果；「一扎啤酒」→ 啤酒
+        const head = name
+          .split("的")
+          .pop()
+          .replace(/^[0-9一二三四五六七八九十百千]+[个只把杯扎瓶盒张份条根块串]?/, "");
+        const key = flatten(head) || flatten(name);
+        if (key.length >= 2 && !flatSrc.includes(key)) {
+          add("中", where, "新增道具", `「${name}」原文中未出现`);
+        }
+      }
+
+      // 4) 重复镜头：相邻 Clip 机位/动作描述高度相似
+      for (let i = 1; i < shot.clips.length; i += 1) {
+        const prev = shot.clips[i - 1];
+        const cur = shot.clips[i];
+        const s = similarity(prev.camera, cur.camera);
+        if (s >= 0.75) {
+          add(
+            "中",
+            `${where} Clip${cur.letter}`,
+            "重复镜头",
+            `与 Clip${prev.letter} 描述相似度 ${(s * 100).toFixed(0)}%`,
+          );
+        }
+      }
+
+      // 5) 空镜：无台词、无动作、描述又极短
+      for (const clip of shot.clips) {
+        const cam = String(clip.camera || "");
+        if (!clip.dialogue.length && cam.length < 18 && !MOTION.test(cam)) {
+          add("中", `${where} Clip${clip.letter}`, "空镜", `无台词、无动作：${cam || "（空）"}`);
+        }
+      }
+    }
+  }
+
+  return issues;
+}

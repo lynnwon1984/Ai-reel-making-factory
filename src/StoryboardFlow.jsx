@@ -22,7 +22,8 @@ import {
 } from "./storyboard.js";
 import defaultStoryboard from "./prompts/default-storyboard.md?raw";
 import qcPrompt from "./prompts/qc-storyboard.md?raw";
-import { parseQc, countByLevel, collectBatchIssues, topIssues, hasHigh } from "./qc.js";
+import { parseQc, countByLevel, collectBatchIssues, topIssues, hasHigh, sortIssues } from "./qc.js";
+import { runEngineQc } from "./qc-engine.js";
 
 const STORAGE_KEY = "pd-storyboard-v1";
 
@@ -238,7 +239,12 @@ export function StoryboardFlow() {
   const l1 = useMemo(() => renderL1(units), [units]);
   const l1View = useMemo(() => splitL1(l1), [l1]);
   const ledger = useMemo(() => buildLedger(parsed), [parsed]);
-  const qcIssues = useMemo(() => collectBatchIssues(state.batches), [state.batches]);
+  const modelQcIssues = useMemo(() => collectBatchIssues(state.batches), [state.batches]);
+  const engineIssues = useMemo(() => runEngineQc(state.text, output), [state.text, output]);
+  const qcIssues = useMemo(
+    () => sortIssues([...engineIssues, ...modelQcIssues]),
+    [engineIssues, modelQcIssues],
+  );
   const qcCounts = useMemo(() => countByLevel(qcIssues), [qcIssues]);
   const [qcBusy, setQcBusy] = useState(false);
   const [qcRunning, setQcRunning] = useState(false);
@@ -871,6 +877,7 @@ export function StoryboardFlow() {
                     <thead>
                       <tr>
                         <th>级别</th>
+                        <th>来源</th>
                         <th>位置</th>
                         <th>规则</th>
                         <th>证据</th>
@@ -880,6 +887,7 @@ export function StoryboardFlow() {
                       {qcIssues.slice(0, 200).map((it, i) => (
                         <tr key={i}>
                           <td>{it.level}</td>
+                          <td>{it.source === "engine" ? "引擎" : "模型"}</td>
                           <td className="mono">{it.where}</td>
                           <td>{it.rule}</td>
                           <td>{it.evidence}</td>
