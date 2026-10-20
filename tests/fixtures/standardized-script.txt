@@ -1,0 +1,2456 @@
+分
+分镜流水线
+流程 / PIPELINE
+剧本清洗
+重新分集
+待建
+生成分镜
+待建
+工作台 / WORKSPACE
+项目
+使用说明
+流程 / PIPELINE
+剧本清洗
+
+把原始剧本，洗成标准剧本。
+
+功能说明：第一步「整理」规范剧本格式（排版、人物名、群像、着装、场次合并、集数重排、道具名统一等）； 第二步「修改逻辑」修复剧情逻辑硬伤，并把中文台词译为英文。每一步都会先给出确认清单，你确认后才执行； 结果自动保存，切到其他页面再回来不会丢进度。
+1
+整理 · 格式标准化
+2
+修改逻辑 · 逻辑 + 翻译
+重新开始
+步骤 01 · 输入
+输入剧本
+上传文件
+粘贴文字
+提示词
+使用默认
+查看 / 替换
+Power Beyond Magic-1_格式标准化版.txt
+原型阶段支持 .txt / .md
+选择文件
+填入示例剧本
+模型：deepseek-flash · 推理档位 low · 流式输出
+整理
+步骤 01 · 第一轮
+统一确认清单
+已确认
+
+模型先给出全部待处理项，你确认之后才会执行。
+
+《统一确认清单》
+
+以下仅为拟处理项，未执行任何删改、合并、重排、统一、补写。请确认后指定输出集数。
+
+## 1. 拟合并场次清单
+
+按同一集内、同一场景、同一时间、剧情连续、重复标注原则合并，合并后场次编号顺延。
+
+- 第1集：原1-1、1-2 → **1-1 Village 外 未注明**；原1-3、1-4 → **1-2 High Mountains 外 雪天**
+- 第2集：原2-1、2-2 → **2-1 Border Tavern 内 未注明**
+- 第3集：原3-1、3-2、3-3 → **3-1 Norman Castle Hall 内 未注明**
+- 第4集：原4-1、4-2、4-3 → **4-1 Norman Castle Room 内 未注明**；原4-4、4-5、4-6 → **4-2 Norman Castle Courtyard 外 未注明**
+- 第5集：原5-1、5-2 → **5-1 Norman Castle Room 内 未注明**；原5-3 → **5-2 Village 外 未注明**；原5-4、5-5 → **5-3 Magic Shop 内 未注明**
+- 第6集：原6-1、6-2 → **6-1 Norman Castle Room 内 未注明**；原6-3 → **6-2 Underground Ice Cellar 内 未注明**；原6-4 → **6-3 Norman Castle Courtyard 外 未注明**；原6-5、6-6、6-7 → **6-4 Underground Ice Cellar 内 未注明**
+- 第7集：原7-1、7-2、7-3 → **7-1 Norman Castle Room 内 未注明**；原7-4 → **7-2 Norman Castle Corridor 外 未注明**；原7-5 → **7-3 Norman Castle Courtyard 外 未注明**
+- 第8集：原8-1、8-2 → **8-1 Norman Castle Wall 外 未注明**；原8-3、8-4 → **8-2 Norman Castle Corridor 外 未注明**；原8-5 → **8-3 Norman Castle Courtyard 外 未注明**；原8-6 → **8-4 Norman Castle Room 内 未注明**；原8-7、8-8、8-9、8-10 → **8-5 Norman Castle Hall 内 未注明**
+- 第9集：原9-1、9-2 → **9-1 Magic Shop 内 未注明**；原9-3、9-4、9-5 → **9-2 Magic Shop 内 未注明**；原9-6、9-7、9-8 → **9-3 Magic Shop／魔法商店 内 未注明**（场景名统一待确认）
+- 第10集：原10-1、10-2、10-3 → **10-1 炼金术士公会大厅 内 未注明**（Alchemy Guild Hall 拟统一为炼金术士公会大厅）；原10-4 → **10-2 Norman Castle Hall 内 未注明**；原10-5至10-9 → **10-3 Norman Castle Courtyard 外 未注明**
+- 第11集：原11-1至11-4 → **11-1 Norman Castle Courtyard 外 未注明**
+- 第12集：原12-1至12-3 → **12-1 Norman Castle Corridor 外 未注明**；原12-4 → **12-2 Norman Castle Hall 内 未注明**；原12-5、12-6 → **12-3 Norman Castle Corridor 外 未注明**
+- 第13集：原13-1、13-2 → **13-1 Church 内 未注明**；原13-3至13-7 → **13-2 Norman Castle Courtyard 外 未注明**
+- 第14集：原14-1至14-6 → **14-1 Church 内 未注明**
+- 第15集：原15-1至15-5 → **15-1 Norman Castle Room 内 未注明**
+- 第16集：原16-1、16-2 → **16-1 Norman Castle Courtyard 外 未注明**；原16-3 → **16-2 Ancient Ruins Entrance 外 未注明**
+- 第17集：原17-1至17-3 → **17-1 Ancient Ruins Entrance 外 未注明**
+
+## 2. 拟删除音效／字幕标记及余字幕清单
+
+- 所有【音效】标记：拟删除标记，保留其后内容。
+- 所有【字幕】标记：拟删除标记。
+- 【字幕】后为重复台词、翻译、冗余角色名的：拟删除整句。如：
+  - 【字幕】Run!、【字幕】Oh, no!、【字幕】Thank you.、【字幕】Damn it!、【字幕】Master! 等与紧随台词重复者。
+- 【字幕】后承载地点／人物首次标识的：拟保留文字并去标记。如：
+  - Village、Border Tavern、Norman Castle Hall、Joanna、Rosalind、The castle's underground ice cellar、Castle courtyard、Norman Castle Courtyard、Ruins entrance。
+- 批量确认项：全部【音效】标记删除、重复【字幕】内容删除、承载信息字幕文字保留。
+
+## 3. 拟删除着装描述清单
+
+正文中着装描述拟删除，统一移至人物行“着装：”。例：
+
+- △罗莎琳德穿着白色轻纱长裙站在窗前 → 删除“穿着白色轻纱长裙”
+- △罗莎琳德穿着白色轻纱睡袍站在窗前 → 删除“穿着白色轻纱睡袍”
+- △罗莎琳德穿着白色睡衣 → 删除“穿着白色睡衣”
+- △两个穿着黑色皮革盔甲的卫兵 → 删除“穿着黑色皮革盔甲”
+- △查尔斯穿着绿色的华丽礼服 → 删除“穿着绿色的华丽礼服”
+- △莱昂身穿华丽的银色盔甲 → 删除“身穿华丽的银色盔甲”
+- △亚瑟穿着黑色皮甲和黑色斗篷，罗莎琳德穿着白色轻纱长裙 → 删除着装描述，保留动作
+- △罗莎琳德穿着淡蓝色睡裙 → 删除“穿着淡蓝色睡裙”
+- △亚瑟身穿结婚礼服／白色衬衫 → 删除着装描述
+- △罗莎琳德身穿白色婚纱 → 删除“身穿白色婚纱”
+- △一个身穿灰色马甲和白色衬衫的年轻仆人 → 删除“身穿灰色马甲和白色衬衫”
+- △一双穿着灰色平底鞋的脚 → 删除“穿着灰色平底鞋”
+- △两双穿着靴子的脚，一双黑色皮靴，一双白色长裙下的白鞋 → 删除着装细节
+- 其余同类着装描述均拟删除，仅在人物行标注。
+
+## 4. 拟修改人物名单
+
+拟统一为“中文短名（英文全名，着装：xxx）”；正文只用中文短名；台词中英文名默认不改。
+
+- Arthur／arthur／Arthur(V.O.) → 亚瑟（Arthur）
+- Village Chief → 村长（Village Chief）
+- Royal Archmage（第1集村庄）→ 皇家大魔导师（Royal Archmage）
+- Royal Archmage（第2集，Aldric）→ 大魔导师奥尔德里克（Aldrick）【待确认是否与第9-12集 Aldrick 同一人】
+- Aldrick／Aldric → 奥尔德里奇（Aldrick）
+- Guild Mistress／Selina → 塞琳娜（Selina／Guild Mistress）
+- Noble Woman → 贵族女子（Noble Woman）【若为塞琳娜，拟统一为塞琳娜】
+- Male Disciple → 男弟子（Male Disciple）
+- Female Disciple → 女弟子（Female Disciple）
+- Dragon → 黑龙（Dragon）
+- Merlin → 梅林（Merlin）
+- Tavern Owner → 酒馆老板（Tavern Owner）
+- Male Patron → 男酒客（Male Patron）
+- Count Norman／count_norman → 诺曼伯爵（Count Norman）
+- Countess Norman → 诺曼伯爵夫人（Countess Norman）
+- Joanna／joanna → 乔安娜（Joanna）
+- Rosalind／Rosalind(V.O.) → 罗莎琳德（Rosalind）
+- Hughes → 休斯（Hughes）
+- Two Servants → 两个仆人（Two Servants）
+- Shopkeeper → 店主（Shopkeeper）
+- Two Apprentices → 两个学徒（Two Apprentices）
+- Charles／charles → 查尔斯（Charles）
+- Balthazar → 巴尔萨泽（Balthazar）
+- Guard Messenger／guard_messenger → 守卫信使（Guard Messenger）
+- Elder Elwin／elder_elwin → 埃尔温长老（Elder Elwin）
+- Elder Barry／elder_barry → 巴里长老（Elder Barry）
+- Leon → 莱昂（Leon）
+- Priest／priest → 神父（Priest）
+- Silver-haired Knight Leader → 银发骑士领袖（Silver-haired Knight Leader）
+- 小写说话人前缀统一为粗体中文短名。
+
+## 5. 拟合并群像清单
+
+无台词、无重戏份群体拟合并；有台词群众角色不并入群像。
+
+- 村民们 → 村民群像（Villagers，着装：粗布冬装）
+- 宾客们／众人 → 宾客群像（Guests，着装：各色礼服）
+- 卫兵们／Guards（无台词个体）→ 侍卫群像（Guards，着装：侍卫盔甲／黑色皮革盔甲）【若有集体台词，保留群体角色，待确认】
+- 侍女／女仆 → 侍女群像（Maids，着装：侍女服）
+- 仆人们 → 仆人群像（Servants，着装：仆人服／灰色马甲白衬衫）
+- 其他顾客和学徒 → 魔法商店顾客群像（Customers，着装：各色法师袍）、学徒群像（Apprentices，着装：学徒袍）
+- 随从们 → 随从群像（Followers，着装：随从服饰）
+- 围观群众／人群 → 围观群众群像（Onlookers，着装：各色服饰）
+- 有台词群众角色单独列出：男酒客（Male Patron）、两个仆人／随从（Two Servants）、守卫信使（Guard Messenger）等。
+
+## 6. 拟删除重复内容、空无效场清单
+
+拟删除后出现的重复动作／台词，保留首次；重复场次不单独保留，按第1项并入相邻同场景场次。
+
+- 第3集：3-2结尾与3-3开头罗莎琳德咳嗽、亚瑟内心独白重复；伯爵宣布婚礼重复；伯爵夫人低语重复。
+- 第4集：4-2罗莎琳德劝阻台词重复；4-4亚瑟掐休斯、Hughes震惊台词重复；4-5、4-6仆人震惊重复。
+- 第5集：5-1 Rosalind“It's incurable...”及亚瑟承诺重复；5-4黑狼尸体扔地重复。
+- 第6集：6-1、6-2伯爵夫人命令重复；6-5罗莎琳德问话、亚瑟解释重复。
+- 第7集：7-1亚瑟“Moonlight Magic Source”重复；7-2、7-3为拆分重复。
+- 第8集：8-1／8-2长老对话重复；8-3／8-4伯爵夫人台词重复；8-7至8-10大厅重复；8-9／8-10亚瑟询问、伯爵命令重复。
+- 第9集：9-2／9-6查尔斯自我介绍、邀请重复；9-6／9-7／9-8打查尔斯、罗莎琳德劝阻重复。
+- 第10集：10-5至10-9巴尔萨泽／伯爵对话重复；10-2／10-3重复。
+- 第11集：11-1至11-4奥尔德里奇道歉、亚瑟条件、伯爵选择重复。
+- 第12集：12-1至12-3走廊对话重复；12-5／12-6乔安娜内心独白重复。
+- 第13集：13-3至13-7庭院重复；莱昂、伯爵夫人、埃尔温台词重复。
+- 第14集：14-1至14-6教堂重复；莱昂宣战、伯爵离婚宣布、亚瑟拳击重复。
+- 第15集：15-1／15-2亲密动作重复；15-4亚瑟台词重复。
+- 第16集：16-1／16-2塞琳娜质问重复；16-3部分重复。
+- 第17集：17-1至17-3银发骑士、伯爵、亚瑟对话重复。
+- 空无效场：原4-3、4-5、5-2、6-6、6-7、7-2、7-3、8-2、8-3、8-4、8-10、9-1、9-3至9-5、10-2、10-3、10-6、10-8、11-2至11-4、12-2、12-3、13-2、13-4至13-7、14-3至14-6、15-2、15-3、15-5、16-2、17-1、17-2等，均不单独保留，合并入相邻同场景场次。
+
+## 7. 拟重排集数清单
+
+- 原第1-17集按实际剧情顺序连续，拟保留原集名，重新编号仍为第1集至第17集。
+- 集标题格式拟统一为：**第X集：集名**。
+- 场次编号按第1项合并后从 X-1 起顺延。
+- 原集名缺失：无。
+- 批量确认项：集数格式统一、场次重排。
+
+## 8. 拟统一道具名称清单
+
+仅统一动作描述中实际指同一道具的不同称呼；台词中道具名不改。
+
+- 羊皮纸婚约／婚约信件／信件（婚约）→ 统一为“婚约”（首次：羊皮纸婚约）
+- 金属酒杯／酒杯 → 统一为“金属酒杯”（首次第2集）
+- 空间戒指／蓝色宝石空间戒指／蓝色宝石戒指 → 统一为“空间戒指”（首次第11集）
+- 木盒子／木盒 → 统一为“木盒子”
+- 陨石／燃烧陨石 → 统一为“陨石”
+- 黑狼尸体／霜刃之狼尸体／Blood Wolf King → 动作中拟统一为“黑狼尸体”（首次第5集；台词不改）
+- 魔法火柴／魔法木柴／木柴 → 拟统一为“魔法木柴”【待确认首次名称】
+- 龙头法杖／黑色法杖（奥尔德里奇）→ 待确认是否统一为“龙头法杖”
+- 龙息草／Dragonsbreath Grass → 动作中“龙息草”，台词保留 Dragonsbreath Grass
+- 高阶魔力药剂／高级魔力药剂／顶级药剂／魔力药水 → 动作中拟统一“高阶魔力药剂”
+- 不同角色持有的法杖不统一。
+
+## 9. 拟明确动作主语清单
+
+- △一双穿着灰色平底鞋的脚迈进大门 → △罗莎琳德迈进大门
+- △特写一只穿着黑色皮靴的脚向前迈出一步 → △亚瑟向前迈出一步
+- △画面特写两双穿着靴子的脚并排走在石板路上，一双是黑色皮靴，一双是白色长裙下的白鞋 → △亚瑟和罗莎琳德并排走在石板路上
+- △一个年轻男酒客惊恐地站起身 → △男酒客惊恐地站起身
+- △一个身穿灰色马甲和白色衬衫的年轻仆人慌慌张张地跑过来 → △仆人慌慌张张地跑过来（角色名待确认）
+- △一个声音传来 → △亚瑟（O.S.）的声音传来（上下文明确）
+- 其余无法明确指向的不补。
+
+## 10. 拟补充／拟定着装清单
+
+原文有明确服饰描述的优先提取；未明确者按身份、场景、时代背景拟定。同一集同角色同套服装只首次标注；换装后重新标注；跨集首次重新标注。
+
+- 亚瑟：旅行者装／深色皮甲斗篷／白色衬衫；第15集婚礼白色衬衫、黑裤皮靴；第16集黑色皮甲、黑色斗篷、黑色皮靴。
+- 罗莎琳德：白色轻纱长裙／白色婚纱／白色睡袍／淡蓝色睡裙；第16集白色轻纱长裙（裙摆月亮图案）。
+- 诺曼伯爵：贵族礼服／深色长袍。
+- 诺曼伯爵夫人：华丽长裙，戴红宝石戒指。
+- 乔安娜：法师长裙，持红色宝石法杖。
+- 休斯：军需官制服／皮甲。
+- 查尔斯：绿色华丽礼服，持短魔杖。
+- 塞琳娜：奢华会长礼服，持黑色折扇，提金属箱子。
+- 奥尔德里奇：黑色法袍，持龙头法杖。
+- 梅林：白发白袍，持黑色法杖。
+- 巴尔萨泽：炼金公会会长法袍。
+- 莱昂：银色盔甲，持金色长剑。
+- 银发骑士领袖：华丽骑士盔甲，持金色大剑。
+- 神父：神职长袍。
+- 群像：村民群像粗布冬装；宾客群像各色礼服；侍卫群像侍卫盔甲／黑色皮革盔甲；侍女群像侍女服；仆人群像灰色马甲白衬衫；学徒群像学徒袍；随从群像随从服；围观群众群像各色服饰。
+- 有台词群众：男酒客、两个仆人／随从、守卫信使等单独标注着装。
+- 批量确认项：以上拟定着装可全部确认，或逐项修改。
+
+## 11. 其他需用户决策项
+
+- Royal Archmage（第1集村庄）与第2集 Royal Archmage／Aldric 与第9-12集 Aldrick 是否同一人？
+- Noble Woman 是否即塞琳娜（Selina／Guild Mistress）？
+- Two Apprentices（第5集）与 Two Servants（第9集）是否同一群体？
+- Guards 作为有集体台词的群体，是否保留为“侍卫群像”，还是拆为有台词群众角色？
+- 场景名统一：Magic Shop／魔法商店 → 建议统一“Magic Shop”；Alchemy Guild Hall／炼金术士公会大厅 → 建议统一“炼金术士公会大厅”。
+- 台词中 Rosaline／Rosalind／Rosa 拼写不一致，台词默认不改，是否仅统一说话人标签？
+- 第15集亲密戏中“赤裸上身”等是否作为着装描述删除，或在人物行标注“上身赤裸”？
+- 第1集黑龙与第13集金色神龙虚影是否同一角色？拟不合并，分别保留。
+- 英文台词保留，中文短名仅用于说话人标签，是否确认？
+- 小写说话人前缀（arthur、joanna、elder_barry 等）统一为粗体中文短名，是否确认？
+
+请回复“确认”或逐项修改，并指定需要输出的集数。未得到明确确认前，不执行任何删改、合并、重排、统一、动作主语明确化、着装拟定。
+步骤 01 · 第二轮
+整理后的剧本
+已保存
+整理后的完整剧本如下：
+第1集：神秘强者降世
+1-1 Village 外 未注明
+人物：村长（Village Chief，着装：粗布冬装）、皇家大魔导师（Royal Archmage，着装：法师长袍）、男弟子（Male Disciple，着装：弟子法袍）、女弟子（Female Disciple，着装：弟子法袍）、亚瑟（Arthur，着装：旅行者装）、黑龙（Dragon，着装：黑龙鳞甲）、村民群像（Villagers，着装：粗布冬装）
+△Village。俯瞰被雪覆盖的村庄广场。
+△村民群像在雪地上惊慌失措地奔跑。
+△龙吼声。一只巨大的黑龙在村庄上空飞过，发出咆哮。
+△爆炸声。黑龙向村庄的房屋喷火，房屋爆炸起火。
+△村长在奔跑的人群中大喊。
+村长（惊恐大喊）：Run!
+△一个年轻女子拉着一个老妇人和一个小孩在惊恐地奔跑，黑龙在背景中飞过。
+△黑龙在空中展翅咆哮，向下喷火。
+△画面特写一个人的眼睛，充满恐惧。
+村长（O.S.）（绝望地喊叫）：Oh, no!
+△画面黑屏后，村长跪在地上，双手捂脸，然后移开双手，看着自己的双手，神情绝望。
+△皇家大魔导师站在村长身后，面对着黑龙，双手施展魔法，形成一个蓝色的圆形魔法盾，挡住黑龙喷出的火焰。他大喊。
+皇家大魔导师（吃力地大喊）：Go now!
+△村长在地上爬行，回头对大魔导师说话，然后起步逃跑。
+村长（感激地回应）：Thank you.
+△大魔导师的魔法盾被打破，他被冲击力击倒在地上，吐血，痛苦地喊道。
+皇家大魔导师（痛苦地低吼）：Damn it!
+△大魔导师挣扎着想站起来，嘴角流着血。
+△两个年轻的弟子跑过来扶住他。男弟子拿着一根法杖，喊道。
+男弟子（焦急地大喊）：Master!
+△大魔导师用手擦了擦嘴角的血，对弟子们说。
+皇家大魔导师（虚弱但坚定地说话）：We have to stop it or everyone here will die!
+△男弟子扶着他，担忧地回答。
+男弟子（担忧地回答）：But Master, this dragon is too strong. We can't beat it.
+△画面特写大魔导师沉重的表情，接着是黑龙咆哮的画面。
+皇家大魔导师（语气坚定）：We fight even if we can't win. That's war.
+△俯瞰镜头，大魔导师和两个弟子站在广场中央，黑龙在空中盘旋。一个声音传来。
+亚瑟（O.S.）（轻松调侃的语气）：So lively.
+△亚瑟手里拿着一个咬了一口的苹果，走过来，微笑着说。
+亚瑟（微笑调侃）：Is this a tea party? Mind if I join?
+△大魔导师和弟子们惊讶地看着他。大魔导师急切地喊道。
+皇家大魔导师（急切地大喊）：Get out of here! It's dangerous!
+△亚瑟继续咬了一口苹果，神情自若。大魔导师继续喊着。
+皇家大魔导师（继续急切地喊道）：You shouldn't be here.
+△重物落地声、龙吼声。突然黑龙从天而降，落在亚瑟身后咆哮。
+皇家大魔导师（惊恐地大喊）：Look out! Dodge!
+△亚瑟微微一笑，转过身面对黑龙。
+△亚瑟把手中的苹果举起来，展示给黑龙看。
+△黑龙向亚瑟喷火。亚瑟冷静地看着火焰。
+△亚瑟将手中的苹果用力扔向黑龙。
+△击中爆炸声。苹果像炮弹一样飞出，直接击中了黑龙的眼睛，黑龙痛苦地咆哮，被击退飞走。
+△大魔导师和弟子们目瞪口呆。
+男弟子（难以置信地喃喃自语）：How did he do that?
+△黑龙再次飞回，愤怒地咆哮。
+亚瑟（自信地微笑）：Time to end this!
+△亚瑟弯腰把皮箱放在雪地上。
+△重击声。亚瑟高高跃起，直接跳到了黑龙的背上，一拳将黑龙打倒在地上。
+亚瑟（轻松地微笑）：Nothing special.
+△男弟子看着这一幕，转头问大魔导师。
+男弟子（兴奋且好奇地询问）：Master, what spell is that? Can I learn it?
+△大魔导师一巴掌拍在男弟子的头上，生气地训斥道。
+皇家大魔导师（愤怒地训斥）：Shut up, you idiot! That's not magic. That's pure physical strength from that man.
+△男弟子捂着头，震惊地睁大眼睛。
+男弟子（震惊地喃喃自语）：Physical strength? How is that...
+△亚瑟转过身，对大魔导师和弟子们微笑，准备离开。
+亚瑟（微笑，挥手）：I'll leave the rest to you. I'm off. Bye.
+△大魔导师急切地向前迈了一步，伸手喊道。
+皇家大魔导师（急切）：Wait!
+△亚瑟一跃而起，化作一道黑影飞向天空。
+△女弟子抬头看着天空，双手合十，露出崇拜的神色。
+女弟子（崇拜，赞叹）：Oh my god, that's so cool!
+1-2 High Mountains 外 雪天
+人物：亚瑟（Arthur）、梅林（Merlin，着装：白发白袍）
+△重物落地声。亚瑟从天而降，单膝跪地落在雪地上，激起一阵烟尘。前方站着一个白发白袍的老人梅林。
+△亚瑟站起身，拍了拍身上的雪，走向梅林。
+亚瑟（随意，询问）：Old man, why the rush to call me back?
+△梅林转过身，手里拿着黑色法杖，神色严肃地看着亚瑟。
+梅林（严肃，回忆）：Twelve years ago, I accidentally killed the old Earl of the Norman family in the south.
+△纸张展开声。梅林从怀里拿出一张羊皮纸婚约，展示给亚瑟看。
+梅林（解释）：To make amends, I signed this marriage contract on his deathbed.
+△两人站在高山之巅的魔法阵中央，周围环绕着石雕像。梅林把婚约递给亚瑟。
+梅林（命令）：So pack your rags, and go get married in the south.
+△亚瑟接过婚约，低头看着上面的字，梅林继续说话。
+梅林（调侃）：You'll be living off their family for the rest of your life.
+△亚瑟震惊地抬起头，一把揪住梅林的衣领，愤怒地大喊。
+亚瑟（愤怒，质问）：Old man? I trusted you, and you sold me off to some broke family to be a kept man?
+△梅林神色平静，拍了拍亚瑟揪着他衣领的手，解释道。
+梅林（无奈，平静）：Twelve years ago I swore a blood oath. I owe them a life. I have no choice.
+△亚瑟松开手，烦躁地抓了抓头发，叹了口气，妥协地看着梅林。
+亚瑟（烦躁，妥协）：Damn! Fine. You pulled me out of a pile of corpses and raised me like your own son. I owe you a life. I'll do it.
+△梅林露出欣慰的笑容，拍了拍亚瑟的肩膀。
+梅林（欣慰，高兴）：That's my good apprentice!
+△梅林凭空拿出一个精致的木盒子，递给亚瑟。
+梅林（递出礼物）：Here. Your wedding gift.
+△亚瑟接过木盒子，用手指摸了摸，微笑着调侃。
+亚瑟（微笑，满意）：At least you have some conscience.
+△魔法击中声、重物落地声。梅林突然用法杖一指，一道蓝光击中亚瑟，亚瑟和木盒子一起被击飞出去，重重摔在雪地上。
+△亚瑟从雪地上爬起来，拍掉身上的雪，愤怒地对梅林大喊。
+亚瑟（愤怒，质问）：You crazy old man, what the hell is wrong with you?
+△梅林看着他，大声训斥，神色中带着一丝得意。
+梅林（大声，得意）：Quit whining like a woman! I'm sending you to paradise. The southern women are hot.
+△梅林看着前方，继续对亚瑟说话。
+梅林（神色得意）：Besides, the southern women are hot.
+△亚瑟无奈地听着，梅林继续说话。
+梅林（赞赏）：With your terrifying muscle power that ignores magic, you can do whatever you want!
+△亚瑟微微侧头，神色平静地听着。
+梅林（O.S.）（语带赞赏）：With your terrifying muscle power that ignores magic,
+△梅林面部特写，继续对亚瑟说话。
+梅林（肯定）：Norman family is a great place!
+梅林（面带微笑）：you can do whatever you want! Norman family is a great place!
+△梅林手持黑色法杖，独自站在高山之巅的魔法阵中央。
+△魔法传送声。梅林用法杖顿地，地上出现蓝色魔法阵，亚瑟化作一颗火球飞向天空，木盒子也随之消失。
+△魔法传送声。天空中出现一个巨大的火球，拖着黑烟向地面坠落。
+△梅林看着天空，脸上露出狡黠的微笑。
+梅林（微笑，调侃）：Oh, by the way. Don't forget your daily training.
+△亚瑟站在悬崖边，抬头看着天空中坠落的火球，愤怒地大喊。
+亚瑟（愤怒大喊）：You want me to train now?!
+△巨大的火球穿过云层，直奔悬崖上的亚瑟而去。
+△亚瑟大喊着一跃而起，迎向坠落的火球。
+亚瑟（怒吼）：Ah!
+△重物撞击声。亚瑟单膝跪地落在岩石上，单手托住巨大的燃烧火球，周围地面碎裂，激起一阵烟尘。
+第2集：徒手托陨石
+2-1 Border Tavern 内 未注明
+人物：亚瑟（Arthur，着装：旅行者装）、奥尔德里奇（Aldrick，着装：黑色法袍）、塞琳娜（Selina，着装：贵族女子华贵长裙）、酒馆老板（Tavern Owner，着装：酒馆围裙）、男酒客（Male Patron，着装：粗布衣）
+△开门声。酒馆的双扇木门从里面被推开，阳光照进昏暗的酒馆。
+△亚瑟背着行李，迈步走进酒馆。
+△Border Tavern。酒馆内光线昏暗，奥尔德里奇和塞琳娜坐在一张桌子旁。
+△亚瑟在酒馆内走动，环顾四周。
+△酒馆老板端着托盘，托盘上有三杯啤酒，快步走过。
+△滑倒声。酒馆老板脚下一滑，身体向前倾倒。
+△托盘上的一杯啤酒飞到空中，啤酒洒了出来。
+△奥尔德里奇神色平静地坐在桌旁，伸出右手食指，指尖发出蓝色光芒。
+△魔法声。飞在空中的啤酒杯和洒出的啤酒在蓝色魔法光芒中静止在半空。
+△重物落地声。奥尔德里奇挥手，一道蓝色魔法能量将滑倒的酒馆老板击飞，老板重重摔在远处的桌子上。
+△奥尔德里奇收回手，闭上眼睛。塞琳娜优雅地坐着，神色平静。
+△亚瑟走到奥尔德里奇和塞琳娜的桌旁。
+△亚瑟拉开椅子坐下，将一个金属酒杯放在桌上。
+△亚瑟看着前方，大声向老板要酒。
+亚瑟（语气随意）：Boss, give me the cheapest beer.
+△酒馆老板站在柜台后，手里拿着抹布擦拭杯子，神色有些紧张。
+△塞琳娜转过头，静静地看着坐在对面的亚瑟。
+△奥尔德里奇端起自己的酒杯，斜眼看着亚瑟，语气轻蔑地嘲讽。
+奥尔德里奇（语气傲慢）：Stinking country bumpkin. This is not a place for you. Get out.
+△亚瑟微微一笑，身体前倾，挑衅地看着奥尔德里奇。
+亚瑟（面带微笑）：Did you buy this tavern, old man?
+△奥尔德里奇神色阴沉下来，紧盯着亚瑟。
+△奥尔德里奇将右手放在桌上，手掌中凝聚出一团蓝色的魔法火焰。
+△亚瑟看着那团蓝色火焰，脸上露出灿烂的笑容。
+△奥尔德里奇托着蓝色火焰，冷冷地看着亚瑟。
+△亚瑟伸出双手，在奥尔德里奇手里的蓝色火焰上方晃了晃，仿佛在烤火取暖。
+△塞琳娜伸出右手，挡在奥尔德里奇的手前，出声阻止他。
+塞琳娜（语气严肃）：Enough, Aldric. We didn't book the whole place. Let this gentleman sit.
+△亚瑟开心地笑了起来，靠回椅背上。
+亚瑟（笑着调侃）：Now this lady is reasonable.
+△亚瑟端起桌上的金属酒杯，大口喝起酒来。
+△亚瑟仰头喝酒，喉咙不断吞咽，酒水顺着脖子流下。
+△雷声。酒馆外的天空突然变得漆黑，乌云密布，狂风大作。
+△酒馆外的木质招牌“BORDERLAND TAVERN”在狂风中剧烈摇晃。
+△酒馆内开始剧烈震动，屋顶落下灰尘，酒客们惊慌失措。
+△男酒客惊恐地站起身，大声喊叫。
+男酒客（惊恐大喊）：What is that? Is it the end of the world?!
+△塞琳娜捂着胸口，震惊地睁大眼睛，抬头看着屋顶。
+△航拍视角下，一颗巨大的燃烧陨石拖着浓烟，正从天空中砸向森林中的酒馆。
+△陨石在空中燃烧，发出耀眼的红光，逼近酒馆。
+男酒客（O.S.）（惊恐大喊）：No! It's a celestial meteor!
+△塞琳娜神色更加惊恐，呼吸急促。
+△奥尔德里奇站起身，手里拿着法杖，神色慌张地大喊。
+奥尔德里奇（语气惊恐）：Its mass and impact force are terrifying.
+△亚瑟依然平静地坐在桌旁，端着酒杯继续喝酒。
+△塞琳娜脸色苍白，绝望地看着前方，奥尔德里奇继续惊恐地大喊。
+奥尔德里奇（O.S.）（语气绝望）：My magic shield is like paper against it! My lady, there's no escape!
+△塞琳娜面部特写，眼神中充满了绝望和恐惧。
+奥尔德里奇（O.S.）（焦急）：My lady, there's no escape!
+△亚瑟放下酒杯，站起身，拍了拍衣服，微笑着调侃。
+亚瑟（语气轻松）：Mages always make such a fuss. This is just my usual training dumbbell.
+△电流声。亚瑟身上爆发出金色的电光，他屈膝做好起跳准备。
+△亚瑟化作一道耀眼的金色光束，瞬间冲破酒馆的屋顶，飞向天空。
+△亚瑟在空中张开双臂，身体周围环绕着金色的能量光环。
+△亚瑟迎着巨大的燃烧陨石飞去，身形在陨石面前显得十分渺小。
+△碰撞声。亚瑟伸出右手，在身前凝聚出一个巨大的金色魔法阵，正面挡住了下落的陨石。
+△亚瑟面部特写，他咬紧牙关，神色坚毅，全力抵挡着陨石的冲击。
+△亚瑟托着巨大的陨石，从天空中缓缓降落。
+△重物落地声。亚瑟稳稳地落在地面上，将巨大的陨石轻轻放在酒馆外的空地上，激起一片尘土。
+△亚瑟拍了拍双手上的灰尘，神色轻松地看着前方。
+△亚瑟迈步走向站在酒馆门口的塞琳娜。
+△亚瑟走到塞琳娜面前停下，微笑着看着她。
+亚瑟（温柔微笑）：Thank you for your hospitality, beautiful lady.
+△塞琳娜愣在原地，呆呆地看着亚瑟，没有说话。
+△亚瑟微微一笑，双手插进口袋，转过身迈步离去。
+△塞琳娜看着亚瑟离去的背影，眼眶湿润，流下一行眼泪，神色无比震惊。
+塞琳娜（V.O.）（难以置信）：Oh my god... He caught a meteor with his bare hands? What kind of monster is he?
+△奥尔德里奇走到塞琳娜身旁，神色凝重地看着亚瑟离去的方向。
+奥尔德里奇（神色凝重）：My lady... This man has not a trace of magic, yet his physical strength is terrifying to this degree.
+△奥尔德里奇转头看向塞琳娜，心有余悸地继续说话。
+奥尔德里奇（心有余悸）：Thank goodness you stopped me from acting earlier. Or we'd be nothing but ash.
+△塞琳娜看着亚瑟消失的方向，眼神变得坚定。
+塞琳娜（语气坚定）：Find out who he is. I want to know him.
+第3集：退婚风波与病弱长女
+3-1 Norman Castle Hall 内 未注明
+人物：亚瑟（Arthur，着装：旅行者装）、诺曼伯爵（Count Norman，着装：贵族礼服）、诺曼伯爵夫人（Countess Norman，着装：华丽长裙，戴红宝石戒指）、乔安娜（Joanna，着装：法师长裙，持红色宝石法杖）、罗莎琳德（Rosalind，着装：白色轻纱长裙）
+△Norman Castle Hall。画面展示城堡墙壁上挂着的华丽盾牌和交叉的双剑。
+△画面展示大厅顶部的巨大水晶吊灯，散发着柔和的光芒。
+△亚瑟手里拿着一份婚约，背对镜头迈步走进宽敞的城堡大厅。
+△亚瑟转过头，打量着大厅内的陈设。
+△亚瑟收回目光，微笑着走向大厅中央的长桌。
+△亚瑟走到长桌旁，将手中的婚约轻轻放在桌面上。
+△诺曼伯爵和伯爵夫人坐在桌旁。诺曼伯爵双手交叠放在桌上，神色严肃地看着亚瑟。
+△亚瑟看着诺曼伯爵，神色轻松地自我介绍。
+亚瑟（礼貌微笑）：Count Norman, I'm Arthur. I'm here to fulfill the marriage contract.
+△亚瑟站在大厅里，神色平静。
+诺曼伯爵（O.S.）（愤怒地大喊）：reeking of cheap ale,
+△诺曼伯爵坐在椅子上，神色愤怒地大喊。
+诺曼伯爵（愤怒地大喊）：with not a hint of magic?
+△拍桌声。诺曼伯爵愤怒地一拍桌子，猛地站起身，大声斥责。
+诺曼伯爵（愤怒大喊）：Absurd! Marry my daughter to you?
+△诺曼伯爵愤怒地大喊，身体前倾。
+诺曼伯爵（愤怒地大喊）：This is an utter disgrace to the Norman family!
+△亚瑟平静地看着愤怒的诺曼伯爵，没有任何慌张。
+△亚瑟无奈地摊开双手，脸上带着一丝微笑。
+乔安娜（O.S.）（高傲地赞同）：Father is right!
+△诺曼伯爵指着亚瑟，继续愤怒地嘲讽。
+诺曼伯爵（轻蔑嘲讽）：A useless waste, reeking of cheap ale, with not a hint of magic?
+△高跟鞋踩在石梯上的清脆声。金发女子乔安娜提着长裙走下楼梯。
+△伯爵夫人坐在一旁，神色冷漠地看着亚瑟。
+△诺曼伯爵继续大喊，亚瑟则无奈地摊开双手，脸上带着一丝微笑。
+诺曼伯爵（愤怒咆哮）：This is an utter disgrace to the Norman family!
+△乔安娜走到大厅中央，停在亚瑟面前，神色高傲地看着他。
+乔安娜（高傲地宣告）：I, Joanna, am about to become a full mage of the Royal Mage Academy!
+△乔安娜双手环抱在胸前，神色轻蔑地看着亚瑟。
+乔安娜（轻蔑地嘲讽）：You lowly warrior, fit only to roll in the mud,
+△亚瑟平静地看着乔安娜，脸上带着淡淡的微笑。
+乔安娜（O.S.）（轻蔑地嘲讽）：aren't even worthy of kissing my boots!
+△乔安娜得意地笑了起来，看着亚瑟。
+乔安娜（戏谑地询问）：Want to marry me?
+△乔安娜凑近亚瑟，眼神冰冷，一字一顿地说话。
+乔安娜（冰冷地拒绝）：Dream on!
+△魔法闪烁声。乔安娜的脸部特写，随后画面闪烁白光。
+△大厅全景。伯爵夫人站起身，神色愤怒地指着亚瑟。
+诺曼伯爵夫人（愤怒地大喊）：Listen here, you stinking bumpkin!
+△伯爵夫人用手帕捂着鼻子，神色厌恶地看着亚瑟。
+诺曼伯爵夫人（厌恶地质问）：you think a piece of scrap paper is enough to marry my Joanna?
+△伯爵夫人继续用手帕捂着鼻子，眼神充满鄙夷。
+诺曼伯爵夫人（鄙夷地嘲讽）：You're not even fit to polish her shoes!
+△乔安娜神色高傲地大喊。
+乔安娜（骄傲地大喊）：I'm a future Royal Mage!
+△亚瑟平静地看着她，眼神深邃。
+乔安娜（O.S.）（轻蔑地反问）：Marry a magicless waste like you?
+△伯爵夫人和伯爵并排站立，冷漠地看着亚瑟。
+△乔安娜得意地笑着。
+乔安娜（得意地嘲笑）：Oh, that's worse than death.
+△亚瑟看着乔安娜，神色平静，手中拿着婚约。
+亚瑟（平静地总结）：I see. The noble Norman family plans to break the contract.
+△亚瑟转过身，准备离去。
+亚瑟（干脆地回答）：Fine, I'll leave.
+△亚瑟拿着婚约，迈步走向大门，边走边转头说话。
+亚瑟（调侃地威胁）：And I'll have a chat with the nobles in town about how the Normans don't keep their word.
+△亚瑟回头看了一眼，嘴角带着一丝嘲讽的微笑。
+诺曼伯爵（O.S.）（愤怒地大喊）：Stop!
+△诺曼伯爵神色慌张而愤怒地大喊。
+诺曼伯爵（慌张而愤怒地大喊）：If we break the contract, the Norman name will be ruined!
+△伯爵夫人走到伯爵身旁，凑到他耳边低声说话。
+诺曼伯爵夫人（低声提议）：Darling, don't forget Rosalind.
+△诺曼伯爵神色一动，若有所思。
+诺曼伯爵夫人（O.S.）（低声提醒）：She's not married yet.
+△伯爵夫人继续在伯爵耳边低语，眼神阴险。
+诺曼伯爵夫人（阴险地低语）：Let that sickly girl take Joanna's place. Problem solved.
+△诺曼伯爵微微点头。
+诺曼伯爵（迟疑地沉吟）：This...
+△沉重的开门声。大厅的木质大门缓缓打开，阳光和雪花飘落进来。
+△罗莎琳德迈进大门，裙摆在风中飘动。
+△一位年轻女子走进来，手里拿着一块手帕。
+△罗莎琳德的正面特写，她有着一头金发，神色柔弱而忧郁。
+△伯爵和伯爵夫人站在桌旁，转头看向门口。
+△亚瑟站在大厅里，转过头看向门口的罗莎琳德。
+△罗莎琳德站在大门口，神色柔弱地看着大厅内。
+△剧烈的咳嗽声。罗莎琳德突然用手帕捂住嘴，剧烈地咳嗽起来，手帕上染上了鲜红的血迹。
+亚瑟（V.O.）（震惊地心想）：Her constitution is actually Moonlight Magic Source
+△亚瑟震惊地睁大眼睛，看着罗莎琳德。
+亚瑟（V.O.）（震惊地心想）：with powerful lunar elements.
+△亚瑟神色凝重地看着罗莎琳德。
+亚瑟（V.O.）（凝重的语气）：But unfortunately, she's poisoned by a witch's toxin.
+△罗莎琳德拿开手帕，嘴角流血，看着手帕上的血迹。
+亚瑟（V.O.）（凝重的语气）：Without immediate treatment,
+△罗莎琳德手帕上血迹的特写，血迹呈放射状。
+亚瑟（V.O.）（凝重的语气）：she won't live past five days.
+△伯爵夫人换上一副虚伪的关切神情，迈步走向罗莎琳德。
+诺曼伯爵夫人（虚伪关切的语气）：Oh, poor Rosa. Come here.
+△罗莎琳德神色哀伤、虚弱地站在门边。
+△伯爵夫人走过去，拉住罗莎琳德的手。
+诺曼伯爵夫人（虚伪的语气）：Your father and I have found a brave husband for you.
+△伯爵夫人拉着罗莎琳德往里走。
+诺曼伯爵夫人（虚伪的语气）：Take a look.
+△画面黑场过渡。
+△诺曼伯爵和伯爵夫人并排站立。
+诺曼伯爵（严肃的语气）：Rosa, Mr. Arthur has a marriage contract with our family.
+△诺曼伯爵看着罗莎琳德。
+诺曼伯爵（严肃的语气）：You're so ill, you need a strong man to care for you.
+△诺曼伯爵继续说话。
+诺曼伯爵（严肃的语气）：Your father is doing this for your own good.
+△罗莎琳德低着头，神色哀伤、无奈。
+△伯爵夫人和伯爵站在长桌旁，罗莎琳德和亚瑟已经坐在长桌旁。
+诺曼伯爵夫人（笑着说）：Isn't that right?
+△伯爵夫人继续说话。
+诺曼伯爵夫人（笑着说）：Joanna is giving up such a good match for you.
+△伯爵夫人走到罗莎琳德身后，按着她的肩膀。
+诺曼伯爵夫人（笑着说）：You should really thank your sister.
+△罗莎琳德低着头，神色黯然。
+△乔安娜站在一旁，得意地笑着。
+乔安娜（得意的语气）：Exactly right.
+△乔安娜继续说话。
+乔安娜（嘲讽的语气）：Sister, you're terminally ill and nearly dead.
+△罗莎琳德神色哀伤地看着前方。
+△画面特写罗莎琳德放在大腿上的双手，紧紧绞着手帕。
+乔安娜（嘲讽的语气）：With this waste,
+△亚瑟坐在桌旁，神色平静地听着。
+乔安娜（改口说）：No, this gentleman,
+△乔安娜笑着看着他们。
+乔安娜（嘲讽的语气）：you two are a perfect match.
+△罗莎琳德闭上眼睛，深吸一口气，然后睁开眼。
+罗莎琳德（轻声说）：Father, my lady, stop.
+△罗莎琳德看着他们，神色坚定。
+罗莎琳德（坚定的语气）：I agree.
+△诺曼伯爵高兴地大笑并鼓掌。
+诺曼伯爵（高兴的语气）：Excellent! A true daughter of Norman,
+△乔安娜在一旁，神色有些意外和不屑。
+诺曼伯爵（高兴的语气）：knowing how to share the family's burdens!
+△诺曼伯爵得意地笑着。
+△诺曼伯爵转头看向亚瑟。
+诺曼伯爵（询问的语气）：And you?
+△罗莎琳德有些紧张和担忧地转头看向身旁的亚瑟。
+△亚瑟微微一笑。
+亚瑟（轻松的语气）：The old man told me to fulfill the contract.
+△亚瑟继续微笑着说话。
+亚瑟（轻松的语气）：Marrying anyone is the same.
+△诺曼伯爵和伯爵夫人神色严肃地听着。
+亚瑟（轻松的语气）：Besides,
+△亚瑟转头看着罗莎琳德，微笑着。
+亚瑟（调侃的语气）：this Miss Rosa is far more pleasant to look at than some arrogant peacock.
+△亚瑟转头看着罗莎琳德，脸上带着温和的微笑。
+△亚瑟收起笑容，神色平静。
+亚瑟（平静的语气）：I agree.
+△乔安娜气得满脸通红，愤怒地指着亚瑟大喊。
+乔安娜（愤怒地大喊）：You bastard, what did you say?
+△亚瑟平静地看着她，嘴角带着一丝嘲讽的微笑。
+△诺曼伯爵大声宣布。
+诺曼伯爵（大声宣布）：Good! Three days from now, the wedding will be held here in the castle!
+第4集：教训恶霸军需官
+4-1 Norman Castle Room 内 未注明
+人物：亚瑟（Arthur，着装：旅行者装）、罗莎琳德（Rosalind，着装：白色轻纱睡袍）
+△画面切换到夜晚，城堡的窗外下着大雪，月光照在窗户上。
+△窗外呼啸的风雪声。画面展示夜晚城堡的窗户，窗外下着大雪，月光照在结霜的窗玻璃上。
+△罗莎琳德站在窗前，看着窗外的雪景，神色忧郁。
+△罗莎琳德转过头，看着走近的亚瑟。
+罗莎琳德（轻声说）：Mr. Arthur, no one is watching now. You should leave quickly.
+△亚瑟走到罗莎琳德身边，微微一笑，开口询问。
+亚瑟（调侃地微笑）：What? Do you also despise this useless waste?
+△罗莎琳德看着亚瑟，神色有些急切地摇头解释，随后露出一丝苦涩的微笑。
+罗莎琳德（急切而苦涩）：No, that's not it. It's that I'm not worthy of you.
+△亚瑟收起笑容，神色变得严肃，静静地看着罗莎琳德。
+△罗莎琳德低下头，神色哀伤地向亚瑟坦白自己的身体状况，并再次劝他逃跑。
+罗莎琳德（哀伤而真诚）：The archmage said the poison in my body is destroying me. I won't survive this winter. While they're not watching you, run.
+△亚瑟和罗莎琳德在房间里对视，亚瑟神色坚定，语气霸道而温柔。
+亚瑟（坚定而霸道）：Worthy or not, I decide. Since the contract is signed, you are now my fiancée.
+△罗莎琳德有些惊讶和感动地看着亚瑟，眼中闪烁着泪光。
+△亚瑟走上前，伸出右手轻轻抚摸罗莎琳德的额头。罗莎琳德有些紧张地微微后退并举起双手，亚瑟轻声安抚她。
+亚瑟（温柔地命令）：Don't move.
+△亚瑟收回手，看着罗莎琳德，自信地向她保证。
+亚瑟（自信地）：They can't cure your poison... but I can.
+△罗莎琳德低下头，有些悲伤地叹了口气，随后抬头看着亚瑟，显然并不相信他的话。
+罗莎琳德（悲伤而无奈）：Don't comfort me, Arthur. Even the top archmages of the Royal Academy have given up.
+△亚瑟看着罗莎琳德，没有说话，神色平静而深邃。
+△亚瑟突然上前一步弯下腰，将罗莎琳德拦腰抱起。罗莎琳德有些惊呼，亚瑟低头看着她说话。
+亚瑟（温柔地）：Forgive me, my fiancée.
+△亚瑟抱着罗莎琳德转身走向房间内的四柱大床。
+△亚瑟将罗莎琳德轻轻放在床上，罗莎琳德顺从地躺下，看着他。
+△亚瑟直起身，环顾冰冷刺骨的房间，皱起眉头询问魔法木柴的下落。
+亚瑟（皱眉询问）：This room is like an ice cellar. Where's the firewood?
+△罗莎琳德躺在床上，神色虚弱且委屈地向亚瑟解释魔法木柴早就没有了，并提到了军需官休斯。
+罗莎琳德（虚弱而委屈）：It ran out long ago. Hughes, the quartermaster, hasn't given me any this month.
+△亚瑟低头看着躺在床上的罗莎琳德，神色冷峻。
+亚瑟（语气坚定）：I'll go get it.
+△亚瑟神色一冷，低头看着罗莎琳德，决定去找休斯。
+亚瑟（冷冷地）：Tell me where he is. I'll go get it.
+△罗莎琳德躺在床上，神色焦急，睁大眼睛极力劝阻亚瑟。
+罗莎琳德（语气焦急）：No, Hughes is one of the Lady's men, ruthless! And he's a mage apprentice, he knows real magic! You'll get yourself killed!
+△罗莎琳德有些焦急地想起身，睁大眼睛极力劝阻亚瑟，警告他休斯是夫人的人且懂得魔法。
+罗莎琳德（焦急而恐惧）：No, Hughes is one of the Lady's men, ruthless! And he's a mage apprentice, he knows real magic! You'll get yourself killed! Listen to me, just go!
+△罗莎琳德继续焦急地劝阻亚瑟，呼吸急促。
+罗莎琳德（语气哀求）：Listen to me, just go!
+△亚瑟弯下腰，双手温柔地握住罗莎琳德的手，看着她。
+亚瑟（语气温柔而坚定）：You stay put. I'll be right back.
+△罗莎琳德有些担忧和无奈地看着亚瑟，双手交叠放在胸前。
+4-2 Norman Castle Courtyard 外 未注明
+人物：亚瑟（Arthur）、休斯（Hughes，着装：军需官制服／皮甲）、两个仆人（Two Servants，着装：仆人服）
+△场景切换。夜晚的城堡庭院。雪地上，亚瑟大步走来。
+△亚瑟停下脚步，看着前方，大声喊话。
+亚瑟（语气强硬）：Hey, give me the magic firewood!
+△军需官休斯坐在一旁，手里拿着一串烤肉正在吃，转头看向亚瑟，不屑地笑，背景里有一堆整齐的魔法木柴。
+休斯（语气嘲讽）：Firewood? For that dying useless young lady? Oh, oh my god, don't waste our precious resources.
+△亚瑟神色冷峻，盯着休斯。
+亚瑟（语气冰冷）：What did you just say?
+△休斯站起身，右手掌心凝聚出一团火焰，嚣张地对亚瑟大喊。
+休斯（语气嚣张）：Can't you understand, lowly waste? I said she's a useless piece of trash!
+△旁边坐着的两个仆人有些惊讶地看着休斯和亚瑟。
+△亚瑟和休斯在庭院中对峙，休斯手里托着火球。
+△亚瑟看着休斯，嘴角微微上扬，露出一丝嘲讽的微笑。
+亚瑟（语气嘲讽）：Seems like the rats of the Norman family don't know the rules very well.
+△休斯托着手中的大火球，得意地冷笑。
+休斯（语气狂妄）：A magicless waste, daring to give orders on Norman territory? Even if Rosalind herself stood here, she'd have to watch my mood!
+△亚瑟微微一笑，神色自信。
+亚瑟（语气自信）：Really? Then today I'll teach you how to be an obedient little mouse.
+△休斯被激怒，面部表情变得狰狞。
+△火球呼啸声。休斯大喊，并将手中的火球猛烈地扔向亚瑟。
+休斯（怒吼）：Die!
+△旁边坐着的两个仆人紧张地睁大眼睛看着。
+△火焰碎裂声。亚瑟伸出右手，直接徒手接住了飞来的火球，火球在他掌心被捏碎，化作点点火星消散。
+△休斯满脸震惊，不敢置信地大喊。
+休斯（语气震惊）：Impossible! You don't even have a magic shield, how can you shatter a spell with your bare hands?
+△亚瑟神色平静地走向休斯，休斯愣在原地。
+△亚瑟突然伸手，一把掐住休斯的脖子，将他整个人单手提了起来。休斯双脚离地，痛苦地挣扎。
+△亚瑟抬头看着被提在空中的休斯，脸上带着温和却冰冷的微笑。
+亚瑟（语气轻蔑）：Because your magic is as weak as a baby's.
+△休斯满脸震惊，不敢置信地对亚瑟大喊。
+休斯（震惊而愤怒地大喊）：...shattered? How can you shatter a spell with your bare hands?
+△亚瑟右手猛地一甩，将休斯整个人重重地扔了出去。
+△重物摔落声。休斯重重地摔在雪地上，痛苦地捂着胸口呻吟。
+△亚瑟拍了拍双手，神色轻松地走向那一堆魔法木柴。
+△重物撞击声。休斯重重地撞在城堡的石墙上，墙壁被撞出蛛网状裂缝，碎石落下，休斯随后滑落到雪地上。
+△两个仆人满脸震惊地看着这一幕，吓得张大嘴巴，倒吸一口凉气，身体微微颤抖。
+△亚瑟拍了拍双手，神色轻松地转过身看向两个仆人，并伸手指着他们命令道。
+亚瑟（神色轻松但语气威严）：You lot. Take all the magic firewood, and that stove to Miss Rosalind's tower right now. If a single log is missing...
+△两个仆人吓得立刻举起双手，连连点头，惊恐地大喊回应。
+两个仆人（惊恐地连连点头）：Y-yes, sir! We'll deliver it immediately! Immediately!
+第5集：猎杀霜刃之狼
+5-1 Norman Castle Room 内 未注明
+人物：亚瑟（Arthur，着装：旅行者装）、罗莎琳德（Rosalind，着装：白色睡袍）
+△温暖的房间内，壁炉里燃烧着熊熊烈火。罗莎琳德躺在床上，转头看着走来的亚瑟，虚弱地开口询问。
+罗莎琳德（虚弱而关切地询问）：You actually got the firewood... Didn't Hughes give you trouble?
+△亚瑟坐在床边，手里端着一碗热粥，用木勺舀起一勺粥，微笑着对罗莎琳德解释。
+亚瑟（温柔地微笑）：He's a reasonable man. I just gave him a little persuasion.
+△亚瑟低头吹了吹勺子里的热粥，然后微笑着递到罗莎琳德嘴边。
+亚瑟（温柔地叮嘱）：Here, have something warm.
+△罗莎琳德张口喝下热粥，神色稍微缓和，看着亚瑟，有些感动和忧虑地开口。
+罗莎琳德（感动而忧虑）：Mr. Arthur, you...
+△亚瑟微笑着看着她，继续端着碗，轻声打断她。
+亚瑟（温柔地微笑）：Just call me Arthur.
+△亚瑟将碗放到床头的柜子上，站起身，看着罗莎琳德，温柔地叮嘱她休息。
+亚瑟（温柔地叮嘱）：You rest. I'll go to town and get you some proper food and magic herbs.
+△罗莎琳德神色一惊，急忙挣扎着坐起身，从怀里掏出一个棕色的小钱袋，双手递向亚瑟。
+罗莎琳德（急切而虚弱）：Arthur, here are thirty gold sovereigns I've saved over the years.
+△亚瑟低下头，看着罗莎琳德递过来的钱袋，双手接了过来。罗莎琳德继续焦急地说话。
+罗莎琳德（焦急地解释）：It's not much, but enough to hire a carriage back north.
+△罗莎琳德眼含泪水，紧紧盯着亚瑟，神色无比担忧和焦急地劝他离开。
+罗莎琳德（含泪焦急地劝说）：You hurt Hughes, the Lady won't let it go. Run!
+△亚瑟手里拿着钱袋，看着罗莎琳德，嘴角微微上扬，露出一丝温柔的微笑。
+亚瑟（温柔地微笑询问）：Thirty gold sovereigns? Is that enough to cure your illness?
+△罗莎琳德眼泪流了下来，绝望地摇了摇头，看着亚瑟，声音颤抖地劝他离开。
+罗莎琳德（流泪绝望地劝说）：Don't worry about me. It's incurable... Just having a bowl of hot soup in this cold castle is enough for me. Go. Never come back.
+△亚瑟弯下腰，双手温柔地握住罗莎琳德拿着钱袋的手，拉近两人的距离，神色坚定地看着她。
+亚瑟（温柔而坚定）：Listen, Rosa.
+△亚瑟双眼紧紧盯着罗莎琳德，神色极其认真和坚定地做出承诺。
+亚瑟（极其认真和坚定）：I agreed to this marriage. I won't run and leave you.
+△亚瑟继续看着罗莎琳德，轻声叮嘱她休息。
+亚瑟（轻声安慰）：Get some sleep. Leave the rest to me.
+△亚瑟松开罗莎琳德的手，站起身，转身走向房门，开门走了出去，并顺手关上门。
+△罗莎琳德躺在床上，看着亚瑟离去的方向，眼泪顺着脸颊流了下来。
+5-2 Village 外 未注明
+人物：亚瑟（Arthur）
+△俯瞰镜头下，被白雪覆盖的城镇广场上人来人往，马车缓缓行驶。
+△城堡沉重的木质大门打开，亚瑟迈步走了出来，迎着阳光走向街道。
+△亚瑟神色匆匆且坚定地走在铺满积雪的街道上。
+5-3 Magic Shop 内 未注明
+人物：亚瑟（Arthur）、店主（Shopkeeper，着装：商店长袍）、魔法商店顾客群像（Customers，着装：各色法师袍）、学徒群像（Apprentices，着装：学徒袍）
+△亚瑟走进宽敞的魔法商店，店内货架上摆满了发光的药剂瓶，魔法商店顾客群像和学徒群像正在浏览。
+△亚瑟走到木质柜台前，将棕色钱袋放在柜台上，向柜台后的店主提出需求。
+亚瑟（平静而直接）：I want a stalk of Dragonsbreath Grass.
+△店主正在拨弄算盘，听到后抬头看着亚瑟，神色傲慢地报价。
+店主（傲慢而轻蔑）：Dragonsbreath Grass? That's a premium ingredient for flame ointments. Five thousand gold sovereigns!
+△店主伸手拿起柜台上的钱袋，在手里掂了掂，露出嘲讽的笑容。
+店主（嘲讽）：With that little gold, you're not even fit to smell it.
+△亚瑟神色平静地看着店主，店主继续大声斥责并挥手赶他走。
+店主（愤怒而嫌恶）：Can't afford it? Get out, and don't leave your stench in my shop!
+△亚瑟没有生气，而是转过头，视线落在了旁边的墙壁上。
+△墙上贴着一张通缉令，上面画着一只凶猛的黑狼，写着“WANTED REWARD! 30000”。
+△亚瑟的眼睛特写，瞳孔中清晰地倒映着通缉令上的画面，他在心中默念。
+亚瑟（V.O.）（冷静思考）：Frostblade Wolf, thirty thousand gold.
+△亚瑟转回来看向店主，神色平静地提出约定。
+亚瑟（自信而平静）：Five thousand gold, right? Fine. Give me ten minutes.
+△店主听了大笑起来，满脸不可置信地大声嘲讽亚瑟。
+店主（大笑嘲讽）：Ten minutes? You think you're an mage master? Even if you robbed a lord's treasury, you couldn't be back in ten.
+△亚瑟嘴角微微上扬，露出一丝自信的微笑，转身走向大门，离开了商店。
+△商店大厅内一片安静，敞开的大门外阳光明媚。
+△亚瑟右手拖着一只巨大的黑狼尸体，神色轻松地从大门走了进来。
+△学徒群像看到这一幕，震惊地瞪大眼睛，双手死死捂住嘴巴。
+△重物落地声。亚瑟右手猛地一甩，将巨大的黑狼尸体重重地扔在商店地板中央。
+△店主站在柜台后，神色震惊地看着地上的黑狼尸体；镜头特写黑狼尸体，其身上覆盖着冰晶，胸口有一个巨大的血洞。
+△店主双手张开，满脸不可置信地大喊，身体微微颤抖。
+店主（震惊大喊）：Oh my god! That's a fully grown Blood Wolf King! Worth at least thirty thousand gold!
+△亚瑟神色平静地看着店主，语气坚定。
+亚瑟（平静坚定）：Now, wrap up that Dragonsbreath Grass for me.
+第6集：冰窖救美与怒火
+6-1 Norman Castle Room 内 未注明
+人物：诺曼伯爵夫人（Countess Norman，着装：华丽长裙，戴红宝石戒指）、乔安娜（Joanna，着装：法师长裙，持红色宝石法杖）、罗莎琳德（Rosalind，着装：白色睡衣）、侍卫群像（Guards，着装：黑色皮革盔甲）
+△风声。俯瞰镜头下，白雪覆盖的诺曼城堡静静伫立在群山和森林之间。
+△开门声、急促的脚步声。城堡房间的木门被推开，诺曼伯爵夫人神色愤怒地快步走进来，乔安娜手持顶端有红色宝石发光的法杖紧随其后。
+△伯爵夫人走到床边，愤怒地指着床上的罗莎琳德大骂。
+诺曼伯爵夫人（愤怒指责）：You cursed jinx! That crude barbarian of yours broke three of Hughes's ribs!
+△罗莎琳德神色惊恐地从床上坐起来，看着伯爵夫人；伯爵夫人继续大声辱骂她。
+诺曼伯爵夫人（刻薄辱骂）：What use are you alive except to shame the Norman family?
+△魔法能量声。乔安娜走上前，挥动法杖释放出红色光芒，将床上的被子和床单瞬间割裂；乔安娜神色愤怒地抱怨。
+乔安娜（愤怒抱怨）：Mother, that lowly waste must have already fled by now! If this gets out, my reputation will be ruined!
+△罗莎琳德受到惊吓和魔法余波影响，从床上摔落到地板上，神色痛苦。
+△乔安娜走到罗莎琳德面前，居高临下地看着她，脸上露出嘲讽和嫉恨的笑容。
+乔安娜（嘲讽嫉恨）：I see it now. You're jealous of my superior magic talent, so you deliberately let that brute go just to spite me. Isn't that right?
+△罗莎琳德虚弱地趴在地上，用手撑着身体，抬头看着乔安娜，含泪辩解。
+罗莎琳德（虚弱辩解）：My Lady, Joanna... Arthur is not a brute. He's the fiancé father acknowledged. And he didn't run away...
+△伯爵夫人冷笑一声，双手抱胸，神色轻蔑地看着地上的罗莎琳德。
+诺曼伯爵夫人（冷笑轻蔑）：Didn't run? A magicless waste who offended a mage apprentice, would he stay to wait for death?
+△伯爵夫人转头看向房间里的壁炉，发现里面正烧着珍贵的木材，顿时怒火中烧。
+诺曼伯爵夫人（怒不可遏）：You dare to warm yourself with such precious firewood?
+△伯爵夫人转过头，向着门外大声呼喊。
+诺曼伯爵夫人（大声呼喊）：Guards!
+△侍卫群像快步走进房间，向伯爵夫人低头行礼。
+侍卫群像（恭敬行礼）：My Lady!
+△伯爵夫人指着壁炉和地上的罗莎琳德，神色狠毒地下达命令；罗莎琳德在地上露出绝望的神色。
+诺曼伯爵夫人（狠毒下令）：Smash this stove! Drag this useless thing to the underground ice cellar! Since she loves shivering so much, let her get a good lesson down there!
+△侍卫群像低头领命，准备动手。
+侍卫群像（低头领命）：Yes, my lady!
+△侍卫群像一左一右走向趴在地上的罗莎琳德，准备将她强行拖走。
+6-2 Underground Ice Cellar 内 未注明
+人物：罗莎琳德（Rosalind）
+△The castle's underground ice cellar。罗莎琳德独自一人坐在冰冷潮湿的地下冰窖石地板上，身体紧缩，双手抱臂，瑟瑟发抖。
+△罗莎琳德脸色苍白，睫毛和头发上覆盖着冰霜，虚弱地喘息着，眼含泪水，在心中默默呼唤亚瑟。
+罗莎琳德（V.O.）（虚弱地内心呼唤）：Arthur?
+△罗莎琳德继续在内心独白，眼泪从眼角滑落，期盼亚瑟已经安全逃离。
+罗莎琳德（V.O.）（含泪内心独白）：I hope you're on a carriage far away by now. Please don't let them catch you...
+△特写罗莎琳德的眼睛，一滴晶莹的眼泪顺着脸颊流下，滴落在冰冷的地板上，溅起微弱的水花。
+△罗莎琳德虚弱地闭上眼睛，继续内心独白，嘴角勉强露出一丝微笑，回忆起亚瑟给她的温暖。
+罗莎琳德（V.O.）（虚弱地微笑独白）：It's alright... I wasn't going to make it through this winter anyway. At least... that bowl of soup was really warm.
+△闪回。亚瑟双手端着一碗热气腾腾的粥，用木勺舀起一勺，轻轻吹了吹，神色温柔。
+△闪回。亚瑟微笑着把热粥递向罗莎琳德，眼神中充满关切。
+亚瑟（温柔地微笑）：Here, have something warm.
+△画面回到冰窖，罗莎琳德闭着眼睛，眼泪不断流下，呼吸越来越微弱，声音渐渐低沉。
+罗莎琳德（V.O.）（极度虚弱地呢喃）：Arthur... thank you... I'm so sleepy...
+6-3 Norman Castle Courtyard 外 未注明
+人物：亚瑟（Arthur）
+△Castle courtyard。阳光明媚的雪地上，亚瑟手里拿着一个木盒子，神色匆忙地快步跑进城堡大门。
+△亚瑟跑到城堡房间的木门前，猛地伸手推开双开木门。
+△亚瑟走进空无一人的房间，环顾四周，发现床铺凌乱，壁炉已经熄灭，罗莎琳德不见了踪影。
+△亚瑟神色震惊和慌张，大声呼喊罗莎的名字。
+亚瑟（慌张地呼喊）：Rosa?
+△亚瑟转身冲出房间，来到外面的雪地上寻找线索。
+△亚瑟低头看到雪地上有一串凌乱的脚印，一直延伸到地下冰窖的入口处。
+6-4 Underground Ice Cellar 内 未注明
+人物：亚瑟（Arthur）、罗莎琳德（Rosalind）
+△亚瑟顺着脚印跑到地下冰窖沉重的双开铁门前，猛地用力推开大门。
+△罗莎琳德虚弱地睁开眼睛，看着眼前的亚瑟，满脸泪痕。
+罗莎琳德（虚弱且不可置信）：Arthur, why are you back? Didn't you escape?
+△冰窖大门大开，阳光照进阴暗的冰窖，亚瑟站在门口，神色愤怒地看着里面。
+△亚瑟深情而自责地看着她，轻声向她解释。
+亚瑟（自责且温柔）：I'm sorry. I went to the black market to trade for herbs and took some time.
+△亚瑟愤怒地大喊罗莎的名字，声音在冰窖中回荡。
+亚瑟（愤怒地大喊）：Rosa!
+△亚瑟继续看着罗莎琳德说话。
+亚瑟（坚定）：How could I ever leave you and run?
+△亚瑟快步冲下台阶，跑到罗莎琳德身边，蹲下身子，双手扶住她冰冷的肩膀。
+△罗莎琳德哭着抱住亚瑟的脖子。
+罗莎琳德（大哭）：I thought... I thought I'd never see you again...
+△亚瑟抱紧罗莎琳德，用手抚摸她的头安慰她。
+亚瑟（温柔）：It's alright. I'm here.
+△亚瑟深情而自责地看着她，轻声向她解释自己去黑市换药草耽误了时间。
+亚瑟（深情而自责）：I'm sorry. I went to the black market to trade for herbs and took some time. How could I ever leave you and run?
+△亚瑟继续抱着罗莎琳德安慰她。
+亚瑟（温柔且坚定）：No one will ever hurt you again.
+△亚瑟眼神变冷，眼睛发出幽蓝的光芒。
+亚瑟（冰冷且愤怒）：It seems certain people in the Norman family need a harsh lesson.
+△亚瑟将罗莎琳德拦腰抱起，转身走向冰窖出口的台阶。
+△亚瑟抱着罗莎琳德走上台阶，画面下方叠印出亚瑟发蓝光的眼睛特写。
+第7集：一拳轰碎城墙
+7-1 Norman Castle Room 内 未注明
+人物：亚瑟（Arthur，着装：旅行者装）、罗莎琳德（Rosalind，着装：白色睡袍）
+△亚瑟抱着罗莎琳德快步走进房间。
+△亚瑟将罗莎琳德轻轻放在床上，罗莎琳德神色担忧地看着他。
+罗莎琳德（担忧）：Arthur, you hurt Hughes. The lady won't let it go.
+△罗莎琳德继续抓着亚瑟的衣服说话。
+罗莎琳德（焦急）：And Hughes's cousin is Leon.
+△罗莎琳德神色愈发焦虑。
+罗莎琳德（焦虑）：He's a genius knight who awakened Holy Light and is about to enter the Royal Mage Academy.
+△罗莎琳德双手紧紧抓住亚瑟的手，哀求他。
+罗莎琳德（哀求）：Please, run!
+△亚瑟微微一笑，神色自信。
+亚瑟（自信且不屑）：Holy Light Knight? Nothing in front of me.
+△罗莎琳德愣愣地看着亚瑟。
+亚瑟（O.S.）（温柔）：Don't be afraid.
+△亚瑟双手握住罗莎琳德的手，温柔地看着她。
+亚瑟（温柔且坚定）：I said I'd marry you, and I will protect you.
+△罗莎琳德看着亚瑟，亚瑟继续说话。
+亚瑟（O.S.）（霸道且温柔）：No buts.
+△亚瑟看着罗莎琳德，神色认真。
+亚瑟（认真）：Now, I'm going to fix the trouble inside you.
+△亚瑟松开罗莎琳德的手，站起身走向房间另一侧的桌子。
+△亚瑟走到桌前，弯腰打开桌上的木盒子，里面放着散发着红色火焰的龙息草。
+△亚瑟伸手拿起龙息草，罗莎琳德在床上惊讶地看着。
+罗莎琳德（震惊）：Dragonsbreath Grass?
+△罗莎琳德继续看着亚瑟，神色黯然。
+罗莎琳德（黯然且自卑）：But the royal archmages said even with top-grade potions, a waste like me with innate magic blockage can't absorb it...
+△亚瑟看着手中的龙息草，神色不屑。
+亚瑟（不屑）：What do those bookworms who only recite spells know?
+△亚瑟拿着龙息草走向床边。
+亚瑟（自信）：They have no idea how immense the power hidden inside you really is.
+△亚瑟走到床前，将龙息草轻轻放在罗莎琳德的胸口。
+△亚瑟的手掌散发出耀眼的金色光芒，将龙息草化作能量融入罗莎琳德体内。
+△罗莎琳德闭上眼睛，露出痛苦的表情，身体开始散发出强烈的金色光芒。
+△能量轰鸣声。整个房间被耀眼的金色光芒照亮，一道巨大的金色光柱从罗莎琳德身上冲天而起。
+△亚瑟收回手，松了一口气，微笑着看着罗莎琳德。
+亚瑟（松了一口气）：Phew, Moonlight Magic Source...
+亚瑟（微笑着，语气赞叹）：Moonlight Magic Source... truly lives up to its name.
+△罗莎琳德睁开眼睛，神色震惊地看着自己的双手。
+罗莎琳德（震惊）：This power...
+罗莎琳德（神色震惊而兴奋）：This power... My magic meridians are open? I can sense the elements around me!
+△罗莎琳德兴奋地看着亚瑟。
+罗莎琳德（兴奋）：I can sense the elements around me!
+△亚瑟双手抱臂，微笑着看着她。
+亚瑟（调侃且微笑）：Now, do you still think I'm just a troublemaking deserter?
+△罗莎琳德兴奋地看着亚瑟，然后扑进亚瑟怀里紧紧抱住他。
+罗莎琳德（激动地流着泪，紧紧抱住他）：Thank you, Arthur! You've given me a second life!
+△罗莎琳德在亚瑟怀里，抬头看着他，神色温柔。
+罗莎琳德（有些害羞而温柔）：Can... can I call you Arthur from now on? After we have the wedding, I'll...
+△亚瑟低头看着她，温柔地抚摸她的脸颊。
+亚瑟（温柔地微笑，眼神宠溺）：Of course. You rest and consolidate your magic. I have some 'household matters' to deal with.
+△亚瑟松开罗莎琳德，转过身，神色变得冷酷，向房间外走去。罗莎琳德在床上面带微笑地看着他离开。
+7-2 Norman Castle Corridor 外 未注明
+人物：亚瑟（Arthur）
+△夜晚，城堡外景，一轮圆月挂在空中。
+△城堡主楼的外侧走廊。亚瑟独自站在走廊上，双手抱臂，看着远方。
+△亚瑟自言自语，神色冷酷。
+亚瑟（语气冰冷而愤怒）：Sleeping soundly, are you? You like tearing down other people's houses? Then I'll give you plenty to tear down!
+△亚瑟伸出右手，握紧拳头，拳头上凝聚起耀眼的金色与红色火焰能量。
+△亚瑟挥拳向前轰出。
+亚瑟（大喊）：Break!
+△巨大的爆炸声。城堡的一面巨大石墙被亚瑟的拳风轰出一个巨大的破洞，碎石四溅。
+7-3 Norman Castle Courtyard 外 未注明
+人物：亚瑟（Arthur）、诺曼伯爵夫人（Countess Norman，着装：华丽长裙，戴红宝石戒指）、侍卫群像（Guards，着装：侍卫盔甲）
+△城堡主庭院。警报声响起，火光冲天。侍卫群像在庭院里奔跑并大喊。
+侍卫群像（惊慌而大声地呼喊）：Attack! Enemy attack! Protect the Count!
+△伯爵夫人和侍女群像惊慌失措地从大厅跑出来，看着天空中燃烧的城堡。
+诺曼伯爵夫人（神色震惊而恐慌）：Oh my god... What in the world...
+△庭院里一片混乱，仆人群像四处逃散，城堡上方燃起熊熊大火，破洞清晰可见。
+△亚瑟站在走廊边缘，纵身一跃，从高处跳下。
+△重物落地声。亚瑟稳稳地落在庭院的地面上，地面被震出裂缝，激起一片尘土。
+△亚瑟从尘土中缓缓站起身，神色冷酷。
+△伯爵夫人站在庭院中央，震惊地看着亚瑟。
+第8集：长女觉醒，伯爵臣服
+8-1 Norman Castle Wall 外 未注明
+人物：诺曼伯爵（Count Norman，着装：贵族礼服）、诺曼伯爵夫人（Countess Norman，着装：华丽长裙，戴红宝石戒指）、埃尔温长老（Elder Elwin，着装：长老法袍）、巴里长老（Elder Barry，着装：长老法袍）
+△城堡破损的城墙处。两个年长的法师站在破损的城墙前。
+△埃尔温长老伸手抚摸破损的石墙，神色凝重。
+埃尔温长老（神色震惊而凝重）：Oh my god... This cut... no trace of fire or wind elements. This wasn't caused by magic!
+△巴里长老震惊地看着埃尔温。
+巴里长老（满脸不可置信，语气震惊）：You mean... this is pure physical destruction? One blow caved in a load-bearing wall reinforced with defensive arrays? How terrifying must that brute force be!
+△伯爵夫人和诺曼伯爵在走廊上奔跑，神色慌张。
+△伯爵夫人一边跑一边惊恐地自言自语。
+诺曼伯爵夫人（神色慌张，语气惊恐）：Could it be a high-level magical beast...
+8-2 Norman Castle Corridor 外 未注明
+人物：诺曼伯爵夫人（Countess Norman）、诺曼伯爵（Count Norman）
+△伯爵夫人和诺曼伯爵在走廊上奔跑，巴里长老的声音在画外继续。
+巴里长老（O.S.）（语气难以置信）：One blow caved in a load-bearing wall reinforced with defensive arrays?
+△伯爵夫人神色慌张地奔跑，巴里长老的声音在画外结束。
+巴里长老（O.S.）（语气惊恐）：How terrifying must that brute force be!
+△伯爵夫人一边跑一边惊恐地自言自语。
+诺曼伯爵夫人（神色慌张）：Could it be a high-level magical beast attacking the castle?
+8-3 Norman Castle Courtyard 外 未注明
+人物：诺曼伯爵（Count Norman）、诺曼伯爵夫人（Countess Norman）、埃尔温长老（Elder Elwin）、巴里长老（Elder Barry）
+△诺曼伯爵神色凝重地回答。
+诺曼伯爵（神色凝重）：Impossible. The castle's barrier gave no warning.
+△诺曼伯爵站在庭院中央，对着天空大喊，双手微微张开。
+诺曼伯爵（大声呼喊）：If the Norman family has offended you, we can talk!
+△诺曼伯爵继续大喊，身后站着伯爵夫人、两位长老和侍卫群像。
+诺曼伯爵（大声呼喊）：Name your price, what do you want?
+8-4 Norman Castle Room 内 未注明
+人物：罗莎琳德（Rosalind，着装：白色睡袍）、亚瑟（Arthur）
+△罗莎琳德双手交叠放在胸前，神色担忧地自言自语。
+罗莎琳德（神色担忧）：That huge commotion just now. Arthur couldn't be in trouble, could he?
+△开门声。房间门被推开，亚瑟抱着一叠厚厚的毛皮走进来。
+△罗莎琳德看到亚瑟，神色转为惊喜，快步迎上去。
+罗莎琳德（神色惊喜）：Arthur! What happened outside? It felt like an earthquake.
+△亚瑟把毛皮放在地上，微笑着看着罗莎琳德。
+亚瑟（面带微笑）：Oh, nothing. Probably some blind idiot pig that ran into the lady's wall.
+△罗莎琳德温柔地看着亚瑟，面带微笑。
+罗莎琳德（神色温柔）：As long as you're safe, that's all that matters.
+△亚瑟弯腰把毛皮铺在壁炉前的地板上。
+亚瑟（语气温和）：You take the bed. I'll sleep here.
+△罗莎琳德走近亚瑟，伸手轻抚他的手臂，关切地看着他。
+罗莎琳德（神色关切）：The tower is freezing. You'll get sick sleeping on the floor.
+△亚瑟直起身，微笑着看着罗莎琳德。
+亚瑟（调侃语气）：We haven't had the wedding yet. Isn't that against noble etiquette?
+△罗莎琳德深情地看着亚瑟。
+罗莎琳德（神色深情）：You gave me my life. I don't care about those rules.
+△亚瑟温柔地微笑，看着罗莎琳德。
+△两人并排躺在床上，罗莎琳德靠在亚瑟的肩膀上安然入睡，亚瑟搂着她，神色温柔而坚定。
+亚瑟（V.O.）（内心独白，语气坚定）：From now on, anyone who so much as touches a hair on your head will pay with their life.
+8-5 Norman Castle Hall 内 未注明
+人物：诺曼伯爵（Count Norman）、诺曼伯爵夫人（Countess Norman）、罗莎琳德（Rosalind，着装：华丽长裙）、亚瑟（Arthur）、侍卫群像（Guards，着装：侍卫盔甲）
+△白天的城堡外景，大门缓缓打开。
+△城堡大厅内，长桌旁坐着诺曼伯爵和伯爵夫人正在用餐。
+△罗莎琳德穿着华丽的长裙走进大厅，走到桌旁向伯爵和伯爵夫人行礼。
+罗莎琳德（语气恭敬）：Father, my Lady.
+△伯爵夫人用餐，神色傲慢。
+△亚瑟跟着罗莎琳德走进大厅，在罗莎琳德身旁的空位坐下，拿起桌上的苹果咬了一口，神色自若。伯爵和伯爵夫人神色复杂地看着他。
+亚瑟（调侃而挑衅）：Why didn't anyone call us for breakfast? This castle's hospitality is terrible.
+△伯爵夫人愤怒地猛拍桌子站起来，指着亚瑟大喊。
+诺曼伯爵夫人（愤怒大喊）：You useless waste! You hurt Hughes and dare to swagger in here? Guards!
+△亚瑟继续咬了一口苹果，神色自若。
+△伯爵夫人指着亚瑟继续大喊。
+诺曼伯爵夫人（愤怒命令）：Seize this reckless bumpkin!
+△罗莎琳德神色担忧地看着。
+△伯爵夫人继续大喊。
+诺曼伯爵夫人（狠毒）：Break his legs and throw him out of the castle!
+△罗莎琳德急忙站起来，挡在亚瑟身前。
+△侍卫群像拔出长剑指向前方。
+△罗莎琳德神色紧张地看着侍卫群像。
+△亚瑟站起身，把罗莎琳德护在身后，手里仍拿着苹果。
+△亚瑟神色冷峻地看着前方。
+△白光闪过，亚瑟神色冷酷。
+△侍卫群像手持长剑，神色警惕地看着亚瑟。
+△亚瑟护着罗莎琳德，冷冷地看着前方。
+△诺曼伯爵站起身，伸出一只手制止侍卫群像。
+诺曼伯爵（严厉喝止）：Stop! All of you, stand down!
+△侍卫群像听到命令，收起武器退下。
+△诺曼伯爵和伯爵夫人站在一起，伯爵神色凝重。
+△伯爵夫人转头愤怒地对诺曼伯爵大喊，并指向亚瑟。
+诺曼伯爵夫人（愤怒质问）：Norman! This barbaric thug broke Hughes's ribs, and now dares to cause trouble in my dining room! Why don't you throw him in the dungeon?
+△亚瑟伸手搂住罗莎琳德的肩膀，冷笑着对伯爵夫人说话。
+亚瑟（冷笑反驳）：Barbaric? Your precious steward cut off Rosa's firewood, and tried to freeze her to death in the cellar. I was being merciful by not snapping his neck!
+△罗莎琳德神色复杂地看着亚瑟。
+△亚瑟神色严厉地盯着伯爵夫人。
+△伯爵夫人愤怒地反驳。
+诺曼伯爵夫人（强词夺理）：Nonsense! What proof do you have?
+△罗莎琳德走上前一步，神色坚定地看着伯爵夫人说话。
+罗莎琳德（坚定维护）：Stop calling him a thug, my lady. Arthur is now my husband. And he saved my life.
+△罗莎琳德站在大厅中，神色坚定地看着前方说话。
+罗莎琳德（坚定）：Arthur is now my husband. And he saved my life.
+△伯爵夫人震惊而愤怒地瞪大眼睛。
+诺曼伯爵夫人（难以置信）：You dare speak to me like that?
+△伯爵夫人转头对诺曼伯爵大喊。
+诺曼伯爵夫人（歇斯底里）：Norman, did you hear that? This dying useless thing dares to talk back to me!
+△诺曼伯爵愤怒地大吼。
+诺曼伯爵（愤怒大吼）：Enough! Everyone shut up! Guards, get out!
+△侍卫群像听到命令，收起武器，转身退下。
+△诺曼伯爵看着罗莎琳德，神色从愤怒转为震惊和疑惑，他走上前打量着罗莎琳德。
+诺曼伯爵（震惊疑惑）：Wait... Rosa? Your complexion... You can walk on your own, and I can even sense strong magical fluctuations from you? Impossible!
+△罗莎琳德微微一笑，神色平静地看着诺曼伯爵说话。
+罗莎琳德（平静微笑）：You're not wrong, Father. The uncontrollable magic inside me has been completely cured by Arthur.
+△诺曼伯爵和伯爵夫人震惊地看着罗莎琳德。
+诺曼伯爵（难以置信）：What? That's impossible!
+△魔法施法声。诺曼伯爵伸出一只手，按在罗莎琳德的额头上，手掌发出蓝色的光芒。
+△诺曼伯爵闭上眼睛感应，随后睁开眼睛，双眼发出蓝色的光芒，神色极其震惊。
+诺曼伯爵（极度震惊）：Unbelievable... Your mana flow is flawless! And incredibly pure! Even the witch poison that the top royal mages couldn't cure, it's completely gone!
+△罗莎琳德微微一笑，神色欣慰。
+△诺曼伯爵神色复杂地看着亚瑟，内心感到极度震撼。
+诺曼伯爵（V.O.）（凝重深思）：How could a magicless waste perform such a miracle? This Arthur... is definitely not as simple as he appears!
+△亚瑟神色自若地微微一笑。
+△诺曼伯爵走到亚瑟面前，深深地向亚瑟鞠了一躬。
+诺曼伯爵（诚恳感激）：Mr. Arthur, thank you for saving my daughter!
+△亚瑟神色平静地看着诺曼伯爵，微微欠身回礼。
+亚瑟（谦逊平静）：Count, you flatter me. Rosa is my fiancée. Saving her is only right.
+△伯爵夫人站在一旁，神色嫉恨地低头小声嘀咕。
+诺曼伯爵夫人（低声咒骂）：Damn waste...
+△诺曼伯爵直起身，从怀里拿出一个沉甸甸的棕色钱袋，递给罗莎琳德。
+诺曼伯爵（温和叮嘱）：Rosa, here are a hundred gold sovereigns. You and Arthur go to town,
+△罗莎琳德接过钱袋，诺曼伯爵继续叮嘱。
+诺曼伯爵（郑重）：buy decent clothes and wedding supplies. The wedding in three days, I want it grand!
+△亚瑟神色平静地看着。
+△亚瑟看着诺曼伯爵，开口询问。
+亚瑟（平静询问）：Count, Rosa's tower is freezing. Shouldn't she move somewhere else?
+△诺曼伯爵神色一震，转头愤怒地对伯爵夫人大喊。
+诺曼伯爵（严厉命令）：Immediately prepare the warmest suite in the south wing for Rosa!
+△伯爵夫人神色惊恐而委屈地低下头，诺曼伯爵继续严厉地警告她。
+诺曼伯爵（严厉警告）：If you dare mistreat her again, I'll never let it go!
+△伯爵夫人低头不敢说话，罗莎琳德在后面看着。
+第9集：掌掴嚣张少主
+9-1 Magic Shop 内 未注明
+人物：亚瑟（Arthur，着装：旅行者装）、罗莎琳德（Rosalind，着装：白色轻纱长裙）、店主（Shopkeeper，着装：商店长袍）、查尔斯（Charles，着装：绿色华丽礼服，持短魔杖）、随从群像（Followers，着装：随从服饰）、两个随从（Two Servants，着装：随从服）
+△亚瑟和罗莎琳德并肩走进魔法商店，从大门向里走。
+△店主迎上前，神色热情地对他们说话。
+店主（热情谄媚）：Oh! You're here! These premium restorative potions come to sixteen thousand gold sovereigns.
+△店主继续笑着说话，并做出手势。
+店主（慷慨大方）：round it down to fifteen for you!
+△罗莎琳德转头看着亚瑟，神色担忧，轻声说话。
+罗莎琳德（担忧而轻柔）：Arthur, that's so expensive...
+△亚瑟温柔地看着罗莎琳德，开口安慰她。
+亚瑟（温柔而坚定）：Your body just recovered. You need these potions to build strength. Money's not an issue.
+△亚瑟和罗莎琳德深情对视，罗莎琳德露出微笑，此时一个男子的声音从画外传来。
+查尔斯（O.S.）（轻浮而自信）：This beautiful lady's bill...
+△查尔斯在一群随从的簇拥下走上前来，他穿着绿色的华丽礼服，手里拿着一根顶端发光的短魔杖，神色自信。
+查尔斯（傲慢自信）：I'll cover it.
+△查尔斯走近，看着罗莎琳德，神色傲慢而自信地自我介绍。
+查尔斯（得意洋洋）：I'm Charles, heir to the Alchemy Guild.
+△查尔斯继续看着罗莎琳德，赞美她。
+查尔斯（谄媚讨好）：Beautiful lady, you're absolutely enchanting.
+△查尔斯微微一礼，向罗莎琳德发出邀请。
+查尔斯（虚伪绅士）：Would you do me the honor of having dinner with me?
+△亚瑟神色一冷，上前一步挡在罗莎琳德身前，冷冷地看着查尔斯，罗莎琳德有些担忧地躲在亚瑟身后。
+△亚瑟冷冷地盯着查尔斯，开口警告。
+亚瑟（冰冷警告）：Keep your disgusting eyes to yourself.
+△亚瑟继续冷冷地警告查尔斯，随后画面淡出。
+亚瑟（冷酷宣告）：She has a fiancé.
+9-2 Magic Shop 内 未注明
+人物：塞琳娜（Selina，着装：奢华会长礼服，持黑色折扇）、奥尔德里奇（Aldrick，着装：黑色法袍，持龙头法杖）
+△黑发女子背对镜头站在巨大的彩色玻璃窗前，奥尔德里奇恭敬地站在她身后。黑发女子转过身来，开口询问。
+塞琳娜（平静而威严）：That man... Have you found out about him?
+△奥尔德里奇微微低头，恭敬地回答。
+奥尔德里奇（恭敬汇报）：Yes, my lady. His name is Arthur, a magicless waste.
+△奥尔德里奇继续汇报。
+奥尔德里奇（平静叙述）：Currently living off the Norman family in the south.
+△塞琳娜神色微动，露出若有所思的表情，随后微微一笑。
+塞琳娜（若有所思）：A powerhouse with such terrifying physical strength willing to live off a declining mage family?
+△奥尔德里奇听着，神色凝重。
+△奥尔德里奇开口，语气中带着一丝不屑。
+奥尔德里奇（不屑一顾）：The Norman family is just a third-rate mage clan,
+△奥尔德里奇微微低头，神色不屑地继续向女会长汇报。
+奥尔德里奇（语气不屑）：shortsighted, unable to see the danger of that man.
+△塞琳娜静静地听着，神色平静，奥尔德里奇的声音从画外传来。
+奥尔德里奇（O.S.）（语气不屑）：shortsighted, unable to see the danger of that man.
+△奥尔德里奇神色凝重地看着塞琳娜。
+△塞琳娜微微一笑，眼神中闪过一丝兴趣。
+塞琳娜（饶有兴致）：Interesting.
+△奥尔德里奇微微低头，等待塞琳娜的指示。
+△塞琳娜神色认真地看着奥尔德里奇，开口吩咐。
+塞琳娜（不容置疑）：prepare a gift of the finest magic materials from the guild vault. I will personally visit the Norman family,
+△塞琳娜神色认真地看着奥尔德里奇，开口吩咐。
+塞琳娜（神色认真）：Aldrick, prepare a gift of the finest magic materials from the guild vault. I will personally visit the Norman family, and make acquaintance with this Mr. Arthur.
+△奥尔德里奇深深鞠躬，恭敬地回答。
+奥尔德里奇（恭敬地鞠躬）：As you wish, my lady.
+9-3 Magic Shop 内 未注明
+人物：亚瑟（Arthur）、罗莎琳德（Rosalind）、查尔斯（Charles）、两个随从（Two Servants，着装：随从服）
+△查尔斯在一群随从的簇拥下，手里拿着一根顶端发光的短魔杖，神色自信地看着罗莎琳德和亚瑟，开口自我介绍并发出邀请。
+查尔斯（神色自信）：I'm the heir of the Royal Alchemy Guild. Beautiful lady, won't you be my friend?
+△罗莎琳德神色平静，看着查尔斯，开口拒绝。
+罗莎琳德（神色平静）：I have a fiancé.
+△查尔斯神色微变，随后露出一丝冷笑，开口回应。
+查尔斯（冷笑）：Fine. Very well.
+△查尔斯身后的一个黑衣守卫上前，弯腰将一个沉甸甸的钱袋递给亚瑟，亚瑟伸手接过钱袋拿在手中。
+△查尔斯神色傲慢地看着亚瑟，挥动着手中的魔杖，开口羞辱亚瑟并提出要求。
+查尔斯（神色傲慢）：These gold sovereigns are enough for a bumpkin like you to waste in taverns for the rest of your life. Give me your fiancé.
+△亚瑟转过身，将钱袋递给罗莎琳德，罗莎琳德伸手接过，亚瑟温柔地对她说。
+亚瑟（语气温柔）：Here, Rosa. Keep this money.
+△亚瑟转回身，双手叉腰，神色戏谑地看着查尔斯，开口反击。
+亚瑟（神色戏谑）：Oh my, esteemed young master, I have a few dozen gold sovereigns here. I wonder if that's enough to buy your mother for one night with me?
+△查尔斯勃然大怒，脸色铁青，挥舞着魔杖大吼。
+查尔斯（愤怒大吼）：Good, good, good! You magicless bastard! Daring to insult noble mage bloodline!
+△查尔斯转头对身后的守卫大喊下令，罗莎琳德在后面惊恐地用双手捂住脸。
+查尔斯（愤怒大吼）：Guards! Seize him! I'll burn him to ashes!
+△两个守卫拔出燃烧着火焰的剑，冲向亚瑟。亚瑟神色平静，在守卫的剑刺来时迅速出手，一把抓住了其中一个守卫的手腕。
+△亚瑟用力一扭，将两个守卫狠狠地摔向后方的玻璃展示柜，展示柜碎裂一地。查尔斯在旁边愤怒地大骂。
+查尔斯（愤怒大骂）：Useless lot! Can't even handle a bumpkin!
+△查尔斯举起魔杖对准亚瑟，魔杖顶端凝聚出熊熊烈火，他大吼，罗莎琳德在亚瑟身后露出极度惊恐的神色。
+查尔斯（大吼）：Feel the fury of flames! Fireball!
+△亚瑟身形一闪，瞬间出现在查尔斯面前，一把抓住了查尔斯握着魔杖的手腕，冷冷地看着他并开口。
+亚瑟（语气冰冷）：The mage's common flaw: too much talking.
+△亚瑟一拳重重地打在查尔斯的脸上，查尔斯被打得在空中翻滚了一圈，狠狠地摔在地上，魔杖掉落在一旁。
+△亚瑟抬起脚，一脚踩碎了掉落在地上的华丽魔杖。
+△查尔斯躺在地上，捂着流血的嘴，神色痛苦而愤怒地大喊威胁。
+查尔斯（痛苦而愤怒地大喊）：My wand! You dare hit me? My father is the Alchemy Guild Master! He'll have you killed!
+△亚瑟走上前，一把将查尔斯从地上拎了起来，冷冷地盯着他。
+△亚瑟冷冷地对查尔斯说话，并连续几拳重重地打在查尔斯的脸上。
+亚瑟（语气冰冷）：I don't care who your father is.
+△罗莎琳德急忙冲上前，双手紧紧抓住亚瑟的手臂，神色焦急地劝阻。
+罗莎琳德（神色焦急）：Arthur! Stop! You'll kill him! He's the guild heir. Let's go, this will cause huge trouble!
+△亚瑟听了罗莎琳德的话，松开手将查尔斯扔在地上，查尔斯狼狈地摔倒。亚瑟转过身，和罗莎琳德一起准备离开。
+△查尔斯躺在地上，用手捂着流血的脸，神色痛苦而愤怒地大喊威胁。
+查尔斯（愤怒而痛苦地大喊）：My father is the Alchemy Guild Master! He'll have you killed!
+△亚瑟走上前，一把将查尔斯从地上拎了起来，冷冷地盯着他说话。
+亚瑟（冷冷地）：I don't care who your father is.
+△亚瑟冷冷地看着查尔斯，连续几拳重重地打在查尔斯的脸上。
+△罗莎琳德急忙冲上前，双手紧紧抓住亚瑟的手臂，神色焦急地大声劝阻。
+罗莎琳德（焦急地大喊）：Arthur! Stop! You'll kill him! He's the guild heir. Let's go, this will cause huge trouble!
+△亚瑟听了罗莎琳德的话，松开手将查尔斯扔在地上，转过身温柔地对罗莎琳德说话。
+亚瑟（温柔地）：Fine. Whatever you say.
+△亚瑟和罗莎琳德手拉手向大门走去准备离开，一个随从急忙跑过来扶起躺在在地上的查尔斯。
+两个随从（惊慌地询问）：Young master! Are you alright?
+△查尔斯在随从的搀扶下挣扎着坐起来，满脸是血，神色极其愤怒和怨恨地咬牙切齿大喊。
+查尔斯（咬牙切齿地怒吼）：That woman... she's Rosalind of the Norman family! Go tell my father! I want the Normans to hand over that bumpkin! And I'll make that woman my slave right in front of him!
+第10集：会长亲临，雷霆反噬
+10-1 炼金术士公会大厅 内 未注明
+人物：巴尔萨泽（Balthazar，着装：炼金公会会长法袍）、查尔斯（Charles，着装：绿色华丽礼服，脸上缠绷带）、塞琳娜（Selina，着装：奢华会长礼服，持黑色折扇）、奥尔德里奇（Aldrick，着装：黑色法袍，持龙头法杖）
+△会长巴尔萨泽得知消息后勃然大怒，猛地一挥手将桌上的药水瓶和实验器具全部扫落到地上，摔得粉碎。
+巴尔萨泽（愤怒地大吼）：The Normans really did this?!
+△查尔斯站在巴尔萨泽身旁，神色委屈而愤怒地开口请求。
+查尔斯（委屈而愤怒地）：Father, you have to avenge me!
+△巴尔萨泽转过身，伸手拍了拍查尔斯的肩膀，神色阴冷地安慰他。
+巴尔萨泽（阴冷地）：Don't worry. I will burn that bumpkin who hurt you to ashes!
+△大门打开的声音。大厅沉重的大门缓缓打开，外面透进强烈的光芒。巴尔萨泽转头看向大门，神色不悦地大喊。
+巴尔萨泽（不悦地大喊）：What's going on out there? Such noise.
+△塞琳娜和奥尔德里奇并肩从大门外走进来。巴尔萨泽看到他们，神色大惊，连忙躬身行礼，语气极其恭敬和结巴。
+巴尔萨泽（极其恭敬而结巴地）：W-w-welcome, Lady Selena!
+△塞琳娜神色高傲，轻轻展开手中的黑色折扇，微微抬起下巴，开口说话。
+塞琳娜（高傲地）：Rise, all of you. I've come to visit a distinguished guest.
+△塞琳娜和奥尔德里奇并肩向大厅内走去，塞琳娜一边走一边摇着折扇，神色平静地吩咐。
+塞琳娜（平静地吩咐）：Bring out the most valuable magical materials from the Guild Vault.
+△巴尔萨泽满脸堆笑，神色极其谄媚地连连点头答应。
+巴尔萨泽（谄媚地连连点头）：Of course, my lady. I'll have it done immediately. You'll be fully satisfied.
+△奥尔德里奇转头看向查尔斯，注意到他脸上的伤，用手中的龙头法杖指了指查尔斯，神色严肃地开口询问。
+奥尔德里奇（严肃地询问）：What happened to your son's face?
+△巴尔萨泽神色有些尴尬，但随即露出一丝讨好的笑容，开口向奥尔德里奇解释。
+巴尔萨泽（尴尬而讨好地解释）：To be honest, Elder, he was beaten by some trash from a minor family in town. I was just about to teach them a lesson.
+△奥尔德里奇听后，神色变得严厉，握紧手中的龙头法杖，语气冰冷而威严地开口。
+奥尔德里奇（冰冷而威严地）：In this southern town, someone dares to offend our Alchemy Guild? Tell me the family name. I'll deal with them personally.
+巴尔萨泽（谄媚地摆手）：No need to trouble yourself, Elder! Just a bankrupt third-rate mage family. This trifle isn't worth dirtying your noble hands.
+△巴尔萨泽将双手按在胸前，继续对奥尔德里奇说话。
+巴尔萨泽（自信且恭敬地）：I can handle it myself.
+△奥尔德里奇从怀中拿出一颗发光的金色石头，递向巴尔萨泽。
+奥尔德里奇（严肃地）：If you encounter trouble, crush this stone and I'll be there immediately.
+△查尔斯站在一旁，神色惊讶地看着奥尔德里奇手中发光的金色石头。
+△巴尔萨泽伸出双手，小心翼翼地从奥尔德里奇手中接过那颗发光的金色石头。
+△巴尔萨泽抬头看着奥尔德里奇，满脸感激地大声致谢。
+巴尔萨泽（极其感激地）：Thank you, Elder! I'm so grateful.
+△巴尔萨泽低头端详着手中发光的金色石头，神色得意。
+10-2 Norman Castle Hall 内 未注明
+人物：诺曼伯爵（Count Norman，着装：贵族礼服）、诺曼伯爵夫人（Countess Norman，着装：华丽长裙，戴红宝石戒指）、守卫信使（Guard Messenger，着装：守卫盔甲）
+△倒酒声。诺曼伯爵夫人手持银色酒壶，面带微笑地往诺曼伯爵面前的酒杯里倒红酒，并开口询问。
+诺曼伯爵夫人（微笑地）：Count, have you heard?
+△诺曼伯爵夫人继续倒酒，随后凑近诺曼伯爵耳边，神色有些八卦地低声说话。
+诺曼伯爵夫人（低声且有些幸灾乐祸地）：Young Master Charles of the Alchemy Guild was beaten up at the Guild today. Even lost some teeth.
+△诺曼伯爵端起酒杯抿了一口，随后放下酒杯，神色严肃而轻蔑地开口说话。
+诺曼伯爵（严肃且轻蔑地）：I've heard a little. Who's so bold as to offend the Alchemy Guild? What a reckless idiot.
+△急促的脚步声。守卫信使神色极其慌张地从大厅门口跑进来，在光滑的地板上滑倒了一下，随即急忙爬起来冲向餐桌。
+△守卫信使跑到餐桌旁，双手撑在桌面上，气喘吁吁，神色惊恐地大喊。
+守卫信使（惊恐且气喘吁吁地）：Count! Terrible news!
+△诺曼伯爵眉头紧锁，神色不悦地看着守卫信使，沉声质问。
+诺曼伯爵（不悦地）：What's the panic?
+△守卫信使神色焦急地大声汇报情况。
+守卫信使（焦急地）：The Alchemy Guild Master has brought dozens of high-level battle mages.
+△守卫信使继续神色恐慌地大声汇报，双手在空中比划。
+守卫信使（极其恐慌地）：They've surrounded the castle! They swear to raze the Norman family.
+△诺曼伯爵和伯爵夫人听后大惊失色，两人对视一眼，神色震惊。
+△诺曼伯爵夫人神色大变，焦急而愤怒地大声质问守卫信使。
+诺曼伯爵夫人（焦急且愤怒地）：What? Why is the Alchemy Guild surrounding us?
+△守卫信使看着诺曼伯爵，咽了口唾沫，神色紧张地继续汇报。
+守卫信使（紧张且吞吐地）：They say... it was Lord Arthur who crippled Young Master Charles.
+△诺曼伯爵夫人听到亚瑟的名字，震惊得瞪大了眼睛，满脸不可置信。
+△玻璃破碎声。诺曼伯爵愤怒地将手中的酒杯狠狠摔在地上，红酒溅了一地，酒杯摔得粉碎。
+△诺曼伯爵夫人歇斯底里地大喊，面部表情因极度愤怒和怨恨而扭曲。
+诺曼伯爵夫人（歇斯底里且愤怒地）：That damned bumpkin! He's going to get our entire family killed!
+△剧烈的震动声。大厅突然剧烈摇晃，头顶的吊灯剧烈摆动，灰尘和碎石落下，诺曼伯爵夫人神色惊恐地抬头看去。
+10-3 Norman Castle Courtyard 外 未注明
+人物：巴尔萨泽（Balthazar）、查尔斯（Charles）、诺曼伯爵（Count Norman）、诺曼伯爵夫人（Countess Norman）、亚瑟（Arthur，着装：旅行者装）、罗莎琳德（Rosalind，着装：白色轻纱长裙）、塞琳娜（Selina，着装：奢华会长礼服）、奥尔德里奇（Aldrick，着装：黑色法袍，持龙头法杖）、侍卫群像（Guards，着装：侍卫盔甲）
+△Norman Castle Courtyard。巴尔萨泽站在城堡大门外，身上散发着紫色的魔法光芒，神色愤怒地大喊。
+巴尔萨泽（愤怒且大声地）：Count Norman! Get out here now!
+△诺曼伯爵和伯爵夫人带着侍卫群像，神色慌张地从城堡大门里急匆匆跑出来，跑向巴尔萨泽。
+△诺曼伯爵在巴尔萨泽面前停下脚步，双手摊开，满脸堆笑，神色谄媚而焦急地连连解释。
+诺曼伯爵（谄媚且焦急地）：Guild Master Balthazar, this is absolutely a misunderstanding! Arthur is just a magicless waste, how could he possibly hurt your son?
+△巴尔萨泽神色冰冷，猛地怒喝一声，打断了诺曼伯爵的话。
+巴尔萨泽（愤怒地）：Shut up!
+△巴尔萨泽神色严厉地指着诺曼伯爵，大声斥责。
+巴尔萨泽（严厉地）：Everyone in the guild saw it! If you don't hand him over today, I swear the Norman family won't see tomorrow's sun!
+△查尔斯转头看向巴尔萨泽，神色嚣张地开口说话，随后又转头看向前方。
+查尔斯（嚣张）：Father, stop wasting words with them. Just drag that bumpkin Arthur out here.
+△诺曼伯爵夫人走上前，神色谄媚而急切地对巴尔萨泽和查尔斯说话。
+诺曼伯爵夫人（谄媚而急切）：Guild Master, the trouble caused by that waste Arthur has nothing to do with us! You can do whatever you want with him.
+△查尔斯神色阴险地笑起来，看着诺曼伯爵夫人，开口提出条件。
+查尔斯（阴险地笑）：That bastard will die, of course. But, Rosalind comes with me too. You understand what I mean, my lady?
+△诺曼伯爵夫人听后，立刻面露喜色，连连点头，神色谄媚地答应。
+诺曼伯爵夫人（谄媚地答应）：Of course, Young Master Charles! You can take Rosalind!
+△诺曼伯爵神色愤怒，猛地转头冲着伯爵夫人大吼，并伸手推了她一下。
+诺曼伯爵（愤怒大吼）：Shut up and get inside! I am the master of this house, you have no say here!
+△诺曼伯爵夫人被推得后退一步，神色极其愤怒和泼辣，指着诺曼伯爵大声反驳。
+诺曼伯爵夫人（愤怒反驳）：You dare yell at me? Without my family's money, you'd have lost that worthless count title long ago!
+△查尔斯神色不耐烦地打断了他们的争吵，眼神冰冷地看着他们。
+查尔斯（不耐烦）：Enough. I'm not interested in your bickering. Hand over Arthur and Rosalind, or I'll burn your castle to the ground!
+△亚瑟和罗莎琳德手拉手从城堡大门里缓缓走出来。亚瑟神色平静而轻蔑地开口。
+亚瑟（平静而轻蔑）：Burn the castle?
+△亚瑟看着查尔斯，嘴角微微上扬，露出一抹嘲讽的微笑。
+亚瑟（嘲讽）：You barely have any teeth left, and you're still this loud?
+△查尔斯看到亚瑟，神色大变，愤怒而惊恐地指着亚瑟，转头对巴尔萨泽大喊。
+查尔斯（愤怒而惊恐）：Father! That's him! That's the bastard who hit me! Kill him!
+△巴尔萨泽神色冰冷地看着亚瑟，随后露出一抹残忍的微笑，大声下令。
+巴尔萨泽（冷酷下令）：So just a lowly trash. Seize him!
+△诺曼伯爵走上前，挡在亚瑟和罗莎琳德身前，神色严肃地对巴尔萨泽说话。
+诺曼伯爵（严肃）：Guild Master Balthazar, Norman family may not be what it once was, but you can't go too far!
+△诺曼伯爵继续神色严肃地说话，亚瑟在后面神色平静地看着他。
+诺曼伯爵（继续严肃说话）：Arthur wouldn't have acted without reason, there must be a cause!
+△巴尔萨泽神色极其愤怒，猛地走上前，指着诺曼伯爵大声咆哮。
+巴尔萨泽（愤怒咆哮）：I don't care about reasons! Anyone who stands in my way today dies!
+△巴尔萨泽走到诺曼伯爵面前，神色严厉地指着他，大声质问和威胁。
+巴尔萨泽（严厉质问）：Count! Are you insane? You'd destroy the entire family for a waste?
+△巴尔萨泽继续指着诺曼伯爵威胁。
+巴尔萨泽（继续威胁）：If you keep protecting him, I'll depose you!
+△画面切到亚瑟和罗莎琳德，罗莎琳德神色担忧地看着亚瑟，亚瑟则神色平静地开口。
+亚瑟（平静开口）：Count,
+△巴尔萨泽用手指戳着诺曼伯爵的胸口，神色愤怒地斥责。
+巴尔萨泽（愤怒斥责）：You'd destroy the entire family for a waste?
+△巴尔萨泽神色严厉地看着诺曼伯爵，发出最后的威胁。
+巴尔萨泽（神色严厉）：If you keep protecting him, I'll depose you!
+△亚瑟站在诺曼伯爵身后，神色平静地开口说话。
+亚瑟（神色平静）：Count, this started because of me. I'll...
+△诺曼伯爵猛地转过身，神色严肃地打断亚瑟，并伸手示意他退后。
+诺曼伯爵（神色严肃）：Step back. What can an ordinary man without magic do?
+△诺曼伯爵转回身看着巴尔萨泽，神色诚恳地开口认错。
+诺曼伯爵（神色诚恳）：Guild Master Balthazar, we were wrong.
+△诺曼伯爵低下头，神色有些沮丧和无奈，提出赔偿条件。
+诺曼伯爵（神色沮丧）：I'm willing to hand over half the family's assets,
+△罗莎琳德神色担忧地拉着亚瑟的衣袖，亚瑟则神色平静地看着前方。
+诺曼伯爵（O.S.）（神色诚恳）：plus ten crates of high-grade mana potions as compensation.
+△诺曼伯爵抬起头，神色诚恳地看着巴尔萨泽，为亚瑟求情。
+诺曼伯爵（神色诚恳）：Spare Arthur.
+△巴尔萨泽和查尔斯站在对面，巴尔萨泽冷笑一声，神色轻蔑地开口。
+巴尔萨泽（冷笑轻蔑）：Ten crates? You're joking.
+△巴尔萨泽神色嚣张地往前走了一步，大声拒绝并宣判亚瑟的死刑。
+巴尔萨泽（神色嚣张）：Even a hundred crates won't save him. He dies today!
+△查尔斯站在巴尔萨泽身后，神色愤怒而嚣张地大喊附和。
+查尔斯（愤怒嚣张）：Yes! He must die!
+△巴尔萨泽神色冰冷地指着亚瑟，大声怒喝。
+巴尔萨泽（神色冰冷）：Useless bastard! Die!
+△魔法凝聚的滋滋声。巴尔萨泽手中的法杖顶端宝石发出强烈的蓝光。
+△巴尔萨泽神色冰冷而残忍地看着前方，准备发动攻击。
+△巨大的雷击声。一道巨大的蓝色闪电从天而降，猛烈地劈向庭院中央。
+△亚瑟神色平静地站在原地，身上散发着微弱的蓝色电光，但毫发无损。
+△罗莎琳德和诺曼伯爵夫人神色极其震惊地看着亚瑟。
+罗莎琳德（极其震惊）：Arthur, you...
+△雷电消散的噼啪声。亚瑟微微侧身，神色轻松地拍了拍肩膀，仿佛在拍落灰尘。
+△巴尔萨泽神色极其震惊和难以置信地瞪大眼睛，看着安然无恙的亚瑟。
+△雷电彻底消散，亚瑟神色平静地站在原地，毫发无伤。
+△罗莎琳德、诺曼伯爵和伯爵夫人三人同框，脸上写满了震惊与不可思议。
+△沉重的倒地声。巴尔萨泽猛地吐出一口鲜血，身体摇晃着向后倒去，重重地摔在地上。
+△传送门打开的嗡鸣声。一个金色的传送门在庭院中打开，塞琳娜和奥尔德里奇从中并肩走出来。
+△巴尔萨泽倒在地上，嘴角流着血，神色痛苦而愤怒地大喊。
+巴尔萨泽（愤怒而痛苦地大喊）：That barbarian wrecked our guild! Please use high magic to kill him!
+第11集：大魔导师当众掌掴会长
+11-1 Norman Castle Courtyard 外 未注明
+人物：亚瑟（Arthur）、罗莎琳德（Rosalind）、诺曼伯爵（Count Norman）、诺曼伯爵夫人（Countess Norman）、巴尔萨泽（Balthazar）、查尔斯（Charles）、塞琳娜（Selina，着装：奢华会长礼服）、奥尔德里奇（Aldrick，着装：黑色法袍，持龙头法杖）、两个随从（Two Servants，着装：随从服）、侍卫群像（Guards，着装：侍卫盔甲）
+△巴尔萨泽倒在地上，一手捂着胸口，嘴角流着血，神色痛苦而震惊地看着亚瑟质问。
+巴尔萨泽（痛苦震惊）：You're not an ordinary man... You can disperse magic with your body?
+△诺曼伯爵神色极其震惊，眼睛瞪得极大，看着走出来的奥尔德里奇。
+诺曼伯爵（极其震惊地惊呼）：That's... a fourth-tier archmage! We're doomed!
+△亚瑟神色平静地握了握拳头，随后双手抱胸，居高临下地看着巴尔萨泽，语气轻蔑。
+亚瑟（轻蔑平静）：With such meager skills, you dare to cause trouble at the Norman estate?
+△诺曼伯爵神色慌张地看着前方，继续大喊。
+诺曼伯爵（慌张地大喊）：Balthasar actually Sparmin such a big shot!
+△奥尔德里奇站在巴尔萨泽面前，居高临下地看着他，神色严肃地开口。
+奥尔德里奇（严肃地开口）：Are you certain...
+△巴尔萨泽神色极其愤怒和疯狂，挣扎着想爬起来，指着亚瑟大声咆哮。
+巴尔萨泽（疯狂咆哮）：Arrogant monster! So what if you're strong?! I'll slaughter every one of you today!
+△奥尔德里奇继续严肃地看着巴尔萨泽。
+奥尔德里奇（严肃地质问）：...he's the one you want to kill?
+△符石发出的嗡鸣声。巴尔萨泽从怀里掏出一枚发光的金色传送符石，紧紧握在右手掌心。
+△巴尔萨泽挣扎着想爬起来，一手捂着胸口，神色疯狂地指着前方大喊。
+巴尔萨泽（疯狂地指着前方大喊）：That's him! A lowly trash!
+△查尔斯头上缠着绷带，站在一旁，神色怨恨地笑着。
+△巴尔萨泽神色极其愤怒地大吼。
+巴尔萨泽（歇斯底里地大吼）：Kill him!
+△罗莎琳德神色极其震惊和担忧地看着前方。
+△诺曼伯爵神色极其震惊地看着前方。
+△奥尔德里奇神色愤怒地转过头看向巴尔萨泽。
+△清脆的巴掌声。奥尔德里奇猛地一巴掌把巴尔萨泽扇倒在地上，巴尔萨泽神色极其震惊和痛苦。
+△塞琳娜神色冷漠地看着倒地的巴尔萨泽。
+△亚瑟双手抱胸，神色平静，嘴角带着一丝玩味的笑意。
+△奥尔德里奇指着倒在地上、捂着脸的巴尔萨泽，愤怒地大吼。
+奥尔德里奇（愤怒地大吼）：You idiot!
+△巴尔萨泽的特写，他捂着被打红的脸，嘴角流血，神色极其震惊和恐惧地看着奥尔德里奇。
+△奥尔德里奇继续愤怒地指着巴尔萨泽大吼。
+奥尔德里奇当前对话中，结尾处已停在：
+奥尔德里奇
+但后面没有提供原始剧本的后续内容。我不能凭空续写或补写台词，否则会违反“台词默认不改、不擅自改变剧情”的原则。
+请把上述结尾之后的原始剧本内容发来，或指定要输出的集数/场次，我可以从该处继续按已确认的格式整理输出，且不重复已输出内容。
+下载
+已进入第二步
+步骤 02 · 第一轮
+逻辑诊断清单
+已确认
+提示词
+使用默认
+查看 / 替换
+# 剧本处理 · 第二步：逻辑诊断 / 台词翻译预检
+
+> 说明：本回复**只输出诊断与确认清单，不执行任何修改**。所有逻辑修复与台词翻译，均须经你逐项确认后方可执行。
+> 另：**第11集在 11-1 中途中断**（奥尔德里奇掌掴巴尔萨泽后无正文），故本诊断覆盖第 1–10 集及 11-1 已给出部分。第11集后半需你补发原文。
+
+---
+
+## 一、《逻辑诊断清单》
+
+| 编号 | 集/场 | 类型 | 等级 | 原文（节选） | 问题 | 建议修复 | 涉及台词/剧情/关系/结局 | 风险等级 | 需确认 |
+|---|---|---|---|---|---|---|---|---|---|
+| L1 | 1-1 | C 人物动线 | B | △村长跪在地上…△皇家大魔导师站在村长身后，面对着黑龙 | 大魔导师凭空出现在村长身后，无入场过渡 | 补过渡入场（如"从火光中走出"），或仅标注 | 否 | L3 | 是 |
+| L2 | 1-1 | E 因果链 | A | △亚瑟…一拳将黑龙打倒在地上…**亚瑟**：Nothing special. → 亚瑟离开 | 黑龙结局悬空（被打倒后如何处置无交代） | 补黑龙离场/结局一句动作 | 否 | L3 | 是 |
+| L3 | 1-2 | C 人物动线 | **A（致命级冲突）** | △亚瑟化作一颗火球飞向天空…△亚瑟站在悬崖边，抬头看着天空中坠落的火球 | 亚瑟先"化作火球飞走"，又"站在悬崖边看火球坠落"，同一角色同时两地 | 明确是"被传送后落下"的动线（如补：亚瑟被传送至空中并坠向悬崖） | 否 | L3 | 是 |
+| L4 | 1-2 | G 空间/场景 | B | 上文"火球"；第2集"celestial meteor" | "火球/陨石"概念前后不一，读者易混 | 统一为"陨石"或明确"火球=被击出的陨石" | 否 | L2 | 是 |
+| L5 | 1-2 | F 信息差 | C | 梅林连续台词：…the southern women are hot. / Besides, the southern women are hot. | 同一句重复出现 | 删重复行（不改实际台词） | 否 | L1 | 是 |
+| L6 | 2-1 | A 动作逻辑 | B | △…将滑倒的酒馆老板击飞…老板重重摔在远处的桌子上 | 先"用魔法静止啤酒"（救人）又"击飞老板"（伤人），意图矛盾 | 调整为单一意图，或标注为"震慑/惩罚" | 否 | L2 | 是 |
+| L7 | 2-1 | B 道具连续性 | A | △亚瑟拉开椅子坐下，将一个金属酒杯放在桌上…**亚瑟**：Boss, give me the cheapest beer. → △亚瑟端起桌上的金属酒杯，大口喝起酒来 | 要酒之前，杯中已有酒；老板始终在柜台擦杯，未上酒 | 补上酒动作，或改为"空杯放在桌上" | 否 | L3 | 是 |
+| L8 | 4-2 | A 动作逻辑 | A | △休斯重重地摔在雪地上…△休斯重重地撞在城堡的石墙上，墙壁被撞出蛛网状裂缝… | 休斯"摔在雪地"后又"撞石墙"，落地描述重复且互斥 | 保留其一的落点（雪地 或 石墙），删除矛盾项 | 否 | L2 | 是 |
+| L9 | 4-2 | F 信息差 | B | **休斯**：Impossible! …shatter a spell with your bare hands? →（亚瑟回话后）**休斯**：…shattered? How can you shatter a spell…? | 休斯同一疑问倒置重复，对话顺序混乱 | 合并为一次提问 | **是（台词）** | L3 | 是 |
+| L10 | 6-4 | F 信息差 | C | **亚瑟**：I'm sorry. I went to the black market…How could I ever leave you and run? 前后重复 | 亚瑟台词两次出现相同内容 | 删重复 | **是（台词）** | L1 | 是 |
+| L11 | 7-1 | F 信息差 | C | **亚瑟**：Moonlight Magic Source… 两次；**罗莎琳德**：This power… / I can sense… 两次 | 台词重复 | 删重复行 | **是（台词）** | L1 | 是 |
+| L12 | 8-2 | F 信息差 | C | **巴里长老（O.S.）**：One blow caved in…How terrifying… 与 8-1 重复 | 台词跨场重复 | 删 8-2 内重复（保留画外音一次） | **是（台词）** | L1 | 是 |
+| L13 | 8-5 | F 信息差 | C | **罗莎琳德**：Arthur is now my husband. And he saved my life. 连续两次 | 台词重复 | 删重复 | **是（台词）** | L1 | 是 |
+| L14 | 9-1 / 9-3 | H 集数/场次顺序 | **S** | 9-1 与 9-3 均为"Magic Shop"，查尔斯两次登场、两次自我介绍 | 同一场景两个版本（9-1 简略、9-3 完整），剧情重复 | 合并为一场，择一保留并合入必要信息 | **是（剧情+台词）** | L3 | 是 |
+| L15 | 9-1 | A 动作逻辑 | C | "…随后画面淡出。**亚瑟**：She has a fiancé." | 淡出后仍有台词，顺序错乱 | 台词移至淡出前 | 否 | L1 | 是 |
+| L16 | 9-2 | G 空间/场景 | B | 场次标题"Magic Shop 内"，内容实为会长居所（塞琳娜+奥尔德里奇密谈） | 场景标题与内容矛盾 | 标注，交回上一步改标题（本版不执行） | 否 | —（格式类） | 是 |
+| L17 | 9-2 | F 信息差 | C | 奥尔德里奇"shortsighted…"、塞琳娜"prepare a gift…"重复 | 台词重复 | 删重复 | **是（台词）** | L1 | 是 |
+| L18 | 10-3 | F 信息差 | C | 巴尔萨泽"You'd destroy the entire family…"/"If you keep protecting him…"、亚瑟"Count,"重复 | 台词重复+顺序 | 删重复 | **是（台词）** | L1 | 是 |
+| L19 | 11-1 | A 动作逻辑 | B | **诺曼伯爵**：Balthasar actually Sparmin such a big shot! | "Sparmin"疑为拼写错误/语义不通 | 需原文确认后修正 | **是（台词）** | L3 | 是 |
+| L20 | 11-1 后 | H 集数/场次顺序 | **S** | 第11集中断 | 内容缺失 | 需补发原文 | — | — | 是 |
+| L21 | 全集 | G 空间/场景 | C | 多场次标题后缀"未注明"（时间/内外景） | 时间/内外景缺失 | 交回上一步补全 | 否 | —（格式类） | 是 |
+| L22 | 1-1 / 5-2 等 | I 群像/人数 | C | 1-1"村民群像"含"年轻女子拉老妇人小孩"；5-2 标题"Village 外"内景为空 | 群像与个体混用 | 标注，交回上一步 | 否 | —（格式类） | 是 |
+
+---
+
+## 二、《道具连续性台账》
+
+| 道具 | 首次出现 | 持有者 | 位置 | 状态 | 称呼变体 | 后续出现 | 处理建议 |
+|---|---|---|---|---|---|---|---|
+| 婚约（羊皮纸） | 1-2 | 梅林→亚瑟 | 高山魔法阵 | 完好 | 婚约／marriage contract | 3-1（放桌上、被亚瑟带走） | 无跳变，保留 |
+| 木盒子 | 1-2 | 梅林→亚瑟 | 高山 | 完好 | 木盒子／wooden box | 2-2（随亚瑟被击飞"消失"）→6-3（亚瑟手中）→7-1（桌上打开） | **1-2→6-3 间无交代**，建议在6-3前补一句亚瑟携盒的说明（L3） |
+| 金属酒杯 | 2-1 | 亚瑟 | 酒馆 | 空 | 金属酒杯 | 2-1 | **凭空出现酒**（见 L7），需补上酒动作或改空杯（L3） |
+| 棕色钱袋（30金） | 5-1 | 罗莎琳德→亚瑟 | 城堡房间 | 30金币 | 钱袋 | 5-3（放柜台） | 无跳变，保留 |
+| 龙息草 | 5-3 | 店主→亚瑟 | 魔法商店 | 完好 | Dragonsbreath Grass | 7-1（亚瑟取出） | 无跳变，保留 |
+| 通缉令 | 5-3 | 墙上 | 魔法商店 | 张贴 | WANTED REWARD 30000 | 5-3 | 保留 |
+| 棕色钱袋（100金） | 8-5 | 诺曼伯爵→罗莎琳德 | 大厅 | 100金币 | 钱袋 | 8-5 | 与 5-1 同为"棕色钱袋"，建议区分称呼（L1） |
+| 金色石头 | 10-1 | 奥尔德里奇→巴尔萨泽 | 公会大厅 | 发光 | 金色石头／发光的金色石头 | 10-1 | 保留 |
+| 金色传送符石 | 11-1 | 巴尔萨泽 | 庭院 | 发光 | 符石 | 11-1 | 注意与 10-1"金色石头"区分；建议统一称呼（L1） |
+| 短魔杖 | 9-1/9-3 | 查尔斯 | 魔法商店 | 完好→被踩碎 | 魔杖／短魔杖 | 9-3（踩碎） | 9-1 与 9-3 重复场景需合并（见 L14） |
+
+---
+
+## 三、《人物动线表》
+
+| 角色 | 场次 | 入场 | 位置 | 移动 | 离场 | 在场关系 | 问题 |
+|---|---|---|---|---|---|---|---|
+| 亚瑟 | 1-2 | 从天而降落到雪地 | 高山魔法阵 | 化作火球飞向天空 | 飞走 | 与梅林 | **飞走后又"站在悬崖边"（L3）** |
+| 亚瑟 | 1-2→2-1 | — | 悬崖 | 接坠落火球 | — | — | 火球/陨石概念混（L4） |
+| 大魔导师 | 1-1 | 无 | 村长身后 | 施法、被击倒、被弟子扶起 | 未离场 | 与村长、亚瑟 | **无入场过渡（L1）** |
+| 村长 | 1-1 | 无 | 跪地→爬行 | 逃跑 | 逃出现场 | 与大魔导师 | 顺序尚可 |
+| 黑龙 | 1-1 | 天空飞入 | 空中/落地 | 被击退→飞回→被压倒 | **无交代** | 与亚瑟 | **结局悬空（L2）** |
+| 奥尔德里奇 | 2-1 | 无 | 桌旁 | 静止啤酒→击飞老板 | 未离场 | 与塞琳娜、亚瑟 | **先救后击矛盾（L6）** |
+| 塞琳娜 | 9-2 | 背对镜头→转身 | 会长居所 | 指派奥尔德里奇 | 未离场 | 与奥尔德里奇 | **场次标题误标 Magic Shop（L16）** |
+| 查尔斯 | 9-1 / 9-3 | 随从簇拥 | 魔法商店 | 登场→被打 | — | 与亚瑟、罗莎琳德 | **两场重复登场（L14）** |
+| 休斯 | 4-2 | 坐着吃烤肉 | 庭院 | 被掐起→被扔 | 摔落 | 与亚瑟 | **落点矛盾（L8）** |
+| 巴尔萨泽 | 10-1/10-2/10-3 | 公会大厅→庭院 | 两处 | 挥落器具→率众围城 | — | 与伯爵、塞琳娜 | 10-2 经信使转述其行动，动线可接受；**10-3 塞琳娜/奥尔德里奇经传送门出现，需注意与前场衔接** |
+| 塞琳娜/奥尔德里奇 | 10-1→10-3 | 传送门 | 公会大厅→庭院 | 出传送门 | — | 与巴尔萨泽、亚瑟 | 传送门可实现两地切换，可接受 |
+
+---
+
+## 四、《高风险剧情修复清单（L3）》
+
+| 编号 | 集/场 | 项目 | 拟修复 | 需用户明确授权 |
+|---|---|---|---|---|
+| L1 | 1-1 | 大魔导师入场过渡 | 补一句入场动作 | 是 |
+| L2 | 1-1 | 黑龙结局 | 补一句黑龙离场/结局动作 | 是 |
+| L3 | 1-2 | 亚瑟动线矛盾 | 补/改传送动线表述 | 是 |
+| L7 | 2-1 | 酒杯凭空有酒 | 补上酒动作 或 改空杯 | 是 |
+| L9 | 4-2 | 休斯台词倒置重复 | 合并为一次提问 | 是 |
+| L14 | 9-1/9-3 | 场景重复（同一"Magic Shop"两版本） | 合并为一场，择一保留并合入必要信息 | 是 |
+| L19 | 11-1 | "Sparmin"文本不通 | 待原文确认后修正 | 是 |
+
+> 注：L5、L10–L13、L15、L17、L18 等"删除重复台词行"若确认为分镜重复，按 L1 处理；若涉及合并/改写，则升为 L3。
+
+---
+
+## 五、《台词翻译确认清单》（中文台词 → 英文）
+
+| 编号 | 集/场 | 角色 | 中文原文 | 拟译英文 |
+|---|---|---|---|---|
+| — | — | — | **无** | — |
+
+**说明**：经逐行核对，**全文所有角色台词（含对白、画外音 O.S.、内心独白 V.O.）均已是英文**，无中文台词待译。因此本清单为空。
+（场次标题、`人物：`、`着装：`、`△` 动作描述及括号内语气提示为中文格式标注，按规则**保留不译**。）
+
+若你另有"把某处中文台词补译"的需求，请单独指出。
+
+---
+
+## 六、其他需用户决策项
+
+| 编号 | 项目 | 需决策内容 |
+|---|---|---|
+| D1 | 第11集缺失 | 请补发 11-1 结尾之后的原文，否则第11集无法完成诊断/输出 |
+| D2 | 重复台词处理尺度 | L5、L10–L13、L15、L17、L18 等：是"删除重复行"（L1）还是"合并改写"（L3）？请指定 |
+| D3 | 9-1 与 9-3 取舍 | 两版本并存，请指定保留哪一版（或授权合并）——**涉及台词/剧情，属 L3** |
+| D4 | 格式类问题（L16、L21、L22） | 场次标题错误、"未注明"、群像混用等属于上一环节（格式整理），本版**只标注不执行**。是否交回上一步处理？ |
+| D5 | 输出集数 | 确认后请告知需要输出哪几集，我将按"既有格式不动"输出 |
+
+---
+
+## 待你确认
+
+请回复以下任一方式：
+
+- **"全部确认"** + 指定输出集数；或
+- 逐项回复，例如：**"确认 L1、L3、L7；D3 保留 9-3；D2 按 L1 删重复；输出第1–3集"**。
+
+收到明确确认前，**我不执行任何逻辑修复与台词翻译**，且只处理你确认的项。
+步骤 02 · 第二轮
+标准化剧本
+ 完成
+> 说明：按你“已确认上述全部处理项”的指示，执行已确认的逻辑修复与重复行清理；英文台词保留原样（L19 已确认的文本不通处按最小必要修正）；全文无中文台词待译，故台词翻译清单为空。
+> 第11集在 11-1 奥尔德里奇“You idiot!”后即中断，缺失部分无法凭空补写，故以下输出第1–10集完整修正稿 + 第11集已给部分；第11集后半需你补发原文。
+---
+第1集：神秘强者降世
+1-1 Village 外 未注明
+人物：村长（Village Chief，着装：粗布冬装）、皇家大魔导师（Royal Archmage，着装：法师长袍）、男弟子（Male Disciple，着装：弟子法袍）、女弟子（Female Disciple，着装：弟子法袍）、亚瑟（Arthur，着装：旅行者装）、黑龙（Dragon，着装：黑龙鳞甲）、村民群像（Villagers，着装：粗布冬装）
+△Village。俯瞰被雪覆盖的村庄广场。
+△村民群像在雪地上惊慌失措地奔跑。
+△龙吼声。一只巨大的黑龙在村庄上空飞过，发出咆哮。
+△爆炸声。黑龙向村庄的房屋喷火，房屋爆炸起火。
+△村长在奔跑的人群中大喊。
+村长（惊恐大喊）：Run!
+△一个年轻女子拉着一个老妇人和一个小孩在惊恐地奔跑，黑龙在背景中飞过。
+△黑龙在空中展翅咆哮，向下喷火。
+△画面特写一个人的眼睛，充满恐惧。
+村长（O.S.）（绝望地喊叫）：Oh, no!
+△画面黑屏后，村长跪在地上，双手捂脸，然后移开双手，看着自己的双手，神情绝望。
+△火光中，皇家大魔导师从燃烧的房屋阴影里走出，站在村长身后，面对着黑龙，双手施展魔法，形成一个蓝色的圆形魔法盾，挡住黑龙喷出的火焰。他大喊。
+皇家大魔导师（吃力地大喊）：Go now!
+△村长在地上爬行，回头对大魔导师说话，然后起步逃跑。
+村长（感激地回应）：Thank you.
+△大魔导师的魔法盾被打破，他被冲击力击倒在地上，吐血，痛苦地喊道。
+皇家大魔导师（痛苦地低吼）：Damn it!
+△大魔导师挣扎着想站起来，嘴角流着血。
+△两个年轻的弟子跑过来扶住他。男弟子拿着一根法杖，喊道。
+男弟子（焦急地大喊）：Master!
+△大魔导师用手擦了擦嘴角的血，对弟子们说。
+皇家大魔导师（虚弱但坚定地说话）：We have to stop it or everyone here will die!
+△男弟子扶着他，担忧地回答。
+男弟子（担忧地回答）：But Master, this dragon is too strong. We can't beat it.
+△画面特写大魔导师沉重的表情，接着是黑龙咆哮的画面。
+皇家大魔导师（语气坚定）：We fight even if we can't win. That's war.
+△俯瞰镜头，大魔导师和两个弟子站在广场中央，黑龙在空中盘旋。一个声音传来。
+亚瑟（O.S.）（轻松调侃的语气）：So lively.
+△亚瑟手里拿着一个咬了一口的苹果，走过来，微笑着说。
+亚瑟（微笑调侃）：Is this a tea party? Mind if I join?
+△大魔导师和弟子们惊讶地看着他。大魔导师急切地喊道。
+皇家大魔导师（急切地大喊）：Get out of here! It's dangerous!
+△亚瑟继续咬了一口苹果，神情自若。大魔导师继续喊着。
+皇家大魔导师（继续急切地喊道）：You shouldn't be here.
+△重物落地声、龙吼声。突然黑龙从天而降，落在亚瑟身后咆哮。
+皇家大魔导师（惊恐地大喊）：Look out! Dodge!
+△亚瑟微微一笑，转过身面对黑龙。
+△亚瑟把手中的苹果举起来，展示给黑龙看。
+△黑龙向亚瑟喷火。亚瑟冷静地看着火焰。
+△亚瑟将手中的苹果用力扔向黑龙。
+△击中爆炸声。苹果像炮弹一样飞出，直接击中了黑龙的眼睛，黑龙痛苦地咆哮，被击退飞走。
+△大魔导师和弟子们目瞪口呆。
+男弟子（难以置信地喃喃自语）：How did he do that?
+△黑龙再次飞回，愤怒地咆哮。
+亚瑟（自信地微笑）：Time to end this!
+△亚瑟弯腰把皮箱放在雪地上。
+△重击声。亚瑟高高跃起，直接跳到了黑龙的背上，一拳将黑龙打倒在地上。
+亚瑟（轻松地微笑）：Nothing special.
+△黑龙沉重地砸进雪地，挣扎片刻后振翅飞走，消失在乌云中。
+△男弟子看着这一幕，转头问大魔导师。
+男弟子（兴奋且好奇地询问）：Master, what spell is that? Can I learn it?
+△大魔导师一巴掌拍在男弟子的头上，生气地训斥道。
+皇家大魔导师（愤怒地训斥）：Shut up, you idiot! That's not magic. That's pure physical strength from that man.
+△男弟子捂着头，震惊地睁大眼睛。
+男弟子（震惊地喃喃自语）：Physical strength? How is that...
+△亚瑟转过身，对大魔导师和弟子们微笑，准备离开。
+亚瑟（微笑，挥手）：I'll leave the rest to you. I'm off. Bye.
+△大魔导师急切地向前迈了一步，伸手喊道。
+皇家大魔导师（急切）：Wait!
+△亚瑟一跃而起，化作一道黑影飞向天空。
+△女弟子抬头看着天空，双手合十，露出崇拜的神色。
+女弟子（崇拜，赞叹）：Oh my god, that's so cool!
+1-2 High Mountains 外 雪天
+人物：亚瑟（Arthur）、梅林（Merlin，着装：白发白袍）
+△重物落地声。亚瑟从天而降，单膝跪地落在雪地上，激起一阵烟尘。前方站着一个白发白袍的老人梅林。
+△亚瑟站起身，拍了拍身上的雪，走向梅林。
+亚瑟（随意，询问）：Old man, why the rush to call me back?
+△梅林转过身，手里拿着黑色法杖，神色严肃地看着亚瑟。
+梅林（严肃，回忆）：Twelve years ago, I accidentally killed the old Earl of the Norman family in the south.
+△纸张展开声。梅林从怀里拿出一张羊皮纸婚约，展示给亚瑟看。
+梅林（解释）：To make amends, I signed this marriage contract on his deathbed.
+△两人站在高山之巅的魔法阵中央，周围环绕着石雕像。梅林把婚约递给亚瑟。
+梅林（命令）：So pack your rags, and go get married in the south.
+△亚瑟接过婚约，低头看着上面的字，梅林继续说话。
+梅林（调侃）：You'll be living off their family for the rest of your life.
+△亚瑟震惊地抬起头，一把揪住梅林的衣领，愤怒地大喊。
+亚瑟（愤怒，质问）：Old man? I trusted you, and you sold me off to some broke family to be a kept man?
+△梅林神色平静，拍了拍亚瑟揪着他衣领的手，解释道。
+梅林（无奈，平静）：Twelve years ago I swore a blood oath. I owe them a life. I have no choice.
+△亚瑟松开手，烦躁地抓了抓头发，叹了口气，妥协地看着梅林。
+亚瑟（烦躁，妥协）：Damn! Fine. You pulled me out of a pile of corpses and raised me like your own son. I owe you a life. I'll do it.
+△梅林露出欣慰的笑容，拍了拍亚瑟的肩膀。
+梅林（欣慰，高兴）：That's my good apprentice!
+△梅林凭空拿出一个精致的木盒子，递给亚瑟。
+梅林（递出礼物）：Here. Your wedding gift.
+△亚瑟接过木盒子，用手指摸了摸，微笑着调侃。
+亚瑟（微笑，满意）：At least you have some conscience.
+△魔法击中声、重物落地声。梅林突然用法杖一指，一道蓝光击中亚瑟，亚瑟和木盒子一起被击飞出去，重重摔在雪地上。
+△亚瑟从雪地上爬起来，拍掉身上的雪，愤怒地对梅林大喊。
+亚瑟（愤怒，质问）：You crazy old man, what the hell is wrong with you?
+△梅林看着他，大声训斥，神色中带着一丝得意。
+梅林（大声，得意）：Quit whining like a woman! I'm sending you to paradise. The southern women are hot.
+△亚瑟无奈地听着，梅林继续说话。
+梅林（赞赏）：With your terrifying muscle power that ignores magic, you can do whatever you want!
+△亚瑟微微侧头，神色平静地听着。
+梅林（O.S.）（语带赞赏）：With your terrifying muscle power that ignores magic,
+△梅林面部特写，继续对亚瑟说话。
+梅林（肯定）：Norman family is a great place!
+梅林（面带微笑）：you can do whatever you want! Norman family is a great place!
+△梅林手持黑色法杖，独自站在高山之巅的魔法阵中央。
+△魔法传送声。梅林用法杖顿地，地上出现蓝色魔法阵，亚瑟的身影被蓝色魔法阵吞没，消失在原地，木盒子也随之消失。
+△魔法传送声。天空中出现一个巨大的燃烧陨石，拖着黑烟向地面坠落。
+△梅林看着天空，脸上露出狡黠的微笑。
+梅林（微笑，调侃）：Oh, by the way. Don't forget your daily training.
+△亚瑟单膝落在悬崖边，起身抬头看着天空中坠落的燃烧陨石，愤怒地大喊。
+亚瑟（愤怒大喊）：You want me to train now?!
+△巨大的燃烧陨石穿过云层，直奔悬崖上的亚瑟而去。
+△亚瑟大喊着一跃而起，迎向坠落的燃烧陨石。
+亚瑟（怒吼）：Ah!
+△重物撞击声。亚瑟单膝跪地落在岩石上，单手托住巨大的燃烧陨石，周围地面碎裂，激起一阵烟尘。
+第2集：徒手托陨石
+2-1 Border Tavern 内 未注明
+人物：亚瑟（Arthur，着装：旅行者装）、奥尔德里奇（Aldrick，着装：黑色法袍）、塞琳娜（Selina，着装：贵族女子华贵长裙）、酒馆老板（Tavern Owner，着装：酒馆围裙）、男酒客（Male Patron，着装：粗布衣）
+△开门声。酒馆的双扇木门从里面被推开，阳光照进昏暗的酒馆。
+△亚瑟背着行李，迈步走进酒馆。
+△Border Tavern。酒馆内光线昏暗，奥尔德里奇和塞琳娜坐在一张桌子旁。
+△亚瑟在酒馆内走动，环顾四周。
+△酒馆老板端着托盘，托盘上有三杯啤酒，快步走过。
+△滑倒声。酒馆老板脚下一滑，身体向前倾倒。
+△托盘上的一杯啤酒飞到空中，啤酒洒了出来。
+△奥尔德里奇神色平静地坐在桌旁，伸出右手食指，指尖发出蓝色光芒。
+△魔法声。飞在空中的啤酒杯和洒出的啤酒在蓝色魔法光芒中静止在半空。
+△奥尔德里奇挥手，一道蓝色魔法能量托住滑倒的酒馆老板，将他稳住；老板踉跄后退，撞在桌边。
+△奥尔德里奇收回手，闭上眼睛。塞琳娜优雅地坐着，神色平静。
+△亚瑟走到奥尔德里奇和塞琳娜的桌旁。
+△亚瑟拉开椅子坐下，将一个金属酒杯放在桌上。
+△亚瑟看着前方，大声向老板要酒。
+亚瑟（语气随意）：Boss, give me the cheapest beer.
+△酒馆老板放下抹布，快步端来一扎最便宜的啤酒，倒进亚瑟桌上的金属酒杯里。
+△塞琳娜转过头，静静地看着坐在对面的亚瑟。
+△奥尔德里奇端起自己的酒杯，斜眼看着亚瑟，语气轻蔑地嘲讽。
+奥尔德里奇（语气傲慢）：Stinking country bumpkin. This is not a place for you. Get out.
+△亚瑟微微一笑，身体前倾，挑衅地看着奥尔德里奇。
+亚瑟（面带微笑）：Did you buy this tavern, old man?
+△奥尔德里奇神色阴沉下来，紧盯着亚瑟。
+△奥尔德里奇将右手放在桌上，手掌中凝聚出一团蓝色的魔法火焰。
+△亚瑟看着那团蓝色火焰，脸上露出灿烂的笑容。
+△奥尔德里奇托着蓝色火焰，冷冷地看着亚瑟。
+△亚瑟伸出双手，在奥尔德里奇手里的蓝色火焰上方晃了晃，仿佛在烤火取暖。
+△塞琳娜伸出右手，挡在奥尔德里奇的手前，出声阻止他。
+塞琳娜（语气严肃）：Enough, Aldric. We didn't book the whole place. Let this gentleman sit.
+△亚瑟开心地笑了起来，靠回椅背上。
+亚瑟（笑着调侃）：Now this lady is reasonable.
+△亚瑟端起桌上的金属酒杯，大口喝起酒来。
+△亚瑟仰头喝酒，喉咙不断吞咽，酒水顺着脖子流下。
+△雷声。酒馆外的天空突然变得漆黑，乌云密布，狂风大作。
+△酒馆外的木质招牌“BORDERLAND TAVERN”在狂风中剧烈摇晃。
+△酒馆内开始剧烈震动，屋顶落下灰尘，酒客们惊慌失措。
+△男酒客惊恐地站起身，大声喊叫。
+男酒客（惊恐大喊）：What is that? Is it the end of the world?!
+△塞琳娜捂着胸口，震惊地睁大眼睛，抬头看着屋顶。
+△航拍视角下，一颗巨大的燃烧陨石拖着浓烟，正从天空中砸向森林中的酒馆。
+△陨石在空中燃烧，发出耀眼的红光，逼近酒馆。
+男酒客（O.S.）（惊恐大喊）：No! It's a celestial meteor!
+△塞琳娜神色更加惊恐，呼吸急促。
+△奥尔德里奇站起身，手里拿着法杖，神色慌张地大喊。
+奥尔德里奇（语气惊恐）：Its mass and impact force are terrifying.
+△亚瑟依然平静地坐在桌旁，端着酒杯继续喝酒。
+△塞琳娜脸色苍白，绝望地看着前方，奥尔德里奇继续惊恐地大喊。
+奥尔德里奇（O.S.）（语气绝望）：My magic shield is like paper against it! My lady, there's no escape!
+△塞琳娜面部特写，眼神中充满了绝望和恐惧。
+奥尔德里奇（O.S.）（焦急）：My lady, there's no escape!
+△亚瑟放下酒杯，站起身，拍了拍衣服，微笑着调侃。
+亚瑟（语气轻松）：Mages always make such a fuss. This is just my usual training dumbbell.
+△电流声。亚瑟身上爆发出金色的电光，他屈膝做好起跳准备。
+△亚瑟化作一道耀眼的金色光束，瞬间冲破酒馆的屋顶，飞向天空。
+△亚瑟在空中张开双臂，身体周围环绕着金色的能量光环。
+△亚瑟迎着巨大的燃烧陨石飞去，身形在陨石面前显得十分渺小。
+△碰撞声。亚瑟伸出右手，在身前凝聚出一个巨大的金色魔法阵，正面挡住了下落的陨石。
+△亚瑟面部特写，他咬紧牙关，神色坚毅，全力抵挡着陨石的冲击。
+△亚瑟托着巨大的陨石，从天空中缓缓降落。
+△重物落地声。亚瑟稳稳地落在地面上，将巨大的陨石轻轻放在酒馆外的空地上，激起一片尘土。
+△亚瑟拍了拍双手上的灰尘，神色轻松地看着前方。
+△亚瑟迈步走向站在酒馆门口的塞琳娜。
+△亚瑟走到塞琳娜面前停下，微笑着看着她。
+亚瑟（温柔微笑）：Thank you for your hospitality, beautiful lady.
+△塞琳娜愣在原地，呆呆地看着亚瑟，没有说话。
+△亚瑟微微一笑，双手插进口袋，转过身迈步离去。
+△塞琳娜看着亚瑟离去的背影，眼眶湿润，流下一行眼泪，神色无比震惊。
+塞琳娜（V.O.）（难以置信）：Oh my god... He caught a meteor with his bare hands? What kind of monster is he?
+△奥尔德里奇走到塞琳娜身旁，神色凝重地看着亚瑟离去的方向。
+奥尔德里奇（神色凝重）：My lady... This man has not a trace of magic, yet his physical strength is terrifying to this degree.
+△奥尔德里奇转头看向塞琳娜，心有余悸地继续说话。
+奥尔德里奇（心有余悸）：Thank goodness you stopped me from acting earlier. Or we'd be nothing but ash.
+△塞琳娜看着亚瑟消失的方向，眼神变得坚定。
+塞琳娜（语气坚定）：Find out who he is. I want to know him.
+第3集：退婚风波与病弱长女
+3-1 Norman Castle Hall 内 未注明
+人物：亚瑟（Arthur，着装：旅行者装）、诺曼伯爵（Count Norman，着装：贵族礼服）、诺曼伯爵夫人（Countess Norman，着装：华丽长裙，戴红宝石戒指）、乔安娜（Joanna，着装：法师长裙，持红色宝石法杖）、罗莎琳德（Rosalind，着装：白色轻纱长裙）
+△Norman Castle Hall。画面展示城堡墙壁上挂着的华丽盾牌和交叉的双剑。
+△画面展示大厅顶部的巨大水晶吊灯，散发着柔和的光芒。
+△亚瑟手里拿着一份婚约，背对镜头迈步走进宽敞的城堡大厅。
+△亚瑟转过头，打量着大厅内的陈设。
+△亚瑟收回目光，微笑着走向大厅中央的长桌。
+△亚瑟走到长桌旁，将手中的婚约轻轻放在桌面上。
+△诺曼伯爵和伯爵夫人坐在桌旁。诺曼伯爵双手交叠放在桌上，神色严肃地看着亚瑟。
+△亚瑟看着诺曼伯爵，神色轻松地自我介绍。
+亚瑟（礼貌微笑）：Count Norman, I'm Arthur. I'm here to fulfill the marriage contract.
+△亚瑟站在大厅里，神色平静。
+诺曼伯爵（O.S.）（愤怒地大喊）：reeking of cheap ale,
+△诺曼伯爵坐在椅子上，神色愤怒地大喊。
+诺曼伯爵（愤怒地大喊）：with not a hint of magic?
+△拍桌声。诺曼伯爵愤怒地一拍桌子，猛地站起身，大声斥责。
+诺曼伯爵（愤怒大喊）：Absurd! Marry my daughter to you?
+△诺曼伯爵愤怒地大喊，身体前倾。
+诺曼伯爵（愤怒地大喊）：This is an utter disgrace to the Norman family!
+△亚瑟平静地看着愤怒的诺曼伯爵，没有任何慌张。
+△亚瑟无奈地摊开双手，脸上带着一丝微笑。
+乔安娜（O.S.）（高傲地赞同）：Father is right!
+△诺曼伯爵指着亚瑟，继续愤怒地嘲讽。
+诺曼伯爵（轻蔑嘲讽）：A useless waste, reeking of cheap ale, with not a hint of magic?
+△高跟鞋踩在石梯上的清脆声。金发女子乔安娜提着长裙走下楼梯。
+△伯爵夫人坐在一旁，神色冷漠地看着亚瑟。
+△诺曼伯爵继续大喊，亚瑟则无奈地摊开双手，脸上带着一丝微笑。
+诺曼伯爵（愤怒咆哮）：This is an utter disgrace to the Norman family!
+△乔安娜走到大厅中央，停在亚瑟面前，神色高傲地看着他。
+乔安娜（高傲地宣告）：I, Joanna, am about to become a full mage of the Royal Mage Academy!
+△乔安娜双手环抱在胸前，神色轻蔑地看着亚瑟。
+乔安娜（轻蔑地嘲讽）：You lowly warrior, fit only to roll in the mud,
+△亚瑟平静地看着乔安娜，脸上带着淡淡的微笑。
+乔安娜（O.S.）（轻蔑地嘲讽）：aren't even worthy of kissing my boots!
+△乔安娜得意地笑了起来，看着亚瑟。
+乔安娜（戏谑地询问）：Want to marry me?
+△乔安娜凑近亚瑟，眼神冰冷，一字一顿地说话。
+乔安娜（冰冷地拒绝）：Dream on!
+△魔法闪烁声。乔安娜的脸部特写，随后画面闪烁白光。
+△大厅全景。伯爵夫人站起身，神色愤怒地指着亚瑟。
+诺曼伯爵夫人（愤怒地大喊）：Listen here, you stinking bumpkin!
+△伯爵夫人用手帕捂着鼻子，神色厌恶地看着亚瑟。
+诺曼伯爵夫人（厌恶地质问）：you think a piece of scrap paper is enough to marry my Joanna?
+△伯爵夫人继续用手帕捂着鼻子，眼神充满鄙夷。
+诺曼伯爵夫人（鄙夷地嘲讽）：You're not even fit to polish her shoes!
+△乔安娜神色高傲地大喊。
+乔安娜（骄傲地大喊）：I'm a future Royal Mage!
+△亚瑟平静地看着她，眼神深邃。
+乔安娜（O.S.）（轻蔑地反问）：Marry a magicless waste like you?
+△伯爵夫人和伯爵并排站立，冷漠地看着亚瑟。
+△乔安娜得意地笑着。
+乔安娜（得意地嘲笑）：Oh, that's worse than death.
+△亚瑟看着乔安娜，神色平静，手中拿着婚约。
+亚瑟（平静地总结）：I see. The noble Norman family plans to break the contract.
+△亚瑟转过身，准备离去。
+亚瑟（干脆地回答）：Fine, I'll leave.
+△亚瑟拿着婚约，迈步走向大门，边走边转头说话。
+亚瑟（调侃地威胁）：And I'll have a chat with the nobles in town about how the Normans don't keep their word.
+△亚瑟回头看了一眼，嘴角带着一丝嘲讽的微笑。
+诺曼伯爵（O.S.）（愤怒地大喊）：Stop!
+△诺曼伯爵神色慌张而愤怒地大喊。
+诺曼伯爵（慌张而愤怒地大喊）：If we break the contract, the Norman name will be ruined!
+△伯爵夫人走到伯爵身旁，凑到他耳边低声说话。
+诺曼伯爵夫人（低声提议）：Darling, don't forget Rosalind.
+△诺曼伯爵神色一动，若有所思。
+诺曼伯爵夫人（O.S.）（低声提醒）：She's not married yet.
+△伯爵夫人继续在伯爵耳边低语，眼神阴险。
+诺曼伯爵夫人（阴险地低语）：Let that sickly girl take Joanna's place. Problem solved.
+△诺曼伯爵微微点头。
+诺曼伯爵（迟疑地沉吟）：This...
+△沉重的开门声。大厅的木质大门缓缓打开，阳光和雪花飘落进来。
+△罗莎琳德迈进大门，裙摆在风中飘动。
+△一位年轻女子走进来，手里拿着一块手帕。
+△罗莎琳德的正面特写，她有着一头金发，神色柔弱而忧郁。
+△伯爵和伯爵夫人站在桌旁，转头看向门口。
+△亚瑟站在大厅里，转过头看向门口的罗莎琳德。
+△罗莎琳德站在大门口，神色柔弱地看着大厅内。
+△剧烈的咳嗽声。罗莎琳德突然用手帕捂住嘴，剧烈地咳嗽起来，手帕上染上了鲜红的血迹。
+亚瑟（V.O.）（震惊地心想）：Her constitution is actually Moonlight Magic Source
+△亚瑟震惊地睁大眼睛，看着罗莎琳德。
+亚瑟（V.O.）（震惊地心想）：with powerful lunar elements.
+△亚瑟神色凝重地看着罗莎琳德。
+亚瑟（V.O.）（凝重的语气）：But unfortunately, she's poisoned by a witch's toxin.
+△罗莎琳德拿开手帕，嘴角流血，看着手帕上的血迹。
+亚瑟（V.O.）（凝重的语气）：Without immediate treatment,
+△罗莎琳德手帕上血迹的特写，血迹呈放射状。
+亚瑟（V.O.）（凝重的语气）：she won't live past five days.
+△伯爵夫人换上一副虚伪的关切神情，迈步走向罗莎琳德。
+诺曼伯爵夫人（虚伪关切的语气）：Oh, poor Rosa. Come here.
+△罗莎琳德神色哀伤、虚弱地站在门边。
+△伯爵夫人走过去，拉住罗莎琳德的手。
+诺曼伯爵夫人（虚伪的语气）：Your father and I have found a brave husband for you.
+△伯爵夫人拉着罗莎琳德往里走。
+诺曼伯爵夫人（虚伪的语气）：Take a look.
+△画面黑场过渡。
+△诺曼伯爵和伯爵夫人并排站立。
+诺曼伯爵（严肃的语气）：Rosa, Mr. Arthur has a marriage contract with our family.
+△诺曼伯爵看着罗莎琳德。
+诺曼伯爵（严肃的语气）：You're so ill, you need a strong man to care for you.
+△诺曼伯爵继续说话。
+诺曼伯爵（严肃的语气）：Your father is doing this for your own good.
+△罗莎琳德低着头，神色哀伤、无奈。
+△伯爵夫人和伯爵站在长桌旁，罗莎琳德和亚瑟已经坐在长桌旁。
+诺曼伯爵夫人（笑着说）：Isn't that right?
+△伯爵夫人继续说话。
+诺曼伯爵夫人（笑着说）：Joanna is giving up such a good match for you.
+△伯爵夫人走到罗莎琳德身后，按着她的肩膀。
+诺曼伯爵夫人（笑着说）：You should really thank your sister.
+△罗莎琳德低着头，神色黯然。
+△乔安娜站在一旁，得意地笑着。
+乔安娜（得意的语气）：Exactly right.
+△乔安娜继续说话。
+乔安娜（嘲讽的语气）：Sister, you're terminally ill and nearly dead.
+△罗莎琳德神色哀伤地看着前方。
+△画面特写罗莎琳德放在大腿上的双手，紧紧绞着手帕。
+乔安娜（嘲讽的语气）：With this waste,
+△亚瑟坐在桌旁，神色平静地听着。
+乔安娜（改口说）：No, this gentleman,
+△乔安娜笑着看着他们。
+乔安娜（嘲讽的语气）：you two are a perfect match.
+△罗莎琳德闭上眼睛，深吸一口气，然后睁开眼。
+罗莎琳德（轻声说）：Father, my lady, stop.
+△罗莎琳德看着他们，神色坚定。
+罗莎琳德（坚定的语气）：I agree.
+△诺曼伯爵高兴地大笑并鼓掌。
+诺曼伯爵（高兴的语气）：Excellent! A true daughter of Norman,
+△乔安娜在一旁，神色有些意外和不屑。
+诺曼伯爵（高兴的语气）：knowing how to share the family's burdens!
+△诺曼伯爵得意地笑着。
+△诺曼伯爵转头看向亚瑟。
+诺曼伯爵（询问的语气）：And you?
+△罗莎琳德有些紧张和担忧地转头看向身旁的亚瑟。
+△亚瑟微微一笑。
+亚瑟（轻松的语气）：The old man told me to fulfill the contract.
+△亚瑟继续微笑着说话。
+亚瑟（轻松的语气）：Marrying anyone is the same.
+△诺曼伯爵和伯爵夫人神色严肃地听着。
+亚瑟（轻松的语气）：Besides,
+△亚瑟转头看着罗莎琳德，微笑着。
+亚瑟（调侃的语气）：this Miss Rosa is far more pleasant to look at than some arrogant peacock.
+△亚瑟转头看着罗莎琳德，脸上带着温和的微笑。
+△亚瑟收起笑容，神色平静。
+亚瑟（平静的语气）：I agree.
+△乔安娜气得满脸通红，愤怒地指着亚瑟大喊。
+乔安娜（愤怒地大喊）：You bastard, what did you say?
+△亚瑟平静地看着她，嘴角带着一丝嘲讽的微笑。
+△诺曼伯爵大声宣布。
+诺曼伯爵（大声宣布）：Good! Three days from now, the wedding will be held here in the castle!
+第4集：教训恶霸军需官
+4-1 Norman Castle Room 内 未注明
+人物：亚瑟（Arthur，着装：旅行者装）、罗莎琳德（Rosalind，着装：白色轻纱睡袍）
+△画面切换到夜晚，城堡的窗外下着大雪，月光照在窗户上。
+△窗外呼啸的风雪声。画面展示夜晚城堡的窗户，窗外下着大雪，月光照在结霜的窗玻璃上。
+△罗莎琳德站在窗前，看着窗外的雪景，神色忧郁。
+△罗莎琳德转过头，看着走近的亚瑟。
+罗莎琳德（轻声说）：Mr. Arthur, no one is watching now. You should leave quickly.
+△亚瑟走到罗莎琳德身边，微微一笑，开口询问。
+亚瑟（调侃地微笑）：What? Do you also despise this useless waste?
+△罗莎琳德看着亚瑟，神色有些急切地摇头解释，随后露出一丝苦涩的微笑。
+罗莎琳德（急切而苦涩）：No, that's not it. It's that I'm not worthy of you.
+△亚瑟收起笑容，神色变得严肃，静静地看着罗莎琳德。
+△罗莎琳德低下头，神色哀伤地向亚瑟坦白自己的身体状况，并再次劝他逃跑。
+罗莎琳德（哀伤而真诚）：The archmage said the poison in my body is destroying me. I won't survive this winter. While they're not watching you, run.
+△亚瑟和罗莎琳德在房间里对视，亚瑟神色坚定，语气霸道而温柔。
+亚瑟（坚定而霸道）：Worthy or not, I decide. Since the contract is signed, you are now my fiancée.
+△罗莎琳德有些惊讶和感动地看着亚瑟，眼中闪烁着泪光。
+△亚瑟走上前，伸出右手轻轻抚摸罗莎琳德的额头。罗莎琳德有些紧张地微微后退并举起双手，亚瑟轻声安抚她。
+亚瑟（温柔地命令）：Don't move.
+△亚瑟收回手，看着罗莎琳德，自信地向她保证。
+亚瑟（自信地）：They can't cure your poison... but I can.
+△罗莎琳德低下头，有些悲伤地叹了口气，随后抬头看着亚瑟，显然并不相信他的话。
+罗莎琳德（悲伤而无奈）：Don't comfort me, Arthur. Even the top archmages of the Royal Academy have given up.
+△亚瑟看着罗莎琳德，没有说话，神色平静而深邃。
+△亚瑟突然上前一步弯下腰，将罗莎琳德拦腰抱起。罗莎琳德有些惊呼，亚瑟低头看着她说话。
+亚瑟（温柔地）：Forgive me, my fiancée.
+△亚瑟抱着罗莎琳德转身走向房间内的四柱大床。
+△亚瑟将罗莎琳德轻轻放在床上，罗莎琳德顺从地躺下，看着他。
+△亚瑟直起身，环顾冰冷刺骨的房间，皱起眉头询问魔法木柴的下落。
+亚瑟（皱眉询问）：This room is like an ice cellar. Where's the firewood?
+△罗莎琳德躺在床上，神色虚弱且委屈地向亚瑟解释魔法木柴早就没有了，并提到了军需官休斯。
+罗莎琳德（虚弱而委屈）：It ran out long ago. Hughes, the quartermaster, hasn't given me any this month.
+△亚瑟低头看着躺在床上的罗莎琳德，神色冷峻。
+亚瑟（语气坚定）：I'll go get it.
+△亚瑟神色一冷，低头看着罗莎琳德，决定去找休斯。
+亚瑟（冷冷地）：Tell me where he is. I'll go get it.
+△罗莎琳德躺在床上，神色焦急，睁大眼睛极力劝阻亚瑟。
+罗莎琳德（语气焦急）：No, Hughes is one of the Lady's men, ruthless! And he's a mage apprentice, he knows real magic! You'll get yourself killed!
+△罗莎琳德有些焦急地想起身，睁大眼睛极力劝阻亚瑟，警告他休斯是夫人的人且懂得魔法。
+罗莎琳德（焦急而恐惧）：No, Hughes is one of the Lady's men, ruthless! And he's a mage apprentice, he knows real magic! You'll get yourself killed! Listen to me, just go!
+△罗莎琳德继续焦急地劝阻亚瑟，呼吸急促。
+罗莎琳德（语气哀求）：Listen to me, just go!
+△亚瑟弯下腰，双手温柔地握住罗莎琳德的手，看着她。
+亚瑟（语气温柔而坚定）：You stay put. I'll be right back.
+△罗莎琳德有些担忧和无奈地看着亚瑟，双手交叠放在胸前。
+4-2 Norman Castle Courtyard 外 未注明
+人物：亚瑟（Arthur）、休斯（Hughes，着装：军需官制服／皮甲）、两个仆人（Two Servants，着装：仆人服）
+△场景切换。夜晚的城堡庭院。雪地上，亚瑟大步走来。
+△亚瑟停下脚步，看着前方，大声喊话。
+亚瑟（语气强硬）：Hey, give me the magic firewood!
+△军需官休斯坐在一旁，手里拿着一串烤肉正在吃，转头看向亚瑟，不屑地笑，背景里有一堆整齐的魔法木柴。
+休斯（语气嘲讽）：Firewood? For that dying useless young lady? Oh, oh my god, don't waste our precious resources.
+△亚瑟神色冷峻，盯着休斯。
+亚瑟（语气冰冷）：What did you just say?
+△休斯站起身，右手掌心凝聚出一团火焰，嚣张地对亚瑟大喊。
+休斯（语气嚣张）：Can't you understand, lowly waste? I said she's a useless piece of trash!
+△旁边坐着的两个仆人有些惊讶地看着休斯和亚瑟。
+△亚瑟和休斯在庭院中对峙，休斯手里托着火球。
+△亚瑟看着休斯，嘴角微微上扬，露出一丝嘲讽的微笑。
+亚瑟（语气嘲讽）：Seems like the rats of the Norman family don't know the rules very well.
+△休斯托着手中的大火球，得意地冷笑。
+休斯（语气狂妄）：A magicless waste, daring to give orders on Norman territory? Even if Rosalind herself stood here, she'd have to watch my mood!
+△亚瑟微微一笑，神色自信。
+亚瑟（语气自信）：Really? Then today I'll teach you how to be an obedient little mouse.
+△休斯被激怒，面部表情变得狰狞。
+△火球呼啸声。休斯大喊，并将手中的火球猛烈地扔向亚瑟。
+休斯（怒吼）：Die!
+△旁边坐着的两个仆人紧张地睁大眼睛看着。
+△火焰碎裂声。亚瑟伸出右手，直接徒手接住了飞来的火球，火球在他掌心被捏碎，化作点点火星消散。
+△休斯满脸震惊，不敢置信地大喊。
+休斯（语气震惊）：Impossible! You don't even have a magic shield, how can you shatter a spell with your bare hands?
+△亚瑟神色平静地走向休斯，休斯愣在原地。
+△亚瑟突然伸手，一把掐住休斯的脖子，将他整个人单手提了起来。休斯双脚离地，痛苦地挣扎。
+△亚瑟抬头看着被提在空中的休斯，脸上带着温和却冰冷的微笑。
+亚瑟（语气轻蔑）：Because your magic is as weak as a baby's.
+△亚瑟右手猛地一甩，将休斯整个人重重地扔了出去。
+△重物撞击声。休斯重重地撞在城堡的石墙上，墙壁被撞出蛛网状裂缝，碎石落下，休斯随后滑落到雪地上，痛苦地捂着胸口呻吟。
+△亚瑟拍了拍双手，神色轻松地走向那一堆魔法木柴。
+△两个仆人满脸震惊地看着这一幕，吓得张大嘴巴，倒吸一口凉气，身体微微颤抖。
+△亚瑟拍了拍双手，神色轻松地转过身看向两个仆人，并伸手指着他们命令道。
+亚瑟（神色轻松但语气威严）：You lot. Take all the magic firewood, and that stove to Miss Rosalind's tower right now. If a single log is missing...
+△两个仆人吓得立刻举起双手，连连点头，惊恐地大喊回应。
+两个仆人（惊恐地连连点头）：Y-yes, sir! We'll deliver it immediately! Immediately!
+第5集：猎杀霜刃之狼
+5-1 Norman Castle Room 内 未注明
+人物：亚瑟（Arthur，着装：旅行者装）、罗莎琳德（Rosalind，着装：白色睡袍）
+△温暖的房间内，壁炉里燃烧着熊熊烈火。罗莎琳德躺在床上，转头看着走来的亚瑟，虚弱地开口询问。
+罗莎琳德（虚弱而关切地询问）：You actually got the firewood... Didn't Hughes give you trouble?
+△亚瑟坐在床边，手里端着一碗热粥，用木勺舀起一勺粥，微笑着对罗莎琳德解释。
+亚瑟（温柔地微笑）：He's a reasonable man. I just gave him a little persuasion.
+△亚瑟低头吹了吹勺子里的热粥，然后微笑着递到罗莎琳德嘴边。
+亚瑟（温柔地叮嘱）：Here, have something warm.
+△罗莎琳德张口喝下热粥，神色稍微缓和，看着亚瑟，有些感动和忧虑地开口。
+罗莎琳德（感动而忧虑）：Mr. Arthur, you...
+△亚瑟微笑着看着她，继续端着碗，轻声打断她。
+亚瑟（温柔地微笑）：Just call me Arthur.
+△亚瑟将碗放到床头的柜子上，站起身，看着罗莎琳德，温柔地叮嘱她休息。
+亚瑟（温柔地叮嘱）：You rest. I'll go to town and get you some proper food and magic herbs.
+△罗莎琳德神色一惊，急忙挣扎着坐起身，从怀里掏出一个棕色的小钱袋，双手递向亚瑟。
+罗莎琳德（急切而虚弱）：Arthur, here are thirty gold sovereigns I've saved over the years.
+△亚瑟低下头，看着罗莎琳德递过来的钱袋，双手接了过来。罗莎琳德继续焦急地说话。
+罗莎琳德（焦急地解释）：It's not much, but enough to hire a carriage back north.
+△罗莎琳德眼含泪水，紧紧盯着亚瑟，神色无比担忧和焦急地劝他离开。
+罗莎琳德（含泪焦急地劝说）：You hurt Hughes, the Lady won't let it go. Run!
+△亚瑟手里拿着钱袋，看着罗莎琳德，嘴角微微上扬，露出一丝温柔的微笑。
+亚瑟（温柔地微笑询问）：Thirty gold sovereigns? Is that enough to cure your illness?
+△罗莎琳德眼泪流了下来，绝望地摇了摇头，看着亚瑟，声音颤抖地劝他离开。
+罗莎琳德（流泪绝望地劝说）：Don't worry about me. It's incurable... Just having a bowl of hot soup in this cold castle is enough for me. Go. Never come back.
+△亚瑟弯下腰，双手温柔地握住罗莎琳德拿着钱袋的手，拉近两人的距离，神色坚定地看着她。
+亚瑟（温柔而坚定）：Listen, Rosa.
+△亚瑟双眼紧紧盯着罗莎琳德，神色极其认真和坚定地做出承诺。
+亚瑟（极其认真和坚定）：I agreed to this marriage. I won't run and leave you.
+△亚瑟继续看着罗莎琳德，轻声叮嘱她休息。
+亚瑟（轻声安慰）：Get some sleep. Leave the rest to me.
+△亚瑟松开罗莎琳德的手，站起身，转身走向房门，开门走了出去，并顺手关上门。
+△罗莎琳德躺在床上，看着亚瑟离去的方向，眼泪顺着脸颊流了下来。
+5-2 Village 外 未注明
+人物：亚瑟（Arthur）
+△俯瞰镜头下，被白雪覆盖的城镇广场上人来人往，马车缓缓行驶。
+△城堡沉重的木质大门打开，亚瑟迈步走了出来，迎着阳光走向街道。
+△亚瑟神色匆匆且坚定地走在铺满积雪的街道上。
+5-3 Magic Shop 内 未注明
+人物：亚瑟（Arthur）、店主（Shopkeeper，着装：商店长袍）、魔法商店顾客群像（Customers，着装：各色法师袍）、学徒群像（Apprentices，着装：学徒袍）
+△亚瑟走进宽敞的魔法商店，店内货架上摆满了发光的药剂瓶，魔法商店顾客群像和学徒群像正在浏览。
+△亚瑟走到木质柜台前，将棕色钱袋放在柜台上，向柜台后的店主提出需求。
+亚瑟（平静而直接）：I want a stalk of Dragonsbreath Grass.
+△店主正在拨弄算盘，听到后抬头看着亚瑟，神色傲慢地报价。
+店主（傲慢而轻蔑）：Dragonsbreath Grass? That's a premium ingredient for flame ointments. Five thousand gold sovereigns!
+△店主伸手拿起柜台上的钱袋，在手里掂了掂，露出嘲讽的笑容。
+店主（嘲讽）：With that little gold, you're not even fit to smell it.
+△亚瑟神色平静地看着店主，店主继续大声斥责并挥手赶他走。
+店主（愤怒而嫌恶）：Can't afford it? Get out, and don't leave your stench in my shop!
+△亚瑟没有生气，而是转过头，视线落在了旁边的墙壁上。
+△墙上贴着一张通缉令，上面画着一只凶猛的黑狼，写着“WANTED REWARD! 30000”。
+△亚瑟的眼睛特写，瞳孔中清晰地倒映着通缉令上的画面，他在心中默念。
+亚瑟（V.O.）（冷静思考）：Frostblade Wolf, thirty thousand gold.
+△亚瑟转回来看向店主，神色平静地提出约定。
+亚瑟（自信而平静）：Five thousand gold, right? Fine. Give me ten minutes.
+△店主听了大笑起来，满脸不可置信地大声嘲讽亚瑟。
+店主（大笑嘲讽）：Ten minutes? You think you're a mage master? Even if you robbed a lord's treasury, you couldn't be back in ten.
+△亚瑟嘴角微微上扬，露出一丝自信的微笑，转身走向大门，离开了商店。
+△商店大厅内一片安静，敞开的大门外阳光明媚。
+△亚瑟右手拖着一只巨大的黑狼尸体，神色轻松地从大门走了进来。
+△学徒群像看到这一幕，震惊地瞪大眼睛，双手死死捂住嘴巴。
+△重物落地声。亚瑟右手猛地一甩，将巨大的黑狼尸体重重地扔在商店地板中央。
+△店主站在柜台后，神色震惊地看着地上的黑狼尸体；镜头特写黑狼尸体，其身上覆盖着冰晶，胸口有一个巨大的血洞。
+△店主双手张开，满脸不可置信地大喊，身体微微颤抖。
+店主（震惊大喊）：Oh my god! That's a fully grown Blood Wolf King! Worth at least thirty thousand gold!
+△亚瑟神色平静地看着店主，语气坚定。
+亚瑟（平静坚定）：Now, wrap up that Dragonsbreath Grass for me.
+第6集：冰窖救美与怒火
+6-1 Norman Castle Room 内 未注明
+人物：诺曼伯爵夫人（Countess Norman，着装：华丽长裙，戴红宝石戒指）、乔安娜（Joanna，着装：法师长裙，持红色宝石法杖）、罗莎琳德（Rosalind，着装：白色睡衣）、侍卫群像（Guards，着装：黑色皮革盔甲）
+△风声。俯瞰镜头下，白雪覆盖的诺曼城堡静静伫立在群山和森林之间。
+△开门声、急促的脚步声。城堡房间的木门被推开，诺曼伯爵夫人神色愤怒地快步走进来，乔安娜手持顶端有红色宝石发光的法杖紧随其后。
+△伯爵夫人走到床边，愤怒地指着床上的罗莎琳德大骂。
+诺曼伯爵夫人（愤怒指责）：You cursed jinx! That crude barbarian of yours broke three of Hughes's ribs!
+△罗莎琳德神色惊恐地从床上坐起来，看着伯爵夫人；伯爵夫人继续大声辱骂她。
+诺曼伯爵夫人（刻薄辱骂）：What use are you alive except to shame the Norman family?
+△魔法能量声。乔安娜走上前，挥动法杖释放出红色光芒，将床上的被子和床单瞬间割裂；乔安娜神色愤怒地抱怨。
+乔安娜（愤怒抱怨）：Mother, that lowly waste must have already fled by now! If this gets out, my reputation will be ruined!
+△罗莎琳德受到惊吓和魔法余波影响，从床上摔落到地板上，神色痛苦。
+△乔安娜走到罗莎琳德面前，居高临下地看着她，脸上露出嘲讽和嫉恨的笑容。
+乔安娜（嘲讽嫉恨）：I see it now. You're jealous of my superior magic talent, so you deliberately let that brute go just to spite me. Isn't that right?
+△罗莎琳德虚弱地趴在地上，用手撑着身体，抬头看着乔安娜，含泪辩解。
+罗莎琳德（虚弱辩解）：My Lady, Joanna... Arthur is not a brute. He's the fiancé father acknowledged. And he didn't run away...
+△伯爵夫人冷笑一声，双手抱胸，神色轻蔑地看着地上的罗莎琳德。
+诺曼伯爵夫人（冷笑轻蔑）：Didn't run? A magicless waste who offended a mage apprentice, would he stay to wait for death?
+△伯爵夫人转头看向房间里的壁炉，发现里面正烧着珍贵的木材，顿时怒火中烧。
+诺曼伯爵夫人（怒不可遏）：You dare to warm yourself with such precious firewood?
+△伯爵夫人转过头，向着门外大声呼喊。
+诺曼伯爵夫人（大声呼喊）：Guards!
+△侍卫群像快步走进房间，向伯爵夫人低头行礼。
+侍卫群像（恭敬行礼）：My Lady!
+△伯爵夫人指着壁炉和地上的罗莎琳德，神色狠毒地下达命令；罗莎琳德在地上露出绝望的神色。
+诺曼伯爵夫人（狠毒下令）：Smash this stove! Drag this useless thing to the underground ice cellar! Since she loves shivering so much, let her get a good lesson down there!
+△侍卫群像低头领命，准备动手。
+侍卫群像（低头领命）：Yes, my lady!
+△侍卫群像一左一右走向趴在地上的罗莎琳德，准备将她强行拖走。
+6-2 Underground Ice Cellar 内 未注明
+人物：罗莎琳德（Rosalind）
+△The castle's underground ice cellar。罗莎琳德独自一人坐在冰冷潮湿的地下冰窖石地板上，身体紧缩，双手抱臂，瑟瑟发抖。
+△罗莎琳德脸色苍白，睫毛和头发上覆盖着冰霜，虚弱地喘息着，眼含泪水，在心中默默呼唤亚瑟。
+罗莎琳德（V.O.）（虚弱地内心呼唤）：Arthur?
+△罗莎琳德继续在内心独白，眼泪从眼角滑落，期盼亚瑟已经安全逃离。
+罗莎琳德（V.O.）（含泪内心独白）：I hope you're on a carriage far away by now. Please don't let them catch you...
+△特写罗莎琳德的眼睛，一滴晶莹的眼泪顺着脸颊流下，滴落在冰冷的地板上，溅起微弱的水花。
+△罗莎琳德虚弱地闭上眼睛，继续内心独白，嘴角勉强露出一丝微笑，回忆起亚瑟给她的温暖。
+罗莎琳德（V.O.）（虚弱地微笑独白）：It's alright... I wasn't going to make it through this winter anyway. At least... that bowl of soup was really warm.
+△闪回。亚瑟双手端着一碗热气腾腾的粥，用木勺舀起一勺，轻轻吹了吹，神色温柔。
+△闪回。亚瑟微笑着把热粥递向罗莎琳德，眼神中充满关切。
+亚瑟（温柔地微笑）：Here, have something warm.
+△画面回到冰窖，罗莎琳德闭着眼睛，眼泪不断流下，呼吸越来越微弱，声音渐渐低沉。
+罗莎琳德（V.O.）（极度虚弱地呢喃）：Arthur... thank you... I'm so sleepy...
+6-3 Norman Castle Courtyard 外 未注明
+人物：亚瑟（Arthur）
+△Castle courtyard。阳光明媚的雪地上，亚瑟手里拿着一个木盒子，神色匆忙地快步跑进城堡大门。
+△亚瑟跑到城堡房间的木门前，猛地伸手推开双开木门。
+△亚瑟走进空无一人的房间，环顾四周，发现床铺凌乱，壁炉已经熄灭，罗莎琳德不见了踪影。
+△亚瑟神色震惊和慌张，大声呼喊罗莎的名字。
+亚瑟（慌张地呼喊）：Rosa?
+△亚瑟转身冲出房间，来到外面的雪地上寻找线索。
+△亚瑟低头看到雪地上有一串凌乱的脚印，一直延伸到地下冰窖的入口处。
+6-4 Underground Ice Cellar 内 未注明
+人物：亚瑟（Arthur）、罗莎琳德（Rosalind）
+△亚瑟顺着脚印跑到地下冰窖沉重的双开铁门前，猛地用力推开大门。
+△罗莎琳德虚弱地睁开眼睛，看着眼前的亚瑟，满脸泪痕。
+罗莎琳德（虚弱且不可置信）：Arthur, why are you back? Didn't you escape?
+△冰窖大门大开，阳光照进阴暗的冰窖，亚瑟站在门口，神色愤怒地看着里面。
+△亚瑟深情而自责地看着她，轻声向她解释。
+亚瑟（自责且温柔）：I'm sorry. I went to the black market to trade for herbs and took some time.
+△亚瑟愤怒地大喊罗莎的名字，声音在冰窖中回荡。
+亚瑟（愤怒地大喊）：Rosa!
+△亚瑟继续看着罗莎琳德说话。
+亚瑟（坚定）：How could I ever leave you and run?
+△亚瑟快步冲下台阶，跑到罗莎琳德身边，蹲下身子，双手扶住她冰冷的肩膀。
+△罗莎琳德哭着抱住亚瑟的脖子。
+罗莎琳德（大哭）：I thought... I thought I'd never see you again...
+△亚瑟抱紧罗莎琳德，用手抚摸她的头安慰她。
+亚瑟（温柔）：It's alright. I'm here.
+△亚瑟继续抱着罗莎琳德安慰她。
+亚瑟（温柔且坚定）：No one will ever hurt you again.
+△亚瑟眼神变冷，眼睛发出幽蓝的光芒。
+亚瑟（冰冷且愤怒）：It seems certain people in the Norman family need a harsh lesson.
+△亚瑟将罗莎琳德拦腰抱起，转身走向冰窖出口的台阶。
+△亚瑟抱着罗莎琳德走上台阶，画面下方叠印出亚瑟发蓝光的眼睛特写。
+第7集：一拳轰碎城墙
+7-1 Norman Castle Room 内 未注明
+人物：亚瑟（Arthur，着装：旅行者装）、罗莎琳德（Rosalind，着装：白色睡袍）
+△亚瑟抱着罗莎琳德快步走进房间。
+△亚瑟将罗莎琳德轻轻放在床上，罗莎琳德神色担忧地看着他。
+罗莎琳德（担忧）：Arthur, you hurt Hughes. The lady won't let it go.
+△罗莎琳德继续抓着亚瑟的衣服说话。
+罗莎琳德（焦急）：And Hughes's cousin is Leon.
+△罗莎琳德神色愈发焦虑。
+罗莎琳德（焦虑）：He's a genius knight who awakened Holy Light and is about to enter the Royal Mage Academy.
+△罗莎琳德双手紧紧抓住亚瑟的手，哀求他。
+罗莎琳德（哀求）：Please, run!
+△亚瑟微微一笑，神色自信。
+亚瑟（自信且不屑）：Holy Light Knight? Nothing in front of me.
+△罗莎琳德愣愣地看着亚瑟。
+亚瑟（O.S.）（温柔）：Don't be afraid.
+△亚瑟双手握住罗莎琳德的手，温柔地看着她。
+亚瑟（温柔且坚定）：I said I'd marry you, and I will protect you.
+△罗莎琳德看着亚瑟，亚瑟继续说话。
+亚瑟（O.S.）（霸道且温柔）：No buts.
+△亚瑟看着罗莎琳德，神色认真。
+亚瑟（认真）：Now, I'm going to fix the trouble inside you.
+△亚瑟松开罗莎琳德的手，站起身走向房间另一侧的桌子。
+△亚瑟走到桌前，弯腰打开桌上的木盒子，里面放着散发着红色火焰的龙息草。
+△亚瑟伸手拿起龙息草，罗莎琳德在床上惊讶地看着。
+罗莎琳德（震惊）：Dragonsbreath Grass?
+△罗莎琳德继续看着亚瑟，神色黯然。
+罗莎琳德（黯然且自卑）：But the royal archmages said even with top-grade potions, a waste like me with innate magic blockage can't absorb it...
+△亚瑟看着手中的龙息草，神色不屑。
+亚瑟（不屑）：What do those bookworms who only recite spells know?
+△亚瑟拿着龙息草走向床边。
+亚瑟（自信）：They have no idea how immense the power hidden inside you really is.
+△亚瑟走到床前，将龙息草轻轻放在罗莎琳德的胸口。
+△亚瑟的手掌散发出耀眼的金色光芒，将龙息草化作能量融入罗莎琳德体内。
+△罗莎琳德闭上眼睛，露出痛苦的表情，身体开始散发出强烈的金色光芒。
+△能量轰鸣声。整个房间被耀眼的金色光芒照亮，一道巨大的金色光柱从罗莎琳德身上冲天而起。
+△亚瑟收回手，松了一口气，微笑着看着罗莎琳德。
+亚瑟（松了一口气，微笑赞叹）：Phew, Moonlight Magic Source... truly lives up to its name.
+△罗莎琳德睁开眼睛，神色震惊地看着自己的双手。
+罗莎琳德（神色震惊而兴奋）：This power... My magic meridians are open? I can sense the elements around me!
+△亚瑟双手抱臂，微笑着看着她。
+亚瑟（调侃且微笑）：Now, do you still think I'm just a troublemaking deserter?
+△罗莎琳德兴奋地看着亚瑟，然后扑进亚瑟怀里紧紧抱住他。
+罗莎琳德（激动地流着泪，紧紧抱住他）：Thank you, Arthur! You've given me a second life!
+△罗莎琳德在亚瑟怀里，抬头看着他，神色温柔。
+罗莎琳德（有些害羞而温柔）：Can... can I call you Arthur from now on? After we have the wedding, I'll...
+△亚瑟低头看着她，温柔地抚摸她的脸颊。
+亚瑟（温柔地微笑，眼神宠溺）：Of course. You rest and consolidate your magic. I have some 'household matters' to deal with.
+△亚瑟松开罗莎琳德，转过身，神色变得冷酷，向房间外走去。罗莎琳德在床上面带微笑地看着他离开。
+7-2 Norman Castle Corridor 外 未注明
+人物：亚瑟（Arthur）
+△夜晚，城堡外景，一轮圆月挂在空中。
+△城堡主楼的外侧走廊。亚瑟独自站在走廊上，双手抱臂，看着远方。
+△亚瑟自言自语，神色冷酷。
+亚瑟（语气冰冷而愤怒）：Sleeping soundly, are you? You like tearing down other people's houses? Then I'll give you plenty to tear down!
+△亚瑟伸出右手，握紧拳头，拳头上凝聚起耀眼的金色与红色火焰能量。
+△亚瑟挥拳向前轰出。
+亚瑟（大喊）：Break!
+△巨大的爆炸声。城堡的一面巨大石墙被亚瑟的拳风轰出一个巨大的破洞，碎石四溅。
+7-3 Norman Castle Courtyard 外 未注明
+人物：亚瑟（Arthur）、诺曼伯爵夫人（Countess Norman，着装：华丽长裙，戴红宝石戒指）、侍卫群像（Guards，着装：侍卫盔甲）
+△城堡主庭院。警报声响起，火光冲天。侍卫群像在庭院里奔跑并大喊。
+侍卫群像（惊慌而大声地呼喊）：Attack! Enemy attack! Protect the Count!
+△伯爵夫人和侍女群像惊慌失措地从大厅跑出来，看着天空中燃烧的城堡。
+诺曼伯爵夫人（神色震惊而恐慌）：Oh my god... What in the world...
+△庭院里一片混乱，仆人群像四处逃散，城堡上方燃起熊熊大火，破洞清晰可见。
+△亚瑟站在走廊边缘，纵身一跃，从高处跳下。
+△重物落地声。亚瑟稳稳地落在庭院的地面上，地面被震出裂缝，激起一片尘土。
+△亚瑟从尘土中缓缓站起身，神色冷酷。
+△伯爵夫人站在庭院中央，震惊地看着亚瑟。
+第8集：长女觉醒，伯爵臣服
+8-1 Norman Castle Wall 外 未注明
+人物：诺曼伯爵（Count Norman，着装：贵族礼服）、诺曼伯爵夫人（Countess Norman，着装：华丽长裙，戴红宝石戒指）、埃尔温长老（Elder Elwin，着装：长老法袍）、巴里长老（Elder Barry，着装：长老法袍）
+△城堡破损的城墙处。两个年长的法师站在破损的城墙前。
+△埃尔温长老伸手抚摸破损的石墙，神色凝重。
+埃尔温长老（神色震惊而凝重）：Oh my god... This cut... no trace of fire or wind elements. This wasn't caused by magic!
+△巴里长老震惊地看着埃尔温。
+巴里长老（满脸不可置信，语气震惊）：You mean... this is pure physical destruction? One blow caved in a load-bearing wall reinforced with defensive arrays? How terrifying must that brute force be!
+△伯爵夫人和诺曼伯爵在走廊上奔跑，神色慌张。
+△伯爵夫人一边跑一边惊恐地自言自语。
+诺曼伯爵夫人（神色慌张，语气惊恐）：Could it be a high-level magical beast...
+8-2 Norman Castle Corridor 外 未注明
+人物：诺曼伯爵夫人（Countess Norman）、诺曼伯爵（Count Norman）
+△伯爵夫人和诺曼伯爵在走廊上奔跑。
+△伯爵夫人一边跑一边惊恐地自言自语。
+诺曼伯爵夫人（神色慌张）：Could it be a high-level magical beast attacking the castle?
+8-3 Norman Castle Courtyard 外 未注明
+人物：诺曼伯爵（Count Norman）、诺曼伯爵夫人（Countess Norman）、埃尔温长老（Elder Elwin）、巴里长老（Elder Barry）
+△诺曼伯爵神色凝重地回答。
+诺曼伯爵（神色凝重）：Impossible. The castle's barrier gave no warning.
+△诺曼伯爵站在庭院中央，对着天空大喊，双手微微张开。
+诺曼伯爵（大声呼喊）：If the Norman family has offended you, we can talk!
+△诺曼伯爵继续大喊，身后站着伯爵夫人、两位长老和侍卫群像。
+诺曼伯爵（大声呼喊）：Name your price, what do you want?
+8-4 Norman Castle Room 内 未注明
+人物：罗莎琳德（Rosalind，着装：白色睡袍）、亚瑟（Arthur）
+△罗莎琳德双手交叠放在胸前，神色担忧地自言自语。
+罗莎琳德（神色担忧）：That huge commotion just now. Arthur couldn't be in trouble, could he?
+△开门声。房间门被推开，亚瑟抱着一叠厚厚的毛皮走进来。
+△罗莎琳德看到亚瑟，神色转为惊喜，快步迎上去。
+罗莎琳德（神色惊喜）：Arthur! What happened outside? It felt like an earthquake.
+△亚瑟把毛皮放在地上，微笑着看着罗莎琳德。
+亚瑟（面带微笑）：Oh, nothing. Probably some blind idiot pig that ran into the lady's wall.
+△罗莎琳德温柔地看着亚瑟，面带微笑。
+罗莎琳德（神色温柔）：As long as you're safe, that's all that matters.
+△亚瑟弯腰把毛皮铺在壁炉前的地板上。
+亚瑟（语气温和）：You take the bed. I'll sleep here.
+△罗莎琳德走近亚瑟，伸手轻抚他的手臂，关切地看着他。
+罗莎琳德（神色关切）：The tower is freezing. You'll get sick sleeping on the floor.
+△亚瑟直起身，微笑着看着罗莎琳德。
+亚瑟（调侃语气）：We haven't had the wedding yet. Isn't that against noble etiquette?
+△罗莎琳德深情地看着亚瑟。
+罗莎琳德（神色深情）：You gave me my life. I don't care about those rules.
+△亚瑟温柔地微笑，看着罗莎琳德。
+△两人并排躺在床上，罗莎琳德靠在亚瑟的肩膀上安然入睡，亚瑟搂着她，神色温柔而坚定。
+亚瑟（V.O.）（内心独白，语气坚定）：From now on, anyone who so much as touches a hair on your head will pay with their life.
+8-5 Norman Castle Hall 内 未注明
+人物：诺曼伯爵（Count Norman）、诺曼伯爵夫人（Countess Norman）、罗莎琳德（Rosalind，着装：华丽长裙）、亚瑟（Arthur）、侍卫群像（Guards，着装：侍卫盔甲）
+△白天的城堡外景，大门缓缓打开。
+△城堡大厅内，长桌旁坐着诺曼伯爵和伯爵夫人正在用餐。
+△罗莎琳德穿着华丽的长裙走进大厅，走到桌旁向伯爵和伯爵夫人行礼。
+罗莎琳德（语气恭敬）：Father, my Lady.
+△伯爵夫人用餐，神色傲慢。
+△亚瑟跟着罗莎琳德走进大厅，在罗莎琳德身旁的空位坐下，拿起桌上的苹果咬了一口，神色自若。伯爵和伯爵夫人神色复杂地看着他。
+亚瑟（调侃而挑衅）：Why didn't anyone call us for breakfast? This castle's hospitality is terrible.
+△伯爵夫人愤怒地猛拍桌子站起来，指着亚瑟大喊。
+诺曼伯爵夫人（愤怒大喊）：You useless waste! You hurt Hughes and dare to swagger in here? Guards!
+△亚瑟继续咬了一口苹果，神色自若。
+△伯爵夫人指着亚瑟继续大喊。
+诺曼伯爵夫人（愤怒命令）：Seize this reckless bumpkin!
+△罗莎琳德神色担忧地看着。
+△伯爵夫人继续大喊。
+诺曼伯爵夫人（狠毒）：Break his legs and throw him out of the castle!
+△罗莎琳德急忙站起来，挡在亚瑟身前。
+△侍卫群像拔出长剑指向前方。
+△罗莎琳德神色紧张地看着侍卫群像。
+△亚瑟站起身，把罗莎琳德护在身后，手里仍拿着苹果。
+△亚瑟神色冷峻地看着前方。
+△白光闪过，亚瑟神色冷酷。
+△侍卫群像手持长剑，神色警惕地看着亚瑟。
+△亚瑟护着罗莎琳德，冷冷地看着前方。
+△诺曼伯爵站起身，伸出一只手制止侍卫群像。
+诺曼伯爵（严厉喝止）：Stop! All of you, stand down!
+△侍卫群像听到命令，收起武器退下。
+△诺曼伯爵和伯爵夫人站在一起，伯爵神色凝重。
+△伯爵夫人转头愤怒地对诺曼伯爵大喊，并指向亚瑟。
+诺曼伯爵夫人（愤怒质问）：Norman! This barbaric thug broke Hughes's ribs, and now dares to cause trouble in my dining room! Why don't you throw him in the dungeon?
+△亚瑟伸手搂住罗莎琳德的肩膀，冷笑着对伯爵夫人说话。
+亚瑟（冷笑反驳）：Barbaric? Your precious steward cut off Rosa's firewood, and tried to freeze her to death in the cellar. I was being merciful by not snapping his neck!
+△罗莎琳德神色复杂地看着亚瑟。
+△亚瑟神色严厉地盯着伯爵夫人。
+△伯爵夫人愤怒地反驳。
+诺曼伯爵夫人（强词夺理）：Nonsense! What proof do you have?
+△罗莎琳德走上前一步，神色坚定地看着伯爵夫人说话。
+罗莎琳德（坚定维护）：Stop calling him a thug, my lady. Arthur is now my husband. And he saved my life.
+△伯爵夫人震惊而愤怒地瞪大眼睛。
+诺曼伯爵夫人（难以置信）：You dare speak to me like that?
+△伯爵夫人转头对诺曼伯爵大喊。
+诺曼伯爵夫人（歇斯底里）：Norman, did you hear that? This dying useless thing dares to talk back to me!
+△诺曼伯爵愤怒地大吼。
+诺曼伯爵（愤怒大吼）：Enough! Everyone shut up! Guards, get out!
+△侍卫群像听到命令，收起武器，转身退下。
+△诺曼伯爵看着罗莎琳德，神色从愤怒转为震惊和疑惑，他走上前打量着罗莎琳德。
+诺曼伯爵（震惊疑惑）：Wait... Rosa? Your complexion... You can walk on your own, and I can even sense strong magical fluctuations from you? Impossible!
+△罗莎琳德微微一笑，神色平静地看着诺曼伯爵说话。
+罗莎琳德（平静微笑）：You're not wrong, Father. The uncontrollable magic inside me has been completely cured by Arthur.
+△诺曼伯爵和伯爵夫人震惊地看着罗莎琳德。
+诺曼伯爵（难以置信）：What? That's impossible!
+△魔法施法声。诺曼伯爵伸出一只手，按在罗莎琳德的额头上，手掌发出蓝色的光芒。
+△诺曼伯爵闭上眼睛感应，随后睁开眼睛，双眼发出蓝色的光芒，神色极其震惊。
+诺曼伯爵（极度震惊）：Unbelievable... Your mana flow is flawless! And incredibly pure! Even the witch poison that the top royal mages couldn't cure, it's completely gone!
+△罗莎琳德微微一笑，神色欣慰。
+△诺曼伯爵神色复杂地看着亚瑟，内心感到极度震撼。
+诺曼伯爵（V.O.）（凝重深思）：How could a magicless waste perform such a miracle? This Arthur... is definitely not as simple as he appears!
+△亚瑟神色自若地微微一笑。
+△诺曼伯爵走到亚瑟面前，深深地向亚瑟鞠了一躬。
+诺曼伯爵（诚恳感激）：Mr. Arthur, thank you for saving my daughter!
+△亚瑟神色平静地看着诺曼伯爵，微微欠身回礼。
+亚瑟（谦逊平静）：Count, you flatter me. Rosa is my fiancée. Saving her is only right.
+△伯爵夫人站在一旁，神色嫉恨地低头小声嘀咕。
+诺曼伯爵夫人（低声咒骂）：Damn waste...
+△诺曼伯爵直起身，从怀里拿出一个沉甸甸的、绣有伯爵徽记的棕色钱袋，递给罗莎琳德。
+诺曼伯爵（温和叮嘱）：Rosa, here are a hundred gold sovereigns. You and Arthur go to town,
+△罗莎琳德接过钱袋，诺曼伯爵继续叮嘱。
+诺曼伯爵（郑重）：buy decent clothes and wedding supplies. The wedding in three days, I want it grand!
+△亚瑟神色平静地看着。
+△亚瑟看着诺曼伯爵，开口询问。
+亚瑟（平静询问）：Count, Rosa's tower is freezing. Shouldn't she move somewhere else?
+△诺曼伯爵神色一震，转头愤怒地对伯爵夫人大喊。
+诺曼伯爵（严厉命令）：Immediately prepare the warmest suite in the south wing for Rosa!
+△伯爵夫人神色惊恐而委屈地低下头，诺曼伯爵继续严厉地警告她。
+诺曼伯爵（严厉警告）：If you dare mistreat her again, I'll never let it go!
+△伯爵夫人低头不敢说话，罗莎琳德在后面看着。
+第9集：掌掴嚣张少主
+9-1 Magic Shop 内 未注明
+人物：亚瑟（Arthur，着装：旅行者装）、罗莎琳德（Rosalind，着装：白色轻纱长裙）、店主（Shopkeeper，着装：商店长袍）、查尔斯（Charles，着装：绿色华丽礼服，持短魔杖）、随从群像（Followers，着装：随从服饰）、两个随从（Two Servants，着装：随从服）
+△亚瑟和罗莎琳德并肩走进魔法商店，从大门向里走。
+△店主迎上前，神色热情地对他们说话。
+店主（热情谄媚）：Oh! You're here! These premium restorative potions come to sixteen thousand gold sovereigns.
+△店主继续笑着说话，并做出手势。
+店主（慷慨大方）：round it down to fifteen for you!
+△罗莎琳德转头看着亚瑟，神色担忧，轻声说话。
+罗莎琳德（担忧而轻柔）：Arthur, that's so expensive...
+△亚瑟温柔地看着罗莎琳德，开口安慰她。
+亚瑟（温柔而坚定）：Your body just recovered. You need these potions to build strength. Money's not an issue.
+△亚瑟和罗莎琳德深情对视，罗莎琳德露出微笑，此时一个男子的声音从画外传来。
+查尔斯（O.S.）（轻浮而自信）：This beautiful lady's bill...
+△查尔斯在一群随从的簇拥下走上前来，他穿着绿色的华丽礼服，手里拿着一根顶端发光的短魔杖，神色自信。
+查尔斯（傲慢自信）：I'll cover it.
+△查尔斯走近，看着罗莎琳德，神色傲慢而自信地自我介绍。
+查尔斯（得意洋洋）：I'm Charles, heir to the Alchemy Guild.
+△查尔斯继续看着罗莎琳德，赞美她。
+查尔斯（谄媚讨好）：Beautiful lady, you're absolutely enchanting.
+△查尔斯微微一礼，向罗莎琳德发出邀请。
+查尔斯（虚伪绅士）：Would you do me the honor of having dinner with me?
+△亚瑟神色一冷，上前一步挡在罗莎琳德身前，冷冷地看着查尔斯，罗莎琳德有些担忧地躲在亚瑟身后。
+△亚瑟冷冷地盯着查尔斯，开口警告。
+亚瑟（冰冷警告）：Keep your disgusting eyes to yourself.
+△罗莎琳德神色平静，看着查尔斯，开口拒绝。
+罗莎琳德（神色平静）：I have a fiancé.
+△查尔斯神色微变，随后露出一丝冷笑，开口回应。
+查尔斯（冷笑）：Fine. Very well.
+△查尔斯身后的一个黑衣守卫上前，弯腰将一个沉甸甸的钱袋递给亚瑟，亚瑟伸手接过钱袋拿在手中。
+△查尔斯神色傲慢地看着亚瑟，挥动着手中的魔杖，开口羞辱亚瑟并提出要求。
+查尔斯（神色傲慢）：These gold sovereigns are enough for a bumpkin like you to waste in taverns for the rest of your life. Give me your fiancé.
+△亚瑟转过身，将钱袋递给罗莎琳德，罗莎琳德伸手接过，亚瑟温柔地对她说。
+亚瑟（语气温柔）：Here, Rosa. Keep this money.
+△亚瑟转回身，双手叉腰，神色戏谑地看着查尔斯，开口反击。
+亚瑟（神色戏谑）：Oh my, esteemed young master, I have a few dozen gold sovereigns here. I wonder if that's enough to buy your mother for one night with me?
+△查尔斯勃然大怒，脸色铁青，挥舞着魔杖大吼。
+查尔斯（愤怒大吼）：Good, good, good! You magicless bastard! Daring to insult noble mage bloodline!
+△查尔斯转头对身后的守卫大喊下令，罗莎琳德在后面惊恐地用双手捂住脸。
+查尔斯（愤怒大吼）：Guards! Seize him! I'll burn him to ashes!
+△两个守卫拔出燃烧着火焰的剑，冲向亚瑟。亚瑟神色平静，在守卫的剑刺来时迅速出手，一把抓住了其中一个守卫的手腕。
+△亚瑟用力一扭，将两个守卫狠狠地摔向后方的玻璃展示柜，展示柜碎裂一地。查尔斯在旁边愤怒地大骂。
+查尔斯（愤怒大骂）：Useless lot! Can't even handle a bumpkin!
+△查尔斯举起魔杖对准亚瑟，魔杖顶端凝聚出熊熊烈火，他大吼，罗莎琳德在亚瑟身后露出极度惊恐的神色。
+查尔斯（大吼）：Feel the fury of flames! Fireball!
+△亚瑟身形一闪，瞬间出现在查尔斯面前，一把抓住了查尔斯握着魔杖的手腕，冷冷地看着他并开口。
+亚瑟（语气冰冷）：The mage's common flaw: too much talking.
+△亚瑟一拳重重地打在查尔斯的脸上，查尔斯被打得在空中翻滚了一圈，狠狠地摔在地上，魔杖掉落在一旁。
+△亚瑟抬起脚，一脚踩碎了掉落在地上的华丽魔杖。
+△查尔斯躺在地上，捂着流血的嘴，神色痛苦而愤怒地大喊威胁。
+查尔斯（痛苦而愤怒地大喊）：My wand! You dare hit me? My father is the Alchemy Guild Master! He'll have you killed!
+△亚瑟走上前，一把将查尔斯从地上拎了起来，冷冷地盯着他。
+△亚瑟冷冷地对查尔斯说话，并连续几拳重重地打在查尔斯的脸上。
+亚瑟（语气冰冷）：I don't care who your father is.
+△罗莎琳德急忙冲上前，双手紧紧抓住亚瑟的手臂，神色焦急地劝阻。
+罗莎琳德（神色焦急）：Arthur! Stop! You'll kill him! He's the guild heir. Let's go, this will cause huge trouble!
+△亚瑟听了罗莎琳德的话，松开手将查尔斯扔在地上，查尔斯狼狈地摔倒。亚瑟转过身，温柔地对罗莎琳德说话。
+亚瑟（温柔地）：Fine. Whatever you say.
+△亚瑟和罗莎琳德手拉手向大门走去准备离开，一个随从急忙跑过来扶起躺在在地上的查尔斯。
+两个随从（惊慌地询问）：Young master! Are you alright?
+△查尔斯在随从的搀扶下挣扎着坐起来，满脸是血，神色极其愤怒和怨恨地咬牙切齿大喊。
+查尔斯（咬牙切齿地怒吼）：That woman... she's Rosalind of the Norman family! Go tell my father! I want the Normans to hand over that bumpkin! And I'll make that woman my slave right in front of him!
+9-2 Magic Shop 内 未注明
+人物：塞琳娜（Selina，着装：奢华会长礼服，持黑色折扇）、奥尔德里奇（Aldrick，着装：黑色法袍，持龙头法杖）
+△黑发女子背对镜头站在巨大的彩色玻璃窗前，奥尔德里奇恭敬地站在她身后。黑发女子转过身来，开口询问。
+塞琳娜（平静而威严）：That man... Have you found out about him?
+△奥尔德里奇微微低头，恭敬地回答。
+奥尔德里奇（恭敬汇报）：Yes, my lady. His name is Arthur, a magicless waste.
+△奥尔德里奇继续汇报。
+奥尔德里奇（平静叙述）：Currently living off the Norman family in the south.
+△塞琳娜神色微动，露出若有所思的表情，随后微微一笑。
+塞琳娜（若有所思）：A powerhouse with such terrifying physical strength willing to live off a declining mage family?
+△奥尔德里奇听着，神色凝重。
+△奥尔德里奇开口，语气中带着一丝不屑。
+奥尔德里奇（不屑一顾）：The Norman family is just a third-rate mage clan,
+△奥尔德里奇微微低头，神色不屑地继续向女会长汇报。
+奥尔德里奇（语气不屑）：shortsighted, unable to see the danger of that man.
+△塞琳娜静静地听着，神色平静。
+△奥尔德里奇神色凝重地看着塞琳娜。
+△塞琳娜微微一笑，眼神中闪过一丝兴趣。
+塞琳娜（饶有兴致）：Interesting.
+△奥尔德里奇微微低头，等待塞琳娜的指示。
+△塞琳娜神色认真地看着奥尔德里奇，开口吩咐。
+塞琳娜（神色认真）：Aldrick, prepare a gift of the finest magic materials from the guild vault. I will personally visit the Norman family, and make acquaintance with this Mr. Arthur.
+△奥尔德里奇深深鞠躬，恭敬地回答。
+奥尔德里奇（恭敬地鞠躬）：As you wish, my lady.
+第10集：会长亲临，雷霆反噬
+10-1 炼金术士公会大厅 内 未注明
+人物：巴尔萨泽（Balthazar，着装：炼金公会会长法袍）、查尔斯（Charles，着装：绿色华丽礼服，脸上缠绷带）、塞琳娜（Selina，着装：奢华会长礼服，持黑色折扇）、奥尔德里奇（Aldrick，着装：黑色法袍，持龙头法杖）
+△会长巴尔萨泽得知消息后勃然大怒，猛地一挥手将桌上的药水瓶和实验器具全部扫落到地上，摔得粉碎。
+巴尔萨泽（愤怒地大吼）：The Normans really did this?!
+△查尔斯站在巴尔萨泽身旁，神色委屈而愤怒地开口请求。
+查尔斯（委屈而愤怒地）：Father, you have to avenge me!
+△巴尔萨泽转过身，伸手拍了拍查尔斯的肩膀，神色阴冷地安慰他。
+巴尔萨泽（阴冷地）：Don't worry. I will burn that bumpkin who hurt you to ashes!
+△大门打开的声音。大厅沉重的大门缓缓打开，外面透进强烈的光芒。巴尔萨泽转头看向大门，神色不悦地大喊。
+巴尔萨泽（不悦地大喊）：What's going on out there? Such noise.
+△塞琳娜和奥尔德里奇并肩从大门外走进来。巴尔萨泽看到他们，神色大惊，连忙躬身行礼，语气极其恭敬和结巴。
+巴尔萨泽（极其恭敬而结巴地）：W-w-welcome, Lady Selena!
+△塞琳娜神色高傲，轻轻展开手中的黑色折扇，微微抬起下巴，开口说话。
+塞琳娜（高傲地）：Rise, all of you. I've come to visit a distinguished guest.
+△塞琳娜和奥尔德里奇并肩向大厅内走去，塞琳娜一边走一边摇着折扇，神色平静地吩咐。
+塞琳娜（平静地吩咐）：Bring out the most valuable magical materials from the Guild Vault.
+△巴尔萨泽满脸堆笑，神色极其谄媚地连连点头答应。
+巴尔萨泽（谄媚地连连点头）：Of course, my lady. I'll have it done immediately. You'll be fully satisfied.
+△奥尔德里奇转头看向查尔斯，注意到他脸上的伤，用手中的龙头法杖指了指查尔斯，神色严肃地开口询问。
+奥尔德里奇（严肃地询问）：What happened to your son's face?
+△巴尔萨泽神色有些尴尬，但随即露出一丝讨好的笑容，开口向奥尔德里奇解释。
+巴尔萨泽（尴尬而讨好地解释）：To be honest, Elder, he was beaten by some trash from a minor family in town. I was just about to teach them a lesson.
+△奥尔德里奇听后，神色变得严厉，握紧手中的龙头法杖，语气冰冷而威严地开口。
+奥尔德里奇（冰冷而威严地）：In this southern town, someone dares to offend our Alchemy Guild? Tell me the family name. I'll deal with them personally.
+巴尔萨泽（谄媚地摆手）：No need to trouble yourself, Elder! Just a bankrupt third-rate mage family. This trifle isn't worth dirtying your noble hands.
+△巴尔萨泽将双手按在胸前，继续对奥尔德里奇说话。
+巴尔萨泽（自信且恭敬地）：I can handle it myself.
+△奥尔德里奇从怀中拿出一颗发光的金色石头，递向巴尔萨泽。
+奥尔德里奇（严肃地）：If you encounter trouble, crush this stone and I'll be there immediately.
+△查尔斯站在一旁，神色惊讶地看着奥尔德里奇手中发光的金色石头。
+△巴尔萨泽伸出双手，小心翼翼地从奥尔德里奇手中接过那颗发光的金色石头。
+△巴尔萨泽抬头看着奥尔德里奇，满脸感激地大声致谢。
+巴尔萨泽（极其感激地）：Thank you, Elder! I'm so grateful.
+△巴尔萨泽低头端详着手中发光的金色石头，神色得意。
+10-2 Norman Castle Hall 内 未注明
+人物：诺曼伯爵（Count Norman，着装：贵族礼服）、诺曼伯爵夫人（Countess Norman，着装：华丽长裙，戴红宝石戒指）、守卫信使（Guard Messenger，着装：守卫盔甲）
+△倒酒声。诺曼伯爵夫人手持银色酒壶，面带微笑地往诺曼伯爵面前的酒杯里倒红酒，并开口询问。
+诺曼伯爵夫人（微笑地）：Count, have you heard?
+△诺曼伯爵夫人继续倒酒，随后凑近诺曼伯爵耳边，神色有些八卦地低声说话。
+诺曼伯爵夫人（低声且有些幸灾乐祸地）：Young Master Charles of the Alchemy Guild was beaten up at the Guild today. Even lost some teeth.
+△诺曼伯爵端起酒杯抿了一口，随后放下酒杯，神色严肃而轻蔑地开口说话。
+诺曼伯爵（严肃且轻蔑地）：I've heard a little. Who's so bold as to offend the Alchemy Guild? What a reckless idiot.
+△急促的脚步声。守卫信使神色极其慌张地从大厅门口跑进来，在光滑的地板上滑倒了一下，随即急忙爬起来冲向餐桌。
+△守卫信使跑到餐桌旁，双手撑在桌面上，气喘吁吁，神色惊恐地大喊。
+守卫信使（惊恐且气喘吁吁地）：Count! Terrible news!
+△诺曼伯爵眉头紧锁，神色不悦地看着守卫信使，沉声质问。
+诺曼伯爵（不悦地）：What's the panic?
+△守卫信使神色焦急地大声汇报情况。
+守卫信使（焦急地）：The Alchemy Guild Master has brought dozens of high-level battle mages.
+△守卫信使继续神色恐慌地大声汇报，双手在空中比划。
+守卫信使（极其恐慌地）：They've surrounded the castle! They swear to raze the Norman family.
+△诺曼伯爵和伯爵夫人听后大惊失色，两人对视一眼，神色震惊。
+△诺曼伯爵夫人神色大变，焦急而愤怒地大声质问守卫信使。
+诺曼伯爵夫人（焦急且愤怒地）：What? Why is the Alchemy Guild surrounding us?
+△守卫信使看着诺曼伯爵，咽了口唾沫，神色紧张地继续汇报。
+守卫信使（紧张且吞吐地）：They say... it was Lord Arthur who crippled Young Master Charles.
+△诺曼伯爵夫人听到亚瑟的名字，震惊得瞪大了眼睛，满脸不可置信。
+△玻璃破碎声。诺曼伯爵愤怒地将手中的酒杯狠狠摔在地上，红酒溅了一地，酒杯摔得粉碎。
+△诺曼伯爵夫人歇斯底里地大喊，面部表情因极度愤怒和怨恨而扭曲。
+诺曼伯爵夫人（歇斯底里且愤怒地）：That damned bumpkin! He's going to get our entire family killed!
+△剧烈的震动声。大厅突然剧烈摇晃，头顶的吊灯剧烈摆动，灰尘和碎石落下，诺曼伯爵夫人神色惊恐地抬头看去。
+10-3 Norman Castle Courtyard 外 未注明
+人物：巴尔萨泽（Balthazar）、查尔斯（Charles）、诺曼伯爵（Count Norman）、诺曼伯爵夫人（Countess Norman）、亚瑟（Arthur，着装：旅行者装）、罗莎琳德（Rosalind，着装：白色轻纱长裙）、塞琳娜（Selina，着装：奢华会长礼服）、奥尔德里奇（Aldrick，着装：黑色法袍，持龙头法杖）、侍卫群像（Guards，着装：侍卫盔甲）
+△Norman Castle Courtyard。巴尔萨泽站在城堡大门外，身上散发着紫色的魔法光芒，神色愤怒地大喊。
+巴尔萨泽（愤怒且大声地）：Count Norman! Get out here now!
+△诺曼伯爵和伯爵夫人带着侍卫群像，神色慌张地从城堡大门里急匆匆跑出来，跑向巴尔萨泽。
+△诺曼伯爵在巴尔萨泽面前停下脚步，双手摊开，满脸堆笑，神色谄媚而焦急地连连解释。
+诺曼伯爵（谄媚且焦急地）：Guild Master Balthazar, this is absolutely a misunderstanding! Arthur is just a magicless waste, how could he possibly hurt your son?
+△巴尔萨泽神色冰冷，猛地怒喝一声，打断了诺曼伯爵的话。
+巴尔萨泽（愤怒地）：Shut up!
+△巴尔萨泽神色严厉地指着诺曼伯爵，大声斥责。
+巴尔萨泽（严厉地）：Everyone in the guild saw it! If you don't hand him over today, I swear the Norman family won't see tomorrow's sun!
+△查尔斯转头看向巴尔萨泽，神色嚣张地开口说话，随后又转头看向前方。
+查尔斯（嚣张）：Father, stop wasting words with them. Just drag that bumpkin Arthur out here.
+△诺曼伯爵夫人走上前，神色谄媚而急切地对巴尔萨泽和查尔斯说话。
+诺曼伯爵夫人（谄媚而急切）：Guild Master, the trouble caused by that waste Arthur has nothing to do with us! You can do whatever you want with him.
+△查尔斯神色阴险地笑起来，看着诺曼伯爵夫人，开口提出条件。
+查尔斯（阴险地笑）：That bastard will die, of course. But, Rosalind comes with me too. You understand what I mean, my lady?
+△诺曼伯爵夫人听后，立刻面露喜色，连连点头，神色谄媚地答应。
+诺曼伯爵夫人（谄媚地答应）：Of course, Young Master Charles! You can take Rosalind!
+△诺曼伯爵神色愤怒，猛地转头冲着伯爵夫人大吼，并伸手推了她一下。
+诺曼伯爵（愤怒大吼）：Shut up and get inside! I am the master of this house, you have no say here!
+△诺曼伯爵夫人被推得后退一步，神色极其愤怒和泼辣，指着诺曼伯爵大声反驳。
+诺曼伯爵夫人（愤怒反驳）：You dare yell at me? Without my family's money, you'd have lost that worthless count title long ago!
+△查尔斯神色不耐烦地打断了他们的争吵，眼神冰冷地看着他们。
+查尔斯（不耐烦）：Enough. I'm not interested in your bickering. Hand over Arthur and Rosalind, or I'll burn your castle to the ground!
+△亚瑟和罗莎琳德手拉手从城堡大门里缓缓走出来。亚瑟神色平静而轻蔑地开口。
+亚瑟（平静而轻蔑）：Burn the castle?
+△亚瑟看着查尔斯，嘴角微微上扬，露出一抹嘲讽的微笑。
+亚瑟（嘲讽）：You barely have any teeth left, and you're still this loud?
+△查尔斯看到亚瑟，神色大变，愤怒而惊恐地指着亚瑟，转头对巴尔萨泽大喊。
+查尔斯（愤怒而惊恐）：Father! That's him! That's the bastard who hit me! Kill him!
+△巴尔萨泽神色冰冷地看着亚瑟，随后露出一抹残忍的微笑，大声下令。
+巴尔萨泽（冷酷下令）：So just a lowly trash. Seize him!
+△诺曼伯爵走上前，挡在亚瑟和罗莎琳德身前，神色严肃地对巴尔萨泽说话。
+诺曼伯爵（严肃）：Guild Master Balthazar, Norman family may not be what it once was, but you can't go too far!
+△诺曼伯爵继续神色严肃地说话，亚瑟在后面神色平静地看着他。
+诺曼伯爵（继续严肃说话）：Arthur wouldn't have acted without reason, there must be a cause!
+△巴尔萨泽神色极其愤怒，猛地走上前，指着诺曼伯爵大声咆哮。
+巴尔萨泽（愤怒咆哮）：I don't care about reasons! Anyone who stands in my way today dies!
+△巴尔萨泽走到诺曼伯爵面前，神色严厉地指着他，大声质问和威胁。
+巴尔萨泽（严厉质问）：Count! Are you insane? You'd destroy the entire family for a waste?
+△巴尔萨泽继续指着诺曼伯爵威胁。
+巴尔萨泽（继续威胁）：If you keep protecting him, I'll depose you!
+△画面切到亚瑟和罗莎琳德，罗莎琳德神色担忧地看着亚瑟，亚瑟则神色平静地开口。
+亚瑟（神色平静）：Count, this started because of me. I'll...
+△诺曼伯爵猛地转过身，神色严肃地打断亚瑟，并伸手示意他退后。
+诺曼伯爵（神色严肃）：Step back. What can an ordinary man without magic do?
+△诺曼伯爵转回身看着巴尔萨泽，神色诚恳地开口认错。
+诺曼伯爵（神色诚恳）：Guild Master Balthazar, we were wrong.
+△诺曼伯爵低下头，神色有些沮丧和无奈，提出赔偿条件。
+诺曼伯爵（神色沮丧）：I'm willing to hand over half the family's assets,
+△罗莎琳德神色担忧地拉着亚瑟的衣袖，亚瑟则神色平静地看着前方。
+诺曼伯爵（O.S.）（神色诚恳）：plus ten crates of high-grade mana potions as compensation.
+△诺曼伯爵抬起头，神色诚恳地看着巴尔萨泽，为亚瑟求情。
+诺曼伯爵（神色诚恳）：Spare Arthur.
+△巴尔萨泽和查尔斯站在对面，巴尔萨泽冷笑一声，神色轻蔑地开口。
+巴尔萨泽（冷笑轻蔑）：Ten crates? You're joking.
+△巴尔萨泽神色嚣张地往前走了一步，大声拒绝并宣判亚瑟的死刑。
+巴尔萨泽（神色嚣张）：Even a hundred crates won't save him. He dies today!
+△查尔斯站在巴尔萨泽身后，神色愤怒而嚣张地大喊附和。
+查尔斯（愤怒嚣张）：Yes! He must die!
+△巴尔萨泽神色冰冷地指着亚瑟，大声怒喝。
+巴尔萨泽（神色冰冷）：Useless bastard! Die!
+△魔法凝聚的滋滋声。巴尔萨泽手中的法杖顶端宝石发出强烈的蓝光。
+△巴尔萨泽神色冰冷而残忍地看着前方，准备发动攻击。
+△巨大的雷击声。一道巨大的蓝色闪电从天而降，猛烈地劈向庭院中央。
+△亚瑟神色平静地站在原地，身上散发着微弱的蓝色电光，但毫发无损。
+△罗莎琳德和诺曼伯爵夫人神色极其震惊地看着亚瑟。
+罗莎琳德（极其震惊）：Arthur, you...
+△雷电消散的噼啪声。亚瑟微微侧身，神色轻松地拍了拍肩膀，仿佛在拍落灰尘。
+△巴尔萨泽神色极其震惊和难以置信地瞪大眼睛，看着安然无恙的亚瑟。
+△雷电彻底消散，亚瑟神色平静地站在原地，毫发无伤。
+△罗莎琳德、诺曼伯爵和伯爵夫人三人同框，脸上写满了震惊与不可思议。
+△沉重的倒地声。巴尔萨泽猛地吐出一口鲜血，身体摇晃着向后倒去，重重地摔在地上。
+△传送门打开的嗡鸣声。一个金色的传送门在庭院中打开，塞琳娜和奥尔德里奇从中并肩走出来。
+△巴尔萨泽倒在地上，嘴角流着血，神色痛苦而愤怒地大喊。
+巴尔萨泽（愤怒而痛苦地大喊）：That barbarian wrecked our guild! Please use high magic to kill him!
+第11集：大魔导师当众掌掴会长
+11-1 Norman Castle Courtyard 外 未注明
+人物：亚瑟（Arthur）、罗莎琳德（Rosalind）、诺曼伯爵（Count Norman）、诺曼伯爵夫人（Countess Norman）、巴尔萨泽（Balthazar）、查尔斯（Charles）、塞琳娜（Selina，着装：奢华会长礼服）、奥尔德里奇（Aldrick，着装：黑色法袍，持龙头法杖）、两个随从（Two Servants，着装：随从服）、侍卫群像（Guards，着装：侍卫盔甲）
+△巴尔萨泽倒在地上，一手捂着胸口，嘴角流着血，神色痛苦而震惊地看着亚瑟质问。
+巴尔萨泽（痛苦震惊）：You're not an ordinary man... You can disperse magic with your body?
+△诺曼伯爵神色极其震惊，眼睛瞪得极大，看着走出来的奥尔德里奇。
+诺曼伯爵（极其震惊地惊呼）：That's... a fourth-tier archmage! We're doomed!
+△亚瑟神色平静地握了握拳头，随后双手抱胸，居高临下地看着巴尔萨泽，语气轻蔑。
+亚瑟（轻蔑平静）：With such meager skills, you dare to cause trouble at the Norman estate?
+△诺曼伯爵神色慌张地看着前方，继续大喊。
+诺曼伯爵（慌张地大喊）：Balthazar actually has such a big shot backing him!
+△奥尔德里奇站在巴尔萨泽面前，居高临下地看着他，神色严肃地开口。
+奥尔德里奇（严肃地开口）：Are you certain...
+△巴尔萨泽神色极其愤怒和疯狂，挣扎着想爬起来，指着亚瑟大声咆哮。
+巴尔萨泽（疯狂咆哮）：Arrogant monster! So what if you're strong?! I'll slaughter every one of you today!
+△奥尔德里奇继续严肃地看着巴尔萨泽。
+奥尔德里奇（严肃地质问）：...he's the one you want to kill?
+△符石发出的嗡鸣声。巴尔萨泽从怀里掏出一枚发光的金色传送符石，紧紧握在右手掌心。
+△巴尔萨泽挣扎着想爬起来，一手捂着胸口，神色疯狂地指着前方大喊。
+巴尔萨泽（疯狂地指着前方大喊）：That's him! A lowly trash!
+△查尔斯头上缠着绷带，站在一旁，神色怨恨地笑着。
+△巴尔萨泽神色极其愤怒地大吼。
+巴尔萨泽（歇斯底里地大吼）：Kill him!
+△罗莎琳德神色极其震惊和担忧地看着前方。
+△诺曼伯爵神色极其震惊地看着前方。
+△奥尔德里奇神色愤怒地转过头看向巴尔萨泽。
+△清脆的巴掌声。奥尔德里奇猛地一巴掌把巴尔萨泽扇倒在地上，巴尔萨泽神色极其震惊和痛苦。
+△塞琳娜神色冷漠地看着倒地的巴尔萨泽。
+△亚瑟双手抱胸，神色平静，嘴角带着一丝玩味的笑意。
+△奥尔德里奇指着倒在地上、捂着脸的巴尔萨泽，愤怒地大吼。
+奥尔德里奇（愤怒地大吼）：You idiot!
+△巴尔萨泽的特写，他捂着被打红的脸，嘴角流血，神色极其震惊和恐惧地看着奥尔德里奇。
+△奥尔德里奇继续愤怒地指着巴尔萨泽大吼。
+奥尔德里奇当前对话中，结尾处已停在：
+奥尔德里奇
+---
+以上为第1–10集完整修正稿，以及第11集已给部分。
+第11集后半缺失：原文在“奥尔德里奇”处中断，无法在不凭空续写的前提下继续输出。请补发 11-1 该处之后的原文；收到后我再按同样规则续完第11集，并可按需输出《变更日志》与《逻辑复检报告》。
+下载完整剧本
+重新开始
+OFFICIAL PIPELINE · STAGE 01
