@@ -1,7 +1,6 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import type { PipelineSettings, Shot, ScriptAnalysis, SeedancePrompt } from '../../src/lib/types.ts';
 import { callDeepSeekStream, createSSE, parseBody, parseJSONResponse, sendError } from './utils.ts';
-import { renderPrompt } from './promptRenderer.ts';
 import { getEffectivePrompt } from './defaultPrompts.ts';
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
@@ -34,31 +33,21 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   const sse = createSSE(res);
 
   try {
-    const effectivePrompt = getEffectivePrompt('prompt_gen', customPrompt);
+    const systemPrompt = getEffectivePrompt('prompt_gen', customPrompt);
     const targetVersion = settings?.targetSeedanceVersion || '2.5';
 
-    const context = {
-      shots: JSON.stringify(shots),
-      analysis: JSON.stringify(analysis),
-      targetVersion,
-    };
-    const { rendered: renderedPrompt, missingVars } = renderPrompt(effectivePrompt, context);
-
-    if (missingVars.length > 0) {
-      console.warn('step4-prompt-gen: Missing variables in prompt:', missingVars);
-    }
-
-    const userMessage = `请为以下 ${shots.length} 个镜头生成 Seedance ${targetVersion} 格式的 prompt，输出 SeedancePrompt[] JSON：\n\n镜头数据：\n${JSON.stringify(shots, null, 2)}`;
+    const userMessage = `请为以下 ${shots.length} 个镜头生成 Seedance ${targetVersion} 格式的 prompt，输出 SeedancePrompt[] JSON：\n\n## 剧本分析数据\n${JSON.stringify(analysis, null, 2)}\n\n## 镜头数据\n${JSON.stringify(shots, null, 2)}`;
 
     const temperature = settings?.temperature ?? 0.3;
-    const maxTokens = settings?.maxTokens ?? 8192;
+    const maxTokens = settings?.maxTokens ?? 16384;
 
     const fullText = await callDeepSeekStream(
-      renderedPrompt,
+      systemPrompt,
       userMessage,
       temperature,
       maxTokens,
       (token) => sse.sendToken(token),
+      { type: 'json_object' },
     );
 
     const result = parseJSONResponse<SeedancePrompt[]>(fullText);

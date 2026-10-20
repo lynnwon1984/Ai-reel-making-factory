@@ -177,7 +177,7 @@ export default function Step4Page() {
   );
 
   return (
-    <StepLayout stepNumber={4} stepTitle="Seedance 分镜头剧本" projectId={pid} inputSection={inputSection} operationSection={operationSection} downloadButtons={downloadButtons}>
+    <StepLayout stepNumber={4} stepTitle="提示词生成" stepDescription="为每个镜头生成 Seedance 格式的 AI 绘图提示词" projectId={pid} inputSection={inputSection} operationSection={operationSection} downloadButtons={downloadButtons}>
       {outputContent}
     </StepLayout>
   );

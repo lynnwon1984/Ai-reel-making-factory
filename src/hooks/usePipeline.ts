@@ -4,6 +4,7 @@ import type {
   PipelineStepState,
   PipelineSettings,
   PurifiedScript,
+  StructuredScript,
   ScriptAnalysis,
   Shot,
   SeedancePrompt,
@@ -18,6 +19,7 @@ import { PIPELINE_STEPS, DEFAULT_SETTINGS } from '../lib/constants';
 
 const API_ENDPOINTS: Record<StageId, string> = {
   audit: '/api/pipeline/step1-audit',
+  structure: '/api/pipeline/step1-structure',
   analyze: '/api/pipeline/step2-analyze',
   diagnose: '/api/pipeline/step2-diagnose',
   repair: '/api/pipeline/step2-repair',
@@ -42,7 +44,7 @@ function createInitialSteps(): PipelineStepState[] {
 }
 
 /** SSE streaming call — handles token, progress, done, error events */
-async function callStepSSE(
+export async function callStepSSE(
   endpoint: string,
   body: Record<string, unknown>,
   onToken: (token: string) => void,
@@ -181,6 +183,7 @@ async function callStepSSE(
 
 export interface PipelineResults {
   purifiedScript?: PurifiedScript;
+  structuredScript?: StructuredScript;
   analysis?: ScriptAnalysis;
   diagnosis?: DiagnosisResult;
   repair?: RepairResult;
@@ -194,6 +197,7 @@ export interface PipelineResults {
 export function usePipeline() {
   const [steps, setSteps] = useState<PipelineStepState[]>(createInitialSteps);
   const [isRunning, setIsRunning] = useState(false);
+  const [isAutoRunning, setIsAutoRunning] = useState(false);
   const [storyboard, setStoryboard] = useState<Storyboard | null>(null);
   const resultsRef = useRef<PipelineResults>({});
   const scriptTextRef = useRef<string>('');
@@ -228,9 +232,21 @@ export function usePipeline() {
         case 'audit':
           body = { scriptText: scriptTextRef.current, settings, customPrompt };
           break;
+        case 'structure':
+          if (!results.purifiedScript) throw new Error('Missing purifiedScript from audit step');
+          body = { purifiedScript: results.purifiedScript, settings, customPrompt };
+          break;
         case 'analyze':
           if (!results.purifiedScript) throw new Error('Missing purifiedScript from audit step');
           body = { purifiedScript: results.purifiedScript, settings, customPrompt };
+          break;
+        case 'diagnose':
+          if (!results.analysis) throw new Error('Missing analysis from previous steps');
+          body = { analysis: results.analysis, scriptText: scriptTextRef.current, settings, customPrompt };
+          break;
+        case 'repair':
+          if (!results.diagnosis) throw new Error('Missing diagnosis from previous steps');
+          body = { diagnosis: results.diagnosis, scriptText: scriptTextRef.current, settings, customPrompt };
           break;
         case 'decompose':
           if (!results.purifiedScript || !results.analysis) throw new Error('Missing data from previous steps');
@@ -304,8 +320,17 @@ export function usePipeline() {
           case 'audit':
             resultsRef.current.purifiedScript = result as PurifiedScript;
             break;
+          case 'structure':
+            resultsRef.current.structuredScript = result as StructuredScript;
+            break;
           case 'analyze':
             resultsRef.current.analysis = result as ScriptAnalysis;
+            break;
+          case 'diagnose':
+            resultsRef.current.diagnosis = result as DiagnosisResult;
+            break;
+          case 'repair':
+            resultsRef.current.repair = result as RepairResult;
             break;
           case 'decompose': {
             const decomposeResult = result as { shots: Shot[]; totalBatches: number };
@@ -356,8 +381,9 @@ export function usePipeline() {
   }, []);
 
   // Only execute first step (audit), then pause
+  // If autoRun=true, continues executing all remaining steps automatically
   const startPipeline = useCallback(
-    async (scriptText: string, settings?: PipelineSettings) => {
+    async (scriptText: string, settings?: PipelineSettings, options?: { autoRun?: boolean }) => {
       scriptTextRef.current = scriptText;
       settingsRef.current = settings ?? DEFAULT_SETTINGS;
       resultsRef.current = {};
@@ -365,57 +391,92 @@ export function usePipeline() {
       setSteps(createInitialSteps());
       setIsRunning(true);
 
+      const autoRun = options?.autoRun ?? false;
+      if (autoRun) setIsAutoRunning(true);
+
+      const stepOrder: StageId[] = ['audit', 'structure', 'analyze', 'diagnose', 'repair', 'decompose', 'decompose_check', 'prompt_gen', 'promptgen_check', 'quality_check', 'repair_final'];
+
       try {
         await executeStep('audit');
+
+        if (autoRun) {
+          // Continue executing all remaining steps
+          for (let i = 1; i < stepOrder.length; i++) {
+            await executeStep(stepOrder[i]);
+          }
+          assembleStoryboard();
+        }
       } catch {
-        // Error captured in step state
+        // Error captured in step state — stops pipeline
       } finally {
         setIsRunning(false);
+        if (autoRun) setIsAutoRunning(false);
       }
     },
-    [executeStep],
+    [executeStep, assembleStoryboard],
   );
 
   // Execute next idle step, then pause
-  const continueStep = useCallback(async () => {
+  // If autoRun=true, continues executing all remaining steps automatically
+  const continueStep = useCallback(async (options?: { autoRun?: boolean }) => {
     if (isRunning) return;
 
-    const stepOrder: StageId[] = ['audit', 'analyze', 'decompose', 'prompt_gen', 'quality_check'];
+    const stepOrder: StageId[] = ['audit', 'structure', 'analyze', 'diagnose', 'repair', 'decompose', 'decompose_check', 'prompt_gen', 'promptgen_check', 'quality_check', 'repair_final'];
     const nextStep = steps.find((s) => s.status === 'idle');
     if (!nextStep) return; // All steps done
 
+    const autoRun = options?.autoRun ?? false;
+    if (autoRun) setIsAutoRunning(true);
+
     setIsRunning(true);
     try {
+      // Execute current step
       await executeStep(nextStep.id);
 
-      // If this was the last step, assemble storyboard
-      const allDone = stepOrder.every((id) => {
-        if (id === nextStep.id) return true; // current step just finished
-        const step = steps.find((s) => s.id === id);
-        return step?.status === 'done';
-      });
-
-      if (allDone && nextStep.id === 'quality_check') {
+      if (autoRun) {
+        // Continue executing all remaining idle steps
+        const currentIdx = stepOrder.indexOf(nextStep.id);
+        for (let i = currentIdx + 1; i < stepOrder.length; i++) {
+          const step = steps.find((s) => s.id === stepOrder[i]);
+          if (step && (step.status === 'idle' || step.status === 'error')) {
+            await executeStep(stepOrder[i]);
+          }
+        }
         assembleStoryboard();
+      } else {
+        // Single step mode: check if this was the last step
+        const allDone = stepOrder.every((id) => {
+          if (id === nextStep.id) return true;
+          const step = steps.find((s) => s.id === id);
+          return step?.status === 'done';
+        });
+
+        if (allDone) {
+          assembleStoryboard();
+        }
       }
     } catch {
       // Error captured in step state
     } finally {
       setIsRunning(false);
+      if (autoRun) setIsAutoRunning(false);
     }
   }, [isRunning, steps, executeStep, assembleStoryboard]);
 
   // Execute all remaining steps to completion
-  const continueAll = useCallback(async () => {
+  const continueAll = useCallback(async (options?: { autoRun?: boolean }) => {
     if (isRunning) return;
 
-    const stepOrder: StageId[] = ['audit', 'analyze', 'decompose', 'prompt_gen', 'quality_check'];
+    const stepOrder: StageId[] = ['audit', 'structure', 'analyze', 'diagnose', 'repair', 'decompose', 'decompose_check', 'prompt_gen', 'promptgen_check', 'quality_check', 'repair_final'];
     const remainingSteps = stepOrder.filter((id) => {
       const step = steps.find((s) => s.id === id);
       return step?.status === 'idle';
     });
 
     if (remainingSteps.length === 0) return;
+
+    const autoRun = options?.autoRun ?? true; // continueAll defaults to auto-run
+    if (autoRun) setIsAutoRunning(true);
 
     setIsRunning(true);
     try {
@@ -427,6 +488,7 @@ export function usePipeline() {
       // Error captured in step state
     } finally {
       setIsRunning(false);
+      if (autoRun) setIsAutoRunning(false);
     }
   }, [isRunning, steps, executeStep, assembleStoryboard]);
 
@@ -435,7 +497,7 @@ export function usePipeline() {
     async (stepIndex: number, newScriptText?: string) => {
       if (isRunning) return;
 
-      const stepOrder: StageId[] = ['audit', 'analyze', 'decompose', 'prompt_gen', 'quality_check'];
+      const stepOrder: StageId[] = ['audit', 'structure', 'analyze', 'diagnose', 'repair', 'decompose', 'decompose_check', 'prompt_gen', 'promptgen_check', 'quality_check', 'repair_final'];
 
       if (newScriptText !== undefined) {
         scriptTextRef.current = newScriptText;
@@ -454,48 +516,68 @@ export function usePipeline() {
       const results = resultsRef.current;
       if (stepIndex <= 0) {
         results.purifiedScript = undefined;
+        results.structuredScript = undefined;
         results.analysis = undefined;
         results.diagnosis = undefined;
         results.repair = undefined;
         results.shots = undefined;
-        results.seedancePrompts = undefined;
         results.storyboardScript = undefined;
         results.qualityReport = undefined;
+        results.repairFinal = undefined;
       } else if (stepIndex <= 1) {
+        results.structuredScript = undefined;
         results.analysis = undefined;
         results.diagnosis = undefined;
         results.repair = undefined;
         results.shots = undefined;
-        results.seedancePrompts = undefined;
         results.storyboardScript = undefined;
         results.qualityReport = undefined;
+        results.repairFinal = undefined;
       } else if (stepIndex <= 2) {
+        results.analysis = undefined;
         results.diagnosis = undefined;
         results.repair = undefined;
         results.shots = undefined;
-        results.seedancePrompts = undefined;
         results.storyboardScript = undefined;
         results.qualityReport = undefined;
+        results.repairFinal = undefined;
       } else if (stepIndex <= 3) {
+        results.diagnosis = undefined;
         results.repair = undefined;
         results.shots = undefined;
-        results.seedancePrompts = undefined;
         results.storyboardScript = undefined;
         results.qualityReport = undefined;
+        results.repairFinal = undefined;
       } else if (stepIndex <= 4) {
+        results.repair = undefined;
         results.shots = undefined;
-        results.seedancePrompts = undefined;
         results.storyboardScript = undefined;
         results.qualityReport = undefined;
+        results.repairFinal = undefined;
       } else if (stepIndex <= 5) {
-        results.seedancePrompts = undefined;
+        results.shots = undefined;
         results.storyboardScript = undefined;
         results.qualityReport = undefined;
-      } else {
+        results.repairFinal = undefined;
+      } else if (stepIndex <= 6) {
+        results.storyboardScript = undefined;
         results.qualityReport = undefined;
+        results.repairFinal = undefined;
+      } else if (stepIndex <= 7) {
+        results.storyboardScript = undefined;
+        results.qualityReport = undefined;
+        results.repairFinal = undefined;
+      } else if (stepIndex <= 8) {
+        results.qualityReport = undefined;
+        results.repairFinal = undefined;
+      } else if (stepIndex <= 9) {
+        results.qualityReport = undefined;
+        results.repairFinal = undefined;
+      } else {
+        results.repairFinal = undefined;
       }
 
-      if (stepIndex >= 6) {
+      if (stepIndex >= 10) {
         setStoryboard(null);
       }
 
@@ -515,6 +597,17 @@ export function usePipeline() {
     [isRunning, executeStep, assembleStoryboard],
   );
 
+  /**
+   * Convenience: run the full pipeline from start to finish.
+   * Equivalent to startPipeline(scriptText, settings, { autoRun: true }).
+   */
+  const runFullPipeline = useCallback(
+    async (scriptText: string, settings?: PipelineSettings) => {
+      await startPipeline(scriptText, settings, { autoRun: true });
+    },
+    [startPipeline],
+  );
+
   const abort = useCallback(() => {
     abortRef.current?.abort();
     abortRef.current = null;
@@ -524,6 +617,7 @@ export function usePipeline() {
         : step
     ));
     setIsRunning(false);
+    setIsAutoRunning(false);
   }, []);
 
   const updateSettings = useCallback((settings: PipelineSettings) => {
@@ -541,11 +635,13 @@ export function usePipeline() {
   return {
     steps,
     isRunning,
+    isAutoRunning,
     storyboard,
     startPipeline,
     continueStep,
     continueAll,
     retryStep,
+    runFullPipeline,
     abort,
     updateSettings,
     settingsRef,

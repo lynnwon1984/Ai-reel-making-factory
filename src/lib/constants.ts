@@ -1,5 +1,6 @@
 import type { StageConfig, PipelineSettings, StageId } from './types.ts';
 import auditSkill from '../../skills/audit.md?raw';
+import structureSkill from '../../skills/structure.md?raw';
 import analyzeSkill from '../../skills/analyze.md?raw';
 import diagnoseSkill from '../../skills/diagnose.md?raw';
 import repairSkill from '../../skills/repair.md?raw';
@@ -58,6 +59,14 @@ export const STAGE_CONFIGS: StageConfig[] = [
     defaultSystemPrompt: auditSkill,
     availableVariables: ['scriptText'],
     outputFormat: 'PurifiedScript JSON',
+  },
+  {
+    id: 'structure',
+    name: '剧本结构化与标注',
+    description: '提取场景结构、角色动作、台词、道具，标注缺失信息，输出结构化场景卡片',
+    defaultSystemPrompt: structureSkill,
+    availableVariables: ['purifiedScript', 'sceneIndex', 'characterNames'],
+    outputFormat: 'StructuredScript JSON (scenes[] + globalNotes)',
   },
   {
     id: 'analyze',
@@ -145,12 +154,34 @@ export const DEFAULT_SETTINGS: PipelineSettings = {
   stylePreset: 'cinematic',
 };
 
-// ===== 流水线步骤定义（有序） =====
+// ===== 流水线步骤定义（有序，10 步完整流程） =====
 
 export const PIPELINE_STEPS: { id: StageId; name: string }[] = [
   { id: 'audit', name: '剧本审计与净化' },
+  { id: 'structure', name: '剧本结构化与标注' },
   { id: 'analyze', name: '剧本深度分析' },
+  { id: 'diagnose', name: '剧本诊断' },
+  { id: 'repair', name: '剧本修复' },
   { id: 'decompose', name: '分镜设计' },
+  { id: 'decompose_check', name: '分镜质检' },
   { id: 'prompt_gen', name: 'Seedance 分镜头剧本' },
+  { id: 'promptgen_check', name: '分镜头剧本合规检查' },
   { id: 'quality_check', name: '分镜头剧本质检' },
+  { id: 'repair_final', name: '分镜头剧本修复与导出' },
+];
+
+// ===== 全流程 10 步执行顺序（一键执行用） =====
+
+export const FULL_PIPELINE_STEPS: { id: StageId; name: string; stepNumber: number }[] = [
+  { id: 'audit',            name: '剧本审计与净化',     stepNumber: 1 },
+  { id: 'structure',        name: '剧本结构化与标注',   stepNumber: 1 },
+  { id: 'analyze',          name: '剧本深度分析',       stepNumber: 2 },
+  { id: 'diagnose',         name: '剧本诊断',           stepNumber: 2 },
+  { id: 'repair',           name: '剧本修复',           stepNumber: 2 },
+  { id: 'decompose',        name: '分镜设计',           stepNumber: 3 },
+  { id: 'decompose_check',  name: '分镜质检',           stepNumber: 3 },
+  { id: 'prompt_gen',       name: 'Seedance 分镜头剧本', stepNumber: 4 },
+  { id: 'promptgen_check',  name: '分镜头剧本合规检查', stepNumber: 4 },
+  { id: 'quality_check',    name: '分镜头剧本质检',     stepNumber: 5 },
+  { id: 'repair_final',     name: '分镜头剧本修复与导出', stepNumber: 5 },
 ];

@@ -1,7 +1,6 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import type { PipelineSettings, PurifiedScript, ScriptAnalysis, DiagnosisResult } from '../../src/lib/types.ts';
 import { callDeepSeekStream, createSSE, parseBody, parseJSONResponse, sendError } from './utils.ts';
-import { renderPrompt } from './promptRenderer.ts';
 import { getEffectivePrompt } from './defaultPrompts.ts';
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
@@ -34,20 +33,10 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   const sse = createSSE(res);
 
   try {
-    const effectivePrompt = getEffectivePrompt('diagnose', customPrompt);
+    const systemPrompt = getEffectivePrompt('diagnose', customPrompt);
 
     const scriptText = purifiedScript.fullText || JSON.stringify(purifiedScript);
     const analysisText = JSON.stringify(analysis, null, 2);
-
-    const context = {
-      scriptText,
-      analysis: analysisText,
-    };
-    const { rendered: renderedPrompt, missingVars } = renderPrompt(effectivePrompt, context);
-
-    if (missingVars.length > 0) {
-      console.warn('step2-diagnose: Missing variables in prompt:', missingVars);
-    }
 
     const userMessage = `请基于以下剧本分析结果，诊断剧本中的问题。
 
@@ -58,14 +47,15 @@ ${analysisText}
 ${scriptText}`;
 
     const temperature = settings?.temperature ?? 0.3;
-    const maxTokens = settings?.maxTokens ?? 8192;
+    const maxTokens = settings?.maxTokens ?? 16384;
 
     const fullText = await callDeepSeekStream(
-      renderedPrompt,
+      systemPrompt,
       userMessage,
       temperature,
       maxTokens,
       (token) => sse.sendToken(token),
+      { type: 'json_object' },
     );
 
     const result = parseJSONResponse<DiagnosisResult>(fullText);

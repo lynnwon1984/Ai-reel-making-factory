@@ -334,7 +334,7 @@ export default function Step2Page() {
   );
 
   return (
-    <StepLayout stepNumber={2} stepTitle="剧本深度分析" projectId={pid} inputSection={inputSection} operationSection={operationSection} downloadButtons={downloadButtons}>
+    <StepLayout stepNumber={2} stepTitle="剧本深度分析" stepDescription="分析剧本的角色档案、场景列表、剧情结构和风格预设，诊断深层问题并自动修复" projectId={pid} inputSection={inputSection} operationSection={operationSection} downloadButtons={downloadButtons}>
       {outputContent}
     </StepLayout>
   );

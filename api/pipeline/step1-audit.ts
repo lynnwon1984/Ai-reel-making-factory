@@ -1,7 +1,6 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import type { PipelineSettings, PurifiedScript } from '../../src/lib/types.ts';
 import { callDeepSeekStream, createSSE, parseBody, parseJSONResponse, sendError } from './utils.ts';
-import { renderPrompt } from './promptRenderer.ts';
 import { getEffectivePrompt } from './defaultPrompts.ts';
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
@@ -28,27 +27,26 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   const sse = createSSE(res);
 
   try {
-    const effectivePrompt = getEffectivePrompt('audit', customPrompt);
-
-    const context = { scriptText };
-    const { rendered: renderedPrompt, missingVars } = renderPrompt(effectivePrompt, context);
-
-    if (missingVars.length > 0) {
-      console.warn('step1-audit: Missing variables in prompt:', missingVars);
-    }
+    const systemPrompt = getEffectivePrompt('audit', customPrompt);
+    console.log(`[step1-audit] System prompt length: ${systemPrompt.length} chars`);
 
     const userMessage = `请对以下剧本进行审计与净化处理，输出 JSON 格式，包含 fullText（连续纯净剧本全文）、sceneIndex（轻量场景索引数组）、logicIssues（6类逻辑断链检测）、totalScenes、characterNames、auditNotes：\n\n${scriptText}`;
 
     const temperature = settings?.temperature ?? 0.3;
-    const maxTokens = settings?.maxTokens ?? 8192;
+    const maxTokens = settings?.maxTokens ?? 16384;
+
+    console.log(`[step1-audit] Calling DeepSeek with temperature=${temperature}, maxTokens=${maxTokens}`);
 
     const fullText = await callDeepSeekStream(
-      renderedPrompt,
+      systemPrompt,
       userMessage,
       temperature,
       maxTokens,
       (token) => sse.sendToken(token),
+      { type: 'json_object' },
     );
+
+    console.log(`[step1-audit] AI response length: ${fullText.length} chars, first 200: ${fullText.slice(0, 200)}`);
 
     const result = parseJSONResponse<PurifiedScript>(fullText);
     sse.sendDone(result);

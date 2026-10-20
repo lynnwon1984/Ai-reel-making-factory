@@ -38,8 +38,8 @@ export default function Step3Page() {
     const step1Output = getStepOutput(1);
     const step2Output = getStepOutput(2);
     const prev: Record<string, unknown> = {};
-    if (step1Output) prev.purifiedScript = step1Output;
-    if (step2Output) prev.analysis = step2Output;
+    if (step1Output) prev.purifiedScript = step1Output.data;
+    if (step2Output) prev.analysis = step2Output.data;
     setPrevResults(prev as { purifiedScript?: PurifiedScript; analysis?: ScriptAnalysis });
     setScriptText(inputText);
     executeStep('decompose');
@@ -180,7 +180,7 @@ export default function Step3Page() {
   );
 
   return (
-    <StepLayout stepNumber={3} stepTitle="分镜设计" projectId={pid} inputSection={inputSection} operationSection={operationSection} downloadButtons={downloadButtons}>
+    <StepLayout stepNumber={3} stepTitle="镜头分解" stepDescription="将剧本拆解为具体的镜头列表，包含景别、机位、运镜等分镜信息" projectId={pid} inputSection={inputSection} operationSection={operationSection} downloadButtons={downloadButtons}>
       {outputContent}
     </StepLayout>
   );

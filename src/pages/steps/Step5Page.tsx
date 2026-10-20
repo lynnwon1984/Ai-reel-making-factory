@@ -234,7 +234,7 @@ export default function Step5Page() {
   );
 
   return (
-    <StepLayout stepNumber={5} stepTitle="质检与导出" projectId={pid} inputSection={inputSection} operationSection={operationSection} downloadButtons={downloadButtons}>
+    <StepLayout stepNumber={5} stepTitle="质量评审与修复" stepDescription="对所有提示词进行最终质量评审和打分，根据评审结果修复不达标的提示词" projectId={pid} inputSection={inputSection} operationSection={operationSection} downloadButtons={downloadButtons}>
       {outputContent}
     </StepLayout>
   );

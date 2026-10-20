@@ -1,7 +1,6 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import type { PipelineSettings, SeedancePrompt } from '../../src/lib/types.ts';
 import { callDeepSeekStream, createSSE, parseBody, parseJSONResponse, sendError } from './utils.ts';
-import { renderPrompt } from './promptRenderer.ts';
 import { getEffectivePrompt } from './defaultPrompts.ts';
 
 export interface PromptgenCheckResult {
@@ -47,29 +46,20 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   const sse = createSSE(res);
 
   try {
-    const effectivePrompt = getEffectivePrompt('promptgen_check', customPrompt);
-
-    const context = {
-      seedancePrompts: JSON.stringify(seedancePrompts),
-      targetVersion: settings?.targetSeedanceVersion || '2.5',
-    };
-    const { rendered: renderedPrompt, missingVars } = renderPrompt(effectivePrompt, context);
-
-    if (missingVars.length > 0) {
-      console.warn('step4-check: Missing variables in prompt:', missingVars);
-    }
+    const systemPrompt = getEffectivePrompt('promptgen_check', customPrompt);
 
     const userMessage = `请对以下 ${seedancePrompts.length} 个 Seedance Prompt 进行合规检查（目标版本：${settings?.targetSeedanceVersion || '2.5'}）：\n\n${JSON.stringify(seedancePrompts, null, 2)}`;
 
     const temperature = settings?.temperature ?? 0.3;
-    const maxTokens = settings?.maxTokens ?? 8192;
+    const maxTokens = settings?.maxTokens ?? 16384;
 
     const fullText = await callDeepSeekStream(
-      renderedPrompt,
+      systemPrompt,
       userMessage,
       temperature,
       maxTokens,
       (token) => sse.sendToken(token),
+      { type: 'json_object' },
     );
 
     const result = parseJSONResponse<PromptgenCheckResult>(fullText);

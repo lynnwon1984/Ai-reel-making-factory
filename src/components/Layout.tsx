@@ -1,11 +1,16 @@
 import { NavLink, Outlet, useLocation } from 'react-router-dom';
 
 const STEP_BUTTONS = [
-  { num: '①', label: '审计', step: 1 },
+  { num: '①', label: '剧本准备', step: 1 },
   { num: '②', label: '分析', step: 2 },
   { num: '③', label: '分镜', step: 3 },
   { num: '④', label: 'Prompt', step: 4 },
   { num: '⑤', label: '质检', step: 5 },
+  { num: '⑥', label: '诊断', step: 6 },
+  { num: '⑦', label: '修复', step: 7 },
+  { num: '⑧', label: '分镜质检', step: 8 },
+  { num: '⑨', label: '合规检查', step: 9 },
+  { num: '⑩', label: '修复导出', step: 10 },
 ];
 
 export default function Layout() {

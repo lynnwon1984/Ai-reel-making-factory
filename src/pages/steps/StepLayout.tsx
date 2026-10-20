@@ -2,25 +2,33 @@ import { useState, useRef, useCallback, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useProjects } from '../../hooks/useProjects';
 import { useStepData } from '../../hooks/useStepData';
+import { useFullPipeline } from '../../hooks/useFullPipeline';
+import { FULL_PIPELINE_STEPS } from '../../lib/constants';
 import { getModule } from '../../modules/registry';
 
 export const STEP_TITLES = [
   '剧本审计与净化',
   '剧本深度分析',
-  '分镜设计',
-  'Seedance 分镜头剧本',
-  '质检与输出',
+  '镜头分解',
+  '提示词生成',
+  '质量评审与修复',
+  '问题诊断',
+  '剧本修复',
+  '分解检查',
+  '提示词检查',
+  '最终修复',
 ];
 
-export const STEP_SHORT_NAMES = ['审计', '分析', '分镜', '剧本', '质检'];
+export const STEP_SHORT_NAMES = ['剧本准备', '分析', '诊断', '修复', '分镜', '分镜质检', '剧本', '合规检查', '质检', '修复导出'];
 
-export const STEP_IDS = ['audit', 'analyze', 'decompose', 'prompt_gen', 'quality_check'] as const;
+export const STEP_IDS = ['audit', 'analyze', 'diagnose', 'repair', 'decompose', 'decompose_check', 'prompt_gen', 'promptgen_check', 'quality_check', 'repair_final'] as const;
 
-const STEP_NUMS = [1, 2, 3, 4, 5] as const;
+const STEP_NUMS = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10] as const;
 
 interface StepLayoutProps {
   stepNumber: number;
   stepTitle: string;
+  stepDescription?: string;
   projectId: string;
   children: React.ReactNode;
   inputSection?: React.ReactNode;
@@ -28,7 +36,7 @@ interface StepLayoutProps {
   downloadButtons?: React.ReactNode;
 }
 
-export default function StepLayout({ stepNumber, projectId, children, inputSection, operationSection, downloadButtons }: StepLayoutProps) {
+export default function StepLayout({ stepNumber, projectId, children, inputSection, operationSection, downloadButtons, stepDescription }: StepLayoutProps) {
   const { getProject } = useProjects();
   const project = getProject(projectId);
   const moduleDef = project ? getModule(project.moduleId) : undefined;
@@ -75,28 +83,31 @@ export default function StepLayout({ stepNumber, projectId, children, inputSecti
         </div>
 
         {/* Row 2: Recommended flow */}
-        <div className="flex items-center gap-2 text-sm">
+        <div className="flex items-center gap-1 text-sm overflow-x-auto">
           <span className="text-gray-600 mr-1 shrink-0 text-xs">推荐流程：</span>
           {STEP_NUMS.map((n) => {
             const isCurrent = n === stepNumber;
             return (
-              <span key={n} className="flex items-center">
-                {n > 1 && <span className="text-gray-600 mx-1 text-base">→</span>}
+              <span key={n} className="flex items-center shrink-0">
+                {n > 1 && <span className="text-gray-600 mx-0.5 text-xs">→</span>}
                 <Link
                   to={`/project/${projectId}/step${n}`}
-                  className={`px-5 py-2.5 rounded-lg transition-colors min-w-[80px] text-center ${
+                  className={`px-2.5 py-1.5 rounded-md transition-colors text-center whitespace-nowrap ${
                     isCurrent
-                      ? 'bg-blue-600/25 text-blue-300 font-bold text-base ring-1 ring-blue-500/40'
-                      : 'text-gray-400 hover:text-gray-200 hover:bg-gray-800 text-sm'
+                      ? 'bg-blue-600/25 text-blue-300 font-bold text-xs ring-1 ring-blue-500/40'
+                      : 'text-gray-400 hover:text-gray-200 hover:bg-gray-800 text-[11px]'
                   }`}
                 >
-                  {STEP_SHORT_NAMES[n - 1]}
+                  {n}.{STEP_SHORT_NAMES[n - 1]}
                 </Link>
               </span>
             );
           })}
-          <span className="text-gray-700 ml-3 text-[10px]">可点击跳转</span>
+          <span className="text-gray-700 ml-2 text-[10px] shrink-0">可点击跳转</span>
         </div>
+
+        {/* Row 3: Full pipeline auto-run */}
+        <FullPipelineBar projectId={projectId} />
       </header>
 
       {/* ===== Main: Top-Bottom Single Column ===== */}
@@ -117,6 +128,14 @@ export default function StepLayout({ stepNumber, projectId, children, inputSecti
 
         {/* Output area - fills remaining space */}
         <div className="flex-1 overflow-y-auto p-6 min-h-0">
+          {stepDescription && (
+            <div className="mb-5 flex items-start gap-2.5 px-4 py-3 rounded-lg bg-gray-800/40 border border-gray-700/30">
+              <svg className="w-4 h-4 text-blue-400 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              <p className="text-sm text-gray-400 leading-relaxed">{stepDescription}</p>
+            </div>
+          )}
           {children}
         </div>
 
@@ -127,6 +146,100 @@ export default function StepLayout({ stepNumber, projectId, children, inputSecti
           </div>
         )}
       </div>
+    </div>
+  );
+}
+
+// ===== Full Pipeline Auto-Run Bar =====
+
+function FullPipelineBar({ projectId }: { projectId: string }) {
+  const {
+    steps: fpSteps,
+    isAutoRunning,
+    currentStepIndex,
+    runFullPipeline,
+    runFromCurrentStep,
+    abort,
+  } = useFullPipeline(projectId);
+
+  const completedCount = fpSteps.filter((s) => s.status === 'done').length;
+  const totalCount = fpSteps.length;
+  const currentStep = currentStepIndex >= 0 ? fpSteps[currentStepIndex] : null;
+  const hasError = fpSteps.some((s) => s.status === 'error');
+  const allDone = fpSteps.every((s) => s.status === 'done');
+
+  const handleRun = () => {
+    if (allDone) {
+      // Re-run from scratch
+      runFullPipeline();
+    } else if (hasError) {
+      // Resume from error step
+      runFromCurrentStep();
+    } else {
+      // Start from beginning or resume
+      runFromCurrentStep();
+    }
+  };
+
+  const buttonLabel = (() => {
+    if (isAutoRunning) return `⏳ ${currentStep?.name || '执行中'}...`;
+    if (allDone) return '✅ 全流程已完成';
+    if (hasError) return '🔄 继续执行';
+    if (completedCount > 0) return `▶ 继续全流程 (${completedCount}/${totalCount})`;
+    return '▶ 一键执行全流程';
+  })();
+
+  return (
+    <div className="flex items-center gap-3 mt-2 pt-2 border-t border-gray-800/60">
+      {/* Run / Abort button */}
+      <button
+        onClick={isAutoRunning ? abort : handleRun}
+        className={`px-4 py-1.5 rounded-md text-xs font-bold transition-all shrink-0 ${
+          isAutoRunning
+            ? 'bg-red-600/20 text-red-400 hover:bg-red-600/30 border border-red-500/30'
+            : allDone
+              ? 'bg-green-600/15 text-green-400 border border-green-500/25 hover:bg-green-600/25'
+              : 'bg-gradient-to-r from-indigo-600 to-violet-600 text-white hover:from-indigo-500 hover:to-violet-500 shadow-md active:scale-[0.98]'
+        }`}
+      >
+        {buttonLabel}
+      </button>
+
+      {/* Progress bar (visible during execution) */}
+      {isAutoRunning && (
+        <div className="flex-1 flex items-center gap-2 min-w-0">
+          <div className="flex-1 h-1.5 bg-gray-800 rounded-full overflow-hidden">
+            <div
+              className="h-full bg-gradient-to-r from-indigo-500 to-violet-500 rounded-full transition-all duration-500"
+              style={{ width: `${((completedCount + 0.5) / totalCount) * 100}%` }}
+            />
+          </div>
+          <span className="text-[10px] text-gray-500 shrink-0 tabular-nums">
+            {completedCount}/{totalCount}
+          </span>
+        </div>
+      )}
+
+      {/* Step indicators (compact) */}
+      {!isAutoRunning && (
+        <div className="flex items-center gap-1 flex-1 min-w-0 overflow-hidden">
+          {fpSteps.map((step, i) => (
+            <div
+              key={step.id}
+              className={`h-1 flex-1 rounded-full transition-colors ${
+                step.status === 'done'
+                  ? 'bg-green-500/60'
+                  : step.status === 'error'
+                    ? 'bg-red-500/60'
+                    : step.status === 'running'
+                      ? 'bg-blue-500/60 animate-pulse'
+                      : 'bg-gray-800'
+              }`}
+              title={`${FULL_PIPELINE_STEPS[i]?.name || step.id}: ${step.status}`}
+            />
+          ))}
+        </div>
+      )}
     </div>
   );
 }

@@ -46,7 +46,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   try {
     const effectivePrompt = getEffectivePrompt('decompose', customPrompt);
     const temperature = settings?.temperature ?? 0.3;
-    const maxTokens = settings?.maxTokens ?? 8192;
+    const maxTokens = settings?.maxTokens ?? 16384;
     const batchSize = settings?.batchSize || 3;
     const stylePreset = settings?.stylePreset || '';
     const tokenBudget = settings?.tokenBudget || 80000;
@@ -125,6 +125,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         temperature,
         maxTokens,
         (token) => sse.sendToken(token),
+        { type: 'json_object' },
       );
 
       const batchResult = parseJSONResponse<BatchResult>(aiResponse);

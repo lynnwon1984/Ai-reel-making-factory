@@ -1,6 +1,6 @@
 // ===== Stage 配置相关 =====
 
-export type StageId = 'audit' | 'analyze' | 'diagnose' | 'repair' | 'decompose' | 'prompt_gen' | 'quality_check' | 'decompose_check' | 'promptgen_check' | 'repair_final';
+export type StageId = 'audit' | 'structure' | 'analyze' | 'diagnose' | 'repair' | 'decompose' | 'prompt_gen' | 'quality_check' | 'decompose_check' | 'promptgen_check' | 'repair_final';
 
 export interface StageConfig {
   id: StageId;
@@ -67,6 +67,51 @@ export interface PurifiedScript {
     originalLineCount: number;
     purifiedLineCount: number;
   };
+}
+
+// ===== Stage 1b 输出：剧本结构化 =====
+
+export interface ConfidenceValue {
+  value: string;
+  confidence: 'explicit' | 'inferred' | 'unknown';
+}
+
+export interface DialogueEntry {
+  speaker: string;
+  text: string;
+  emotionHint?: string;
+}
+
+export interface MissingInfoEntry {
+  field: string;
+  note: string;
+}
+
+export interface StructuredScene {
+  sceneNumber: number;
+  location: ConfidenceValue;
+  timeOfDay: ConfidenceValue;
+  characters: string[];
+  dialogue: DialogueEntry[];
+  explicitActions: string[];
+  props: string[];
+  sceneTypes: string[];
+  missingInfo: MissingInfoEntry[];
+  completenessScore: number;
+  textOffset: number;
+  textLength: number;
+}
+
+export interface GlobalNotes {
+  totalScenes: number;
+  averageCompleteness: number;
+  lowCompletenessScenes: number[];
+  characterAppearanceConsistency: Record<string, string>;
+}
+
+export interface StructuredScript {
+  scenes: StructuredScene[];
+  globalNotes: GlobalNotes;
 }
 
 // ===== Stage 2 输出：深度分析 =====
