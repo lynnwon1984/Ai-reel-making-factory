@@ -53,8 +53,18 @@ const INITIAL = {
   pauseReason: "",
   /** 生成后是否跑内容质检 */
   qcEnabled: true,
+  /** 调用前是否重申一次的格式硬约束 */
+  strictFormat: true,
   error: "",
 };
+
+/** 编译层：不改用户提示词，只把协议里的时长硬约束在每次调用前重申一次 */
+const FORMAT_REMINDER = `【格式硬约束·优先于其它说明】
+每个 shot 的标注时长必须在 5–15 秒之间，且严格等于其 Clip 时长之和。
+只有 1 个 Clip 的 shot，这个 Clip 至少 5 秒。
+时长低于 5 秒的 shot 视为不合格。
+
+`;
 
 const STEPS = [
   { n: 1, label: "输入" },
@@ -279,9 +289,10 @@ export function StoryboardFlow() {
         );
         const body = batch.map((e) => e.text).join("\n\n");
         const ledgerPart = seedLedger ? `${seedLedger}\n\n` : "";
+        const formatPart = state.strictFormat ? FORMAT_REMINDER : "";
 
         const { text } = await runChunked({
-          seed: `${ledgerPart}【本批】第${from}–${to}集\n\n${body}\n\n请按协议把以上内容转成分镜头剧本。`,
+          seed: `${ledgerPart}${formatPart}【本批】第${from}–${to}集\n\n${body}\n\n请按协议把以上内容转成分镜头剧本。`,
           next: "请继续输出剩余部分。",
           maxRounds: 6,
           onRound: (n) => setBatchInfo({ index: bi + 1, total: batches.length, round: n }),
@@ -615,6 +626,14 @@ export function StoryboardFlow() {
               <option value={0}>不限</option>
             </select>{" "}
             批停一次
+          </label>
+          <label className="hint qc-toggle">
+            <input
+              type="checkbox"
+              checked={state.strictFormat}
+              onChange={(e) => patch({ strictFormat: e.target.checked })}
+            />{" "}
+            格式硬约束
           </label>
           <label className="hint qc-toggle">
             <input
