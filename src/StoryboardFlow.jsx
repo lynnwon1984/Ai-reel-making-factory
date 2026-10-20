@@ -24,6 +24,7 @@ import defaultStoryboard from "./prompts/default-storyboard.md?raw";
 import qcPrompt from "./prompts/qc-storyboard.md?raw";
 import { parseQc, countByLevel, collectBatchIssues, topIssues, hasHigh, sortIssues } from "./qc.js";
 import { runEngineQc } from "./qc-engine.js";
+import { normalizeStoryboard } from "./normalize.js";
 import { verifyModelIssues } from "./qc-verify.js";
 
 const STORAGE_KEY = "pd-storyboard-v1";
@@ -63,6 +64,7 @@ const FORMAT_REMINDER = `【格式硬约束·优先于其它说明】
 每个 shot 的标注时长必须在 5–15 秒之间，且严格等于其 Clip 时长之和。
 只有 1 个 Clip 的 shot，这个 Clip 至少 5 秒。
 时长低于 5 秒的 shot 视为不合格。
+每集 shot 编号从 01 连续编号，中途不得重新从 01 开始。
 
 `;
 
@@ -259,6 +261,7 @@ export function StoryboardFlow() {
   const qcCounts = useMemo(() => countByLevel(qcIssues), [qcIssues]);
   const [qcBusy, setQcBusy] = useState(false);
   const [qcRunning, setQcRunning] = useState(false);
+  const [normalizeTip, setNormalizeTip] = useState("");
   const [showL1, setShowL1] = useState(false);
   const [showRaw, setShowRaw] = useState(false);
 
@@ -414,6 +417,28 @@ export function StoryboardFlow() {
     } finally {
       setQcRunning(false);
     }
+  };
+
+  /** 按协议规范化：重排 shot 编号 + 拆开合并的台词（纯代码，不动内容） */
+  const normalizeAll = () => {
+    if (!state.batches.length) return;
+    let renumbered = 0;
+    let split = 0;
+    const next = state.batches.map((b) => {
+      const r = normalizeStoryboard(b.text, state.text);
+      renumbered += r.renumbered;
+      split += r.split;
+      // 编号变了以后，旧的模型质检位置全部失效，一并清掉，避免指错行
+      return { ...b, text: r.text, qc: [], qcDropped: 0 };
+    });
+    patch({ batches: next });
+    patch({ error: "" });
+    window.setTimeout(() => {
+      // 让结果先渲染，再提示
+      // eslint-disable-next-line no-alert
+      window.__lastNormalize = { renumbered, split };
+    }, 0);
+    return { renumbered, split };
   };
 
   /** 重跑这一段：回到本段起点，级联跑到下一个检查点 */
@@ -911,6 +936,17 @@ export function StoryboardFlow() {
                 <button
                   className="btn ghost sm"
                   type="button"
+                  disabled={!state.batches.length}
+                  onClick={() => {
+                    const r = normalizeAll();
+                    if (r) setNormalizeTip(`已重排编号 ${r.renumbered} 处、拆开合并台词 ${r.split} 条；模型质检已清空，建议重跑一次`);
+                  }}
+                >
+                  按协议规范化
+                </button>
+                <button
+                  className="btn ghost sm"
+                  type="button"
                   disabled={!state.batches.length || qcRunning}
                   onClick={runQcOnAll}
                 >
@@ -947,6 +983,7 @@ export function StoryboardFlow() {
               ) : (
                 <p className="hint">没发现违规项。</p>
               )}
+              {normalizeTip ? <p className="hint">{normalizeTip}</p> : null}
               {state.batches.some((b) => b.qcError) ? (
                 <p className="hint warn-line">
                   有 {state.batches.filter((b) => b.qcError).length} 批质检调用失败，
