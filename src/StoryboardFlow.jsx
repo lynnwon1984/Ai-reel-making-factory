@@ -8,9 +8,9 @@ import {
   Play,
   Stop,
   CheckCircle,
-  Code,
 } from "@phosphor-icons/react";
 import { runStream } from "./api.js";
+import { PromptSlot } from "./PromptSlot.jsx";
 import { runChunked } from "./chunked.js";
 import {
   parseStoryboard,
@@ -39,8 +39,23 @@ const INITIAL = {
   output: "",
   doneBatches: 0,
   error: "",
-  showPrompt: false,
 };
+
+const STEPS = [
+  { n: 1, label: "输入 · 分集剧本" },
+  { n: 2, label: "提示词 · 可替换" },
+  { n: 3, label: "生成 · 每批 N 集" },
+  { n: 4, label: "校验 · 只报告" },
+  { n: 5, label: "可选 · 机读层" },
+];
+
+/** 步骤条状态：任何时刻只有一步是 active */
+function stepState(stage, n) {
+  if (stage === "input") return n === 1 ? "active" : "";
+  if (stage === "running") return n < 3 ? "done" : n === 3 ? "active" : "";
+  // done：1–4 已完成，5 是还剩的那件可选事
+  return n <= 4 ? "done" : "active";
+}
 
 /** 示例分镜：用来在不调模型的情况下看校验与 L1 编译效果 */
 const SAMPLE_STORYBOARD = `第1集：测试
@@ -199,21 +214,11 @@ export function StoryboardFlow() {
     <>
       <div className="flow-head">
         <div className="steps">
-          <div className={`step ${state.stage === "input" ? "active" : "done"}`}>
-            <span className="num">1</span> 输入 · 分集剧本
-          </div>
-          <div className={`step ${state.stage === "input" ? "" : "done"}`}>
-            <span className="num">2</span> 提示词 · 可替换
-          </div>
-          <div className={`step ${state.stage === "running" ? "active" : ""}`}>
-            <span className="num">3</span> 生成 · 每批 N 集
-          </div>
-          <div className={`step ${state.stage === "done" ? "active" : ""}`}>
-            <span className="num">4</span> 校验 · 只报告
-          </div>
-          <div className={`step ${state.stage === "done" ? "active" : ""}`}>
-            <span className="num">5</span> 可选 · 机读层
-          </div>
+          {STEPS.map((s) => (
+            <div key={s.n} className={`step ${stepState(state.stage, s.n)}`}>
+              <span className="num">{s.n}</span> {s.label}
+            </div>
+          ))}
         </div>
         <div className="flow-actions">
           {state.stage === "running" ? (
@@ -345,51 +350,13 @@ export function StoryboardFlow() {
       {state.stage !== "input" || state.output ? (
         <>
           <section className="card">
-            <div className="card-head">
-              <div>
-                <div className="card-kicker">步骤 02 · 提示词</div>
-                <div className="card-title">
-                  默认提示词 · {defaultPromptBody.length} 字
-                </div>
-              </div>
-              <div className="spacer" />
-              <span className={`pill ${state.customPrompt.trim() ? "custom" : ""}`}>
-                {state.customPrompt.trim() ? "使用自定义" : "使用默认"}
-              </span>
-              <button
-                className="btn ghost sm"
-                type="button"
-                onClick={() => patch({ showPrompt: !state.showPrompt })}
-              >
-                <Code size={14} /> {state.showPrompt ? "收起" : "查看 / 替换"}
-              </button>
-            </div>
-            {state.showPrompt ? (
-              <>
-                <textarea
-                  className="script prompt-input"
-                  value={state.customPrompt}
-                  onChange={(e) => patch({ customPrompt: e.target.value })}
-                  placeholder="留空 → 使用默认提示词；粘贴你自己的 → 覆盖默认。"
-                />
-                <div className="row">
-                  <span className="hint">
-                    {state.customPrompt.trim()
-                      ? `已自定义（${state.customPrompt.trim().length} 字）`
-                      : "当前为空，使用默认提示词。"}
-                  </span>
-                  <div className="spacer" />
-                  <button
-                    className="btn ghost sm"
-                    type="button"
-                    disabled={!state.customPrompt.trim()}
-                    onClick={() => patch({ customPrompt: "" })}
-                  >
-                    清空，改回默认
-                  </button>
-                </div>
-              </>
-            ) : null}
+            <div className="card-kicker">步骤 02 · 提示词</div>
+            <PromptSlot
+              label={`默认提示词 · ${defaultPromptBody.length} 字`}
+              defaultText={defaultPromptBody}
+              value={state.customPrompt}
+              onChange={(v) => patch({ customPrompt: v })}
+            />
           </section>
 
           {state.stage === "running" || state.output ? (
