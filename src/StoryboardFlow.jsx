@@ -24,6 +24,7 @@ import defaultStoryboard from "./prompts/default-storyboard.md?raw";
 import qcPrompt from "./prompts/qc-storyboard.md?raw";
 import { parseQc, countByLevel, collectBatchIssues, topIssues, hasHigh, sortIssues } from "./qc.js";
 import { runEngineQc } from "./qc-engine.js";
+import { verifyModelIssues } from "./qc-verify.js";
 
 const STORAGE_KEY = "pd-storyboard-v1";
 
@@ -307,6 +308,8 @@ export function StoryboardFlow() {
 
         // 内容质检：只报告，不改稿；失败不影响主流程
         let issues = [];
+        let droppedCount = 0;
+        let qcError = "";
         if (state.qcEnabled) {
           setQcBusy(true);
           try {
@@ -317,17 +320,30 @@ export function StoryboardFlow() {
               label: `质检 第${from}-${to}集`,
               signal: ctrlRef.current.signal,
             });
-            issues = parseQc(review && review.text ? review.text : review);
+            const rawIssues = parseQc(review && review.text ? review.text : review);
+            const verified = verifyModelIssues(rawIssues, {
+              parsed: parseStoryboard(text),
+              outputText: text,
+            });
+            issues = verified.kept;
+            droppedCount = verified.dropped.length;
           } catch (err) {
             issues = [];
+            qcError = String(err?.message || err);
           } finally {
             setQcBusy(false);
           }
-          acc = acc.map((b, i) => (i === acc.length - 1 ? { ...b, qc: issues } : b));
+          acc = acc.map((b, i) =>
+            i === acc.length - 1
+              ? { ...b, qc: issues, qcDropped: droppedCount, qcError }
+              : b,
+          );
           patch({ batches: acc });
         }
 
-        if (hasHigh(issues)) {
+        // 引擎能判的高危（台词篡改）同样立刻停，不等检查点
+        const engIssues = runEngineQc(body, text);
+        if (hasHigh([...engIssues, ...issues])) {
           patch({ stage: "paused", pausedAt: acc.length, pauseReason: "qc" });
           return;
         }
@@ -370,8 +386,15 @@ export function StoryboardFlow() {
           effort: "low",
           label: `质检 ${b.from}-${b.to}集`,
         });
+        const rawIssues = parseQc(review && review.text ? review.text : review);
+        const verified = verifyModelIssues(rawIssues, {
+          parsed: parseStoryboard(b.text),
+          outputText: b.text,
+        });
         next = next.map((x, j) =>
-          j === i ? { ...x, qc: parseQc(review && review.text ? review.text : review) } : x,
+          j === i
+            ? { ...x, qc: verified.kept, qcDropped: verified.dropped.length }
+            : x,
         );
         patch({ batches: next });
       }
@@ -397,6 +420,7 @@ export function StoryboardFlow() {
     patch({
       stage: state.batches.length ? "paused" : "input",
       pausedAt: state.batches.length,
+      pauseReason: "",
     });
   };
 
@@ -804,6 +828,11 @@ export function StoryboardFlow() {
                 高 {check.stats.high}
               </span>
               <span className={`pill ${check.stats.mid ? "l2" : ""}`}>中 {check.stats.mid}</span>
+              {qcCounts.高 || qcCounts.中 || qcCounts.低 ? (
+                <span className="pill">
+                  质检 高{qcCounts.高} 中{qcCounts.中}
+                </span>
+              ) : null}
             </div>
             {!check.issues.length ? (
               <div className="row">
@@ -899,6 +928,19 @@ export function StoryboardFlow() {
               ) : (
                 <p className="hint">没发现违规项。</p>
               )}
+              {state.batches.some((b) => b.qcError) ? (
+                <p className="hint warn-line">
+                  有 {state.batches.filter((b) => b.qcError).length} 批质检调用失败，
+                  这些批次只做了引擎检查：{state.batches.find((b) => b.qcError)?.qcError}
+                </p>
+              ) : null}
+              {state.batches.some((b) => b.qcDropped > 0) ? (
+                <p className="hint">
+                  模型另有{" "}
+                  {state.batches.reduce((n, b) => n + (b.qcDropped || 0), 0)} 条未通过引用校验，
+                  已丢弃（定位不在本批，或引用的原文搜不到）。
+                </p>
+              ) : null}
             </div>
           </section>
 
