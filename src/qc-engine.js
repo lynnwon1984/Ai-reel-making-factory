@@ -134,13 +134,9 @@ export function runEngineQc(sourceText, outputText) {
           .pop()
           .replace(/^[0-9一二三四五六七八九十百千]+[个只把杯扎瓶盒张份条根块串]?/, "");
         const key = flatten(head) || flatten(name);
-        // 「木招牌」原文写的是「招牌」：从尾部找 2 字以上的子串，命中就不算新道具
-        const known =
-          key.length < 2 ||
-          flatSrc.includes(key) ||
-          Array.from({ length: Math.max(0, key.length - 1) }, (_, i) => key.slice(i + 1)).some(
-            (suffix) => suffix.length >= 2 && flatSrc.includes(suffix),
-          );
+        // 中文里「烤肉串 / 一串烤肉」「粥碗 / 一碗热粥」只是换了个说法。
+        // 只要道具名里有字在原文出现过，就不算凭空新增（宁可漏报，不要误报）。
+        const known = key.length < 2 || [...key].some((ch) => flatSrc.includes(ch));
         if (!known) {
           add("中", where, "新增道具", `「${name}」原文中未出现`);
         }
