@@ -1697,3 +1697,45 @@ textarea.script:focus-visible {
 .cp-actions {
   gap: 10px;
 }
+
+/* ---------- 流程三：内容质检 ---------- */
+
+.qc-block {
+  margin-top: 18px;
+  padding-top: 16px;
+  border-top: 1px solid var(--line);
+}
+
+.qc-title {
+  font-size: 13px;
+  color: var(--muted);
+  margin-bottom: 10px;
+}
+
+.cp-issues {
+  margin: 8px 0 0;
+  padding-left: 16px;
+  font-size: 12.5px;
+  line-height: 1.6;
+}
+
+.cp-issues .lv-高 { color: #f87171; }
+.cp-issues .lv-中 { color: #fbbf24; }
+.cp-issues .lv-低 { color: var(--muted); }
+
+.warn-line {
+  color: #fbbf24;
+}
+
+.qc-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.qc-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
+}

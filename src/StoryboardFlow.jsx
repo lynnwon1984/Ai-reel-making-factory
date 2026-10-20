@@ -21,6 +21,8 @@ import {
   splitEpisodes,
 } from "./storyboard.js";
 import defaultStoryboard from "./prompts/default-storyboard.md?raw";
+import qcPrompt from "./prompts/qc-storyboard.md?raw";
+import { parseQc, countByLevel, collectBatchIssues, topIssues, hasHigh } from "./qc.js";
 
 const STORAGE_KEY = "pd-storyboard-v1";
 
@@ -45,6 +47,10 @@ const INITIAL = {
   checkpoint: 2,
   /** 停在检查点时已完成多少批 */
   pausedAt: 0,
+  /** 这次停下的原因：checkpoint | qc */
+  pauseReason: "",
+  /** 生成后是否跑内容质检 */
+  qcEnabled: true,
   error: "",
 };
 
@@ -232,6 +238,10 @@ export function StoryboardFlow() {
   const l1 = useMemo(() => renderL1(units), [units]);
   const l1View = useMemo(() => splitL1(l1), [l1]);
   const ledger = useMemo(() => buildLedger(parsed), [parsed]);
+  const qcIssues = useMemo(() => collectBatchIssues(state.batches), [state.batches]);
+  const qcCounts = useMemo(() => countByLevel(qcIssues), [qcIssues]);
+  const [qcBusy, setQcBusy] = useState(false);
+  const [qcRunning, setQcRunning] = useState(false);
   const [showL1, setShowL1] = useState(false);
   const [showRaw, setShowRaw] = useState(false);
 
@@ -289,8 +299,34 @@ export function StoryboardFlow() {
         patch({ batches: acc, cursor: bi + 1 });
         setLive("");
 
+        // 内容质检：只报告，不改稿；失败不影响主流程
+        let issues = [];
+        if (state.qcEnabled) {
+          setQcBusy(true);
+          try {
+            const review = await runStream({
+              instructions: qcPrompt,
+              input: `【本集原始剧本】\n${body}\n\n【生成的分镜头剧本】\n${text}`,
+              effort: "low",
+              label: `质检 第${from}-${to}集`,
+              signal: ctrlRef.current.signal,
+            });
+            issues = parseQc(review && review.text ? review.text : review);
+          } catch (err) {
+            issues = [];
+          } finally {
+            setQcBusy(false);
+          }
+          acc = acc.map((b, i) => (i === acc.length - 1 ? { ...b, qc: issues } : b));
+          patch({ batches: acc });
+        }
+
+        if (hasHigh(issues)) {
+          patch({ stage: "paused", pausedAt: acc.length, pauseReason: "qc" });
+          return;
+        }
         if (shouldPause({ done: acc.length, total: batches.length, every })) {
-          patch({ stage: "paused", pausedAt: acc.length });
+          patch({ stage: "paused", pausedAt: acc.length, pauseReason: "checkpoint" });
           return;
         }
       }
@@ -308,6 +344,37 @@ export function StoryboardFlow() {
 
   const run = () => runFrom(0);
   const resume = () => runFrom(state.cursor);
+
+  /** 对已有结果补跑质检（导入的历史分镜也能用） */
+  const runQcOnAll = async () => {
+    if (!state.batches.length || qcRunning) return;
+    setQcRunning(true);
+    try {
+      let next = state.batches;
+      for (let i = 0; i < next.length; i += 1) {
+        const b = next[i];
+        const src =
+          episodes
+            .filter((e) => e.no >= b.from && e.no <= b.to)
+            .map((e) => e.text)
+            .join("\n\n") || state.text;
+        const review = await runStream({
+          instructions: qcPrompt,
+          input: `【本集原始剧本】\n${src}\n\n【生成的分镜头剧本】\n${b.text}`,
+          effort: "low",
+          label: `质检 ${b.from}-${b.to}集`,
+        });
+        next = next.map((x, j) =>
+          j === i ? { ...x, qc: parseQc(review && review.text ? review.text : review) } : x,
+        );
+        patch({ batches: next });
+      }
+    } catch (err) {
+      patch({ error: String(err?.message || err) });
+    } finally {
+      setQcRunning(false);
+    }
+  };
 
   /** 重跑这一段：回到本段起点，级联跑到下一个检查点 */
   const rerunSegment = () =>
@@ -397,7 +464,9 @@ export function StoryboardFlow() {
         {state.stage === "input"
           ? "载入分集剧本 → 需要的话替换提示词 → 点「开始生成」。"
           : state.stage === "running"
-            ? `正在生成第 ${batchInfo.index}/${batchInfo.total} 批…`
+            ? qcBusy
+              ? `第 ${batchInfo.index}/${batchInfo.total} 批已产出，正在质检…`
+              : `正在生成第 ${batchInfo.index}/${batchInfo.total} 批…`
             : "先看校验，再看分镜；不满意就回步骤 02 改提示词重跑，需要机读层再导。"}
       </div>
 
@@ -516,6 +585,14 @@ export function StoryboardFlow() {
               <option value={0}>不限</option>
             </select>{" "}
             批停一次
+          </label>
+          <label className="hint qc-toggle">
+            <input
+              type="checkbox"
+              checked={state.qcEnabled}
+              onChange={(e) => patch({ qcEnabled: e.target.checked })}
+            />{" "}
+            生成后质检
           </label>
           <button
             className="btn primary"
@@ -660,7 +737,34 @@ export function StoryboardFlow() {
                 {ledger.scenes.length ? ledger.scenes.join(" · ") : "—"}
               </div>
             </div>
+            <div className="cp-col">
+              <div className="cp-label">内容质检</div>
+              <div className="cp-value">
+                {!state.qcEnabled ? (
+                  "本次未开启"
+                ) : qcIssues.length ? (
+                  <>
+                    高 {qcCounts.高} · 中 {qcCounts.中} · 低 {qcCounts.低}
+                    <ul className="cp-issues">
+                      {topIssues(qcIssues, 3).map((it, i) => (
+                        <li key={i} className={`lv-${it.level}`}>
+                          {it.where} · {it.rule}
+                        </li>
+                      ))}
+                    </ul>
+                  </>
+                ) : (
+                  "未发现违规项"
+                )}
+              </div>
+            </div>
           </div>
+
+          {state.pauseReason === "qc" ? (
+            <p className="hint warn-line">
+              出现高危问题，不等检查点提前停了 —— 这类错误会被下一批当前提继承。
+            </p>
+          ) : null}
 
           <div className="row cp-actions">
             <button className="btn primary" type="button" onClick={resume}>
@@ -743,6 +847,49 @@ export function StoryboardFlow() {
                 <span className="hint">
                   先处理高优先级问题；改完回步骤 02 更新提示词，再重跑一次。
                 </span>
+              )}
+            </div>
+
+            <div className="qc-block">
+              <div className="qc-head">
+                <div className="qc-title">内容质检 · 只报告，不改稿</div>
+                <div className="spacer" />
+                <button
+                  className="btn ghost sm"
+                  type="button"
+                  disabled={!state.batches.length || qcRunning}
+                  onClick={runQcOnAll}
+                >
+                  {qcRunning ? "质检中…" : "对现有结果跑质检"}
+                </button>
+              </div>
+              {!state.qcEnabled ? (
+                <p className="hint">本次未开启内容质检（可在步骤 01 勾选）。</p>
+              ) : qcIssues.length ? (
+                <div className="table-wrap est-wrap">
+                  <table className="table">
+                    <thead>
+                      <tr>
+                        <th>级别</th>
+                        <th>位置</th>
+                        <th>规则</th>
+                        <th>证据</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {qcIssues.slice(0, 200).map((it, i) => (
+                        <tr key={i}>
+                          <td>{it.level}</td>
+                          <td className="mono">{it.where}</td>
+                          <td>{it.rule}</td>
+                          <td>{it.evidence}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              ) : (
+                <p className="hint">没发现违规项。</p>
               )}
             </div>
           </section>
