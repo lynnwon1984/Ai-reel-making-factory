@@ -1274,6 +1274,62 @@ test("确定性修复：动作 Clip 内容超载时按微单元边界拆分，�
   assert.ok(repaired.repairs.some((item) => item.includes("动作微单元边界")));
 });
 
+test("确定性修复：纯台词 Clip 内容超载时按分句拆分，台词只编译一次", () => {
+  const parsed = parseScript(`第1集：测试
+1-1 房间 内 日
+人物：林岚（Lin，着装：白衬衫）、陈默（Chen，着装：风衣）
+△林岚坐在桌后，抬眼看向陈默。
+陈默（压低声音）：This is a very long line that takes far more than eight seconds to say, and the engine must split it across clips without losing a single word.
+`);
+  const episode = parsed.episodes[0];
+  const scene = episode.scenes[0];
+  const input = buildSceneInput({
+    episode,
+    scene,
+    directorBrief: DIRECTOR_BRIEF,
+    sceneGeography: SCENE_GEOGRAPHY,
+  });
+  const dialogueBlock = input.blocks.find((block) => block.kind === "dialogue");
+  const plan = {
+    schemaVersion: 3,
+    sceneId: "1-1",
+    directorBrief: DIRECTOR_BRIEF,
+    sceneGeography: SCENE_GEOGRAPHY,
+    shots: [
+      {
+        duration: 8,
+        purpose: "让陈默劝林岚离开",
+        storyFunction: "pressure",
+        cast: ["陈默", "林岚"],
+        props: [],
+        startState: "林岚坐在桌后，陈默站在桌前。",
+        stateChange: "陈默把劝说的话说完。",
+        endState: "两人位置不变。",
+        cameraReason: "近景捕捉情绪。",
+        continuityNote: "场首。林岚在桌后，陈默在桌前。",
+        clips: [
+          {
+            duration: 8,
+            size: "CU",
+            cameraMove: "缓慢推近",
+            visualAction: "陈默看着林岚，嘴唇颤抖，泪水不断，继续劝她离开。",
+            sourceBlockIds: [dialogueBlock.id],
+          },
+        ],
+      },
+    ],
+  };
+  const repaired = repairScenePlan(plan, input, SCENE_PLAN_POLICIES.flexible6);
+  const clips = repaired.plan.shots.flatMap((shot) => shot.clips);
+  assert.ok(clips.length >= 2, "超载的台词镜应拆成多段");
+  assert.ok(clips.every((clip) => String(clip.visualAction || "").trim()), "每段都要有画面描述");
+  // 拆分后每段都引用同一句台词，编译阶段应归一到首段、后续段标承接，最终只输出一条 EN。
+  const compiled = compileScenePlan(repaired.plan, input);
+  const enLines = compiled.split("\n").filter((line) => line.startsWith("EN:"));
+  assert.equal(enLines.length, 1, "同一句台词只能编译一次");
+  assert.ok(repaired.plan.shots[0].duration <= SCENE_PLAN_POLICIES.flexible6.shotMax);
+});
+
 test("确定性修复：不存在的源块引用不会在预修复阶段抛错，交给校验器定点处理", () => {
   const { input } = sceneFixture();
   const broken = structuredClone(PLAN);

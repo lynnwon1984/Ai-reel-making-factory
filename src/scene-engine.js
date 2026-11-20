@@ -515,39 +515,135 @@ function splitOverloadedActionClips(shot, sceneInput, policy, repairs) {
         (sum, id) => (units.has(id) ? sum + policy.actionBlockSec : sum),
         0,
       );
-    const maxUnitsPerClip = Math.max(
-      1,
-      Math.floor((policy.clipMax + policy.loadToleranceSec) / policy.actionBlockSec),
-    );
-    if (
-      hasDialogue ||
-      actionUnitIds.length <= maxUnitsPerClip ||
-      contentLoad <= Number(clip.duration || 0) + policy.loadToleranceSec
-    ) {
+    // 单个 Clip 的最大可承载量（含容差）。
+    const clipCapacity = policy.clipMax + policy.loadToleranceSec;
+    if (contentLoad <= clipCapacity) {
       output.push(clip);
       continue;
     }
-
+    // 纯动作路径保持原有行为：按「一屏能放下的动作单元数」等分，时长按 load+容差 取整。
+    if (!hasDialogue) {
+      const maxUnitsPerClip = Math.max(
+        1,
+        Math.floor(clipCapacity / policy.actionBlockSec),
+      );
+      if (actionUnitIds.length <= maxUnitsPerClip) {
+        output.push(clip);
+        continue;
+      }
+      const groups = [];
+      for (let index = 0; index < actionUnitIds.length; index += maxUnitsPerClip) {
+        groups.push(actionUnitIds.slice(index, index + maxUnitsPerClip));
+      }
+      const splitClips = groups.map((group, index) => {
+        const load = group.reduce(
+          (sum, id) => (units.has(id) ? sum + policy.actionBlockSec : sum),
+          0,
+        );
+        const duration = Math.min(
+          policy.clipMax,
+          Math.max(policy.clipMin, Math.ceil(load + policy.loadToleranceSec)),
+        );
+        return {
+          ...clip,
+          duration,
+          visualAction: group
+            .map((id) => trim(units.get(id)?.text))
+            .filter(Boolean)
+            .join("；"),
+          actionUnitIds: group,
+          beat: trim(clip.beat)
+            ? `${trim(clip.beat)} ${index + 1}/${groups.length}`
+            : trim(clip.beat),
+        };
+      });
+      if (
+        splitClips.some((item) => !trim(item.visualAction)) ||
+        splitClips.length > policy.maxClips
+      ) {
+        output.push(clip);
+        continue;
+      }
+      repairs.push(
+        `Clip ${clip.letter || "?"} 内容 ${contentLoad.toFixed(1)}s 超过 ${policy.clipMax}s，在动作微单元边界拆为 ${splitClips
+          .map((item) => item.duration)
+          .join(" + ")} 秒`,
+      );
+      output.push(...splitClips);
+      continue;
+    }
+    // 按「总负载」决定要拆几段，而不是只看动作单元数：
+    // 长台词单独就能把 Clip 撑爆，此时没有动作单元也不该整段放过。
+    const wantedParts = Math.max(2, Math.ceil(contentLoad / clipCapacity));
+    if (wantedParts > policy.maxClips) {
+      output.push(clip);
+      continue;
+    }
+    // 没有足够动作单元时（纯台词镜），按画面描述的分句均分。
+    let textParts = null;
+    if (actionUnitIds.length < wantedParts) {
+      const clauses = trim(clip.visualAction)
+        .split(/[，。；]/)
+        .map(trim)
+        .filter(Boolean);
+      if (clauses.length < wantedParts) {
+        output.push(clip);
+        continue;
+      }
+      const per = Math.ceil(clauses.length / wantedParts);
+      textParts = [];
+      for (let i = 0; i < wantedParts; i += 1) {
+        const group = clauses.slice(i * per, (i + 1) * per);
+        if (!group.length) {
+          textParts = null;
+          break;
+        }
+        textParts.push(group.join("，"));
+      }
+      if (!textParts) {
+        output.push(clip);
+        continue;
+      }
+    }
+    const perGroup = Math.ceil(actionUnitIds.length / wantedParts) || 0;
+    const otherDuration = (shot.clips || []).reduce(
+      (sum, other) => (other === clip ? sum : sum + Number(other.duration || 0)),
+      0,
+    );
     const groups = [];
-    for (let index = 0; index < actionUnitIds.length; index += maxUnitsPerClip) {
-      groups.push(actionUnitIds.slice(index, index + maxUnitsPerClip));
+    if (textParts) {
+      for (let index = 0; index < wantedParts; index += 1) groups.push([]);
+      // 文本拆分不按动作单元切，原有动作单元全部归首段，避免「源内容未覆盖」。
+      groups[0] = actionUnitIds.slice();
+    } else {
+      for (let index = 0; index < actionUnitIds.length; index += perGroup) {
+        groups.push(actionUnitIds.slice(index, index + perGroup));
+      }
     }
     const splitClips = groups.map((group, index) => {
       const load = group.reduce(
         (sum, id) => (units.has(id) ? sum + policy.actionBlockSec : sum),
         0,
       );
+      // 台词被复制到每段，编译时归一到首段、后续段标为承接，负载按段数均摊。
+      const shared = contentLoad - actionUnitIds.reduce(
+        (sum, id) => (units.has(id) ? sum + policy.actionBlockSec : sum),
+        0,
+      );
+      const perClipLoad = load + shared / groups.length;
       const duration = Math.min(
         policy.clipMax,
-        Math.max(policy.clipMin, Math.ceil(load + policy.loadToleranceSec)),
+        Math.max(policy.clipMin, Math.ceil(perClipLoad - policy.loadToleranceSec)),
       );
       return {
         ...clip,
         duration,
-        visualAction: group
-          .map((id) => trim(units.get(id)?.text))
-          .filter(Boolean)
-          .join("；"),
+        visualAction: textParts
+          ? textParts[index]
+          : group
+              .map((id) => trim(units.get(id)?.text))
+              .filter(Boolean)
+              .join("；"),
         actionUnitIds: group,
         beat: trim(clip.beat)
           ? `${trim(clip.beat)} ${index + 1}/${groups.length}`
@@ -556,7 +652,9 @@ function splitOverloadedActionClips(shot, sceneInput, policy, repairs) {
     });
     if (
       splitClips.some((item) => !trim(item.visualAction)) ||
-      splitClips.length > policy.maxClips
+      splitClips.length > policy.maxClips ||
+      splitClips.reduce((sum, item) => sum + Number(item.duration || 0), 0) >
+        policy.shotMax - otherDuration
     ) {
       output.push(clip);
       continue;
@@ -831,11 +929,25 @@ export function repairScenePlan(plan, sceneInput, policy = SCENE_PLAN_POLICIES.s
         repairs.push(`含台词的 ${trim(clip.size)} 改为 ${target}`);
         clip.size = target;
       }
-      const load = blocks.reduce((sum, block) => sum + estimateBlockSeconds(block, policy), 0);
+      // 负载口径必须与 validateScenePlan 一致：台词块（含承接）+ 动作单元。
+      // 之前只统计 sourceBlockIds，漏掉 dialogueContinuationIds 和 actionUnitIds，
+      // 导致审计报超载、修复却认为装得下，一句话都不改。
+      const actorUnitIds = Array.isArray(clip.actionUnitIds) ? clip.actionUnitIds : [];
+      const countedIds = new Set([
+        ...(clip.sourceBlockIds || []),
+        ...(clip.dialogueContinuationIds || []),
+      ]);
+      const load =
+        [...countedIds].reduce((sum, id) => {
+          const block = blockMap.get(id);
+          return block ? sum + estimateBlockSeconds(block, policy) : sum;
+        }, 0) +
+        actorUnitIds.reduce((sum) => sum + policy.actionBlockSec, 0);
       const wanted = Math.max(
         policy.clipMin,
         Number.isFinite(Number(clip.duration)) ? Number(clip.duration) : policy.clipMin,
-        Math.ceil(load + (load ? policy.loadToleranceSec : 0)),
+        // 审计通过的条件是 load ≤ duration + tolerance，取 ceil(load - tolerance) 即最小可通过时长。
+        Math.ceil(load - policy.loadToleranceSec),
       );
       if (wanted <= policy.clipMax && wanted !== clip.duration) {
         repairs.push(`Clip ${clip.letter || "?"} 时长 ${clip.duration}→${wanted} 秒`);
@@ -844,6 +956,9 @@ export function repairScenePlan(plan, sceneInput, policy = SCENE_PLAN_POLICIES.s
     }
 
     splitOverloadedActionClips(shot, sceneInput, policy, repairs);
+    // 拆分会把同一句台词复制到每一段，这里再归一一次：
+    // 首段保留源引用，后续段标为台词承接，保证只编译一条 EN。
+    normalizeDialogueContinuations(shot, blockMap, repairs);
 
     let sum = (shot.clips || []).reduce((total, clip) => total + Number(clip.duration || 0), 0);
     if (sum < policy.shotMin) {
