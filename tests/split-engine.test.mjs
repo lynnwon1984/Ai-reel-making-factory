@@ -11,6 +11,7 @@ import {
   parseScript,
   estimateAll,
   autoCuts,
+  autoSplitScenes,
   renumber,
   rebuildCast,
   renderScript,
@@ -20,6 +21,7 @@ import {
   normalizeSplits,
   sliceByCuts,
   suggestSplitPoint,
+  suggestSplitPoints,
 } from "../src/split.js";
 import { SPLIT_SAMPLE } from "../src/mock-split.js";
 
@@ -49,6 +51,18 @@ ${body.join("\n")}
 人物：乙（B，着装：白衣）
 △乙站着。
 乙（低声）：Done.
+`;
+})();
+
+const MULTI_LONG_SCENE = (() => {
+  const line = (n) =>
+    `甲（平静）：${Array.from({ length: 50 }, (_, i) => `word${n}_${i}`).join(" ")}`;
+  const body = Array.from({ length: 14 }, (_, i) => line(i + 1));
+  return `第1集：多切点测试
+
+1-1 更长的场 外 晴
+人物：甲（A，着装：黑衣）
+${body.join("\n")}
 `;
 })();
 
@@ -160,6 +174,16 @@ test("切分：超限的集只能是「单场就超长」", () => {
   }
 });
 
+test("自动装箱：用全局切分把相邻小块组成窗口内的集", () => {
+  const scenes = [20, 60, 20, 60, 20, 60].map((sec, i) => ({ sec, i }));
+  const cuts = autoCuts(scenes, opt);
+  const eps = renumber(scenes, cuts, opt);
+
+  assert.deepEqual(cuts, [0, 2, 4]);
+  assert.deepEqual(eps.map((ep) => ep.sec), [80, 80, 80]);
+  assert.ok(eps.every((ep) => ep.status === "ok"));
+});
+
 /* ---------------- 重编号 ---------------- */
 
 test("重编号：集号连续，场次号 X-Y 与所属集一致且从 1 连续", () => {
@@ -187,6 +211,14 @@ test("重编号：渲染出的场次号与集号对得上", () => {
       assert.match(out, new RegExp(`\\*\\*${ep.no}-${j + 1} `), `缺少场次 ${ep.no}-${j + 1}`);
     });
   });
+});
+
+test("渲染保底：没跑 rebuildCast 时仍保留原文人物行", () => {
+  const parsed = parseScript(SPLIT_SAMPLE);
+  const scenes = estimateAll(parsed, opt);
+  const eps = renumber(scenes, autoCuts(scenes, opt), opt);
+  const out = renderScript(eps);
+  assert.match(out, /\*\*人物：/);
 });
 
 /* ---------------- 核心承诺：一个字都不改 ---------------- */
@@ -327,6 +359,29 @@ test("下刀建议点：落在块与块之间，且两边都有内容", () => {
   const point = suggestSplitPoint(blocks, opt);
   assert.ok(Number.isInteger(point));
   assert.ok(point >= 1 && point <= blocks.length - 1, "两边都要有块");
+});
+
+test("多切点：超长场一次给出完整切点，不再固定只切一刀", () => {
+  const { parsed } = build(MULTI_LONG_SCENE);
+  const blocks = parsed.episodes[0].scenes[0].blocks;
+  const points = suggestSplitPoints(blocks, opt, opt.establishSec);
+  const after = build(MULTI_LONG_SCENE, undefined, { "1-1": points });
+  const parts = after.scenes.filter((s) => s.origin === "1-1");
+
+  assert.ok(points.length >= 2, `应给出至少两个切点，实际 ${points.length}`);
+  assert.equal(parts.length, points.length + 1);
+  for (const part of parts) {
+    assert.ok(part.auto <= opt.windowHi, `${part.key} 切完仍超上限：${part.auto}s`);
+  }
+});
+
+test("自动下刀计划：只处理超长场，并把场内切点带给切分引擎", () => {
+  const parsed = parseScript(MULTI_LONG_SCENE);
+  const splits = autoSplitScenes(parsed, opt);
+  const scenes = estimateAll(parsed, opt, {}, splits);
+
+  assert.ok(splits["1-1"].length >= 2);
+  assert.ok(scenes.every((one) => one.auto <= opt.windowHi));
 });
 
 test("场内下刀：一场变两段，内容一字不差、总时长不变", () => {

@@ -105,6 +105,22 @@ test("每轮结束都回调 onProgress，中途不会丢进度", async () => {
   assert.deepEqual(seen, ["一", "一二"], "每一轮都要把累计结果交出去落盘");
 });
 
+test("每轮开始时把已有完整内容交给 callModel，供流式中途落盘", async () => {
+  const seen = [];
+  await runChunked({
+    existing: "已有",
+    seed: "s",
+    callModel: async ({ full, round }) => {
+      seen.push({ full, round });
+      return { text: round === 1 ? "一" : "二", status: round === 1 ? "incomplete" : "completed" };
+    },
+  });
+  assert.deepEqual(seen, [
+    { full: "已有", round: 1 },
+    { full: "已有一", round: 2 },
+  ]);
+});
+
 test("续跑时能从既有内容接着跑（重试不从头再来）", async () => {
   const { calls, callModel } = fakeModel([{ text: "接着写", status: "completed" }]);
   const res = await runChunked({ callModel, prefix: "P", seed: "S", existing: "已经跑过的部分" });

@@ -7,6 +7,7 @@
 
 export const CLEAN_KEY = "pd-clean-script-v1";
 export const SPLIT_KEY = "pd-split-v1";
+export const STORYBOARD_KEY = "pd-storyboard-v1";
 
 export function readStore(key) {
   try {
@@ -33,8 +34,10 @@ export function handOffToSplit({ text, fileName }) {
     mode: "paste",
     text,
     fileName: (fileName || "标准化剧本").replace(/\.[^.]+$/, ""),
+    splits: {},
     cuts: null,
     cutMode: "auto",
+    autoSplitVersion: 0,
     overrides: {},
     error: "",
   });
@@ -47,4 +50,21 @@ export function readCleanResult() {
   const text = (s.final || s.organized || "").trim();
   if (!text) return null;
   return { text, fileName: s.fileName || "标准化剧本" };
+}
+
+/** 流程二 → 流程三：把当前确认版的完整分集稿塞进生成分镜输入。 */
+export function handOffToStoryboard({ text, fileName }) {
+  const prev = readStore(STORYBOARD_KEY) ?? {};
+  writeStore(STORYBOARD_KEY, {
+    ...prev,
+    stage: "input",
+    mode: "paste",
+    text,
+    fileName: (fileName || "分集剧本").replace(/\.[^.]+$/, ""),
+    batches: [],
+    cursor: 0,
+    pausedAt: 0,
+    pauseReason: "",
+    error: "",
+  });
 }

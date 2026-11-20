@@ -20,7 +20,7 @@ export function buildRoundInput({ prefix = "", seed = "", next = "", full = "" }
 }
 
 /**
- * @param callModel  ({ input, round, onText }) => { text, status }
+ * @param callModel  ({ input, round, full, onText }) => { text, status }
  *         status === "incomplete" 表示被截断，需要再来一轮；其它值都算跑完。
  * @param onRound    (n) => void        每轮开始
  * @param onProgress (full) => void     每轮结束（用于把中间结果实时落盘）
@@ -45,6 +45,7 @@ export async function runChunked({
     const res = await callModel({
       input: buildRoundInput({ prefix, seed, next, full }),
       round: n,
+      full,
     });
     full += res?.text ?? "";
     status = res?.status ?? "completed";

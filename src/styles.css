@@ -303,6 +303,39 @@ button {
   background: rgba(248, 113, 113, 0.05);
 }
 
+.diagnostic-stack {
+  display: grid;
+  gap: 12px;
+}
+
+.diag-report {
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.012);
+}
+
+.diag-report-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.diag-report-head strong {
+  color: #d6ddd7;
+  font-size: 13.5px;
+}
+
+.diag-report-head .hint {
+  margin-left: auto;
+}
+
+.diag-report .doc {
+  max-height: 280px;
+  margin: 0;
+}
+
 .review-item input[type="checkbox"] {
   width: 15px;
   height: 15px;
@@ -448,6 +481,10 @@ button {
 }
 
 .deferred li {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
   font-size: 12.5px;
   line-height: 1.7;
   color: #cfd8d1;
@@ -614,6 +651,7 @@ textarea.script:focus {
 .row {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   gap: 12px;
   margin-top: 16px;
 }
@@ -1509,14 +1547,51 @@ textarea.script:focus-visible {
 }
 
 .shot-ep-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
   padding: 10px 4px 8px;
   font-size: 13px;
   color: var(--muted);
   border-bottom: 1px solid var(--line);
 }
 
+.shot-ep-head > span {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.shot-ep-actions {
+  display: flex;
+  gap: 6px;
+  margin-left: auto;
+  flex: none;
+}
+
+.shot-ep-actions .btn {
+  padding: 4px 8px;
+  font-size: 11.5px;
+  gap: 4px;
+}
+
 .shot-row {
   border-bottom: 1px solid var(--line);
+}
+
+.advanced-export {
+  margin-top: 10px;
+  border-top: 1px dashed var(--line);
+  padding-top: 8px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.advanced-export summary {
+  width: fit-content;
+  cursor: pointer;
+  user-select: none;
 }
 
 .shot-row-head {

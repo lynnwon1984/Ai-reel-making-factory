@@ -10,11 +10,18 @@ import {
 import { PromptSlot } from "./PromptSlot.jsx";
 import { SOURCE_SAMPLE } from "./mock.js";
 import { runStream } from "./api.js";
-import { canReviewPerItem, buildDecisionText, parseChecklist } from "./checklist.js";
+import {
+  canReviewPerItem,
+  buildDecisionText,
+  parseChecklist,
+  splitDiagnosticReports,
+} from "./checklist.js";
 import { validateScript } from "./validate.js";
+import { cleanActionCostume } from "./costume-cleanup.js";
 import { buildStep1Brief, extractDeferredItems } from "./deferred.js";
 import { handOffToSplit } from "./handoff.js";
 import { runChunked, MAX_ROUNDS } from "./chunked.js";
+import { analyzeFormatScript } from "./clean-engine.js";
 import defaultOrganize from "./prompts/default-organize.md?raw";
 import defaultLogic from "./prompts/default-logic.md?raw";
 
@@ -27,6 +34,7 @@ const INITIAL = {
   fileName: "",
   customOrg: "",
   customLogic: "",
+  checkMode: "local", // local | model
   effortMode: "low", // low | high | auto（auto = 分析步骤 high、长输出 low）
   checklist: "",
   organized: "",
@@ -34,10 +42,12 @@ const INITIAL = {
   final: "",
   error: "",
   failedAt: null, // organize | confirm1 | logic | confirm2
+  run: null, // 中断恢复：{ kind, startedAt }
   decChecklist: {},
   decDiagnose: {},
   noteChecklist: "",
   noteDiagnose: "",
+  acceptedDeferred: {},
 };
 
 function load() {
@@ -86,7 +96,15 @@ function Doc({ text }) {
   return <pre className="doc">{text}</pre>;
 }
 
-function ChecklistReview({ items, isChecked, onToggle, onAll, note, onNote }) {
+function ChecklistReview({
+  items,
+  isChecked,
+  onToggle,
+  onAll,
+  note,
+  onNote,
+  showNote = true,
+}) {
   const okCount = items.filter(isChecked).length;
   return (
     <div className="review">
@@ -119,12 +137,14 @@ function ChecklistReview({ items, isChecked, onToggle, onAll, note, onNote }) {
           </label>
         ))}
       </div>
-      <textarea
-        className="script prompt-input rv-note"
-        placeholder="补充修改要求（可选）：例如「第 10 项瓦鲁斯着装改为深色长袍」"
-        value={note}
-        onChange={(event) => onNote(event.target.value)}
-      />
+      {showNote ? (
+        <textarea
+          className="script prompt-input rv-note"
+          placeholder="补充修改要求（可选）：例如「第 10 项瓦鲁斯着装改为深色长袍」"
+          value={note}
+          onChange={(event) => onNote(event.target.value)}
+        />
+      ) : null}
     </div>
   );
 }
@@ -200,7 +220,9 @@ function useLiveText() {
     text,
     append: (delta) => {
       ref.current += delta;
+      return ref.current;
     },
+    current: () => ref.current,
     reset: () => {
       ref.current = "";
       setText("");
@@ -222,6 +244,7 @@ function downloadFile(filename, content) {
 
 export function CleanFlow() {
   const [state, setState] = useState(load);
+  const stateRef = useRef(state);
   const [busy, setBusy] = useState(null); // organize | confirm1 | logic | confirm2
   const [reason, setReason] = useState(0);
   const [round, setRound] = useState(0);
@@ -231,6 +254,13 @@ export function CleanFlow() {
   const ctrlRef = useRef(null);
   const runIdRef = useRef("");
 
+  useEffect(
+    () => () => {
+      ctrlRef.current?.abort();
+    },
+    [],
+  );
+
   const {
     stage,
     mode,
@@ -238,6 +268,7 @@ export function CleanFlow() {
     fileName,
     customOrg,
     customLogic,
+    checkMode,
     effortMode,
     checklist,
     organized,
@@ -245,21 +276,26 @@ export function CleanFlow() {
     final: finalText,
     error,
     failedAt,
+    run,
     decChecklist,
     decDiagnose,
     noteChecklist,
     noteDiagnose,
+    acceptedDeferred = {},
   } = state;
 
-  const patch = (next) => setState((s) => ({ ...s, ...next }));
-
-  useEffect(() => {
+  const patch = (next) => {
+    const base = stateRef.current;
+    const delta = typeof next === "function" ? next(base) : next;
+    const merged = { ...base, ...delta };
+    stateRef.current = merged;
     try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(merged));
     } catch (err) {
       /* 存储不可用时忽略 */
     }
-  }, [state]);
+    setState(merged);
+  };
 
   const canOrganize = mode === "upload" ? Boolean(fileName) : text.trim().length > 0;
   const promptOrg = customOrg.trim() ? customOrg : defaultOrganize;
@@ -270,13 +306,32 @@ export function CleanFlow() {
     effortMode === "auto" ? (kind === "analyze" ? "high" : "low") : effortMode;
 
   const checklistItems = useMemo(() => parseChecklist(checklist), [checklist]);
-  const diagnoseItems = useMemo(() => parseChecklist(diagnose), [diagnose]);
+  const diagnosticSections = useMemo(
+    () => splitDiagnosticReports(diagnose),
+    [diagnose],
+  );
+  const diagnoseItems = useMemo(
+    () =>
+      diagnosticSections.length
+        ? diagnosticSections.flatMap((section) =>
+            section.reviewable ? section.items : [],
+          )
+        : parseChecklist(diagnose),
+    [diagnose, diagnosticSections],
+  );
   const reviewChecklist = canReviewPerItem(checklistItems);
-  const reviewDiagnose = canReviewPerItem(diagnoseItems);
+  const reviewDiagnose = diagnosticSections.length
+    ? diagnoseItems.length > 0
+    : canReviewPerItem(diagnoseItems);
   const deferredItems = useMemo(
     () => extractDeferredItems(`${diagnose}\n${finalText}`),
     [diagnose, finalText],
   );
+  const outstandingDeferredItems = useMemo(
+    () => deferredItems.filter((one) => !acceptedDeferred[one]),
+    [deferredItems, acceptedDeferred],
+  );
+  const cleanedFinal = useMemo(() => cleanActionCostume(finalText), [finalText]);
 
   const decMap = (kind) => (kind === "checklist" ? decChecklist : decDiagnose) || {};
   const isChecked = (kind, item) => decMap(kind)[item.no] ?? !item.risk;
@@ -319,25 +374,61 @@ export function CleanFlow() {
 
   const fail = (err, step) => {
     if (err?.name === "AbortError") return;
-    patch({ error: String(err?.message || err), failedAt: step });
+    patch({
+      error: String(err?.message || err),
+      failedAt: step,
+      run: null,
+    });
   };
 
   const organize = async () => {
     if (!canOrganize || busy) return;
-    patch({ error: "", failedAt: null });
+    if (checkMode === "local") {
+      try {
+        const result = analyzeFormatScript(text);
+        patch({
+          checklist: result.checklist,
+          stage: "checklist",
+          error: "",
+          failedAt: null,
+          run: null,
+          decChecklist: {},
+          noteChecklist: "",
+          acceptedDeferred: {},
+        });
+      } catch (err) {
+        fail(err, "organize");
+      }
+      return;
+    }
+    patch({
+      error: "",
+      failedAt: "organize",
+      run: { kind: "organize", startedAt: new Date().toISOString() },
+      checklist: "",
+      stage: "checklist",
+    });
     setReason(0);
     live.reset();
     setBusy("organize");
     const signal = newRun();
     const runId = newRunId();
     try {
+      let lastPersist = 0;
       const res = await runStream({
         instructions: promptOrg,
         input: `【原始剧本】\n${text}\n\n请先输出《统一确认清单》。`,
         effort: effortFor("analyze"),
         label: "① 统一确认清单",
         runId,
-        onText: live.append,
+        onText: (delta) => {
+          const full = live.append(delta);
+          const now = Date.now();
+          if (now - lastPersist > 500) {
+            lastPersist = now;
+            patch({ checklist: full });
+          }
+        },
         onReason: setReason,
         signal,
       });
@@ -346,6 +437,8 @@ export function CleanFlow() {
         stage: "checklist",
         decChecklist: {},
         noteChecklist: "",
+        acceptedDeferred: {},
+        run: null,
       });
       live.reset();
       patch({ failedAt: null });
@@ -378,15 +471,25 @@ export function CleanFlow() {
       maxRounds: MAX_ROUNDS,
       onRound: setRound,
       onProgress: (full) => patch({ [field]: full }),
-      callModel: async ({ input, round }) => {
+      callModel: async ({ input, round, full }) => {
         live.reset();
+        let roundText = "";
+        let lastPersist = 0;
         return runStream({
           instructions,
           input,
           effort,
           label: `${label} 第${round}轮`,
           runId,
-          onText: live.append,
+          onText: (delta) => {
+            live.append(delta);
+            roundText += delta;
+            const now = Date.now();
+            if (now - lastPersist > 500) {
+              lastPersist = now;
+              patch({ [field]: `${full}${roundText}` });
+            }
+          },
           onReason: setReason,
           signal,
         });
@@ -398,7 +501,13 @@ export function CleanFlow() {
 
   const confirm1 = async ({ resume = false } = {}) => {
     if (busy) return;
-    patch({ error: "", failedAt: null, stage: "result1" });
+    patch({
+      error: "",
+      failedAt: "confirm1",
+      run: { kind: "confirm1", startedAt: new Date().toISOString() },
+      stage: "result1",
+      ...(resume ? {} : { organized: "" }),
+    });
     setReason(0);
     setRound(0);
     setBusy("confirm1");
@@ -424,7 +533,7 @@ export function CleanFlow() {
         runId: runIdRef.current,
         existing: resume ? organized : "",
       });
-      patch({ failedAt: null });
+      patch({ failedAt: null, run: null });
     } catch (err) {
       fail(err, "confirm1");
     } finally {
@@ -434,19 +543,33 @@ export function CleanFlow() {
 
   const startLogic = async () => {
     if (busy) return;
-    patch({ error: "", failedAt: null });
+    patch({
+      error: "",
+      failedAt: "logic",
+      run: { kind: "logic", startedAt: new Date().toISOString() },
+      diagnose: "",
+      stage: "diagnose",
+    });
     setReason(0);
     live.reset();
     setBusy("logic");
     const signal = newRun();
     try {
+      let lastPersist = 0;
       const res = await runStream({
         instructions: promptLogic,
-        input: `【待处理的剧本】\n${organized}\n\n请先输出《逻辑诊断清单》《道具连续性台账》《人物动线表》《台词翻译确认清单》。`,
+        input: `【待处理的剧本】\n${organized}\n\n请先输出《逻辑诊断清单》《道具连续性台账》《人物动线表》《高风险剧情修复清单（L3，若有）》《台词翻译确认清单》。`,
         effort: effortFor("analyze"),
         label: "② 逻辑诊断清单",
         runId: runIdRef.current || newRunId(),
-        onText: live.append,
+        onText: (delta) => {
+          const full = live.append(delta);
+          const now = Date.now();
+          if (now - lastPersist > 500) {
+            lastPersist = now;
+            patch({ diagnose: full });
+          }
+        },
         onReason: setReason,
         signal,
       });
@@ -455,6 +578,7 @@ export function CleanFlow() {
         stage: "diagnose",
         decDiagnose: {},
         noteDiagnose: "",
+        run: null,
       });
       live.reset();
       patch({ failedAt: null });
@@ -467,13 +591,20 @@ export function CleanFlow() {
 
   const confirm2 = async ({ resume = false } = {}) => {
     if (busy) return;
-    patch({ error: "", failedAt: null, stage: "result2" });
+    patch({
+      error: "",
+      failedAt: "confirm2",
+      run: { kind: "confirm2", startedAt: new Date().toISOString() },
+      stage: "result2",
+      acceptedDeferred: {},
+      ...(resume ? {} : { final: "" }),
+    });
     setReason(0);
     setRound(0);
     setBusy("confirm2");
     const signal = newRun();
     try {
-      await runOutput({
+      const output = await runOutput({
         field: "final",
         instructions: promptLogic,
         prefix: `【待处理的剧本】\n${organized}`,
@@ -493,7 +624,8 @@ export function CleanFlow() {
         runId: runIdRef.current,
         existing: resume ? finalText : "",
       });
-      patch({ failedAt: null });
+      const cleaned = cleanActionCostume(output);
+      patch({ final: cleaned.text, failedAt: null, run: null });
     } catch (err) {
       fail(err, "confirm2");
     } finally {
@@ -512,6 +644,7 @@ export function CleanFlow() {
       stage: "input",
       error: "",
       failedAt: null,
+      run: null,
       checklist: "",
       organized: "",
       diagnose: "",
@@ -520,6 +653,7 @@ export function CleanFlow() {
       decDiagnose: {},
       noteChecklist: "",
       noteDiagnose: "",
+      acceptedDeferred: {},
       ...(keepScript ? {} : { text: "", fileName: "" }),
     });
   };
@@ -535,7 +669,7 @@ export function CleanFlow() {
 
   // 格式类遗留项交回第①步：把「待处理剧本 + 事项」填回输入框，回到步骤①
   const sendBackToStep1 = () => {
-    if (!deferredItems.length || !finalText) return;
+    if (!outstandingDeferredItems.length || !finalText) return;
     ctrlRef.current?.abort();
     setBusy(null);
     setConfirmOpen(false);
@@ -543,11 +677,12 @@ export function CleanFlow() {
     setRound(0);
     live.reset();
     patch({
-      text: buildStep1Brief(deferredItems, finalText),
+      text: buildStep1Brief(outstandingDeferredItems, cleanedFinal.text),
       mode: "paste",
       stage: "input",
       error: "",
       failedAt: null,
+      run: null,
       checklist: "",
       organized: "",
       diagnose: "",
@@ -556,27 +691,47 @@ export function CleanFlow() {
       decDiagnose: {},
       noteChecklist: "",
       noteDiagnose: "",
+      acceptedDeferred: {},
     });
   };
 
-  const step1 = stage === "input" || stage === "checklist" ? "active" : "done";
-  const step2 = stage === "diagnose" || stage === "result2" ? "active" : "";
+  const acceptDeferred = (one) => {
+    patch({ acceptedDeferred: { ...acceptedDeferred, [one]: true } });
+  };
+
+  const stageStep = {
+    input: 1,
+    checklist: 2,
+    result1: 3,
+    diagnose: 4,
+    result2: 5,
+  }[stage] || 1;
+  const flowSteps = [
+    "输入剧本",
+    "格式检查",
+    "执行格式整理",
+    "逻辑检查",
+    "执行逻辑修复",
+  ];
+  const stepClass = (index) =>
+    index < stageStep ? "done" : index === stageStep ? "active" : "";
+  const interrupted = Boolean(run) && !busy;
 
   const checklistShown = busy === "organize" ? live.text : checklist;
   const organizeShown = busy === "confirm1" ? organized + live.text : organized;
   const diagnoseShown = busy === "logic" ? live.text : diagnose;
-  const finalShown = busy === "confirm2" ? finalText + live.text : finalText;
+  const finalShown =
+    busy === "confirm2" ? finalText + live.text : cleanedFinal.text;
 
   return (
     <>
       <div className="flow-head">
         <div className="steps">
-          <div className={`step ${step1}`}>
-            <span className="num">1</span> 整理 · 格式标准化
-          </div>
-          <div className={`step ${step2}`}>
-            <span className="num">2</span> 修改逻辑 · 逻辑 + 翻译
-          </div>
+          {flowSteps.map((label, index) => (
+            <div className={`step ${stepClass(index + 1)}`} key={label}>
+              <span className="num">{index + 1}</span> {label}
+            </div>
+          ))}
         </div>
         <div className="flow-actions">
           {busy ? <span className="hint">运行中……</span> : null}
@@ -616,10 +771,13 @@ export function CleanFlow() {
         </div>
       ) : null}
 
-      {error ? (
+      {error || interrupted ? (
         <div className="error-bar">
           <WarningCircle size={16} weight="fill" />
-          <div>{error}</div>
+          <div>
+            {error ||
+              "上次运行在生成中途离开或刷新，已保留最后一段输出。可以从当前进度继续。"}
+          </div>
           <div className="spacer" />
           {failedAt ? (
             <button className="btn sm" type="button" disabled={Boolean(busy)} onClick={retry}>
@@ -659,6 +817,7 @@ export function CleanFlow() {
           defaultText={defaultOrganize}
           value={customOrg}
           onChange={(v) => patch({ customOrg: v })}
+          label="格式整理执行提示词"
         />
 
         {mode === "paste" ? (
@@ -689,9 +848,21 @@ export function CleanFlow() {
             填入示例剧本
           </button>
           <label className="effort">
+            <span className="hint">格式检查</span>
+            <select
+              value={checkMode}
+              disabled={Boolean(busy)}
+              onChange={(e) => patch({ checkMode: e.target.value })}
+            >
+              <option value="local">本地规则 · 0 token</option>
+              <option value="model">模型辅助</option>
+            </select>
+          </label>
+          <label className="effort">
             <span className="hint">推理档位</span>
             <select
               value={effortMode}
+              disabled={Boolean(busy)}
               onChange={(e) => patch({ effortMode: e.target.value })}
             >
               <option value="low">低（默认 · 快）</option>
@@ -707,7 +878,7 @@ export function CleanFlow() {
             disabled={!canOrganize || Boolean(busy)}
             onClick={organize}
           >
-            整理 <ArrowRight size={15} weight="bold" />
+            检查格式 <ArrowRight size={15} weight="bold" />
           </button>
         </div>
       </section>
@@ -725,7 +896,11 @@ export function CleanFlow() {
               {busy === "organize" ? "生成中" : stage === "checklist" ? "待确认" : "已确认"}
             </span>
           </div>
-          <p className="sub">模型先给出全部待处理项，你逐项确认之后才会执行。</p>
+          <p className="sub">
+            {checkMode === "local"
+              ? "本地规则先扫描全部结构问题；语义不确定项会标为待判断，不会直接修改原稿。"
+              : "模型先给出全部待处理项，你逐项确认之后才会执行。"}
+          </p>
           {stage === "checklist" && reviewChecklist ? (
             <ChecklistReview
               items={checklistItems}
@@ -749,7 +924,12 @@ export function CleanFlow() {
                   : "未能识别出清单条目，改为整体确认。"}
               </span>
               <div className="spacer" />
-              <button className="btn primary" type="button" disabled={Boolean(busy)} onClick={confirm1}>
+              <button
+                className="btn primary"
+                type="button"
+                disabled={Boolean(busy) || Boolean(run)}
+                onClick={confirm1}
+              >
                 {reviewChecklist
                   ? `确认 ${checklistItems.filter((item) => isChecked("checklist", item)).length} 项`
                   : "确认"}
@@ -781,6 +961,15 @@ export function CleanFlow() {
             <StreamStatus phase={phase} reason={reason} chars={live.text.length} round={round} />
           ) : null}
           {busy !== "confirm1" && organized ? <ValidationPanel text={organized} /> : null}
+          {stage === "result1" || ["diagnose", "result2"].includes(stage) ? (
+            <PromptSlot
+              defaultText={defaultLogic}
+              value={customLogic}
+              onChange={(value) => patch({ customLogic: value })}
+              label="第二步 · 逻辑修改提示词"
+              readOnly={busy === "confirm1" || stage !== "result1"}
+            />
+          ) : null}
           {busy !== "confirm1" ? (
             <div className="row">
               <button
@@ -793,7 +982,12 @@ export function CleanFlow() {
               </button>
               <div className="spacer" />
               {stage === "result1" ? (
-                <button className="btn primary" type="button" disabled={Boolean(busy)} onClick={startLogic}>
+                <button
+                  className="btn primary"
+                  type="button"
+                  disabled={Boolean(busy) || Boolean(run)}
+                  onClick={startLogic}
+                >
                   开始第二步 · 修改逻辑 <ArrowRight size={15} weight="bold" />
                 </button>
               ) : (
@@ -817,14 +1011,43 @@ export function CleanFlow() {
               {busy === "logic" ? "生成中" : stage === "diagnose" ? "待确认" : "已确认"}
             </span>
           </div>
-
-          <PromptSlot
-            defaultText={defaultLogic}
-            value={customLogic}
-            onChange={(v) => patch({ customLogic: v })}
-          />
-
-          {stage === "diagnose" && reviewDiagnose ? (
+          {stage === "diagnose" && diagnosticSections.length ? (
+            <div className="diagnostic-stack">
+              {diagnosticSections.map((section) => (
+                <div className="diag-report" key={section.key}>
+                  <div className="diag-report-head">
+                    <strong>{section.title}</strong>
+                    <span className="hint">
+                      {section.reviewable && section.items.length
+                        ? `${section.items.length} 个可确认项`
+                        : section.reviewable
+                          ? "无可逐项确认内容"
+                          : "仅供核对"}
+                    </span>
+                  </div>
+                  {section.reviewable && section.items.length ? (
+                    <ChecklistReview
+                      items={section.items}
+                      isChecked={(item) => isChecked("diagnose", item)}
+                      onToggle={(no) => toggleDec("diagnose", no, section.items)}
+                      onAll={(value) => setAllDec("diagnose", value, section.items)}
+                      showNote={false}
+                    />
+                  ) : section.raw ? (
+                    <Doc text={section.raw} />
+                  ) : (
+                    <div className="hint">本项为空。</div>
+                  )}
+                </div>
+              ))}
+              <textarea
+                className="script prompt-input rv-note"
+                placeholder="补充修改要求（可选）：例如「台词翻译全部确认，但第 L3 项改为……」。"
+                value={noteDiagnose}
+                onChange={(event) => patch({ noteDiagnose: event.target.value })}
+              />
+            </div>
+          ) : stage === "diagnose" && reviewDiagnose ? (
             <ChecklistReview
               items={diagnoseItems}
               isChecked={(item) => isChecked("diagnose", item)}
@@ -847,7 +1070,12 @@ export function CleanFlow() {
                   : "未能识别出诊断条目，改为整体确认。"}
               </span>
               <div className="spacer" />
-              <button className="btn primary" type="button" disabled={Boolean(busy)} onClick={confirm2}>
+              <button
+                className="btn primary"
+                type="button"
+                disabled={Boolean(busy) || Boolean(run)}
+                onClick={confirm2}
+              >
                 {reviewDiagnose
                   ? `确认 ${diagnoseItems.filter((item) => isChecked("diagnose", item)).length} 项`
                   : "确认"}
@@ -878,13 +1106,15 @@ export function CleanFlow() {
           {busy === "confirm2" ? (
             <StreamStatus phase={phase} reason={reason} chars={live.text.length} round={round} />
           ) : null}
-          {busy !== "confirm2" && finalText ? <ValidationPanel text={finalText} /> : null}
-          {busy !== "confirm2" && deferredItems.length ? (
+          {busy !== "confirm2" && finalText ? <ValidationPanel text={cleanedFinal.text} /> : null}
+          {busy !== "confirm2" && outstandingDeferredItems.length ? (
             <div className="deferred">
               <div className="deferred-head">
-                <span className="pill l2">格式类遗留 {deferredItems.length} 项</span>
+                <span className="pill l2">
+                  格式类遗留 {outstandingDeferredItems.length} 项
+                </span>
                 <span className="hint">
-                  第②步只标注不执行，这些属于第①步的活。点右边可把它们带回第一步重跑。
+                  第②步只标注不执行。确认当前结构合理时可保留，否则送回第一步。
                 </span>
                 <div className="spacer" />
                 <button className="btn sm" type="button" onClick={sendBackToStep1}>
@@ -892,8 +1122,17 @@ export function CleanFlow() {
                 </button>
               </div>
               <ul>
-                {deferredItems.map((one, i) => (
-                  <li key={i}>{one}</li>
+                {outstandingDeferredItems.map((one, i) => (
+                  <li key={i}>
+                    <span>{one}</span>
+                    <button
+                      className="btn ghost sm"
+                      type="button"
+                      onClick={() => acceptDeferred(one)}
+                    >
+                      保留此结构
+                    </button>
+                  </li>
                 ))}
               </ul>
             </div>
@@ -903,17 +1142,17 @@ export function CleanFlow() {
               <button
                 className="btn"
                 type="button"
-                disabled={!finalText}
-                onClick={() => downloadFile("标准化剧本.txt", finalText)}
+                disabled={!finalText || Boolean(run)}
+                onClick={() => downloadFile("标准化剧本.txt", cleanedFinal.text)}
               >
                 <DownloadSimple size={15} /> 下载完整剧本
               </button>
               <button
                 className="btn primary"
                 type="button"
-                disabled={!finalText}
+                disabled={!finalText || Boolean(run)}
                 onClick={() => {
-                  handOffToSplit({ text: finalText, fileName });
+                  handOffToSplit({ text: cleanedFinal.text, fileName });
                   window.location.hash = "#/episode";
                 }}
               >

@@ -5,7 +5,13 @@ import { ArrowsClockwise, Code, CopySimple } from "@phosphor-icons/react";
  * 提示词槽位：默认提示词可读、可复制，也可填入后改成自定义。
  * 留空 = 用默认；有内容 = 用自定义。
  */
-export function PromptSlot({ defaultText, value, onChange, label = "提示词" }) {
+export function PromptSlot({
+  defaultText,
+  value,
+  onChange,
+  label = "提示词",
+  readOnly = false,
+}) {
   const [open, setOpen] = useState(false);
   const [tab, setTab] = useState("default");
   const [copied, setCopied] = useState(false);
@@ -31,6 +37,7 @@ export function PromptSlot({ defaultText, value, onChange, label = "提示词" }
         <span className={`pill ${usingCustom ? "custom" : ""}`}>
           {usingCustom ? "使用自定义" : "使用默认"}
         </span>
+        {readOnly ? <span className="pill">已锁定</span> : null}
         <div className="spacer" />
         <button className="btn ghost sm" type="button" onClick={() => setOpen((v) => !v)}>
           {open ? "收起" : "查看 / 替换"}
@@ -68,6 +75,7 @@ export function PromptSlot({ defaultText, value, onChange, label = "提示词" }
                 <button
                   className="btn sm"
                   type="button"
+                  disabled={readOnly}
                   onClick={() => {
                     onChange(defaultText);
                     setTab("custom");
@@ -82,6 +90,7 @@ export function PromptSlot({ defaultText, value, onChange, label = "提示词" }
               <textarea
                 className="script prompt-input"
                 value={value}
+                readOnly={readOnly}
                 onChange={(e) => onChange(e.target.value)}
                 placeholder="留空 → 使用默认提示词；粘贴你自己的提示词 → 覆盖默认。"
               />
@@ -90,12 +99,13 @@ export function PromptSlot({ defaultText, value, onChange, label = "提示词" }
                   {usingCustom
                     ? `已自定义（${value.trim().length} 字），本步将使用你的提示词。`
                     : "当前为空，本步使用默认提示词。"}
+                  {readOnly ? " 本步骤已开始，提示词已锁定。" : ""}
                 </span>
                 <div className="spacer" />
                 <button
                   className="btn ghost sm"
                   type="button"
-                  disabled={!usingCustom}
+                  disabled={!usingCustom || readOnly}
                   onClick={() => onChange("")}
                 >
                   <ArrowsClockwise size={14} /> 清空，改回默认

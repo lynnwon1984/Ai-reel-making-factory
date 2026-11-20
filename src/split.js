@@ -4,7 +4,7 @@
  * 设计前提（见设计文档 v0.3.1 §5）：
  *   1. 只改结构，不改一个字 —— 场内的正文/台词原样搬运，只重新分组与重新编号。
  *   2. 零模型调用 —— 估时用纯规则（实测模型估时两次差 32%，不可重复）。
- *   3. 落刀点只能在场景边界；超长场单独标记为强制切点。
+ *   3. 默认落刀在场景边界；单场自身超限时，可在动作块之间下多刀。
  */
 
 /* ---------------- 纯规则估时参数（4 个旋钮） ---------------- */
@@ -146,7 +146,7 @@ function dialogueSeconds(content, opt) {
 /* ---------------- 场内下刀 ----------------
 
    一场戏自己就超过上限时（实测 101 场里有 3 场，最长 168 秒），
-   只能在这一场内部再切一刀。切点在"块"之间 —— 块就是 △ 动作行与台词行。
+   可在这一场内部按块下多刀。切点在"块"之间 —— 块就是 △ 动作行与台词行。
 
    切出来的每一段仍然是独立的"场"（有自己的场次号、人物行），
    所以下游的切分逻辑完全不用改。
@@ -193,6 +193,68 @@ export function suggestSplitPoint(blocks, opt) {
     }
   }
   return best;
+}
+
+function estimateBlocks(blocks, opt, establish = 0) {
+  let dlgRaw = 0;
+  let actionLines = 0;
+  for (const block of blocks) {
+    if (block.kind === "dialogue") dlgRaw += dialogueSeconds(block.content, opt);
+    if (block.kind === "action") actionLines += 1;
+  }
+  return Math.ceil(dlgRaw) + Math.min(actionLines * opt.beatSec, opt.beatCap) + establish;
+}
+
+function splitCost(sec, opt) {
+  const target = (opt.windowLo + opt.windowHi) / 2;
+  if (sec > opt.windowHi) {
+    const over = sec - opt.windowHi;
+    return 1e9 + over * 1e4 + Math.abs(sec - target);
+  }
+  if (sec < opt.windowLo) {
+    const under = opt.windowLo - sec;
+    return 1e8 + under * 1e3 + Math.abs(sec - target);
+  }
+  return Math.abs(sec - target);
+}
+
+/**
+ * 一个超长场内可能不止切一刀。
+ * 用块级动态规划挑选全部切点，优先避免任一段超出上限，再尽量贴近窗口中线。
+ */
+export function suggestSplitPoints(blocks, opt, establish = 0) {
+  const n = blocks.length;
+  if (n < 2) return [];
+
+  const best = Array(n + 1).fill(Infinity);
+  const prev = Array(n + 1).fill(-1);
+  best[0] = 0;
+
+  for (let start = 0; start < n; start += 1) {
+    if (!Number.isFinite(best[start])) continue;
+    for (let end = start + 1; end <= n; end += 1) {
+      const sec = estimateBlocks(
+        blocks.slice(start, end),
+        opt,
+        start === 0 ? establish : 0,
+      );
+      const cost = best[start] + splitCost(sec, opt);
+      if (cost < best[end]) {
+        best[end] = cost;
+        prev[end] = start;
+      }
+      if (sec > opt.windowHi) break;
+    }
+  }
+
+  const cuts = [];
+  let cursor = n;
+  while (cursor > 0 && prev[cursor] >= 0) {
+    const start = prev[cursor];
+    if (start > 0) cuts.push(start);
+    cursor = start;
+  }
+  return cuts.reverse();
 }
 
 /** 给全剧每一场算预估秒数，返回扁平数组（切分的工作对象）。已下刀的场会展开成多段。 */
@@ -249,23 +311,65 @@ export function estimateAll(parsed, opt, overrides = {}, splits = {}) {
   return out;
 }
 
+/** 全剧自动下刀计划：只给自身超过窗口上限的场生成多个切点。 */
+export function autoSplitScenes(parsed, opt, overrides = {}) {
+  const base = estimateAll(parsed, opt, overrides);
+  const byKey = new Map(base.map((scene) => [scene.key, scene]));
+  const splits = {};
+
+  for (const scene of parsed.episodes.flatMap((ep) => ep.scenes)) {
+    const estimate = byKey.get(scene.key);
+    if (!estimate || estimate.auto <= opt.windowHi || scene.blocks.length < 2) continue;
+    const points = suggestSplitPoints(scene.blocks, opt, estimate.est);
+    if (points.length) splits[scene.key] = points;
+  }
+  return splits;
+}
+
 /* ---------------- 切分 ---------------- */
 
 /**
- * 贪心切分：只在场景边界落刀。
+ * 全局动态规划装箱：在场景（或场内切段）边界落刀。
+ * 先把所有越界集降到最少，再尽量让每集贴近窗口中线。
  * cuts[k] = 第 k+1 集从第几个场景开始（含）。
  */
 export function autoCuts(scenes, opt) {
-  const cuts = [0];
-  let sec = 0;
-  for (let i = 0; i < scenes.length; i++) {
-    if (sec > 0 && sec + scenes[i].sec > opt.windowHi) {
-      cuts.push(i);
-      sec = 0;
+  if (!scenes.length) return [0];
+
+  const n = scenes.length;
+  const target = (opt.windowLo + opt.windowHi) / 2;
+  const best = Array(n + 1).fill(Infinity);
+  const prev = Array(n + 1).fill(-1);
+  best[0] = 0;
+
+  for (let start = 0; start < n; start += 1) {
+    if (!Number.isFinite(best[start])) continue;
+    let sec = 0;
+    for (let end = start + 1; end <= n; end += 1) {
+      sec += scenes[end - 1].sec;
+      const over = Math.max(0, sec - opt.windowHi);
+      const under = Math.max(0, opt.windowLo - sec);
+      const cost =
+        best[start] +
+        (over > 0 ? 1e9 + over * 1e4 : 0) +
+        (under > 0 ? 1e8 + under * 1e3 : 0) +
+        Math.abs(sec - target);
+      if (cost < best[end]) {
+        best[end] = cost;
+        prev[end] = start;
+      }
+      if (sec > opt.windowHi) break;
     }
-    sec += scenes[i].sec;
   }
-  return cuts;
+
+  const cuts = [0];
+  let cursor = n;
+  while (cursor > 0) {
+    cursor = prev[cursor];
+    if (cursor <= 0) break;
+    cuts.push(cursor);
+  }
+  return [...new Set(cuts)].sort((a, b) => a - b);
 }
 
 export function packEpisodes(scenes, cuts) {
@@ -413,7 +517,10 @@ export function renderScript(eps) {
     out.push("");
     ep.scenes.forEach((s, i) => {
       out.push(`**${ep.no}-${i + 1} ${s.place}**`);
-      if (s.castOut) out.push(`**人物：${s.castOut}**`);
+      // SplitFlow 会先跑 rebuildCast；命令行或交接调用未必经过那一步。
+      // 渲染层保留原文人物行，避免静默产出“没有人物”的剧本。
+      const cast = s.castOut || s.cast;
+      if (cast) out.push(`**人物：${cast}**`);
       for (const line of s.body) out.push(line);
       out.push("");
     });

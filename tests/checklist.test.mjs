@@ -14,6 +14,7 @@ import {
   parseChecklist,
   canReviewPerItem,
   buildDecisionText,
+  splitDiagnosticReports,
 } from "../src/checklist.js";
 
 const DIR = path.join(path.dirname(fileURLToPath(import.meta.url)), "fixtures");
@@ -119,4 +120,33 @@ test("边界：只有 2 项时不够格逐项确认", () => {
 test("边界：buildDecisionText 面对空清单不崩", () => {
   const text = buildDecisionText([], () => true, "");
   assert.match(text, /合计：确认 0 项，不执行 0 项/);
+});
+
+test("多份诊断：按标题拆分，并给所有可确认项分配全局唯一编号", () => {
+  const first = read("checklist-table.txt");
+  const second = `| 编号 | 原文 | 英文 | 风险 |
+| --- | --- | --- | --- |
+| T1 | 你好 | Hello | L1 |
+| T2 | 再见 | Goodbye | L1 |
+| T3 | 快走 | Move | L1 |`;
+  const reports = splitDiagnosticReports(
+    `## 《逻辑诊断清单》\n${first}\n\n## 《台词翻译确认清单》\n${second}`,
+  );
+
+  assert.deepEqual(
+    reports.map((report) => report.title),
+    ["逻辑诊断清单", "台词翻译确认清单"],
+  );
+  assert.equal(reports[0].items.length, 22);
+  assert.equal(reports[1].items.length, 3);
+  const all = reports.flatMap((report) => report.items);
+  assert.deepEqual(
+    all.map((item) => item.no),
+    Array.from({ length: 25 }, (_, i) => i + 1),
+  );
+  assert.ok(all.every((item) => item.title.includes(item.section)));
+});
+
+test("多份诊断：没有标准标题时退回空数组，由界面展示原始文本", () => {
+  assert.deepEqual(splitDiagnosticReports("普通诊断，没有多份报告标题。"), []);
 });

@@ -17,6 +17,7 @@ import {
   parseScript,
   estimateAll,
   autoCuts,
+  autoSplitScenes,
   renumber,
   rebuildCast,
   renderScript,
@@ -24,10 +25,10 @@ import {
   shiftCutLeft,
   shiftCutRight,
   normalizeSplits,
-  suggestSplitPoint,
+  suggestSplitPoints,
 } from "./split.js";
 import { SPLIT_SAMPLE } from "./mock-split.js";
-import { readCleanResult } from "./handoff.js";
+import { handOffToStoryboard, readCleanResult } from "./handoff.js";
 
 const STORAGE_KEY = "pd-split-v1";
 /** 复核名单只列动作最重的这么多场 —— 全部标出来就没信息量了 */
@@ -46,6 +47,7 @@ const INITIAL = {
   cutMode: "auto", // auto | manual
   reviewOnly: false,
   showKnobs: false,
+  autoSplitVersion: 3,
   error: "",
 };
 
@@ -54,12 +56,26 @@ function load() {
     const raw = localStorage.getItem(STORAGE_KEY);
     if (raw) {
       const saved = JSON.parse(raw);
-      return {
+      const merged = {
         ...INITIAL,
         ...saved,
         // 旋钮新增项向后兼容
         options: { ...DEFAULT_OPTIONS, ...(saved.options ?? {}) },
       };
+      if (
+        merged.stage === "done" &&
+        merged.text.trim() &&
+        saved.autoSplitVersion !== 3
+      ) {
+        merged.splits = autoSplitScenes(
+          parseScript(merged.text),
+          merged.options,
+          merged.overrides,
+        );
+        merged.autoSplitVersion = 3;
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(merged));
+      }
+      return merged;
     }
   } catch (err) {
     /* 忽略损坏的本地状态 */
@@ -263,28 +279,44 @@ export function SplitFlow() {
 
   const longScenes = scenes.filter((s) => s.parts === 1 && s.auto > options.windowHi);
 
-  const splitOne = (key) => setSplit(key, [suggestSplitPoint(sceneBlocks(key), options)]);
+  const sceneEstablish = (key) =>
+    scenes.find((s) => s.key === key || s.origin === key)?.est ?? 0;
 
-  const nudgeSplit = (key, delta) => {
+  const splitOne = (key) =>
+    setSplit(key, suggestSplitPoints(sceneBlocks(key), options, sceneEstablish(key)));
+
+  const nudgeSplit = (key, index, delta) => {
     const points = splits[key] ?? [];
-    if (points.length !== 1) return; // 多个切点的微调留给以后
-    setSplit(key, [points[0] + delta]);
+    if (!points[index]) return;
+    const next = [...points];
+    next[index] += delta;
+    setSplit(key, next);
   };
 
   const splitAll = () => {
     const next = { ...splits };
     for (const s of longScenes) {
       const blocks = sceneBlocks(s.key);
-      if (blocks.length > 1) next[s.key] = [suggestSplitPoint(blocks, options)];
+      if (blocks.length > 1) {
+        next[s.key] = suggestSplitPoints(blocks, options, s.est);
+      }
     }
     patch({ splits: next, cuts: null, cutMode: "auto" });
   };
 
   const toggleWaive = (key) => {
-    const next = { ...waived };
-    if (next[key]) delete next[key];
-    else next[key] = true;
-    patch({ waived: next });
+    setState((s) => {
+      const next = { ...(s.waived || {}) };
+      if (next[key]) delete next[key];
+      else next[key] = true;
+      const merged = { ...s, waived: next };
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(merged));
+      } catch (err) {
+        /* ignore */
+      }
+      return merged;
+    });
   };
 
   const analyze = () => {
@@ -299,7 +331,14 @@ export function SplitFlow() {
       });
       return;
     }
-    patch({ stage: "done", cuts: null, cutMode: "auto", error: "" });
+    patch({
+      stage: "done",
+      splits: autoSplitScenes(parsed, options, overrides),
+      cuts: null,
+      cutMode: "auto",
+      autoSplitVersion: 3,
+      error: "",
+    });
   };
 
   const reset = ({ keepScript }) => {
@@ -309,6 +348,8 @@ export function SplitFlow() {
       next.fileName = fileName;
       next.mode = mode;
       next.stage = "done";
+      next.splits = autoSplitScenes(parsed, options, overrides);
+      next.autoSplitVersion = 3;
     }
     patch(next);
     try {
@@ -353,7 +394,7 @@ export function SplitFlow() {
             <span className="num">2</span> 估时 · 纯规则
           </div>
           <div className={`step ${step2}`}>
-            <span className="num">3</span> 切分 · 场景边界
+            <span className="num">3</span> 切分 · 边界与切点
           </div>
           <div className={`step ${step2}`}>
             <span className="num">4</span> 输出 · 可预览下载
@@ -551,7 +592,7 @@ export function SplitFlow() {
             {longScenes.length ? (
               <p className="hint">
                 有 <b>{longScenes.length}</b> 场自己就超过了上限（{options.windowHi} 秒），
-                靠挪边界解决不了 —— 用最右边的 <b>✂ 场内下刀</b>，在动作之间切一刀。
+                靠挪边界解决不了 —— 用最右边的 <b>✂ 场内下刀</b>，按动作块自动下多刀。
               </p>
             ) : null}
             {showKnobs ? (
@@ -636,13 +677,14 @@ export function SplitFlow() {
                       </td>
                       <td className="act">
                         {s.parts > 1 ? (
-                          s.part === 1 ? (
-                            <>
+                          <>
+                            {s.part < s.parts ? (
+                              <>
                               <button
                                 className="mini"
                                 type="button"
                                 title="把切点往前挪一块"
-                                onClick={() => nudgeSplit(s.origin, -1)}
+                                onClick={() => nudgeSplit(s.origin, s.part - 1, -1)}
                               >
                                 ◀
                               </button>
@@ -650,10 +692,13 @@ export function SplitFlow() {
                                 className="mini"
                                 type="button"
                                 title="把切点往后挪一块"
-                                onClick={() => nudgeSplit(s.origin, 1)}
+                                onClick={() => nudgeSplit(s.origin, s.part - 1, 1)}
                               >
                                 ▶
                               </button>
+                              </>
+                            ) : null}
+                            {s.part === 1 ? (
                               <button
                                 className="mini"
                                 type="button"
@@ -661,8 +706,8 @@ export function SplitFlow() {
                               >
                                 撤销
                               </button>
-                            </>
-                          ) : null
+                            ) : null}
+                          </>
                         ) : s.auto > options.windowHi ? (
                           <button
                             className="mini"
@@ -743,8 +788,8 @@ export function SplitFlow() {
             </div>
 
             <p className="hint">
-              落刀点只在<b>场景边界</b>。想把某一场挪到隔壁集，点该场最右侧的按钮；觉得没问题就跳过这一步。
-              超长场（一场就超过上限）只能场内再下刀，已单独标出。
+              默认落刀在<b>场景边界</b>。想把某一场挪到隔壁集，点该场最右侧的按钮；觉得没问题就跳过这一步。
+              单场自身超上限时，会在场内按动作块自动下多刀，并单独标出。
             </p>
 
             <div className="ep-list">
@@ -790,18 +835,25 @@ export function SplitFlow() {
               <div>
                 <b>流程二到这就结束了。</b>
                 <span className="hint">
-                  这份剧本已经可以直接喂给下一步「生成分镜」。
+                  {stats.over + stats.under
+                    ? `当前还有 ${stats.over + stats.under} 个时长例外；确认这一版即表示接受当前结构。`
+                    : "全部集都在时长窗口内，可以交给下一步。"}
+                  点击右侧会把这版完整剧本一键交给「生成分镜」。
                 </span>
               </div>
               <div className="spacer" />
               <button
-                className="btn"
+                className="btn primary"
                 type="button"
                 onClick={() => {
+                  handOffToStoryboard({
+                    text: output,
+                    fileName: `${fileName || "分集剧本"}-${eps.length}集`,
+                  });
                   window.location.hash = "#/storyboard";
                 }}
               >
-                下一步：生成分镜 (待建)
+                确认这版，进入生成分镜
               </button>
             </div>
           </section>

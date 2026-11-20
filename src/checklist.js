@@ -48,7 +48,9 @@ function parseNumbered(lines) {
   if (cur) items.push(cur);
 
   for (const item of items) {
-    item.risk = /\bL3\b|高风险/.test(`${item.title} ${item.body.join(" ")}`);
+    item.risk = /\bL3\b|高风险|待判断|需确认|候选/.test(
+      `${item.title} ${item.body.join(" ")}`,
+    );
   }
 
   return items;
@@ -121,6 +123,98 @@ export function parseChecklist(text) {
   const table = parseTable(lines);
   if (table.length >= 3) return table;
   return numbered.length ? numbered : table;
+}
+
+const DIAGNOSTIC_TITLES = [
+  "逻辑诊断清单",
+  "道具连续性台账",
+  "人物动线表",
+  "高风险剧情修复清单",
+  "台词翻译确认清单",
+  "其他需用户决策项",
+];
+
+const REVIEWABLE_TITLES = new Set([
+  "逻辑诊断清单",
+  "高风险剧情修复清单",
+  "台词翻译确认清单",
+  "其他需用户决策项",
+]);
+
+function headingText(line) {
+  return line
+    .trim()
+    .replace(/^#{1,6}\s*/, "")
+    .replace(/\*\*/g, "")
+    .replace(/^\d+\s*[.、)]\s*/, "")
+    .replace(/^[-*]\s+/, "")
+    .trim();
+}
+
+function diagnosticTitle(line) {
+  const text = headingText(line);
+  if (!text || text.length > 80 || text.includes("|")) return "";
+  for (const title of DIAGNOSTIC_TITLES) {
+    if (
+      text === title ||
+      text === `《${title}》` ||
+      text.startsWith(`${title}：`) ||
+      text.startsWith(`${title}:`) ||
+      text.startsWith(`《${title}》`) ||
+      text.startsWith(`${title}（`)
+    ) {
+      return title;
+    }
+  }
+  return "";
+}
+
+/**
+ * 第二步会一次输出多份诊断文件。
+ * 按标题拆开后分别解析，避免只有第一张表被展示或被确认。
+ */
+export function splitDiagnosticReports(text) {
+  const sections = [];
+  let current = { title: "诊断说明", lines: [] };
+
+  for (const line of String(text || "").split("\n")) {
+    const title = diagnosticTitle(line);
+    if (title) {
+      if (current.lines.some((item) => item.trim())) sections.push(current);
+      current = { title, lines: [] };
+    } else {
+      current.lines.push(line);
+    }
+  }
+  if (current.lines.some((item) => item.trim())) sections.push(current);
+
+  const found = sections.filter((section) =>
+    DIAGNOSTIC_TITLES.includes(section.title),
+  );
+  if (!found.length) return [];
+
+  let globalNo = 0;
+  return found.map((section, index) => {
+    const raw = section.lines.join("\n").trim();
+    const reviewable = REVIEWABLE_TITLES.has(section.title);
+    const items = parseChecklist(raw).map((item) => {
+      if (reviewable) globalNo += 1;
+      return {
+        ...item,
+        no: reviewable ? globalNo : item.id || item.no,
+        sourceNo: item.id || item.no,
+        section: section.title,
+        title: `${section.title} · ${item.title}`,
+      };
+    });
+    return {
+      key: `report-${index + 1}`,
+      title: section.title,
+      raw,
+      items,
+      reviewable,
+    };
+  });
 }
 
 /** 是否够格走逐项确认（否则退回整体确认） */

@@ -8,6 +8,7 @@ import {
   Play,
   Stop,
   CheckCircle,
+  CopySimple,
 } from "@phosphor-icons/react";
 import { runStream } from "./api.js";
 import { PromptSlot } from "./PromptSlot.jsx";
@@ -16,8 +17,6 @@ import { runChunked } from "./chunked.js";
 import {
   parseStoryboard,
   validateStoryboard,
-  compileToL1,
-  renderL1,
   splitEpisodes,
 } from "./storyboard.js";
 import defaultStoryboard from "./prompts/default-storyboard.md?raw";
@@ -26,6 +25,11 @@ import { parseQc, countByLevel, collectBatchIssues, topIssues, hasHigh, sortIssu
 import { runEngineQc } from "./qc-engine.js";
 import { normalizeStoryboard } from "./normalize.js";
 import { verifyModelIssues } from "./qc-verify.js";
+import { buildDeliveryPackage } from "./delivery-package.js";
+import { runExperimentalScript } from "./experimental-engine.js";
+import { getScenePlanPolicy, renderScenePlanPrompt } from "./scene-engine.js";
+import experimentalBriefPrompt from "./prompts/director-brief.md?raw";
+import experimentalScenePrompt from "./prompts/scene-plan.md?raw";
 
 const STORAGE_KEY = "pd-storyboard-v1";
 
@@ -41,6 +45,12 @@ const INITIAL = {
   text: "",
   fileName: "",
   customPrompt: "",
+  customDirectorPrompt: "",
+  customScenePlanPrompt: "",
+  engineMode: "stable",
+  engineEffort: "low",
+  engineChunkSeconds: 20,
+  experimentDraft: null,
   batchSize: 3,
   /** 每批单独存，重跑才有粒度可谈 */
   batches: [],
@@ -72,13 +82,15 @@ const STEPS = [
   { n: 1, label: "输入" },
   { n: 2, label: "提示词" },
   { n: 3, label: "生成" },
-  { n: 4, label: "校验" },
-  { n: 5, label: "机读层" },
+  { n: 4, label: "校验与交付" },
 ];
 
 /** 步骤条状态：任何时刻只有一步是 active */
-function stepState(stage, n) {
-  if (stage === "input") return n === 1 ? "active" : "";
+function stepState(stage, n, hasText) {
+  if (stage === "input") {
+    if (!hasText) return n === 1 ? "active" : "";
+    return n < 2 ? "done" : n === 2 ? "active" : "";
+  }
   if (stage === "running" || stage === "paused") {
     return n < 3 ? "done" : n === 3 ? "active" : "";
   }
@@ -86,7 +98,7 @@ function stepState(stage, n) {
   return n <= 4 ? "done" : "active";
 }
 
-/** 示例分镜：用来在不调模型的情况下看校验与 L1 编译效果 */
+/** 示例分镜：用来在不调模型的情况下看解析与校验效果 */
 const SAMPLE_STORYBOARD = `第1集：测试
 【分镜01】
 [shot01 | 时长：12秒 | 场景：Village 外 雪天 | 人物：村长（Village Chief，着装：粗布冬装）、男弟子（Male Disciple，着装：弟子法袍） | 道具：法杖]
@@ -119,6 +131,7 @@ function load() {
     }
     if (!saved.batches.length) saved.stage = "input";
     else if (saved.stage === "running") saved.stage = "paused";
+    if (saved.engineMode === "classic") saved.engineMode = "stable";
     saved.cursor = saved.batches.length;
     saved.pausedAt = saved.stage === "paused" ? saved.batches.length : saved.pausedAt || 0;
     return saved;
@@ -128,14 +141,35 @@ function load() {
   return INITIAL;
 }
 
-function download(filename, content) {
-  const blob = new Blob([content], { type: "text/plain;charset=utf-8" });
+function download(filename, content, type = "text/plain;charset=utf-8") {
+  const blob = new Blob([content], { type });
   const url = URL.createObjectURL(blob);
   const a = document.createElement("a");
   a.href = url;
   a.download = filename;
   a.click();
   URL.revokeObjectURL(url);
+}
+
+function episodeLabel(ep) {
+  return `第${ep.no}集${ep.title ? `：${ep.title}` : ""}`;
+}
+
+function episodeFileBase(ep) {
+  const title = String(ep.title || "未命名")
+    .replace(/[\\/:*?"<>|]/g, "-")
+    .trim();
+  return `${String(ep.no).padStart(3, "0")}集-${title || "未命名"}`;
+}
+
+function formatDuration(seconds) {
+  const total = Math.max(0, Math.round(Number(seconds) || 0));
+  const hours = Math.floor(total / 3600);
+  const minutes = Math.floor(total / 60);
+  const secs = total % 60;
+  return hours
+    ? `${hours}小时${minutes % 60}分${String(secs).padStart(2, "0")}秒`
+    : `${minutes}分${String(secs).padStart(2, "0")}秒`;
 }
 
 function batchUp(eps, size) {
@@ -158,21 +192,6 @@ function splitOutputByEpisode(text) {
     const no = m ? Number(m[1]) : 0;
     return { from: no, to: no, text: p };
   });
-}
-
-/** L1 每条都重复同一段风格约束，抽出来只写一次 */
-function splitL1(text) {
-  const lines = String(text || "").split("\n");
-  const body = [];
-  let style = "";
-  for (const line of lines) {
-    if (line.startsWith("风格与约束：")) {
-      if (!style) style = line.replace(/^风格与约束：/, "").trim();
-      continue;
-    }
-    body.push(line);
-  }
-  return { style, body: body.join("\n").replace(/\n{3,}/g, "\n\n").trim() };
 }
 
 function ShotRow({ shot }) {
@@ -230,6 +249,12 @@ export function StoryboardFlow() {
     });
 
   const prompt = state.customPrompt.trim() ? state.customPrompt : defaultPromptBody;
+  const experimentalBriefInstructions =
+    state.customDirectorPrompt.trim() || experimentalBriefPrompt;
+  const experimentalSceneInstructions = renderScenePlanPrompt(
+    state.customScenePlanPrompt.trim() || experimentalScenePrompt,
+    getScenePlanPolicy("flexible6"),
+  );
   const episodes = useMemo(() => splitEpisodes(state.text), [state.text]);
   const batches = useMemo(
     () => batchUp(episodes, Math.max(1, Number(state.batchSize) || 3)),
@@ -247,13 +272,35 @@ export function StoryboardFlow() {
   /** 导入的历史结果不一定和当前批数对得上，取大值避免出现「3/1 批」 */
   const totalBatches = Math.max(batches.length, state.batches.length);
   const parsed = useMemo(() => parseStoryboard(output), [output]);
-  const check = useMemo(() => validateStoryboard(parsed), [parsed]);
-  const units = useMemo(() => compileToL1(parsed), [parsed]);
-  const l1 = useMemo(() => renderL1(units), [units]);
-  const l1View = useMemo(() => splitL1(l1), [l1]);
+  const check = useMemo(
+    () =>
+      validateStoryboard(
+        parsed,
+        state.engineMode === "experimental"
+          ? getScenePlanPolicy("flexible6")
+          : undefined,
+      ),
+    [parsed, state.engineMode],
+  );
+  const totalDuration = useMemo(
+    () =>
+      parsed.episodes.reduce(
+        (sum, ep) =>
+          sum + ep.shots.reduce((shotSum, shot) => shotSum + (Number(shot.duration) || 0), 0),
+        0,
+      ),
+    [parsed],
+  );
   const ledger = useMemo(() => buildLedger(parsed), [parsed]);
   const modelQcIssues = useMemo(() => collectBatchIssues(state.batches), [state.batches]);
   const engineIssues = useMemo(() => runEngineQc(state.text, output), [state.text, output]);
+  const experimentalIssues = useMemo(
+    () => state.batches.flatMap((batch) => batch.experimentalIssues || []),
+    [state.batches],
+  );
+  const experimentalHigh = experimentalIssues.filter(
+    (issue) => issue.level === "高",
+  ).length;
   const qcIssues = useMemo(
     () => sortIssues([...engineIssues, ...modelQcIssues]),
     [engineIssues, modelQcIssues],
@@ -262,11 +309,149 @@ export function StoryboardFlow() {
   const [qcBusy, setQcBusy] = useState(false);
   const [qcRunning, setQcRunning] = useState(false);
   const [normalizeTip, setNormalizeTip] = useState("");
-  const [showL1, setShowL1] = useState(false);
   const [showRaw, setShowRaw] = useState(false);
+  const [copyTip, setCopyTip] = useState("");
+
+  const runExperimentalFrom = async (start) => {
+    if (!state.text.trim()) return patch({ error: "请先粘贴或上传剧本。" });
+    if (!batches.length) return patch({ error: "没有识别到可处理的集。" });
+
+    ctrlRef.current = new AbortController();
+    const every = Number(state.checkpoint) || 0;
+    let acc = state.batches.slice(0, start);
+    let draftStarted = Boolean(
+      state.experimentDraft?.batchIndex === start &&
+        (state.experimentDraft.completedEpisodes ||
+          state.experimentDraft.completedScenes),
+    );
+    patch({ stage: "running", error: "", batches: acc, cursor: start });
+    setLive("");
+    setReason(0);
+
+    try {
+      for (let bi = start; bi < batches.length; bi += 1) {
+        const batch = batches[bi];
+        const from = batch[0].no;
+        const to = batch[batch.length - 1].no;
+        const savedDraft =
+          state.experimentDraft?.batchIndex === bi
+            ? state.experimentDraft
+            : {
+                batchIndex: bi,
+                completedEpisodes: {},
+                completedScenes: {},
+              };
+        const draft = {
+          ...savedDraft,
+          completedEpisodes: { ...(savedDraft.completedEpisodes || {}) },
+          completedScenes: { ...(savedDraft.completedScenes || {}) },
+        };
+        draftStarted = true;
+        patch({ experimentDraft: draft });
+        setBatchInfo({ index: bi + 1, total: batches.length, round: 0 });
+        setLive("");
+        const body = batch.map((episode) => episode.text).join("\n\n");
+        const result = await runExperimentalScript({
+          text: body,
+          briefInstructions: experimentalBriefInstructions,
+          sceneInstructions: experimentalSceneInstructions,
+          policyName: "flexible6",
+          chunkSeconds: Number(state.engineChunkSeconds) || 20,
+          effort: state.engineEffort || "low",
+          signal: ctrlRef.current.signal,
+          labelPrefix: `实验引擎 第${from}-${to}集`,
+          completedEpisodes: draft.completedEpisodes,
+          completedScenes: draft.completedScenes,
+          onProgress: ({ episode, scene, finished, total, stage }) => {
+            setBatchInfo({
+              index: bi + 1,
+              total: batches.length,
+              round: finished,
+              stage,
+              episode,
+              scene,
+              sceneTotal: total,
+            });
+          },
+          onSceneComplete: ({ episode, scene, result: sceneResult }) => {
+            draft.completedScenes[`${episode}:${scene}`] = {
+              sceneText: sceneResult.sceneText,
+              stats: {
+                scene: sceneResult.stats.scene,
+                repairCount: sceneResult.stats.repairCount,
+                validation: sceneResult.stats.validation,
+              },
+            };
+            patch({ experimentDraft: draft });
+          },
+          onEpisodeComplete: (episodeResult) => {
+            draft.completedEpisodes[episodeResult.episode] = {
+              text: episodeResult.text,
+              issues: episodeResult.issues,
+            };
+            patch({ experimentDraft: draft });
+          },
+          callModel: (args) =>
+            runStream({
+              ...args,
+              signal: ctrlRef.current.signal,
+              onText: (delta) => setLive((value) => value + delta),
+              onReason: setReason,
+            }),
+        });
+        acc = [
+          ...acc,
+          {
+            from,
+            to,
+            text: result.text,
+            at: Date.now(),
+            engine: "experimental",
+            experimentalIssues: result.issues,
+            engineStats: result.stats,
+          },
+        ];
+        patch({
+          batches: acc,
+          cursor: bi + 1,
+          experimentDraft: null,
+        });
+        setLive("");
+
+        if (result.issues.some((issue) => issue.level === "高")) {
+          patch({
+            stage: "paused",
+            pausedAt: acc.length,
+            pauseReason: "engine",
+          });
+          return;
+        }
+        if (shouldPause({ done: acc.length, total: batches.length, every })) {
+          patch({
+            stage: "paused",
+            pausedAt: acc.length,
+            pauseReason: "checkpoint",
+          });
+          return;
+        }
+      }
+      patch({ stage: "done", pausedAt: 0, experimentDraft: null });
+    } catch (err) {
+      patch({
+        stage: acc.length || draftStarted ? "paused" : "input",
+        pausedAt: acc.length,
+        error: String(err?.message || err),
+      });
+    } finally {
+      ctrlRef.current = null;
+    }
+  };
 
   /** 从第 start 批开始跑；每到检查点就停下等确认 */
   const runFrom = async (start) => {
+    if (state.engineMode === "experimental") {
+      return runExperimentalFrom(start);
+    }
     if (!state.text.trim()) return patch({ error: "请先粘贴或上传剧本。" });
     if (!batches.length) return patch({ error: "没有识别到可处理的集。" });
 
@@ -424,10 +609,26 @@ export function StoryboardFlow() {
     if (!state.batches.length) return;
     let renumbered = 0;
     let split = 0;
+    let deduped = 0;
+    let relabeled = 0;
+    let bumped = 0;
+    let durationFixed = 0;
+    let aliased = 0;
+    let headsMerged = 0;
+    let dialogueRestored = 0;
+    let dialogueDeduped = 0;
     const next = state.batches.map((b) => {
       const r = normalizeStoryboard(b.text, state.text);
       renumbered += r.renumbered;
       split += r.split;
+      deduped += r.deduped;
+      relabeled += r.relabeled;
+      bumped += r.bumped;
+      durationFixed += r.durationFixed;
+      aliased += r.aliased;
+      headsMerged += r.headsMerged;
+      dialogueRestored += r.dialogueRestored;
+      dialogueDeduped += r.dialogueDeduped;
       // 编号变了以后，旧的模型质检位置全部失效，一并清掉，避免指错行
       return { ...b, text: r.text, qc: [], qcDropped: 0 };
     });
@@ -436,9 +637,31 @@ export function StoryboardFlow() {
     window.setTimeout(() => {
       // 让结果先渲染，再提示
       // eslint-disable-next-line no-alert
-      window.__lastNormalize = { renumbered, split };
+      window.__lastNormalize = {
+        renumbered,
+        split,
+        deduped,
+        relabeled,
+        bumped,
+        durationFixed,
+        aliased,
+        headsMerged,
+        dialogueRestored,
+        dialogueDeduped,
+      };
     }, 0);
-    return { renumbered, split };
+    return {
+      renumbered,
+      split,
+      deduped,
+      relabeled,
+      bumped,
+      durationFixed,
+      aliased,
+      headsMerged,
+      dialogueRestored,
+      dialogueDeduped,
+    };
   };
 
   /** 重跑这一段：回到本段起点，级联跑到下一个检查点 */
@@ -468,6 +691,12 @@ export function StoryboardFlow() {
       text: state.text,
       fileName: state.fileName,
       mode: state.mode,
+      engineMode: state.engineMode,
+      engineEffort: state.engineEffort,
+      engineChunkSeconds: state.engineChunkSeconds,
+      customPrompt: state.customPrompt,
+      customDirectorPrompt: state.customDirectorPrompt,
+      customScenePlanPrompt: state.customScenePlanPrompt,
     });
     setLive("");
   };
@@ -475,10 +704,14 @@ export function StoryboardFlow() {
   const onFile = async (file) => {
     if (!file) return;
     const content = await file.text();
-    patch({ text: content, fileName: file.name.replace(/\.[^.]+$/, "") });
+    patch({
+      text: content,
+      fileName: file.name.replace(/\.[^.]+$/, ""),
+      experimentDraft: null,
+    });
   };
 
-  /** 导入已经生成好的分镜（比如 web 端跑出来的），直接进校验和机读层 */
+  /** 导入已经生成好的分镜，直接进入校验与交付 */
   const onImportStoryboard = async (file) => {
     if (!file) return;
     const content = await file.text();
@@ -489,18 +722,62 @@ export function StoryboardFlow() {
       cursor: nextBatches.length,
       pausedAt: 0,
       stage: "done",
+      engineMode: "stable",
+      experimentDraft: null,
       error: "",
     });
   };
 
-  const shown = state.stage === "running" ? output + live : output;
+  const deliveryPackage = () =>
+    buildDeliveryPackage({
+      parsed,
+      projectName: state.fileName || "短剧项目",
+      fullMarkdown: output,
+      generatedAt: new Date(),
+    });
+
+  const downloadDelivery = () => {
+    const pkg = deliveryPackage();
+    download(pkg.fileName, pkg.zip, "application/zip");
+  };
+
+  const downloadEpisode = (ep) => {
+    const text =
+      splitEpisodes(output).find((item) => item.no === ep.no)?.text ||
+      `${episodeLabel(ep)}\n`;
+    download(`${episodeFileBase(ep)}.md`, text, "text/markdown;charset=utf-8");
+  };
+
+  const copyEpisode = async (ep) => {
+    const text =
+      splitEpisodes(output).find((item) => item.no === ep.no)?.text ||
+      `${episodeLabel(ep)}\n`;
+    try {
+      await navigator.clipboard.writeText(text);
+      setCopyTip(`已复制 ${episodeLabel(ep)}`);
+    } catch (err) {
+      setCopyTip(`复制失败：${String(err?.message || err)}`);
+    }
+  };
+
+  const shown =
+    state.stage === "running"
+      ? state.engineMode === "experimental"
+        ? output
+        : output + live
+      : output;
+  const deliveryBlocked =
+    check.issues.length > 0 || qcCounts.高 > 0 || experimentalHigh > 0;
 
   return (
     <>
       <div className="flow-head">
         <div className="steps">
           {STEPS.map((s) => (
-            <div key={s.n} className={`step ${stepState(state.stage, s.n)}`}>
+            <div
+              key={s.n}
+              className={`step ${stepState(state.stage, s.n, Boolean(state.text.trim()))}`}
+            >
               <span className="num">{s.n}</span> {s.label}
             </div>
           ))}
@@ -533,7 +810,7 @@ export function StoryboardFlow() {
             ? qcBusy
               ? `第 ${batchInfo.index}/${batchInfo.total} 批已产出，正在质检…`
               : `正在生成第 ${batchInfo.index}/${batchInfo.total} 批…`
-            : "先看校验，再看分镜；不满意就回步骤 02 改提示词重跑，需要机读层再导。"}
+            : "先看校验，再看分镜；不满意就回步骤 02 改提示词重跑。"}
       </div>
 
       <section className={`card ${state.stage === "input" ? "hi" : ""}`}>
@@ -563,7 +840,9 @@ export function StoryboardFlow() {
 
         <p className="hint">
           输入应已经是<b>分好集</b>的干净剧本（流程二「集数拆分与重组」的产出）。
-          每集 4–15 秒 × N 个 Clip，一次生成一批。
+          {state.engineMode === "experimental"
+            ? " 实验引擎会按场生成导演提示单，再用动作微单元排镜头；调用次数会更多。"
+            : " 每集 4–15 秒 × N 个 Clip，一次生成一批。"}
         </p>
 
         {state.mode === "paste" ? (
@@ -571,7 +850,7 @@ export function StoryboardFlow() {
             className="script"
             placeholder="在此粘贴分集剧本……带「第X集：集名」就能自动按集分批。"
             value={state.text}
-            onChange={(e) => patch({ text: e.target.value })}
+            onChange={(e) => patch({ text: e.target.value, experimentDraft: null })}
           />
         ) : (
           <div className="drop">
@@ -604,6 +883,8 @@ export function StoryboardFlow() {
                 cursor: 1,
                 pausedAt: 0,
                 stage: "done",
+                engineMode: "stable",
+                experimentDraft: null,
               })
             }
           >
@@ -652,14 +933,60 @@ export function StoryboardFlow() {
             </select>{" "}
             批停一次
           </label>
-          <label className="hint qc-toggle">
-            <input
-              type="checkbox"
-              checked={state.strictFormat}
-              onChange={(e) => patch({ strictFormat: e.target.checked })}
-            />{" "}
-            格式硬约束
+          <label className="hint">
+            引擎{" "}
+            <select
+              className="sec-input"
+              value={state.engineMode}
+              disabled={state.stage === "running" || state.batches.length > 0}
+              onChange={(e) =>
+                patch({ engineMode: e.target.value, experimentDraft: null })
+              }
+            >
+              <option value="stable">稳定链路</option>
+              <option value="experimental">实验引擎</option>
+            </select>
           </label>
+          {state.engineMode === "experimental" ? (
+            <>
+              <label className="hint">
+                推理{" "}
+                <select
+                  className="sec-input"
+                  value={state.engineEffort}
+                  onChange={(e) => patch({ engineEffort: e.target.value })}
+                >
+                  <option value="low">low</option>
+                  <option value="minimal">minimal</option>
+                </select>
+              </label>
+              <label className="hint">
+                分块{" "}
+                <input
+                  className="sec-input"
+                  type="number"
+                  min="15"
+                  max="30"
+                  step="5"
+                  value={state.engineChunkSeconds}
+                  onChange={(e) =>
+                    patch({ engineChunkSeconds: Number(e.target.value) })
+                  }
+                />{" "}
+                秒
+              </label>
+            </>
+          ) : null}
+          {state.engineMode === "stable" ? (
+            <label className="hint qc-toggle">
+              <input
+                type="checkbox"
+                checked={state.strictFormat}
+                onChange={(e) => patch({ strictFormat: e.target.checked })}
+              />{" "}
+              格式硬约束
+            </label>
+          ) : null}
           <label className="hint qc-toggle">
             <input
               type="checkbox"
@@ -674,35 +1001,66 @@ export function StoryboardFlow() {
             disabled={!state.text.trim() || state.stage === "running"}
             onClick={run}
           >
-            <Play size={15} /> 开始生成
+            <Play size={15} />{" "}
+            {state.engineMode === "experimental" ? "开始实验生成" : "开始生成"}
           </button>
         </div>
       </section>
 
-      {output ? (
-        <>
+      {state.text.trim() ? (
           <section className="card">
             <div className="card-kicker">步骤 02 · 提示词</div>
-            <PromptSlot
-              label={`默认提示词 · ${defaultPromptBody.length} 字`}
-              defaultText={defaultPromptBody}
-              value={state.customPrompt}
-              onChange={(v) => patch({ customPrompt: v })}
-            />
+            {state.engineMode === "experimental" ? (
+              <>
+                <p className="hint">
+                  实验引擎分两次调用：先写导演提示单，再生成 Schema v3 镜头计划。
+                  留空即使用内置提示词。
+                </p>
+                <PromptSlot
+                  label={`导演提示单 · ${experimentalBriefPrompt.length} 字`}
+                  defaultText={experimentalBriefPrompt}
+                  value={state.customDirectorPrompt}
+                  onChange={(v) => patch({ customDirectorPrompt: v })}
+                  readOnly={state.stage === "running"}
+                />
+                <PromptSlot
+                  label={`镜头计划 v3 · ${experimentalScenePrompt.length} 字`}
+                  defaultText={experimentalScenePrompt}
+                  value={state.customScenePlanPrompt}
+                  onChange={(v) => patch({ customScenePlanPrompt: v })}
+                  readOnly={state.stage === "running"}
+                />
+              </>
+            ) : (
+              <PromptSlot
+                label={`默认提示词 · ${defaultPromptBody.length} 字`}
+                defaultText={defaultPromptBody}
+                value={state.customPrompt}
+                onChange={(v) => patch({ customPrompt: v })}
+              />
+            )}
           </section>
+      ) : null}
 
-          {state.stage === "running" || output ? (
+      {state.stage === "running" || output ? (
             <section className="card hi">
               <div className="card-head">
                 <div>
                   <div className="card-kicker">步骤 03 · 生成</div>
                   <div className="card-title">
                     {state.stage === "running"
-                      ? `第 ${batchInfo.index}/${batchInfo.total} 批 · 第 ${batchInfo.round} 轮`
+                      ? state.engineMode === "experimental"
+                        ? `第 ${batchInfo.index}/${batchInfo.total} 批 · ${
+                            batchInfo.stage === "brief"
+                              ? `导演提示单 第${batchInfo.episode}集 ${batchInfo.scene}`
+                              : `镜头计划 ${batchInfo.finished || 0}/${batchInfo.sceneTotal || 0}`
+                          }`
+                        : `第 ${batchInfo.index}/${batchInfo.total} 批 · 第 ${batchInfo.round} 轮`
                       : `已完成 ${state.batches.length}/${totalBatches} 批`}
                   </div>
                   {state.stage !== "running" && output ? (
                     <span className="hint">
+                      {state.engineMode === "experimental" ? "实验引擎 · " : ""}
                       {parsed.episodes.length} 集 · {check.stats.shots} 分镜 ·{" "}
                       {check.stats.clips} Clip
                     </span>
@@ -717,7 +1075,7 @@ export function StoryboardFlow() {
                   type="button"
                   disabled={!output}
                   onClick={() =>
-                    download(`-分镜.md`, output)
+                    download(`${state.fileName || "剧本"}-分镜.md`, output)
                   }
                 >
                   <DownloadSimple size={14} /> 下载分镜
@@ -741,7 +1099,25 @@ export function StoryboardFlow() {
                     {parsed.episodes.map((ep) => (
                       <div className="shot-ep" key={ep.no}>
                         <div className="shot-ep-head">
-                          第{ep.no}集{ep.title ? `：${ep.title}` : ""} · {ep.shots.length} 分镜
+                          <span>
+                            {episodeLabel(ep)} · {ep.shots.length} 分镜
+                          </span>
+                          <div className="shot-ep-actions">
+                            <button
+                              className="btn ghost sm"
+                              type="button"
+                              onClick={() => copyEpisode(ep)}
+                            >
+                              <CopySimple size={12} /> 复制本集
+                            </button>
+                            <button
+                              className="btn ghost sm"
+                              type="button"
+                              onClick={() => downloadEpisode(ep)}
+                            >
+                              <DownloadSimple size={12} /> 下载本集
+                            </button>
+                          </div>
                         </div>
                         {ep.shots.map((s) => (
                           <ShotRow key={s.no} shot={s} />
@@ -749,6 +1125,7 @@ export function StoryboardFlow() {
                       </div>
                     ))}
                   </div>
+                  {copyTip ? <p className="hint">{copyTip}</p> : null}
                   <div className="preview-toggle">
                     <button
                       className="btn ghost sm"
@@ -769,8 +1146,6 @@ export function StoryboardFlow() {
                 </>
               )}
             </section>
-          ) : null}
-        </>
       ) : null}
 
       {state.stage === "paused" ? (
@@ -839,6 +1214,11 @@ export function StoryboardFlow() {
               出现高危问题，不等检查点提前停了 —— 这类错误会被下一批当前提继承。
             </p>
           ) : null}
+          {state.pauseReason === "engine" ? (
+            <p className="hint warn-line">
+              实验引擎发现高优先级问题。继续会保留这批结果，但不会把问题伪报为通过。
+            </p>
+          ) : null}
 
           <div className="row cp-actions">
             <button className="btn primary" type="button" onClick={resume}>
@@ -862,9 +1242,10 @@ export function StoryboardFlow() {
           <section className="card">
             <div className="card-head">
               <div>
-                <div className="card-kicker">步骤 04 · 校验（只报告，不改稿）</div>
+                <div className="card-kicker">步骤 04 · 校验与交付</div>
                 <div className="card-title">
-                  {check.stats.episodes} 集 · {check.stats.shots} shot · {check.stats.clips} Clip
+                  {check.stats.episodes} 集 · {check.stats.shots} shot · {check.stats.clips} Clip ·{" "}
+                  {formatDuration(totalDuration)}
                 </div>
               </div>
               <div className="spacer" />
@@ -877,8 +1258,13 @@ export function StoryboardFlow() {
                   质检 高{qcCounts.高} 中{qcCounts.中}
                 </span>
               ) : null}
+              {state.engineMode === "experimental" ? (
+                <span className={`pill ${experimentalHigh ? "l3" : ""}`}>
+                  实验审计 高{experimentalHigh} / 共{experimentalIssues.length}
+                </span>
+              ) : null}
             </div>
-            {!check.issues.length ? (
+            {!deliveryBlocked ? (
               <div className="row">
                 <CheckCircle size={18} weight="fill" color="#4ade80" />
                 <span className="hint">全部通过。</span>
@@ -908,19 +1294,50 @@ export function StoryboardFlow() {
             {check.issues.length > 200 ? (
               <p className="hint">只显示前 200 条，共 {check.issues.length} 条。</p>
             ) : null}
+            {state.engineMode === "experimental" && experimentalIssues.length ? (
+              <div className="table-wrap est-wrap" style={{ marginTop: 12 }}>
+                <table className="table">
+                  <thead>
+                    <tr>
+                      <th>级别</th>
+                      <th>位置</th>
+                      <th>实验引擎问题</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {experimentalIssues.slice(0, 200).map((it, i) => (
+                      <tr key={`engine-${i}`}>
+                        <td>{it.level}</td>
+                        <td className="mono">{it.where}</td>
+                        <td>{it.msg}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            ) : null}
             <div className="row" style={{ marginTop: 12 }}>
-              {!check.issues.length ? (
+              {!deliveryBlocked ? (
                 <>
                   <button
                     className="btn primary sm"
                     type="button"
+                    onClick={downloadDelivery}
+                  >
+                    <DownloadSimple size={14} /> 下载交付包
+                  </button>
+                  <button
+                    className="btn ghost sm"
+                    type="button"
                     onClick={() =>
-                      download(`-分镜.md`, output)
+                      download(`${state.fileName || "剧本"}-完整分镜.md`, output, "text/markdown;charset=utf-8")
                     }
                   >
-                    <DownloadSimple size={14} /> 下载分镜
+                    <DownloadSimple size={14} /> 完整分镜
                   </button>
-                  <span className="hint">这就是交付物，直接交给制作。</span>
+                  <span className="hint">
+                    交付包含完整分镜、分集分镜、说明和清单。
+                  </span>
                 </>
               ) : (
                 <span className="hint">
@@ -939,7 +1356,16 @@ export function StoryboardFlow() {
                   disabled={!state.batches.length}
                   onClick={() => {
                     const r = normalizeAll();
-                    if (r) setNormalizeTip(`已重排编号 ${r.renumbered} 处、拆开合并台词 ${r.split} 条；模型质检已清空，建议重跑一次`);
+                    if (r) {
+                      setNormalizeTip(
+                        `已重排编号 ${r.renumbered} 处、拆开合并台词 ${r.split} 条、` +
+                          `去重重复 Clip ${r.deduped} 条、补足短 Clip ${r.bumped} 条、` +
+                          `校正时长 ${r.durationFixed} 处、统一人物别名 ${r.aliased} 处；` +
+                          `合并表头 ${r.headsMerged} 处、回填原文台词 ${r.dialogueRestored} 条；` +
+                          `去重重复台词 ${r.dialogueDeduped} 条；` +
+                          "模型质检已清空，建议重跑一次",
+                      );
+                    }
                   }}
                 >
                   按协议规范化
@@ -1000,51 +1426,6 @@ export function StoryboardFlow() {
             </div>
           </section>
 
-          <section className="card">
-            <div className="card-head">
-              <div>
-                <div className="card-kicker">步骤 05 · 机读层 L1（可选导出）</div>
-                <div className="card-title">{units.length} 条生成单位（一个 Clip 一条）</div>
-              </div>
-              <div className="spacer" />
-              <button
-                className="btn primary sm"
-                type="button"
-                disabled={!units.length}
-                onClick={() => download(`${state.fileName || "剧本"}-L1.md`, l1)}
-              >
-                <DownloadSimple size={14} /> 下载 L1
-              </button>
-            </div>
-            <p className="hint">
-              标签占位（<code>&lt;C01-角色·妆造&gt;</code>），不含秒数，不写 <code>@图片N</code> ——
-              素材绑定由下游完成。duration 只出现在参数行。
-            </p>
-            {l1View.style ? (
-              <div className="l1-style">
-                <b>全局风格约束</b>（每条通用，这里只写一次）：{l1View.style}
-              </div>
-            ) : null}
-            <div className="preview-toggle">
-              <button
-                className="btn ghost sm"
-                type="button"
-                disabled={!l1View.body}
-                onClick={() => setShowL1((v) => !v)}
-              >
-                {showL1 ? "收起预览" : "展开预览"}
-              </button>
-              <span className="hint">
-                原文 {l1.length.toLocaleString()} 字 → 去重后{" "}
-                {l1View.body.length.toLocaleString()} 字
-              </span>
-            </div>
-            {showL1 ? (
-              <div className="preview script-preview">
-                <pre>{l1View.body || "（无）"}</pre>
-              </div>
-            ) : null}
-          </section>
         </>
       ) : null}
     </>
