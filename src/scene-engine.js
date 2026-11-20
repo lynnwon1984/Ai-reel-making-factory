@@ -7,6 +7,7 @@ const trim = (value) => String(value ?? "").trim();
 
 export const DIRECTOR_SCHEMA_VERSION = 2;
 export const ACTION_UNIT_SCHEMA_VERSION = 3;
+export const STABLE_LEAN_SCHEMA_VERSION = 4;
 
 export const STORY_FUNCTIONS = [
   "establish",
@@ -43,6 +44,14 @@ export const SCENE_GEOGRAPHY_FIELDS = [
 const DIRECTOR_SHOT_FIELDS = [
   ["purpose", "缺少镜头职责 purpose"],
   ["storyFunction", "缺少故事功能 storyFunction"],
+  ["startState", "缺少起点状态 startState"],
+  ["stateChange", "缺少主要状态变化 stateChange"],
+  ["endState", "缺少终点状态 endState"],
+  ["cameraReason", "缺少运镜理由 cameraReason"],
+  ["continuityNote", "缺少连续性说明 continuityNote"],
+];
+
+const STABLE_LEAN_SHOT_FIELDS = [
   ["startState", "缺少起点状态 startState"],
   ["stateChange", "缺少主要状态变化 stateChange"],
   ["endState", "缺少终点状态 endState"],
@@ -476,10 +485,104 @@ function normalizeDialogueContinuations(shot, blockMap, repairs) {
         );
       }
     }
+    for (const id of [...continuationIds]) {
+      if (blockMap.get(id)?.kind !== "dialogue") continue;
+      const owner = firstOwner.get(id);
+      if (owner === undefined) {
+        firstOwner.set(id, index);
+        kept.push(id);
+        continuationIds.delete(id);
+        repairs.push(`台词 ${id} 首次出现时没有源引用，已从台词延续改回首段`);
+      }
+    }
     clip.sourceBlockIds = kept;
     if (continuationIds.size) {
       clip.dialogueContinuationIds = [...continuationIds];
     }
+  }
+}
+
+function splitDenseActionClips(shot, sceneInput, policy, repairs) {
+  const actionUnits = new Map(
+    (sceneInput.blocks || []).flatMap((block) =>
+      (block.actionUnits || []).map((unit) => [unit.id, unit]),
+    ),
+  );
+  const blocks = new Map(
+    (sceneInput.blocks || []).map((block) => [block.id, block]),
+  );
+  for (let pass = 0; pass < 4; pass += 1) {
+    const dense = shotActionAudit(shot, sceneInput).denseActionClips[0];
+    if (!dense) return;
+    const index = dense.letter.charCodeAt(0) - 65;
+    const clip = shot.clips?.[index];
+    if (!clip) return;
+    const sourceIds = Array.isArray(clip.sourceBlockIds)
+      ? clip.sourceBlockIds
+      : [];
+    const unitIds = Array.isArray(clip.actionUnitIds)
+      ? clip.actionUnitIds
+      : [];
+    if (unitIds.length < 3) return;
+
+    const cut = Math.ceil(unitIds.length / 2);
+    const groups = [unitIds.slice(0, cut), unitIds.slice(cut)].filter(
+      (group) => group.length,
+    );
+    if (groups.length < 2) return;
+    const makeClip = (group, partIndex) => {
+      const lastPart = partIndex === groups.length - 1;
+      const dialogueIds = lastPart ? sourceIds : [];
+      const load =
+        dialogueIds.reduce((sum, id) => {
+          const block = blocks.get(id);
+          return block ? sum + estimateBlockSeconds(block, policy) : sum;
+        }, 0) +
+        group.reduce((sum) => sum + policy.actionBlockSec, 0);
+      const duration = Math.min(
+        policy.clipMax,
+        Math.max(
+          policy.clipMin,
+          Math.ceil(load - policy.loadToleranceSec),
+        ),
+      );
+      return {
+        ...clip,
+        duration,
+        visualAction: group
+          .map((id) => trim(actionUnits.get(id)?.text))
+          .filter(Boolean)
+          .join("；"),
+        actionUnitIds: group,
+        sourceBlockIds: dialogueIds,
+        beat: trim(clip.beat)
+          ? `${trim(clip.beat)} ${partIndex + 1}/${groups.length}`
+          : `动作阶段 ${partIndex + 1}/${groups.length}`,
+      };
+    };
+    const splitClips = groups.map(makeClip);
+    const otherDuration = (shot.clips || []).reduce(
+      (sum, item, itemIndex) =>
+        sum + (itemIndex === index ? 0 : Number(item.duration || 0)),
+      0,
+    );
+    const splitDuration = splitClips.reduce(
+      (sum, item) => sum + item.duration,
+      0,
+    );
+    if (
+      otherDuration + splitDuration > policy.shotMax ||
+      (shot.clips || []).length - 1 + splitClips.length > policy.maxClips
+    ) {
+      return;
+    }
+    shot.clips.splice(index, 1, ...splitClips);
+    shot.duration = otherDuration + splitDuration;
+    repairs.push(
+      `动作阶段过载：将 Clip ${dense.letter} 在动作微单元边界拆为 ${splitClips
+        .map((item) => item.duration)
+        .join(" + ")} 秒`,
+    );
   }
 }
 
@@ -678,6 +781,7 @@ export function buildSceneInput({
   policy = SCENE_PLAN_POLICIES.strict3,
   directorBrief = null,
   sceneGeography = null,
+  requiredSchemaVersion = 0,
 }) {
   const blocks = scene.blocks.map(sourceBlock);
   const castNames = [
@@ -698,6 +802,9 @@ export function buildSceneInput({
     estimatedSeconds: Math.ceil(blocks.reduce((sum, block) => sum + estimateBlockSeconds(block, policy), 0)),
     blocks,
   };
+  if (Number(requiredSchemaVersion)) {
+    input.requiredSchemaVersion = Number(requiredSchemaVersion);
+  }
   if (directorBrief) input.directorBrief = directorBrief;
   if (sceneGeography) input.sceneGeography = sceneGeography;
   return input;
@@ -857,7 +964,17 @@ export function repairScenePlan(plan, sceneInput, policy = SCENE_PLAN_POLICIES.s
   );
   const repairs = [];
 
-  for (const shot of next.shots || []) {
+  for (const [shotIndex, shot] of (next.shots || []).entries()) {
+    if (
+      shotIndex > 0 &&
+      /^\s*场首(?:\s*[：:]|。)/u.test(trim(shot.continuityNote))
+    ) {
+      shot.continuityNote = trim(shot.continuityNote).replace(
+        /^\s*场首\s*[：:]?\s*/u,
+        "承接上一镜结尾：",
+      );
+      repairs.push("非首镜的“场首”改为承接上一镜");
+    }
     shot.cast = [
       ...new Set(
         (shot.cast || []).flatMap((name) => canonicalCast(name, knownCast, repairs)),
@@ -959,6 +1076,7 @@ export function repairScenePlan(plan, sceneInput, policy = SCENE_PLAN_POLICIES.s
     // 拆分会把同一句台词复制到每一段，这里再归一一次：
     // 首段保留源引用，后续段标为台词承接，保证只编译一条 EN。
     normalizeDialogueContinuations(shot, blockMap, repairs);
+    splitDenseActionClips(shot, sceneInput, policy, repairs);
 
     let sum = (shot.clips || []).reduce((total, clip) => total + Number(clip.duration || 0), 0);
     if (sum < policy.shotMin) {
@@ -1473,6 +1591,32 @@ function postureOf(text) {
   return postures.find(([, pattern]) => pattern.test(value))?.[0] || "";
 }
 
+function postureForSubject(text, name, cast = []) {
+  const subject = trim(name);
+  if (!subject) return "";
+  const clauses = trim(text)
+    .split(/[。；]/)
+    .map(trim)
+    .filter(Boolean);
+  for (const clause of clauses) {
+    let index = clause.indexOf(subject);
+    while (index >= 0) {
+      const before = clause[index - 1] || "";
+      const earlierSubject = [...cast]
+        .filter((item) => item !== subject)
+        .some((item) => {
+          const earlier = clause.indexOf(item);
+          return earlier >= 0 && earlier < index;
+        });
+      if (!earlierSubject && !/[的向朝着给对在]/u.test(before)) {
+        return postureOf(clause);
+      }
+      index = clause.indexOf(subject, index + subject.length);
+    }
+  }
+  return "";
+}
+
 const GENERIC_CONTINUITY =
   /^(?:无|无变化|保持不变|同上|沿用上一镜(?:结尾)?(?:状态)?)[。.]?$/u;
 const TRANSITION_CUE =
@@ -1492,6 +1636,9 @@ export function auditShotContinuity(plan, sceneInput) {
     const shot = shots[index];
     const note = trim(shot.continuityNote);
     const where = `shot${index + 1}`;
+    if (index > 0 && /^场首(?:\s*[：:]|。)/u.test(note)) {
+      add("高", where, "非首镜不得写“场首”，应写对上一镜状态的具体承接");
+    }
     if (index === 0) {
       if (!note.includes("场首")) {
         add("中", where, "首镜 continuityNote 应明确写“场首”并交代初始空间状态");
@@ -1513,8 +1660,20 @@ export function auditShotContinuity(plan, sceneInput) {
     const nextCast = new Set(shot.cast || []);
     const entering = [...nextCast].filter((name) => !prevCast.has(name));
     const leaving = [...prevCast].filter((name) => !nextCast.has(name));
-    const previousPosture = postureOf(previousEnd);
-    const nextPosture = postureOf(start);
+    const sharedCast = [...nextCast].filter((name) => prevCast.has(name));
+    const postureChecks = sharedCast
+      .map((name) => ({
+        name,
+        previousPosture: postureForSubject(
+          previousEnd,
+          name,
+          [...prevCast],
+        ),
+        nextPosture: postureForSubject(start, name, [...nextCast]),
+      }))
+      .filter((item) => item.previousPosture && item.nextPosture);
+    const previousPosture = postureChecks[0]?.previousPosture || "";
+    const nextPosture = postureChecks[0]?.nextPosture || "";
     const declaredTransition = TRANSITION_CUE.test(note);
     const stateScore = bigramSimilarity(previousEnd, start);
     let pairIssues = 0;
@@ -1528,22 +1687,21 @@ export function auditShotContinuity(plan, sceneInput) {
       pairIssues += 1;
     }
 
-    if (
-      previousPosture &&
-      nextPosture &&
-      previousPosture !== nextPosture &&
-      !note.includes(nextPosture)
-    ) {
-      add(
-        "高",
-        where,
-        `人物姿势从上一镜“${previousPosture}”变为“${nextPosture}”，但没有来源动作、时间跳转或省略说明`,
-      );
-      pairIssues += 1;
+    for (const item of postureChecks) {
+      if (
+        item.previousPosture !== item.nextPosture &&
+        !note.includes(item.nextPosture)
+      ) {
+        add(
+          "高",
+          where,
+          `${item.name}的姿势从上一镜“${item.previousPosture}”变为“${item.nextPosture}”，但没有来源动作、时间跳转或省略说明`,
+        );
+        pairIssues += 1;
+      }
     }
 
     if (!declaredTransition && stateScore < 0.12) {
-      const sharedCast = [...nextCast].filter((name) => prevCast.has(name));
       if (!sharedCast.length) {
         add(
           "中",
@@ -1592,14 +1750,27 @@ export function validateScenePlan(plan, sceneInput, policy = SCENE_PLAN_POLICIES
     add("高", sceneInput.sceneId, `sceneId 不匹配：${plan.sceneId}`);
   }
   const directorSchema = Number(plan.schemaVersion) >= DIRECTOR_SCHEMA_VERSION;
+  const leanSchema =
+    Number(plan.schemaVersion) >= STABLE_LEAN_SCHEMA_VERSION;
+  const fullDirectorSchema = directorSchema && !leanSchema;
   const actionSchema = Number(plan.schemaVersion) >= ACTION_UNIT_SCHEMA_VERSION;
   const directorContext = Boolean(
     sceneInput.directorBrief && sceneInput.sceneGeography,
   );
+  if (
+    sceneInput.requiredSchemaVersion &&
+    Number(plan.schemaVersion) !== Number(sceneInput.requiredSchemaVersion)
+  ) {
+    add(
+      "高",
+      sceneInput.sceneId,
+      `schemaVersion ${Number(plan.schemaVersion) || "?"} 不符合要求的 ${sceneInput.requiredSchemaVersion}`,
+    );
+  }
   if (directorContext && inputHasActionUnits && !actionSchema) {
     add("高", sceneInput.sceneId, "输入已包含动作微单元，镜头计划必须使用 schemaVersion 3");
   }
-  if (directorSchema) {
+  if (fullDirectorSchema) {
     const brief = validateDirectorBrief(
       plan.directorBrief || sceneInput.directorBrief,
       plan.sceneGeography || sceneInput.sceneGeography,
@@ -1649,7 +1820,7 @@ export function validateScenePlan(plan, sceneInput, policy = SCENE_PLAN_POLICIES
     if (!trim(shot?.startPosition) && !trim(shot?.startState)) {
       add("中", where, "缺少 startPosition/startState");
     }
-    if (directorSchema) {
+    if (fullDirectorSchema) {
       for (const [field, message] of DIRECTOR_SHOT_FIELDS) {
         if (!trim(shot?.[field])) add("高", where, message);
       }
@@ -1663,13 +1834,19 @@ export function validateScenePlan(plan, sceneInput, policy = SCENE_PLAN_POLICIES
           `storyFunction「${trim(shot.storyFunction)}」不在允许值：${STORY_FUNCTIONS.join("、")}`,
         );
       }
-      if (
-        trim(shot?.startState) &&
-        trim(shot?.endState) &&
-        trim(shot.startState) === trim(shot.endState)
-      ) {
-        add("中", where, "startState 与 endState 完全相同，需确认本镜是否真的有状态变化");
+    }
+    if (leanSchema) {
+      for (const [field, message] of STABLE_LEAN_SHOT_FIELDS) {
+        if (!trim(shot?.[field])) add("高", where, message);
       }
+    }
+    if (
+      (fullDirectorSchema || leanSchema) &&
+      trim(shot?.startState) &&
+      trim(shot?.endState) &&
+      trim(shot.startState) === trim(shot.endState)
+    ) {
+      add("中", where, "startState 与 endState 完全相同，需确认本镜是否真的有状态变化");
     }
     if (!Array.isArray(shot?.cast)) {
       add("高", where, "缺少 shot 级 cast");
@@ -1866,9 +2043,12 @@ export function validateScenePlan(plan, sceneInput, policy = SCENE_PLAN_POLICIES
   if (widePct > policy.wideMaxPct) {
     add("中", sceneInput.sceneId, `中景及以上占比 ${widePct.toFixed(1)}% 超过 ${policy.wideMaxPct}%`);
   }
-  if (directorSchema) {
+  if (fullDirectorSchema) {
     issues.push(...auditShotActionDensity(plan, sceneInput).issues);
     issues.push(...auditShotResponsibilities(plan).issues);
+    issues.push(...auditShotContinuity(plan, sceneInput).issues);
+  } else if (leanSchema) {
+    issues.push(...auditShotActionDensity(plan, sceneInput).issues);
     issues.push(...auditShotContinuity(plan, sceneInput).issues);
   }
   if (actionSchema) {

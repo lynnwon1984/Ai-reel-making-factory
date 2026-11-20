@@ -25,13 +25,16 @@ import { parseQc, countByLevel, collectBatchIssues, topIssues, hasHigh, sortIssu
 import { runEngineQc } from "./qc-engine.js";
 import { auditStateChain } from "./state-chain.js";
 import { auditBlocking } from "./blocking.js";
+import { auditBeatClaims, numberStoryboardBeats } from "./beat-claim.js";
 import { normalizeStoryboard } from "./normalize.js";
 import { verifyModelIssues } from "./qc-verify.js";
 import { buildDeliveryPackage } from "./delivery-package.js";
 import { runExperimentalScript } from "./experimental-engine.js";
+import { runStableV5Script } from "./stable-v5-engine.js";
 import { getScenePlanPolicy, renderScenePlanPrompt } from "./scene-engine.js";
 import experimentalBriefPrompt from "./prompts/director-brief.md?raw";
 import experimentalScenePrompt from "./prompts/scene-plan.md?raw";
+import stableV5Prompt from "./prompts/stable-v5-plan.md?raw";
 
 const STORAGE_KEY = "pd-storyboard-v1";
 
@@ -49,10 +52,12 @@ const INITIAL = {
   customPrompt: "",
   customDirectorPrompt: "",
   customScenePlanPrompt: "",
-  engineMode: "stable",
+  customStableV5Prompt: "",
+  engineMode: "stable-v5",
   engineEffort: "low",
   engineChunkSeconds: 20,
   experimentDraft: null,
+  stableV5Draft: null,
   batchSize: 3,
   /** 每批单独存，重跑才有粒度可谈 */
   batches: [],
@@ -66,10 +71,18 @@ const INITIAL = {
   pauseReason: "",
   /** 生成后是否跑内容质检 */
   qcEnabled: true,
+  acceptEngineMid: false,
   /** 调用前是否重申一次的格式硬约束 */
   strictFormat: true,
   error: "",
 };
+
+const BEAT_FORMAT_REMINDER = `【源拍认领硬约束·优先于其它说明】
+每个 shot 表头必须写 \`拍：起-止\`，按本集从 1 连续认领输入中的 \`[拍NN]\`。
+一个 shot 最多认领 3 拍，且最多包含 1 个动作源拍；不得漏拍、重复或倒序。
+硬性判废：一个 \`拍\` 范围内如果出现两行以 \`△\` 开头的源拍，必须拆成两个 shot；不得合并。
+
+`;
 
 /** 编译层：不改用户提示词，只把协议里的时长硬约束在每次调用前重申一次 */
 const FORMAT_REMINDER = `【格式硬约束·优先于其它说明】
@@ -134,6 +147,9 @@ function load() {
     if (!saved.batches.length) saved.stage = "input";
     else if (saved.stage === "running") saved.stage = "paused";
     if (saved.engineMode === "classic") saved.engineMode = "stable";
+    if (!saved.batches.length && saved.engineMode === "stable") {
+      saved.engineMode = "stable-v5";
+    }
     saved.cursor = saved.batches.length;
     saved.pausedAt = saved.stage === "paused" ? saved.batches.length : saved.pausedAt || 0;
     return saved;
@@ -257,6 +273,10 @@ export function StoryboardFlow() {
     state.customScenePlanPrompt.trim() || experimentalScenePrompt,
     getScenePlanPolicy("flexible6"),
   );
+  const stableV5Instructions = renderScenePlanPrompt(
+    state.customStableV5Prompt.trim() || stableV5Prompt,
+    getScenePlanPolicy("strict3"),
+  );
   const episodes = useMemo(() => splitEpisodes(state.text), [state.text]);
   const batches = useMemo(
     () => batchUp(episodes, Math.max(1, Number(state.batchSize) || 3)),
@@ -280,7 +300,9 @@ export function StoryboardFlow() {
         parsed,
         state.engineMode === "experimental"
           ? getScenePlanPolicy("flexible6")
-          : undefined,
+          : state.engineMode === "stable-v5"
+            ? getScenePlanPolicy("strict3")
+            : undefined,
       ),
     [parsed, state.engineMode],
   );
@@ -296,8 +318,15 @@ export function StoryboardFlow() {
   const ledger = useMemo(() => buildLedger(parsed), [parsed]);
   const modelQcIssues = useMemo(() => collectBatchIssues(state.batches), [state.batches]);
   const engineIssues = useMemo(
-    () => [...runEngineQc(state.text, output), ...auditStateChain(output), ...auditBlocking(output)],
-    [state.text, output],
+    () => [
+      ...runEngineQc(state.text, output),
+      ...auditStateChain(output),
+      ...auditBlocking(output),
+      ...state.batches.flatMap((batch) =>
+        batch.beatClaims ? auditBeatClaims(batch.text, state.text) : [],
+      ),
+    ],
+    [state.text, state.batches, output],
   );
   const experimentalIssues = useMemo(
     () => state.batches.flatMap((batch) => batch.experimentalIssues || []),
@@ -306,6 +335,13 @@ export function StoryboardFlow() {
   const experimentalHigh = experimentalIssues.filter(
     (issue) => issue.level === "高",
   ).length;
+  const engineMid = experimentalIssues.filter(
+    (issue) => issue.level === "中",
+  ).length;
+  const engineMidUnconfirmed =
+    ["experimental", "stable-v5"].includes(state.engineMode) &&
+    engineMid > 0 &&
+    !state.acceptEngineMid;
   const qcIssues = useMemo(
     () => sortIssues([...engineIssues, ...modelQcIssues]),
     [engineIssues, modelQcIssues],
@@ -420,6 +456,7 @@ export function StoryboardFlow() {
           batches: acc,
           cursor: bi + 1,
           experimentDraft: null,
+          acceptEngineMid: false,
         });
         setLive("");
 
@@ -452,10 +489,146 @@ export function StoryboardFlow() {
     }
   };
 
+  const runStableV5From = async (start) => {
+    if (!state.text.trim()) return patch({ error: "请先粘贴或上传剧本。" });
+    if (!batches.length) return patch({ error: "没有识别到可处理的集。" });
+
+    ctrlRef.current = new AbortController();
+    const every = Number(state.checkpoint) || 0;
+    let acc = state.batches.slice(0, start);
+    let draftStarted = Boolean(
+      state.stableV5Draft?.batchIndex === start &&
+        state.stableV5Draft.completedEpisodes,
+    );
+    patch({ stage: "running", error: "", batches: acc, cursor: start });
+    setLive("");
+    setReason(0);
+
+    try {
+      for (let bi = start; bi < batches.length; bi += 1) {
+        const batch = batches[bi];
+        const from = batch[0].no;
+        const to = batch[batch.length - 1].no;
+        const savedDraft =
+          state.stableV5Draft?.batchIndex === bi
+            ? state.stableV5Draft
+            : {
+                batchIndex: bi,
+                completedEpisodes: {},
+                completedScenes: {},
+              };
+        const draft = {
+          ...savedDraft,
+          completedEpisodes: { ...(savedDraft.completedEpisodes || {}) },
+          completedScenes: { ...(savedDraft.completedScenes || {}) },
+        };
+        draftStarted = true;
+        patch({ stableV5Draft: draft });
+        setBatchInfo({ index: bi + 1, total: batches.length, round: 0 });
+        setLive("");
+        const body = batch.map((episode) => episode.text).join("\n\n");
+        const result = await runStableV5Script({
+          text: body,
+          planInstructions: stableV5Instructions,
+          policyName: "strict3",
+          chunkSeconds: 180,
+          effort: state.engineEffort || "low",
+          signal: ctrlRef.current.signal,
+          labelPrefix: `稳定v5 第${from}-${to}集`,
+          completedScenes: draft.completedScenes,
+          onProgress: ({ episode, scene, finished, total, stage }) => {
+            setBatchInfo({
+              index: bi + 1,
+              total: batches.length,
+              round: finished,
+              stage,
+              episode,
+              scene,
+              sceneTotal: total,
+            });
+          },
+          onSceneComplete: ({ episode, scene, result: sceneResult }) => {
+            draft.completedScenes[`${episode}:${scene}`] = sceneResult;
+            patch({ stableV5Draft: draft });
+          },
+          onEpisodeComplete: (episodeResult) => {
+            draft.completedEpisodes[episodeResult.episode] = {
+              text: episodeResult.text,
+              issues: episodeResult.issues,
+            };
+            patch({ stableV5Draft: draft });
+          },
+          callModel: (args) =>
+            runStream({
+              ...args,
+              signal: ctrlRef.current.signal,
+              onText: (delta) => setLive((value) => value + delta),
+              onReason: setReason,
+            }),
+        });
+        const postIssues = [
+          ...runEngineQc(body, result.text),
+          ...auditStateChain(result.text),
+          ...auditBlocking(result.text),
+        ];
+        const issues = [...result.issues, ...postIssues];
+        acc = [
+          ...acc,
+          {
+            from,
+            to,
+            text: result.text,
+            at: Date.now(),
+            engine: "stable-v5",
+            beatClaims: false,
+            experimentalIssues: issues,
+            engineStats: result.stats,
+          },
+        ];
+        patch({
+          batches: acc,
+          cursor: bi + 1,
+          stableV5Draft: null,
+          acceptEngineMid: false,
+        });
+        setLive("");
+
+        if (issues.some((issue) => issue.level === "高")) {
+          patch({
+            stage: "paused",
+            pausedAt: acc.length,
+            pauseReason: "engine",
+          });
+          return;
+        }
+        if (shouldPause({ done: acc.length, total: batches.length, every })) {
+          patch({
+            stage: "paused",
+            pausedAt: acc.length,
+            pauseReason: "checkpoint",
+          });
+          return;
+        }
+      }
+      patch({ stage: "done", pausedAt: 0, stableV5Draft: null });
+    } catch (err) {
+      patch({
+        stage: acc.length || draftStarted ? "paused" : "input",
+        pausedAt: acc.length,
+        error: String(err?.message || err),
+      });
+    } finally {
+      ctrlRef.current = null;
+    }
+  };
+
   /** 从第 start 批开始跑；每到检查点就停下等确认 */
   const runFrom = async (start) => {
     if (state.engineMode === "experimental") {
       return runExperimentalFrom(start);
+    }
+    if (state.engineMode === "stable-v5") {
+      return runStableV5From(start);
     }
     if (!state.text.trim()) return patch({ error: "请先粘贴或上传剧本。" });
     if (!batches.length) return patch({ error: "没有识别到可处理的集。" });
@@ -481,11 +654,17 @@ export function StoryboardFlow() {
           buildLedger(parseStoryboard(acc.map((b) => b.text).filter(Boolean).join("\n\n"))),
         );
         const body = batch.map((e) => e.text).join("\n\n");
+        const beatProtocolEnabled = prompt.includes("[拍NN]");
+        const numbered = beatProtocolEnabled
+          ? numberStoryboardBeats(body)
+          : { text: body };
         const ledgerPart = seedLedger ? `${seedLedger}\n\n` : "";
-        const formatPart = state.strictFormat ? FORMAT_REMINDER : "";
+        const formatPart = state.strictFormat
+          ? `${beatProtocolEnabled ? BEAT_FORMAT_REMINDER : ""}${FORMAT_REMINDER}`
+          : "";
 
         const { text } = await runChunked({
-          seed: `${ledgerPart}${formatPart}【本批】第${from}–${to}集\n\n${body}\n\n请按协议把以上内容转成分镜头剧本。`,
+          seed: `${ledgerPart}${formatPart}【本批】第${from}–${to}集\n\n${numbered.text}\n\n请按协议把以上内容转成分镜头剧本。`,
           next: "请继续输出剩余部分。",
           maxRounds: 6,
           onRound: (n) => setBatchInfo({ index: bi + 1, total: batches.length, round: n }),
@@ -506,7 +685,16 @@ export function StoryboardFlow() {
             }),
         });
 
-        acc = [...acc, { from, to, text: text.trim(), at: Date.now() }];
+        acc = [
+          ...acc,
+          {
+            from,
+            to,
+            text: text.trim(),
+            at: Date.now(),
+            beatClaims: beatProtocolEnabled,
+          },
+        ];
         patch({ batches: acc, cursor: bi + 1 });
         setLive("");
 
@@ -546,7 +734,12 @@ export function StoryboardFlow() {
         }
 
         // 引擎能判的高危（台词篡改）同样立刻停，不等检查点
-        const engIssues = [...runEngineQc(body, text), ...auditStateChain(text), ...auditBlocking(text)];
+        const engIssues = [
+          ...runEngineQc(body, text),
+          ...auditStateChain(text),
+          ...auditBlocking(text),
+          ...(beatProtocolEnabled ? auditBeatClaims(text, body) : []),
+        ];
         if (hasHigh([...engIssues, ...issues])) {
           patch({ stage: "paused", pausedAt: acc.length, pauseReason: "qc" });
           return;
@@ -702,6 +895,8 @@ export function StoryboardFlow() {
       customPrompt: state.customPrompt,
       customDirectorPrompt: state.customDirectorPrompt,
       customScenePlanPrompt: state.customScenePlanPrompt,
+      customStableV5Prompt: state.customStableV5Prompt,
+      stableV5Draft: null,
     });
     setLive("");
   };
@@ -713,6 +908,7 @@ export function StoryboardFlow() {
       text: content,
       fileName: file.name.replace(/\.[^.]+$/, ""),
       experimentDraft: null,
+      stableV5Draft: null,
     });
   };
 
@@ -772,7 +968,10 @@ export function StoryboardFlow() {
         : output + live
       : output;
   const deliveryBlocked =
-    check.issues.length > 0 || qcCounts.高 > 0 || experimentalHigh > 0;
+    check.issues.length > 0 ||
+    qcCounts.高 > 0 ||
+    experimentalHigh > 0 ||
+    engineMidUnconfirmed;
 
   return (
     <>
@@ -847,7 +1046,9 @@ export function StoryboardFlow() {
           输入应已经是<b>分好集</b>的干净剧本（流程二「集数拆分与重组」的产出）。
           {state.engineMode === "experimental"
             ? " 实验引擎会按场生成导演提示单，再用动作微单元排镜头；调用次数会更多。"
-            : " 每集 4–15 秒 × N 个 Clip，一次生成一批。"}
+            : state.engineMode === "stable-v5"
+              ? " 稳定 v5 按场生成动作微单元计划，再由本地编译器和连续性闸门生成分镜。"
+              : " 每集 4–15 秒 × N 个 Clip，一次生成一批。"}
         </p>
         {state.engineMode === "experimental" ? (
           <p className="hint engine-warn">
@@ -865,7 +1066,13 @@ export function StoryboardFlow() {
             className="script"
             placeholder="在此粘贴分集剧本……带「第X集：集名」就能自动按集分批。"
             value={state.text}
-            onChange={(e) => patch({ text: e.target.value, experimentDraft: null })}
+            onChange={(e) =>
+              patch({
+                text: e.target.value,
+                experimentDraft: null,
+                stableV5Draft: null,
+              })
+            }
           />
         ) : (
           <div className="drop">
@@ -955,10 +1162,15 @@ export function StoryboardFlow() {
               value={state.engineMode}
               disabled={state.stage === "running" || state.batches.length > 0}
               onChange={(e) =>
-                patch({ engineMode: e.target.value, experimentDraft: null })
+                patch({
+                  engineMode: e.target.value,
+                  experimentDraft: null,
+                  stableV5Draft: null,
+                })
               }
             >
-              <option value="stable">稳定链路（推荐）</option>
+              <option value="stable-v5">稳定链路 v5（动作微单元 · 推荐）</option>
+              <option value="stable">稳定链路 v4（轻量兼容）</option>
               <option value="experimental">实验引擎（约 6 倍成本）</option>
             </select>
           </label>
@@ -991,6 +1203,19 @@ export function StoryboardFlow() {
                 秒
               </label>
             </>
+          ) : null}
+          {state.engineMode === "stable-v5" ? (
+            <label className="hint">
+              推理{" "}
+              <select
+                className="sec-input"
+                value={state.engineEffort}
+                onChange={(e) => patch({ engineEffort: e.target.value })}
+              >
+                <option value="low">low</option>
+                <option value="minimal">minimal</option>
+              </select>
+            </label>
           ) : null}
           {state.engineMode === "stable" ? (
             <label className="hint qc-toggle">
@@ -1046,6 +1271,20 @@ export function StoryboardFlow() {
                   readOnly={state.stage === "running"}
                 />
               </>
+            ) : state.engineMode === "stable-v5" ? (
+              <>
+                <p className="hint">
+                  模型只输出动作微单元镜头计划；台词和最终 Markdown 由本地编译器生成。
+                  结构、时长、动作密度、连续性和持物账本通过后才进入下一步。
+                </p>
+                <PromptSlot
+                  label={`稳定 v5 镜头计划 · ${stableV5Prompt.length} 字`}
+                  defaultText={stableV5Prompt}
+                  value={state.customStableV5Prompt}
+                  onChange={(v) => patch({ customStableV5Prompt: v })}
+                  readOnly={state.stage === "running"}
+                />
+              </>
             ) : (
               <PromptSlot
                 label={`默认提示词 · ${defaultPromptBody.length} 字`}
@@ -1070,12 +1309,22 @@ export function StoryboardFlow() {
                               ? `导演提示单 第${batchInfo.episode}集 ${batchInfo.scene}`
                               : `镜头计划 ${batchInfo.finished || 0}/${batchInfo.sceneTotal || 0}`
                           }`
-                        : `第 ${batchInfo.index}/${batchInfo.total} 批 · 第 ${batchInfo.round} 轮`
+                        : state.engineMode === "stable-v5"
+                          ? `第 ${batchInfo.index}/${batchInfo.total} 批 · ${
+                              batchInfo.scene
+                                ? `${batchInfo.stage === "repair" ? "定点修复" : "镜头计划"} 第${batchInfo.episode}集 ${batchInfo.scene}`
+                                : "准备镜头计划"
+                            }`
+                          : `第 ${batchInfo.index}/${batchInfo.total} 批 · 第 ${batchInfo.round} 轮`
                       : `已完成 ${state.batches.length}/${totalBatches} 批`}
                   </div>
                   {state.stage !== "running" && output ? (
                     <span className="hint">
-                      {state.engineMode === "experimental" ? "实验引擎 · " : ""}
+                      {state.engineMode === "experimental"
+                        ? "实验引擎 · "
+                        : state.engineMode === "stable-v5"
+                          ? "稳定 v5 · "
+                          : ""}
                       {parsed.episodes.length} 集 · {check.stats.shots} 分镜 ·{" "}
                       {check.stats.clips} Clip
                     </span>
@@ -1273,9 +1522,10 @@ export function StoryboardFlow() {
                   质检 高{qcCounts.高} 中{qcCounts.中}
                 </span>
               ) : null}
-              {state.engineMode === "experimental" ? (
+              {["experimental", "stable-v5"].includes(state.engineMode) ? (
                 <span className={`pill ${experimentalHigh ? "l3" : ""}`}>
-                  实验审计 高{experimentalHigh} / 共{experimentalIssues.length}
+                  {state.engineMode === "stable-v5" ? "v5 审计" : "实验审计"} 高
+                  {experimentalHigh} / 共{experimentalIssues.length}
                 </span>
               ) : null}
             </div>
@@ -1309,14 +1559,19 @@ export function StoryboardFlow() {
             {check.issues.length > 200 ? (
               <p className="hint">只显示前 200 条，共 {check.issues.length} 条。</p>
             ) : null}
-            {state.engineMode === "experimental" && experimentalIssues.length ? (
+            {["experimental", "stable-v5"].includes(state.engineMode) &&
+            experimentalIssues.length ? (
               <div className="table-wrap est-wrap" style={{ marginTop: 12 }}>
                 <table className="table">
                   <thead>
                     <tr>
                       <th>级别</th>
                       <th>位置</th>
-                      <th>实验引擎问题</th>
+                      <th>
+                        {state.engineMode === "stable-v5"
+                          ? "稳定 v5 计划审计"
+                          : "实验引擎问题"}
+                      </th>
                     </tr>
                   </thead>
                   <tbody>
@@ -1330,6 +1585,19 @@ export function StoryboardFlow() {
                   </tbody>
                 </table>
               </div>
+            ) : null}
+            {["experimental", "stable-v5"].includes(state.engineMode) &&
+            engineMid > 0 ? (
+              <label className="hint qc-toggle" style={{ marginTop: 10 }}>
+                <input
+                  type="checkbox"
+                  checked={state.acceptEngineMid}
+                  onChange={(e) =>
+                    patch({ acceptEngineMid: e.target.checked })
+                  }
+                />{" "}
+                我已逐条核对以上中危，并确认可以进入制作
+              </label>
             ) : null}
             <div className="row" style={{ marginTop: 12 }}>
               {!deliveryBlocked ? (

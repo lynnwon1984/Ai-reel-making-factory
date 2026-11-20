@@ -88,9 +88,9 @@ test("定点修复：整场问题无法定位 shot 时仍有明确兜底", () =>
 });
 
 test("定点修复：系统指令明确禁止重新输出整版计划", () => {
-  const instructions = renderShotRepairInstructions("原始镜头计划规则");
+  const instructions = renderShotRepairInstructions("原始镜头计划规则", 4);
   assert.match(instructions, /本次调用优先/);
-  assert.match(instructions, /不要输出 schemaVersion 3 的整版 scene plan/);
+  assert.match(instructions, /本次要求的 schemaVersion 是 4/);
   assert.match(instructions, /replaceableShotIndexes/);
 });
 

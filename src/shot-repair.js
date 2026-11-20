@@ -176,13 +176,16 @@ export function buildShotRepairRequest({
 }
 
 /** 与初稿 prompt 分开的修复系统指令，避免“继续输出整版计划”的旧约束抢占。 */
-export function renderShotRepairInstructions(sceneInstructions) {
+export function renderShotRepairInstructions(
+  sceneInstructions,
+  expectedSchemaVersion = 3,
+) {
   return [
     String(sceneInstructions || ""),
     "",
     "## 定点修复模式（本次调用优先）",
     "你不是在重新生成整场分镜，而是在修复已有计划中的一个或多个问题 shot。",
-    "只输出 repairs 协议规定的 JSON 替换包，不要输出 schemaVersion 3 的整版 scene plan。",
+    `本次要求的 schemaVersion 是 ${expectedSchemaVersion}。只输出 repairs 协议规定的 JSON 替换包，不要输出整版 scene plan。`,
     "targetShots 和 contextShots 都是只读参考；只有 replaceableShotIndexes 允许被替换。",
     "可以在一个替换范围内把 shot 拆分或合并，但必须保持源内容全量覆盖、顺序不变、台词不重复。",
     "不要为了填满 15 秒拉长镜头；内容过载时在动作阶段或动作微单元边界继续拆分。",

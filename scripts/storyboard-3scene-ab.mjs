@@ -9,7 +9,9 @@ import {
   renderScenePlanPrompt,
 } from "../src/scene-engine.js";
 import { runExperimentalScript } from "../src/experimental-engine.js";
+import { runStableV5Script } from "../src/stable-v5-engine.js";
 import { summarizeModelCalls } from "../src/run-metrics.js";
+import { auditBeatClaims, numberStoryboardBeats } from "../src/beat-claim.js";
 
 const ROOT = process.cwd();
 const sourceFile = process.argv[2] || "tests/fixtures/final-script.txt";
@@ -22,6 +24,20 @@ const outDir = requestedOutDir
   ? path.resolve(ROOT, requestedOutDir)
   : path.join(ROOT, "runs", "storyboard-3scene-ab", stamp);
 const resume = process.env.SCENE_PLAN_AB_RESUME === "1";
+const requestedEngines = new Set(
+  String(process.env.SCENE_PLAN_AB_ENGINES || "stable,experimental")
+    .split(",")
+    .map((item) => item.trim())
+    .filter(Boolean),
+);
+const runStable = requestedEngines.has("stable");
+const runExperimental = requestedEngines.has("experimental");
+const runStableV5 = requestedEngines.has("stable-v5");
+if (!runStable && !runStableV5 && !runExperimental) {
+  throw new Error(
+    "SCENE_PLAN_AB_ENGINES 至少要包含 stable、stable-v5 或 experimental",
+  );
+}
 const requestedCases = new Set(
   String(process.env.SCENE_PLAN_AB_CASES || "")
     .split(",")
@@ -86,6 +102,10 @@ const briefInstructions = readFileSync(
 const sceneInstructions = renderScenePlanPrompt(
   readFileSync(path.join(ROOT, "src/prompts/scene-plan.md"), "utf8"),
   getScenePlanPolicy("flexible6"),
+);
+const stableV5Instructions = renderScenePlanPrompt(
+  readFileSync(path.join(ROOT, "src/prompts/stable-v5-plan.md"), "utf8"),
+  getScenePlanPolicy("strict3"),
 );
 
 function findScene(sceneKey) {
@@ -175,10 +195,21 @@ function dialogueKeys(text) {
   return keys;
 }
 
-function outputMetrics(output, sourceText, policy) {
+function outputMetrics(
+  output,
+  sourceText,
+  policy,
+  { requireBeatClaims = false } = {},
+) {
   const parsed = parseStoryboard(output);
   const validation = validateStoryboard(parsed, policy);
   const qc = runEngineQc(sourceText, output);
+  const beatIssues = auditBeatClaims(output, sourceText, {
+    requireClaims: requireBeatClaims,
+    cps: policy.dialogueCps,
+    wps: policy.dialogueWps,
+    pause: policy.dialoguePauseSec,
+  });
   const clips = parsed.episodes.flatMap((ep) =>
     ep.shots.flatMap((shot) => shot.clips || []),
   );
@@ -215,12 +246,14 @@ function outputMetrics(output, sourceText, policy) {
     mid: validation.stats.mid,
     qcHigh: qc.filter((issue) => issue.level === "高").length,
     qcMid: qc.filter((issue) => issue.level === "中").length,
+    beatHigh: beatIssues.filter((issue) => issue.level === "高").length,
+    beatMid: beatIssues.filter((issue) => issue.level === "中").length,
     sourceDialogues: sourceDialogues.length,
     coveredDialogues: covered,
     dialogueCoveragePct: sourceDialogues.length
       ? Number(((covered / sourceDialogues.length) * 100).toFixed(1))
       : 100,
-    issues: [...validation.issues, ...qc],
+    issues: [...validation.issues, ...qc, ...beatIssues],
   };
 }
 
@@ -244,60 +277,120 @@ const report = [];
 for (const item of CASES) {
   const found = findScene(item.key);
   const sceneSource = renderSceneSource(found);
+  const numberedSource = numberStoryboardBeats(sceneSource);
   writeFileSync(path.join(outDir, `${item.key}-source.txt`), sceneSource);
+  writeFileSync(path.join(outDir, `${item.key}-numbered-source.txt`), numberedSource.text);
 
-  console.log(`[A/B] ${item.label} ${item.key} · stable`);
-  const stableStartedAt = Date.now();
-  const stableFile = path.join(outDir, `${item.key}-stable.md`);
-  let stableRun;
-  let stableElapsedMs;
-  const reusedStableFile = stableReuseRoot
-    ? path.join(stableReuseRoot, `${item.key}-stable.md`)
-    : "";
-  if (reusedStableFile && existsSync(reusedStableFile)) {
-    const previousStable = reusedStableReport.get(item.key)?.stable;
-    stableRun = {
-      text: readFileSync(reusedStableFile, "utf8"),
-      status: "completed",
-      usage: previousStable?.usage || null,
-    };
-    stableElapsedMs = previousStable?.elapsedMs || 0;
-    console.log(`[A/B] ${item.key} stable 复用指定基线`);
-  } else if (resume && existsSync(stableFile)) {
-    const artifact = matchingArtifacts(`三场AB 稳定 ${item.key} ${item.label}`).at(-1);
-    stableRun = {
-      text: readFileSync(stableFile, "utf8"),
-      status: "completed",
-      usage: artifact?.usage || null,
-    };
-    stableElapsedMs = artifact?.ms || 0;
-    console.log(`[A/B] ${item.key} stable 复用已有结果`);
-  } else {
-    stableRun = await requestModel({
-      instructions: stableInstructions,
-      input: sceneSource,
-      label: `三场AB 稳定 ${item.key} ${item.label}`,
-    });
-    if (stableRun.status !== "completed") {
-      throw new Error(`稳定链路 ${item.key} 未完成：${stableRun.status}`);
+  let stableRun = { usage: null };
+  let stableOutput = "";
+  let stableElapsedMs = 0;
+  let stableMetrics = null;
+  if (runStable) {
+    console.log(`[A/B] ${item.label} ${item.key} · stable`);
+    const stableStartedAt = Date.now();
+    const stableFile = path.join(outDir, `${item.key}-stable.md`);
+    const reusedStableFile = stableReuseRoot
+      ? path.join(stableReuseRoot, `${item.key}-stable.md`)
+      : "";
+    if (reusedStableFile && existsSync(reusedStableFile)) {
+      const previousStable = reusedStableReport.get(item.key)?.stable;
+      stableRun = {
+        text: readFileSync(reusedStableFile, "utf8"),
+        status: "completed",
+        usage: previousStable?.usage || null,
+      };
+      stableElapsedMs = previousStable?.elapsedMs || 0;
+      console.log(`[A/B] ${item.key} stable 复用指定基线`);
+    } else if (resume && existsSync(stableFile)) {
+      const artifact = matchingArtifacts(`三场AB 稳定 ${item.key} ${item.label}`).at(-1);
+      stableRun = {
+        text: readFileSync(stableFile, "utf8"),
+        status: "completed",
+        usage: artifact?.usage || null,
+      };
+      stableElapsedMs = artifact?.ms || 0;
+      console.log(`[A/B] ${item.key} stable 复用已有结果`);
+    } else {
+      stableRun = await requestModel({
+        instructions: stableInstructions,
+        input: numberedSource.text,
+        label: `三场AB 稳定 ${item.key} ${item.label}`,
+      });
+      if (stableRun.status !== "completed") {
+        throw new Error(`稳定链路 ${item.key} 未完成：${stableRun.status}`);
+      }
+      stableElapsedMs = Date.now() - stableStartedAt;
     }
-    stableElapsedMs = Date.now() - stableStartedAt;
+    stableOutput =
+      (reusedStableFile && existsSync(reusedStableFile)) ||
+      (resume && existsSync(stableFile))
+        ? stableRun.text
+        : normalizeEpisode(stableRun.text, found.episode.no, found.episode.title);
+    writeFileSync(path.join(outDir, `${item.key}-stable.md`), stableOutput);
+    stableMetrics = outputMetrics(
+      stableOutput,
+      sceneSource,
+      getScenePlanPolicy("strict3"),
+    );
   }
-  const stableOutput =
-    (reusedStableFile && existsSync(reusedStableFile)) ||
-    (resume && existsSync(stableFile))
-      ? stableRun.text
-      : normalizeEpisode(stableRun.text, found.episode.no, found.episode.title);
-  writeFileSync(path.join(outDir, `${item.key}-stable.md`), stableOutput);
 
-  console.log(`[A/B] ${item.label} ${item.key} · experimental`);
+  let stableV5Result = null;
+  let stableV5Metrics = null;
+  const stableV5Calls = [];
+  if (runStableV5) {
+    console.log(`[A/B] ${item.label} ${item.key} · stable-v5`);
+    const startedAt = Date.now();
+    stableV5Result = await runStableV5Script({
+      text: sceneSource,
+      planInstructions: stableV5Instructions,
+      policyName: "strict3",
+      effort,
+      labelPrefix: `稳定v5 ${item.key} ${item.label}`,
+      maxRepairRounds: 2,
+      maxBlocksPerChunk: 40,
+      chunkSeconds: 180,
+      onProgress: () => {},
+      callModel: async (args) => {
+        const callStartedAt = Date.now();
+        const result = await requestModel(args);
+        stableV5Calls.push({
+          label: args.label,
+          usage: result.usage,
+          elapsedMs: Date.now() - callStartedAt,
+        });
+        return result;
+      },
+    });
+    writeFileSync(
+      path.join(outDir, `${item.key}-stable-v5.md`),
+      stableV5Result.text,
+    );
+    stableV5Metrics = outputMetrics(
+      stableV5Result.text,
+      sceneSource,
+      getScenePlanPolicy("strict3"),
+    );
+    const engineHigh = stableV5Result.issues.filter(
+      (issue) => issue.level === "高",
+    ).length;
+    const engineMid = stableV5Result.issues.filter(
+      (issue) => issue.level === "中",
+    ).length;
+    stableV5Metrics.engineHigh = engineHigh;
+    stableV5Metrics.engineMid = engineMid;
+    stableV5Metrics.elapsedMs = Date.now() - startedAt;
+  }
+
   const experimentalCalls = [];
   const experimentalFile = path.join(
     outDir,
     `${item.key}-experimental.md`,
   );
-  let experimental;
-  if (resume && existsSync(experimentalFile)) {
+  let experimental = null;
+  if (!runExperimental) {
+    console.log(`[A/B] ${item.key} 跳过实验引擎`);
+  } else if (resume && existsSync(experimentalFile)) {
+    console.log(`[A/B] ${item.label} ${item.key} · experimental`);
     for (const artifact of matchingArtifacts(
       `三场AB 实验 ${item.key} ${item.label}`,
     )) {
@@ -316,6 +409,7 @@ for (const item of CASES) {
     };
     console.log(`[A/B] ${item.key} experimental 复用已有结果`);
   } else {
+    console.log(`[A/B] ${item.label} ${item.key} · experimental`);
     experimental = await runExperimentalScript({
       text: sceneSource,
       briefInstructions,
@@ -336,43 +430,63 @@ for (const item of CASES) {
       },
     });
   }
-  writeFileSync(
-    path.join(outDir, `${item.key}-experimental.md`),
-    experimental.text,
-  );
+  if (experimental) {
+    writeFileSync(
+      path.join(outDir, `${item.key}-experimental.md`),
+      experimental.text,
+    );
+  }
 
-  const stableMetrics = outputMetrics(
-    stableOutput,
-    sceneSource,
-    getScenePlanPolicy("strict3"),
-  );
-  const experimentalMetrics = outputMetrics(
-    experimental.text,
-    sceneSource,
-    getScenePlanPolicy("flexible6"),
-  );
+  const experimentalMetrics = experimental
+    ? outputMetrics(
+        experimental.text,
+        sceneSource,
+        getScenePlanPolicy("flexible6"),
+      )
+    : null;
   report.push({
     key: item.key,
     label: item.label,
     scene: found.scene.place,
     blocks: found.scene.blocks.length,
-    stable: {
-      usage: stableRun.usage,
-      elapsedMs: stableElapsedMs,
-      metrics: stableMetrics,
-      text: `${item.key}-stable.md`,
-    },
-    experimental: {
-      calls: summarizeModelCalls(experimentalCalls),
-      engineIssues: experimental.issues,
-      engineIssuesAvailable:
-        experimental.engineIssuesAvailable ?? !experimental.resumed,
-      metrics: experimentalMetrics,
-      text: `${item.key}-experimental.md`,
-    },
+    stable: stableMetrics
+      ? {
+          usage: stableRun.usage,
+          elapsedMs: stableElapsedMs,
+          metrics: stableMetrics,
+          text: `${item.key}-stable.md`,
+        }
+      : null,
+    stableV5: stableV5Metrics
+      ? {
+          calls: summarizeModelCalls(stableV5Calls),
+          metrics: stableV5Metrics,
+          issues: stableV5Result.issues,
+          text: `${item.key}-stable-v5.md`,
+        }
+      : null,
+    experimental: experimentalMetrics
+      ? {
+          calls: summarizeModelCalls(experimentalCalls),
+          engineIssues: experimental.issues,
+          engineIssuesAvailable:
+            experimental.engineIssuesAvailable ?? !experimental.resumed,
+          metrics: experimentalMetrics,
+          text: `${item.key}-experimental.md`,
+        }
+      : null,
   });
+  const stableLine = stableMetrics
+    ? `稳定 ${stableMetrics.shots}/${stableMetrics.clips}/${stableMetrics.duration}s`
+    : "稳定 跳过";
+  const experimentalLine = experimentalMetrics
+    ? `实验 ${experimentalMetrics.shots}/${experimentalMetrics.clips}/${experimentalMetrics.duration}s`
+    : "实验 跳过";
+  const stableV5Line = stableV5Metrics
+    ? `稳定v5 ${stableV5Metrics.shots}/${stableV5Metrics.clips}/${stableV5Metrics.duration}s`
+    : "稳定v5 跳过";
   console.log(
-    `[A/B] ${item.key} 完成 · 稳定 ${stableMetrics.shots}/${stableMetrics.clips}/${stableMetrics.duration}s · 实验 ${experimentalMetrics.shots}/${experimentalMetrics.clips}/${experimentalMetrics.duration}s`,
+    `[A/B] ${item.key} 完成 · ${stableLine} · ${stableV5Line} · ${experimentalLine}`,
   );
 }
 

@@ -7,6 +7,7 @@ import { fileURLToPath } from "node:url";
 import { parseScript } from "../src/split.js";
 import {
   ACTION_UNIT_SCHEMA_VERSION,
+  STABLE_LEAN_SCHEMA_VERSION,
   analyzeDirectorFields,
   auditShotActionDensity,
   auditShotContinuity,
@@ -323,6 +324,64 @@ test("动作微单元 Schema v3：动作和台词分别覆盖后通过", () => {
     SCENE_PLAN_POLICIES.flexible6,
   );
   assert.deepEqual(result.issues, []);
+});
+
+test("稳定链路 Schema v4：轻量计划启用动作微单元和连续性，但不要求导演字段", () => {
+  const parsed = parseScript(SCRIPT);
+  const episode = parsed.episodes[0];
+  const scene = episode.scenes[0];
+  const input = buildSceneInput({
+    episode,
+    scene,
+    requiredSchemaVersion: STABLE_LEAN_SCHEMA_VERSION,
+  });
+  const plan = structuredClone(ACTION_UNIT_PLAN);
+  plan.schemaVersion = STABLE_LEAN_SCHEMA_VERSION;
+  delete plan.shots[0].purpose;
+  delete plan.shots[0].storyFunction;
+  delete plan.shots[1].purpose;
+  delete plan.shots[1].storyFunction;
+  plan.shots[1].clips = [
+    {
+      duration: 7,
+      size: "MCU",
+      cameraMove: "固定机位",
+      visualAction: "门被推开，访客走进来，把信封放在桌上，林岚开口。",
+      actionUnitIds: ["B03.1", "B03.2", "B04.1"],
+      sourceBlockIds: ["B05"],
+    },
+  ];
+  const result = validateScenePlan(plan, input, SCENE_PLAN_POLICIES.strict3);
+  assert.deepEqual(result.issues, []);
+});
+
+test("稳定链路 Schema v4：版本不符、缺连续性字段、持物换手无来源都会被拦下", () => {
+  const parsed = parseScript(SCRIPT);
+  const episode = parsed.episodes[0];
+  const scene = episode.scenes[0];
+  const input = buildSceneInput({
+    episode,
+    scene,
+    requiredSchemaVersion: STABLE_LEAN_SCHEMA_VERSION,
+  });
+  const plan = structuredClone(ACTION_UNIT_PLAN);
+  plan.schemaVersion = ACTION_UNIT_SCHEMA_VERSION;
+  const result = validateScenePlan(plan, input, SCENE_PLAN_POLICIES.strict3);
+  assert.ok(result.issues.some((issue) => /不符合要求的 4/.test(issue.msg)));
+
+  const broken = structuredClone(ACTION_UNIT_PLAN);
+  broken.schemaVersion = STABLE_LEAN_SCHEMA_VERSION;
+  delete broken.shots[0].continuityNote;
+  const brokenResult = validateScenePlan(
+    broken,
+    input,
+    SCENE_PLAN_POLICIES.strict3,
+  );
+  assert.ok(
+    brokenResult.issues.some((issue) =>
+      /缺少连续性说明 continuityNote/.test(issue.msg),
+    ),
+  );
 });
 
 test("动作微单元 Schema v3：漏掉动作单元或退回整块引用都会被拦下", () => {
@@ -954,6 +1013,50 @@ test("连续性审计：人物切镜进出画只记录，不把画外当作真�
   assert.deepEqual(audit.transitions[0].entering, ["访客"]);
 });
 
+test("连续性审计：不同人物的坐站状态不会误当成同一人跳变", () => {
+  const audit = auditShotContinuity({
+    shots: [
+      {
+        cast: ["亚瑟", "休斯", "两个仆人"],
+        startState: "亚瑟站着，休斯站着；两个仆人坐在木箱上。",
+        endState: "火球飞过；两个仆人坐在木箱上。",
+        continuityNote: "场首。亚瑟与休斯对峙，两个仆人坐在侧面。",
+        clips: [{ visualAction: "两个仆人坐着看向火球。" }],
+      },
+      {
+        cast: ["亚瑟", "休斯"],
+        startState: "亚瑟站在画面左侧，休斯站在右侧。",
+        endState: "亚瑟伸手接住火球。",
+        continuityNote: "承接火球飞来；两个仆人在画外仍坐着。",
+        clips: [{ visualAction: "亚瑟接住火球。" }],
+      },
+    ],
+  });
+  assert.deepEqual(audit.issues, []);
+});
+
+test("连续性审计：非首镜写场首会被拦下", () => {
+  const audit = auditShotContinuity({
+    shots: [
+      {
+        cast: ["林岚"],
+        startState: "林岚站着。",
+        endState: "林岚站着。",
+        continuityNote: "场首。林岚在门口。",
+        clips: [{ visualAction: "林岚站着。" }],
+      },
+      {
+        cast: ["林岚"],
+        startState: "林岚站着。",
+        endState: "林岚继续站着。",
+        continuityNote: "场首：林岚仍在门口。",
+        clips: [{ visualAction: "林岚继续站着。" }],
+      },
+    ],
+  });
+  assert.ok(audit.issues.some((issue) => /非首镜不得写/.test(issue.msg)));
+});
+
 test("确定性修复：自动统一人物短名、补足短 shot 并清掉内容过载", () => {
   const sceneInput = JSON.parse(MODEL_RUN.input);
   const policy = SCENE_PLAN_POLICIES.flexible6;
@@ -1272,6 +1375,60 @@ test("确定性修复：动作 Clip 内容超载时按微单元边界拆分，�
   );
   assert.equal(repaired.plan.shots[0].duration, 10);
   assert.ok(repaired.repairs.some((item) => item.includes("动作微单元边界")));
+});
+
+test("确定性修复：一个 Clip 带三阶段动作和台词时，先拆动作阶段并保留台词源引用", () => {
+  const script = `第1集：测试
+1-1 庭院 外 日
+人物：甲、乙
+△甲冲入门内，挥拳打向乙，乙抬手挡住。
+甲（命令）：Go now!
+`;
+  const parsed = parseScript(script);
+  const episode = parsed.episodes[0];
+  const input = buildSceneInput({
+    episode,
+    scene: episode.scenes[0],
+    requiredSchemaVersion: STABLE_LEAN_SCHEMA_VERSION,
+  });
+  const plan = {
+    schemaVersion: STABLE_LEAN_SCHEMA_VERSION,
+    sceneId: "1-1",
+    shots: [
+      {
+        duration: 6,
+        cast: ["甲", "乙"],
+        props: [],
+        startState: "场首。甲站在门外，乙站在庭院内。",
+        stateChange: "甲冲入、挥拳，乙抬手挡住并下令。",
+        endState: "甲停在乙面前，乙抬着手挡住，两人对峙。",
+        cameraReason: "固定中景保留两人的相对位置。",
+        continuityNote: "场首。甲在门外，乙在庭院内。",
+        clips: [
+          {
+            duration: 6,
+            size: "MCU",
+            cameraMove: "固定机位",
+            visualAction: "甲冲入门内；挥拳打向乙；乙抬手挡住并开口。",
+            actionUnitIds: ["B01.1", "B01.2", "B01.3"],
+            sourceBlockIds: ["B02"],
+          },
+        ],
+      },
+    ],
+  };
+  const repaired = repairScenePlan(plan, input, SCENE_PLAN_POLICIES.strict3);
+  const clips = repaired.plan.shots.flatMap((shot) => shot.clips);
+  assert.ok(clips.length >= 2);
+  assert.ok(clips.some((clip) => clip.sourceBlockIds?.includes("B02")));
+  assert.deepEqual(
+    validateScenePlan(
+      repaired.plan,
+      input,
+      SCENE_PLAN_POLICIES.strict3,
+    ).issues,
+    [],
+  );
 });
 
 test("确定性修复：纯台词 Clip 内容超载时按分句拆分，台词只编译一次", () => {

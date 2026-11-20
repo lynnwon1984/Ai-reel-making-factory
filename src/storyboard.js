@@ -141,6 +141,28 @@ export function parseStoryboard(text) {
       shot.castRaw = f["人物"] || "";
       shot.cast = parseCastLine(shot.castRaw);
       shot.props = f["道具"] || "";
+      shot.beatRaw = f["拍"] || "";
+      const beatValue = shot.beatRaw
+        .replace(/[–—~～至到]/g, "-")
+        .replace(/\s+/g, "");
+      if (/^\d+$/.test(beatValue)) {
+        const no = Number(beatValue);
+        shot.beatClaim = { start: no, end: no, nos: [no] };
+      } else if (/^\d+-\d+$/.test(beatValue)) {
+        const [a, b] = beatValue.split("-").map(Number);
+        const start = Math.min(a, b);
+        const end = Math.max(a, b);
+        shot.beatClaim = {
+          start,
+          end,
+          nos: Array.from({ length: end - start + 1 }, (_, i) => start + i),
+        };
+      } else if (/^\d+(?:,\d+)+$/.test(beatValue)) {
+        const nos = beatValue.split(",").map(Number);
+        shot.beatClaim = { start: nos[0], end: nos.at(-1), nos };
+      } else {
+        shot.beatClaim = null;
+      }
       continue;
     }
     if (RE_POS.test(line) && shot) {

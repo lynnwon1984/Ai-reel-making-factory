@@ -153,7 +153,10 @@ async function planScene({
         expectedSchemaVersion: ACTION_UNIT_SCHEMA_VERSION,
       });
       const repairRaw = await callText(callModel, {
-        instructions: renderShotRepairInstructions(sceneInstructions),
+        instructions: renderShotRepairInstructions(
+          sceneInstructions,
+          ACTION_UNIT_SCHEMA_VERSION,
+        ),
         input: repairInput,
         effort,
         label: `${labelPrefix} 定点修复 第${episode.no}集 ${scene.key} ${index + 1}/${chunks.length} r${modelRepairRounds + 1}`,
