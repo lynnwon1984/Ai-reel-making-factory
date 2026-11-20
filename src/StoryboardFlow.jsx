@@ -848,6 +848,16 @@ export function StoryboardFlow() {
             ? " 实验引擎会按场生成导演提示单，再用动作微单元排镜头；调用次数会更多。"
             : " 每集 4–15 秒 × N 个 Clip，一次生成一批。"}
         </p>
+        {state.engineMode === "experimental" ? (
+          <p className="hint engine-warn">
+            <b>实验通道，不建议作为默认交付路径。</b>
+            <br />
+            实测（三场 A/B）：token 约为稳定链路的 <b>6.0 倍</b>，修复调用占 43%–54%；台词覆盖与稳定链路持平（均为
+            100%）。
+            <br />
+            它买到的是更细的镜头结构，不是更少的缺陷——稳定链路在当前 QC 下三场问题数为 0 / 1 / 0。
+          </p>
+        ) : null}
 
         {state.mode === "paste" ? (
           <textarea
@@ -947,8 +957,8 @@ export function StoryboardFlow() {
                 patch({ engineMode: e.target.value, experimentDraft: null })
               }
             >
-              <option value="stable">稳定链路</option>
-              <option value="experimental">实验引擎</option>
+              <option value="stable">稳定链路（推荐）</option>
+              <option value="experimental">实验引擎（约 6 倍成本）</option>
             </select>
           </label>
           {state.engineMode === "experimental" ? (
