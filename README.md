@@ -4,9 +4,9 @@
 
 | 流程 | 页面 | 做什么 | 引擎 |
 | --- | --- | --- | --- |
-| 一 · 剧本清洗 | `#/clean` | 整理格式 → 确认清单 → 修改逻辑（含中译英） | 调模型 |
+| 一 · 剧本清洗 | `#/clean` | 输入 → 格式检查 → 格式整理 → 逻辑检查 → 逻辑修复（含中译英） | 调模型 |
 | 二 · 集数拆分与重组 | `#/episode` | 按 75–105 秒重新切集，只改结构不改字 | 纯规则，零模型 |
-| 三 · 生成分镜 | `#/storyboard` | 按 Seedance 规范编译分镜头剧本，分批输出 | 纯规则 + 模型按批生成 |
+| 三 · 生成分镜 | `#/storyboard` | 按 Seedance 规范生成分镜头剧本，可切换实验引擎 | 稳定链路 / 实验引擎 |
 
 三个流程之间用 `src/handoff.js` 一键交接，不需要下载再粘贴。各流程状态分别存在 `pd-clean-script-v1` / `pd-split-v1` / `pd-storyboard-v1`，切换页面不丢进度。
 
@@ -24,11 +24,13 @@ npm run build
 ## 目录
 
 - `src/CleanFlow.jsx` / `SplitFlow.jsx` / `StoryboardFlow.jsx` —— 三个流程的界面与状态
-- `src/storyboard.js` —— 流程三引擎（解析 / 校验 / L1 编译 / 分批，零模型）
+- `src/storyboard.js` —— 流程三引擎（解析 / 校验 / 分批，零模型）
+- `src/delivery-package.js` —— 分镜剧本 ZIP（完整稿 / 分集稿 / 说明 / manifest）
+- `src/scene-engine.js` —— 实验中的“云端镜头计划 + 本地编译”引擎
 - `src/split.js`、`src/checklist.js`、`src/validate.js` —— 流程二的估时与校验
 - `src/prompts/` —— 默认提示词；用户可在页面上查看并替换
 - `server/`、`worker/` —— 本地代理与 Sites 部署入口
-- `tests/` —— 98 条单元测试 + 4 条打包契约
+- `tests/` —— 单元测试与 Sites 打包契约
 - `runs/` —— 每次模型调用的完整输入输出落盘（回归样本，不进 git）
 
 ## 历史
