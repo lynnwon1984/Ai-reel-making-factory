@@ -1,0 +1,845 @@
+{
+  "episode": 1,
+  "title": "神秘强者降世",
+  "flow2Estimate": 82,
+  "noCastShots": 0,
+  "totalDuration": 143,
+  "planValidation": [
+    {
+      "issues": [],
+      "stats": {
+        "shots": 19,
+        "clips": 43,
+        "blocks": 62,
+        "widePct": 20.9,
+        "overloadedClips": 0,
+        "totalDuration": 143
+      }
+    }
+  ],
+  "outputValidation": {
+    "issues": [],
+    "stats": {
+      "episodes": 1,
+      "shots": 19,
+      "clips": 43,
+      "high": 0,
+      "mid": 0
+    }
+  },
+  "qc": [],
+  "arbitration": {
+    "episodes": 2,
+    "totalDuration": 143,
+    "inWindow": 1,
+    "short": 1,
+    "over": 0
+  },
+  "repairs": [
+    "Clip ? 时长 2→3 秒",
+    "shot 时长 5→6 秒",
+    "Clip ? 时长 2→3 秒",
+    "Clip ? 时长 2→3 秒",
+    "shot 时长 6→8 秒",
+    "Clip ? 时长 2→3 秒",
+    "shot 时长 5→6 秒",
+    "从源块补回人物「黑龙」",
+    "Clip ? 时长 2→3 秒",
+    "shot 时长 6→7 秒",
+    "Clip ? 时长 2→3 秒",
+    "含台词的 MS 改为 MS",
+    "shot 时长 5→6 秒",
+    "Clip ? 时长 5→6 秒",
+    "Clip ? 时长 5→6 秒",
+    "shot 时长 10→12 秒",
+    "Clip ? 时长 4→5 秒",
+    "shot 时长 6→7 秒",
+    "Clip ? 时长 4→5 秒",
+    "Clip ? 时长 4→5 秒",
+    "shot 时长 8→10 秒",
+    "Clip ? 时长 3→4 秒",
+    "shot 时长 5→6 秒",
+    "Clip ? 时长 2→3 秒",
+    "shot 时长 5→6 秒",
+    "Clip ? 时长 2→3 秒",
+    "Clip ? 时长 2→3 秒",
+    "shot 时长 6→8 秒",
+    "Clip ? 时长 5→6 秒",
+    "shot 时长 9→10 秒",
+    "Clip ? 时长 6→7 秒",
+    "shot 时长 10→11 秒",
+    "Clip ? 时长 5→6 秒",
+    "shot 时长 10→11 秒"
+  ],
+  "scenes": [
+    {
+      "sceneId": "1-1",
+      "before": {
+        "issues": [],
+        "stats": {
+          "shots": 19,
+          "clips": 43,
+          "blocks": 62,
+          "widePct": 20.9,
+          "overloadedClips": 0,
+          "totalDuration": 125
+        }
+      },
+      "plans": [
+        {
+          "plan": {
+            "sceneId": "1-1",
+            "shots": [
+              {
+                "duration": 5,
+                "cast": [
+                  "村民群像",
+                  "黑龙"
+                ],
+                "props": [],
+                "startPosition": "俯视雪覆盖的村庄广场，村民群像散布在广场上；黑龙尚未入画。",
+                "clips": [
+                  {
+                    "duration": 2,
+                    "size": "WS",
+                    "cameraMove": "固定机位",
+                    "visualAction": "俯瞰被雪覆盖的村庄广场，村民群像在雪地上奔跑，互相推挤并向外散开。",
+                    "beat": "建立",
+                    "sourceBlockIds": [
+                      "B01",
+                      "B02"
+                    ]
+                  },
+                  {
+                    "duration": 3,
+                    "size": "CU",
+                    "cameraMove": "仰拍横移",
+                    "visualAction": "巨大黑龙从村庄上空飞过，张口咆哮，随后向房屋喷火，火焰击中屋顶，房屋爆炸起火。",
+                    "beat": "危机",
+                    "sourceBlockIds": [
+                      "B03",
+                      "B04"
+                    ]
+                  }
+                ]
+              },
+              {
+                "duration": 6,
+                "cast": [
+                  "村长",
+                  "村民群像",
+                  "黑龙"
+                ],
+                "props": [],
+                "startPosition": "房屋已起火，黑龙在空中；村民群像在广场上四散奔跑，村长位于奔跑人群前侧。",
+                "clips": [
+                  {
+                    "duration": 2,
+                    "size": "MCU",
+                    "cameraMove": "手持跟拍",
+                    "visualAction": "村长在奔跑的人群中转头面向众人，张大嘴呼喊。",
+                    "beat": "警告",
+                    "sourceBlockIds": [
+                      "B05",
+                      "B06"
+                    ]
+                  },
+                  {
+                    "duration": 2,
+                    "size": "CU",
+                    "cameraMove": "横移跟拍",
+                    "visualAction": "一名年轻女子拉着老妇人和小孩在雪地奔跑，黑龙从背景上空掠过。",
+                    "beat": "混乱",
+                    "sourceBlockIds": [
+                      "B07"
+                    ]
+                  },
+                  {
+                    "duration": 2,
+                    "size": "CU",
+                    "cameraMove": "快速下摇",
+                    "visualAction": "黑龙在空中展翅咆哮，向下方喷火；画面随即切到一名村民睁大的眼睛，瞳孔收缩。",
+                    "beat": "恐惧",
+                    "sourceBlockIds": [
+                      "B08",
+                      "B09"
+                    ]
+                  }
+                ]
+              },
+              {
+                "duration": 5,
+                "cast": [
+                  "村长",
+                  "皇家大魔导师",
+                  "黑龙"
+                ],
+                "props": [],
+                "startPosition": "画面全黑，仅远处燃烧房屋的火光映出村长跪地的轮廓，双手捂脸；黑龙悬在空中。",
+                "clips": [
+                  {
+                    "duration": 2,
+                    "size": "CU",
+                    "cameraMove": "固定机位",
+                    "visualAction": "画面黑屏后，村长跪在雪地上，双手捂住脸，随后移开双手低头看着自己的双手。",
+                    "beat": "重击",
+                    "sourceBlockIds": [
+                      "B10",
+                      "B11"
+                    ]
+                  },
+                  {
+                    "duration": 3,
+                    "size": "MS",
+                    "cameraMove": "缓慢推近",
+                    "visualAction": "火光中，皇家大魔导师从燃烧房屋的阴影里走出，站在村长身后，面向空中的黑龙，双手前推形成蓝色圆形魔法盾，挡住喷来的火焰。",
+                    "beat": "转折",
+                    "sourceBlockIds": [
+                      "B12"
+                    ]
+                  }
+                ]
+              },
+              {
+                "duration": 6,
+                "cast": [
+                  "皇家大魔导师",
+                  "村长"
+                ],
+                "props": [],
+                "startPosition": "皇家大魔导师站在村长身后，双手前推维持蓝色圆形魔法盾，面向空中的黑龙；村长在他身后地上爬行。",
+                "clips": [
+                  {
+                    "duration": 2,
+                    "size": "CU",
+                    "cameraMove": "固定机位",
+                    "visualAction": "皇家大魔导师双手维持魔法盾，面部紧绷，张口大喊。",
+                    "beat": "催促",
+                    "sourceBlockIds": [
+                      "B13"
+                    ]
+                  },
+                  {
+                    "duration": 2,
+                    "size": "CU",
+                    "cameraMove": "手持跟拍",
+                    "visualAction": "村长在地上爬行，回头看向皇家大魔导师，随后起身逃跑。",
+                    "beat": "撤离",
+                    "sourceBlockIds": [
+                      "B14",
+                      "B15"
+                    ]
+                  },
+                  {
+                    "duration": 2,
+                    "size": "CU",
+                    "cameraMove": "快速推近",
+                    "visualAction": "蓝色魔法盾碎裂，皇家大魔导师被冲击力击倒在地，口中吐血。",
+                    "beat": "破防",
+                    "sourceBlockIds": [
+                      "B16"
+                    ]
+                  }
+                ]
+              },
+              {
+                "duration": 5,
+                "cast": [
+                  "皇家大魔导师",
+                  "男弟子",
+                  "女弟子"
+                ],
+                "props": [
+                  "法杖"
+                ],
+                "startPosition": "皇家大魔导师倒在地面，嘴角流血；男弟子与女弟子从画面一侧接近，男弟子手持法杖。",
+                "clips": [
+                  {
+                    "duration": 2,
+                    "size": "ECU",
+                    "cameraMove": "固定机位",
+                    "visualAction": "皇家大魔导师倒在地上，嘴角带血，张口低吼，随后用手撑地挣扎着想站起来。",
+                    "beat": "挣扎",
+                    "sourceBlockIds": [
+                      "B17",
+                      "B18"
+                    ]
+                  },
+                  {
+                    "duration": 3,
+                    "size": "MS",
+                    "cameraMove": "平移",
+                    "visualAction": "两名弟子跑过来扶住他，男弟子一手持法杖，张口大喊；皇家大魔导师用手擦掉嘴角的血，转头看向弟子们。",
+                    "beat": "救援",
+                    "sourceBlockIds": [
+                      "B19",
+                      "B20",
+                      "B21"
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          "artifact": "runs/artifacts/2026-11-04T08-07-31-855Z-AB-新引擎修复-EP1-1-6-r2.json",
+          "attempt": 2
+        },
+        {
+          "plan": {
+            "sceneId": "1-1",
+            "shots": [
+              {
+                "duration": 10,
+                "cast": [
+                  "皇家大魔导师",
+                  "男弟子",
+                  "女弟子"
+                ],
+                "props": [
+                  "法杖"
+                ],
+                "startPosition": "广场中央，大魔导师被男弟子从右侧搀扶，嘴角带血，面朝前方；男弟子右手持法杖；女弟子站在大魔导师左后方。",
+                "clips": [
+                  {
+                    "duration": 5,
+                    "size": "MCU",
+                    "cameraMove": "固定机位",
+                    "visualAction": "大魔导师嘴角带血，抬眼开口；男弟子从右侧扶住他的手臂",
+                    "beat": "对白",
+                    "sourceBlockIds": [
+                      "B22",
+                      "B23"
+                    ]
+                  },
+                  {
+                    "duration": 5,
+                    "size": "MCU",
+                    "cameraMove": "固定机位",
+                    "visualAction": "男弟子扶住大魔导师，眉头紧皱，开口回应；女弟子在左后方看向他",
+                    "beat": "对白",
+                    "sourceBlockIds": [
+                      "B24"
+                    ]
+                  }
+                ]
+              },
+              {
+                "duration": 6,
+                "cast": [
+                  "皇家大魔导师",
+                  "男弟子",
+                  "女弟子",
+                  "黑龙"
+                ],
+                "props": [
+                  "法杖"
+                ],
+                "startPosition": "大魔导师仍被男弟子从右侧搀扶，女弟子站在左后方；黑龙在远处空中盘旋。",
+                "clips": [
+                  {
+                    "duration": 2,
+                    "size": "CU",
+                    "cameraMove": "快速上摇",
+                    "visualAction": "大魔导师嘴角带血，眉头紧锁；镜头上摇至空中黑龙张口咆哮",
+                    "beat": "强调",
+                    "sourceBlockIds": [
+                      "B25"
+                    ]
+                  },
+                  {
+                    "duration": 4,
+                    "size": "CU",
+                    "cameraMove": "固定机位",
+                    "visualAction": "大魔导师由男弟子搀扶，抬眼开口",
+                    "beat": "对白",
+                    "sourceBlockIds": [
+                      "B26"
+                    ]
+                  }
+                ]
+              },
+              {
+                "duration": 5,
+                "cast": [
+                  "皇家大魔导师",
+                  "男弟子",
+                  "女弟子",
+                  "黑龙",
+                  "亚瑟"
+                ],
+                "props": [
+                  "法杖",
+                  "苹果"
+                ],
+                "startPosition": "大魔导师仍由男弟子从右侧搀扶，女弟子站在左侧，三人在广场中央；黑龙在空中盘旋；亚瑟在画面右侧外，右手拿着咬了一口的苹果。",
+                "clips": [
+                  {
+                    "duration": 2,
+                    "size": "WS",
+                    "cameraMove": "俯拍固定",
+                    "visualAction": "广场中央大魔导师与男弟子、女弟子，黑龙在空中盘旋",
+                    "beat": "建立",
+                    "sourceBlockIds": [
+                      "B27"
+                    ]
+                  },
+                  {
+                    "duration": 3,
+                    "size": "MCU",
+                    "cameraMove": "跟移",
+                    "visualAction": "亚瑟从画面右侧走入，右手拿着咬了一口的苹果，嘴角上扬",
+                    "beat": "钩子",
+                    "sourceBlockIds": [
+                      "B28",
+                      "B29"
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          "artifact": "runs/artifacts/2026-11-04T08-43-11-027Z-AB-新引擎修复-EP1-2-6-r3.json",
+          "attempt": 3
+        },
+        {
+          "plan": {
+            "sceneId": "1-1",
+            "shots": [
+              {
+                "duration": 8,
+                "cast": [
+                  "亚瑟",
+                  "皇家大魔导师",
+                  "男弟子",
+                  "女弟子"
+                ],
+                "props": [
+                  "苹果"
+                ],
+                "startPosition": "广场中央的雪地上，皇家大魔导师与男弟子、女弟子并排站在一侧，面向亚瑟；亚瑟站在他们对面，右手拿着一个咬过一口的苹果，苹果停在胸前高度。",
+                "clips": [
+                  {
+                    "duration": 4,
+                    "size": "CU",
+                    "cameraMove": "固定机位",
+                    "visualAction": "亚瑟微笑，右手拿着咬过一口的苹果，嘴唇开合。",
+                    "beat": "建立",
+                    "sourceBlockIds": [
+                      "B30"
+                    ]
+                  },
+                  {
+                    "duration": 4,
+                    "size": "MCU",
+                    "cameraMove": "轻微横移",
+                    "visualAction": "皇家大魔导师与男弟子、女弟子睁大眼睛看向亚瑟；皇家大魔导师身体前倾，张口急喊。",
+                    "beat": "反应",
+                    "sourceBlockIds": [
+                      "B31",
+                      "B32"
+                    ]
+                  }
+                ]
+              },
+              {
+                "duration": 5,
+                "cast": [
+                  "亚瑟",
+                  "皇家大魔导师",
+                  "黑龙"
+                ],
+                "props": [
+                  "苹果"
+                ],
+                "startPosition": "亚瑟站在皇家大魔导师对面，右手拿着咬过一口的苹果；皇家大魔导师身体前倾，面朝亚瑟；黑龙在亚瑟后方的空中盘旋。",
+                "clips": [
+                  {
+                    "duration": 3,
+                    "size": "MCU",
+                    "cameraMove": "固定机位",
+                    "visualAction": "亚瑟继续咬了一口苹果，咀嚼；皇家大魔导师在旁张口继续喊。",
+                    "beat": "推进",
+                    "sourceBlockIds": [
+                      "B33",
+                      "B34"
+                    ]
+                  },
+                  {
+                    "duration": 2,
+                    "size": "MCU",
+                    "cameraMove": "快速下摇跟拍",
+                    "visualAction": "黑龙从空中落到亚瑟身后，双翼展开，低头咆哮。",
+                    "beat": "转折",
+                    "sourceBlockIds": [
+                      "B35"
+                    ]
+                  }
+                ]
+              },
+              {
+                "duration": 5,
+                "cast": [
+                  "皇家大魔导师",
+                  "亚瑟",
+                  "黑龙"
+                ],
+                "props": [
+                  "苹果"
+                ],
+                "startPosition": "亚瑟背对黑龙站在雪地上，右手拿着苹果，面朝皇家大魔导师；黑龙停在亚瑟身后，低头张口；皇家大魔导师站在亚瑟前方。",
+                "clips": [
+                  {
+                    "duration": 2,
+                    "size": "CU",
+                    "cameraMove": "轻微推近",
+                    "visualAction": "皇家大魔导师朝亚瑟方向伸长手臂，张口大喊。",
+                    "beat": "警告",
+                    "sourceBlockIds": [
+                      "B36"
+                    ]
+                  },
+                  {
+                    "duration": 3,
+                    "size": "MCU",
+                    "cameraMove": "跟拍转身",
+                    "visualAction": "亚瑟微微一笑，转过身面对黑龙，随后右手举起苹果，将苹果展示在黑龙前方。",
+                    "beat": "反击铺垫",
+                    "sourceBlockIds": [
+                      "B37",
+                      "B38"
+                    ]
+                  }
+                ]
+              },
+              {
+                "duration": 8,
+                "cast": [
+                  "亚瑟",
+                  "黑龙",
+                  "皇家大魔导师",
+                  "男弟子",
+                  "女弟子"
+                ],
+                "props": [
+                  "苹果"
+                ],
+                "startPosition": "亚瑟面对黑龙站在雪地上，右手举着苹果；黑龙在亚瑟前方低身张口；皇家大魔导师与男弟子、女弟子站在亚瑟侧后方。",
+                "clips": [
+                  {
+                    "duration": 2,
+                    "size": "MS",
+                    "cameraMove": "固定机位",
+                    "visualAction": "黑龙朝亚瑟喷出火焰，亚瑟站在原地，眼睛看着火焰。",
+                    "beat": "危机",
+                    "sourceBlockIds": [
+                      "B39"
+                    ]
+                  },
+                  {
+                    "duration": 4,
+                    "size": "MS",
+                    "cameraMove": "快速跟拍",
+                    "visualAction": "亚瑟右手用力将苹果掷出，苹果飞出击中黑龙眼睛，黑龙扭头咆哮并被击退飞走。",
+                    "beat": "高潮",
+                    "sourceBlockIds": [
+                      "B40",
+                      "B41"
+                    ]
+                  },
+                  {
+                    "duration": 2,
+                    "size": "MCU",
+                    "cameraMove": "固定机位",
+                    "visualAction": "皇家大魔导师与男弟子、女弟子站在原地，瞪大眼睛，张口不动。",
+                    "beat": "反应",
+                    "sourceBlockIds": [
+                      "B42"
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          "artifact": "runs/artifacts/2026-11-04T08-08-33-912Z-AB-新引擎修复-EP1-3-6-r2.json",
+          "attempt": 2
+        },
+        {
+          "plan": {
+            "sceneId": "1-1",
+            "shots": [
+              {
+                "duration": 6,
+                "cast": [
+                  "男弟子",
+                  "黑龙",
+                  "亚瑟"
+                ],
+                "props": [
+                  "皮箱"
+                ],
+                "startPosition": "男弟子站在雪地中，身体朝向亚瑟；亚瑟在数步外站立，右手提着皮箱；黑龙位于远处天空，尚未进入近景。",
+                "clips": [
+                  {
+                    "duration": 2,
+                    "size": "CU",
+                    "cameraMove": "固定机位",
+                    "visualAction": "男弟子抬眼看向亚瑟，嘴唇微动。",
+                    "beat": "疑问",
+                    "sourceBlockIds": [
+                      "B43"
+                    ]
+                  },
+                  {
+                    "duration": 2,
+                    "size": "MCU",
+                    "cameraMove": "快速推近",
+                    "visualAction": "黑龙从远处天空俯冲回场，双翼展开，张口咆哮。",
+                    "beat": "转折",
+                    "sourceBlockIds": [
+                      "B44"
+                    ]
+                  },
+                  {
+                    "duration": 2,
+                    "size": "MCU",
+                    "cameraMove": "固定机位",
+                    "visualAction": "亚瑟右手提箱，面向低空黑龙，嘴角上扬，开口说话。",
+                    "beat": "宣告",
+                    "sourceBlockIds": [
+                      "B45"
+                    ]
+                  }
+                ]
+              },
+              {
+                "duration": 6,
+                "cast": [
+                  "亚瑟",
+                  "黑龙"
+                ],
+                "props": [
+                  "皮箱"
+                ],
+                "startPosition": "亚瑟站在雪地，右手提着皮箱，面朝低空悬停的黑龙；黑龙在数步外低空悬停，双翼展开，头部朝向亚瑟。",
+                "clips": [
+                  {
+                    "duration": 2,
+                    "size": "MCU",
+                    "cameraMove": "下摇跟拍",
+                    "visualAction": "亚瑟弯腰，把右手提着的皮箱放到雪地上，手离开箱柄。",
+                    "beat": "准备",
+                    "sourceBlockIds": [
+                      "B46"
+                    ]
+                  },
+                  {
+                    "duration": 2,
+                    "size": "MS",
+                    "cameraMove": "快速跟拍",
+                    "visualAction": "亚瑟从雪地跃起，落到黑龙背上，挥拳向下击中黑龙，黑龙身体砸向雪地。",
+                    "beat": "动作",
+                    "sourceBlockIds": [
+                      "B47"
+                    ]
+                  },
+                  {
+                    "duration": 2,
+                    "size": "MCU",
+                    "cameraMove": "固定机位",
+                    "visualAction": "亚瑟站在倒地的黑龙旁，面带微笑，开口说话。",
+                    "beat": "强调",
+                    "sourceBlockIds": [
+                      "B48"
+                    ]
+                  }
+                ]
+              },
+              {
+                "duration": 9,
+                "cast": [
+                  "黑龙",
+                  "亚瑟",
+                  "男弟子",
+                  "皇家大魔导师"
+                ],
+                "props": [
+                  "皮箱"
+                ],
+                "startPosition": "黑龙倒在雪地中央，亚瑟站在黑龙背旁；皮箱留在亚瑟脚边雪地；男弟子与皇家大魔导师站在数步外，男弟子面朝黑龙，皇家大魔导师在男弟子侧后方。",
+                "clips": [
+                  {
+                    "duration": 2,
+                    "size": "MS",
+                    "cameraMove": "上摇跟拍",
+                    "visualAction": "黑龙在雪地中挣扎，双翼拍地，随后振翅从亚瑟身旁飞起，冲入乌云。",
+                    "beat": "收束",
+                    "sourceBlockIds": [
+                      "B49"
+                    ]
+                  },
+                  {
+                    "duration": 5,
+                    "size": "MCU",
+                    "cameraMove": "固定机位",
+                    "visualAction": "男弟子看向黑龙飞走的方向，随后转头面向皇家大魔导师，嘴唇开合，抬手比划。",
+                    "beat": "询问",
+                    "sourceBlockIds": [
+                      "B50",
+                      "B51"
+                    ]
+                  },
+                  {
+                    "duration": 2,
+                    "size": "MCU",
+                    "cameraMove": "固定机位",
+                    "visualAction": "皇家大魔导师抬手，一巴掌拍在男弟子头上；男弟子头部向一侧偏。",
+                    "beat": "训斥",
+                    "sourceBlockIds": [
+                      "B52"
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          "artifact": "runs/artifacts/2026-11-04T08-08-39-931Z-AB-新引擎修复-EP1-4-6-r2.json",
+          "attempt": 2
+        },
+        {
+          "plan": {
+            "sceneId": "1-1",
+            "shots": [
+              {
+                "duration": 10,
+                "cast": [
+                  "皇家大魔导师",
+                  "男弟子"
+                ],
+                "props": [],
+                "startPosition": "皇家大魔导师与男弟子相对站立，大魔导师右手停在男弟子头顶旁；男弟子头部向一侧偏开，双臂垂在身侧。",
+                "clips": [
+                  {
+                    "duration": 6,
+                    "size": "CU",
+                    "cameraMove": "固定机位",
+                    "visualAction": "皇家大魔导师面向男弟子，开口说话，右手随训斥动作向下压。",
+                    "beat": "冲突",
+                    "sourceBlockIds": [
+                      "B53"
+                    ]
+                  },
+                  {
+                    "duration": 4,
+                    "size": "CU",
+                    "cameraMove": "固定机位",
+                    "visualAction": "男弟子双手抬起捂住头，眼睛睁大，随后嘴唇微动低声开口。",
+                    "beat": "反应",
+                    "sourceBlockIds": [
+                      "B54",
+                      "B55"
+                    ]
+                  }
+                ]
+              },
+              {
+                "duration": 10,
+                "cast": [
+                  "亚瑟",
+                  "皇家大魔导师",
+                  "男弟子"
+                ],
+                "props": [],
+                "startPosition": "男弟子双手捂头站在大魔导师侧后方；皇家大魔导师面朝男弟子方向，右手垂在身侧；亚瑟位于两人侧前方，背对并侧对他们。",
+                "clips": [
+                  {
+                    "duration": 5,
+                    "size": "CU",
+                    "cameraMove": "固定机位",
+                    "visualAction": "亚瑟转头面向大魔导师与男弟子的方向，微笑，抬手挥动，脚步转向外侧。",
+                    "beat": "转折",
+                    "sourceBlockIds": [
+                      "B56",
+                      "B57"
+                    ]
+                  },
+                  {
+                    "duration": 3,
+                    "size": "MCU",
+                    "cameraMove": "固定机位",
+                    "visualAction": "皇家大魔导师向前迈出一步，右手伸向亚瑟方向，开口喊。",
+                    "beat": "阻止",
+                    "sourceBlockIds": [
+                      "B58",
+                      "B59"
+                    ]
+                  },
+                  {
+                    "duration": 2,
+                    "size": "WS",
+                    "cameraMove": "快速上摇",
+                    "visualAction": "亚瑟跃起，身体化作一道黑影向上飞离画面。",
+                    "beat": "钩子",
+                    "sourceBlockIds": [
+                      "B60"
+                    ]
+                  }
+                ]
+              },
+              {
+                "duration": 5,
+                "cast": [
+                  "女弟子"
+                ],
+                "props": [],
+                "startPosition": "女弟子站在原处，面朝天空方向，双手垂在身侧。",
+                "clips": [
+                  {
+                    "duration": 5,
+                    "size": "CU",
+                    "cameraMove": "缓慢推近",
+                    "visualAction": "女弟子抬头望向天空，双手在胸前合十，目光追随天空方向。",
+                    "beat": "反应",
+                    "sourceBlockIds": [
+                      "B61"
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          "artifact": "runs/artifacts/2026-11-04T08-09-20-065Z-AB-新引擎修复-EP1-5-6-r2.json",
+          "attempt": 2
+        },
+        {
+          "plan": {
+            "sceneId": "1-1",
+            "shots": [
+              {
+                "duration": 5,
+                "cast": [
+                  "女弟子"
+                ],
+                "props": [],
+                "startPosition": "村外空地上，女弟子站在画面中央，身体朝向天空方向，抬头仰望，双手在胸前合十。",
+                "clips": [
+                  {
+                    "duration": 5,
+                    "size": "CU",
+                    "cameraMove": "固定机位",
+                    "visualAction": "女弟子保持抬头望天的姿势，双手合十，开口说话。",
+                    "beat": "反应",
+                    "sourceBlockIds": [
+                      "B62"
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          "artifact": "runs/artifacts/2026-11-04T08-08-44-058Z-AB-新引擎-EP1-6-6-r1.json",
+          "attempt": 1
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,685 @@
+[
+  {
+    "key": "5-1",
+    "label": "对白场",
+    "scene": "Norman Castle Room 内 未注明",
+    "blocks": 30,
+    "stable": {
+      "usage": {
+        "input_tokens": 3416,
+        "input_tokens_details": {
+          "cached_tokens": 0
+        },
+        "output_tokens": 23680,
+        "output_tokens_details": {
+          "reasoning_tokens": 21353
+        },
+        "total_tokens": 27096
+      },
+      "elapsedMs": 121361,
+      "metrics": {
+        "shots": 13,
+        "clips": 21,
+        "duration": 121,
+        "high": 0,
+        "mid": 0,
+        "qcHigh": 0,
+        "qcMid": 0,
+        "sourceDialogues": 14,
+        "coveredDialogues": 14,
+        "dialogueCoveragePct": 100,
+        "issues": []
+      },
+      "text": "5-1-stable.md"
+    },
+    "experimental": {
+      "calls": {
+        "total": {
+          "calls": 13,
+          "inputTokens": 56410,
+          "outputTokens": 85777,
+          "totalTokens": 142187,
+          "reasoningTokens": 69535,
+          "cachedTokens": 30336,
+          "elapsedMs": 481322
+        },
+        "byKind": {
+          "brief": {
+            "calls": 1,
+            "inputTokens": 3835,
+            "outputTokens": 1177,
+            "totalTokens": 5012,
+            "reasoningTokens": 692,
+            "cachedTokens": 0,
+            "elapsedMs": 8334
+          },
+          "draft": {
+            "calls": 6,
+            "inputTokens": 22059,
+            "outputTokens": 45852,
+            "totalTokens": 67911,
+            "reasoningTokens": 38236,
+            "cachedTokens": 14080,
+            "elapsedMs": 265033
+          },
+          "repair": {
+            "calls": 6,
+            "inputTokens": 30516,
+            "outputTokens": 38748,
+            "totalTokens": 69264,
+            "reasoningTokens": 30607,
+            "cachedTokens": 16256,
+            "elapsedMs": 207955
+          }
+        },
+        "rows": [
+          {
+            "label": "三场AB 实验 5-1 对白场 导演提示单 第5集 5-1",
+            "kind": "brief",
+            "inputTokens": 3835,
+            "outputTokens": 1177,
+            "totalTokens": 5012,
+            "reasoningTokens": 692,
+            "cachedTokens": 0,
+            "elapsedMs": 8334
+          },
+          {
+            "label": "三场AB 实验 5-1 对白场 镜头计划 第5集 5-1 1/6",
+            "kind": "draft",
+            "inputTokens": 3671,
+            "outputTokens": 9058,
+            "totalTokens": 12729,
+            "reasoningTokens": 7738,
+            "cachedTokens": 0,
+            "elapsedMs": 50684
+          },
+          {
+            "label": "三场AB 实验 5-1 对白场 定点修复 第5集 5-1 1/6",
+            "kind": "repair",
+            "inputTokens": 5125,
+            "outputTokens": 1977,
+            "totalTokens": 7102,
+            "reasoningTokens": 657,
+            "cachedTokens": 2176,
+            "elapsedMs": 9064
+          },
+          {
+            "label": "三场AB 实验 5-1 对白场 镜头计划 第5集 5-1 2/6",
+            "kind": "draft",
+            "inputTokens": 3785,
+            "outputTokens": 7025,
+            "totalTokens": 10810,
+            "reasoningTokens": 5476,
+            "cachedTokens": 2816,
+            "elapsedMs": 40302
+          },
+          {
+            "label": "三场AB 实验 5-1 对白场 定点修复 第5集 5-1 2/6",
+            "kind": "repair",
+            "inputTokens": 5535,
+            "outputTokens": 8863,
+            "totalTokens": 14398,
+            "reasoningTokens": 6915,
+            "cachedTokens": 2816,
+            "elapsedMs": 50150
+          },
+          {
+            "label": "三场AB 实验 5-1 对白场 镜头计划 第5集 5-1 3/6",
+            "kind": "draft",
+            "inputTokens": 3615,
+            "outputTokens": 6117,
+            "totalTokens": 9732,
+            "reasoningTokens": 5059,
+            "cachedTokens": 2816,
+            "elapsedMs": 35441
+          },
+          {
+            "label": "三场AB 实验 5-1 对白场 定点修复 第5集 5-1 3/6",
+            "kind": "repair",
+            "inputTokens": 4780,
+            "outputTokens": 1362,
+            "totalTokens": 6142,
+            "reasoningTokens": 304,
+            "cachedTokens": 2816,
+            "elapsedMs": 5296
+          },
+          {
+            "label": "三场AB 实验 5-1 对白场 镜头计划 第5集 5-1 4/6",
+            "kind": "draft",
+            "inputTokens": 3675,
+            "outputTokens": 4207,
+            "totalTokens": 7882,
+            "reasoningTokens": 3160,
+            "cachedTokens": 2816,
+            "elapsedMs": 24658
+          },
+          {
+            "label": "三场AB 实验 5-1 对白场 定点修复 第5集 5-1 4/6",
+            "kind": "repair",
+            "inputTokens": 4858,
+            "outputTokens": 1820,
+            "totalTokens": 6678,
+            "reasoningTokens": 773,
+            "cachedTokens": 2816,
+            "elapsedMs": 8654
+          },
+          {
+            "label": "三场AB 实验 5-1 对白场 镜头计划 第5集 5-1 5/6",
+            "kind": "draft",
+            "inputTokens": 3727,
+            "outputTokens": 8530,
+            "totalTokens": 12257,
+            "reasoningTokens": 7284,
+            "cachedTokens": 2816,
+            "elapsedMs": 50833
+          },
+          {
+            "label": "三场AB 实验 5-1 对白场 定点修复 第5集 5-1 5/6",
+            "kind": "repair",
+            "inputTokens": 5078,
+            "outputTokens": 16638,
+            "totalTokens": 21716,
+            "reasoningTokens": 15295,
+            "cachedTokens": 2816,
+            "elapsedMs": 90440
+          },
+          {
+            "label": "三场AB 实验 5-1 对白场 镜头计划 第5集 5-1 6/6",
+            "kind": "draft",
+            "inputTokens": 3586,
+            "outputTokens": 10915,
+            "totalTokens": 14501,
+            "reasoningTokens": 9519,
+            "cachedTokens": 2816,
+            "elapsedMs": 63115
+          },
+          {
+            "label": "三场AB 实验 5-1 对白场 定点修复 第5集 5-1 6/6",
+            "kind": "repair",
+            "inputTokens": 5140,
+            "outputTokens": 8088,
+            "totalTokens": 13228,
+            "reasoningTokens": 6663,
+            "cachedTokens": 2816,
+            "elapsedMs": 44351
+          }
+        ],
+        "cacheHitPct": 53.8,
+        "reasoningPctOfOutput": 81.1,
+        "repairTokenPct": 48.7,
+        "repairTimePct": 43.2,
+        "avgTokensPerCall": 10937
+      },
+      "engineIssues": [],
+      "engineIssuesAvailable": false,
+      "metrics": {
+        "shots": 17,
+        "clips": 31,
+        "duration": 139,
+        "high": 0,
+        "mid": 0,
+        "qcHigh": 0,
+        "qcMid": 0,
+        "sourceDialogues": 14,
+        "coveredDialogues": 14,
+        "dialogueCoveragePct": 100,
+        "issues": []
+      },
+      "text": "5-1-experimental.md"
+    }
+  },
+  {
+    "key": "4-2",
+    "label": "动作场",
+    "scene": "Norman Castle Courtyard 外 未注明",
+    "blocks": 36,
+    "stable": {
+      "usage": {
+        "input_tokens": 3471,
+        "input_tokens_details": {
+          "cached_tokens": 2432
+        },
+        "output_tokens": 15280,
+        "output_tokens_details": {
+          "reasoning_tokens": 12675
+        },
+        "total_tokens": 18751
+      },
+      "elapsedMs": 86471,
+      "metrics": {
+        "shots": 12,
+        "clips": 21,
+        "duration": 130,
+        "high": 0,
+        "mid": 0,
+        "qcHigh": 1,
+        "qcMid": 0,
+        "sourceDialogues": 12,
+        "coveredDialogues": 12,
+        "dialogueCoveragePct": 100,
+        "issues": [
+          {
+            "level": "高",
+            "where": "第4集 分镜07 ClipC",
+            "rule": "台词篡改",
+            "evidence": "产出「亚瑟:（无台词）」在原文中找不到",
+            "source": "engine"
+          }
+        ]
+      },
+      "text": "4-2-stable.md"
+    },
+    "experimental": {
+      "calls": {
+        "total": {
+          "calls": 16,
+          "inputTokens": 70655,
+          "outputTokens": 93904,
+          "totalTokens": 164559,
+          "reasoningTokens": 74838,
+          "cachedTokens": 42752,
+          "elapsedMs": 552023
+        },
+        "byKind": {
+          "brief": {
+            "calls": 2,
+            "inputTokens": 8740,
+            "outputTokens": 4107,
+            "totalTokens": 12847,
+            "reasoningTokens": 3100,
+            "cachedTokens": 4608,
+            "elapsedMs": 28648
+          },
+          "draft": {
+            "calls": 7,
+            "inputTokens": 26136,
+            "outputTokens": 47829,
+            "totalTokens": 73965,
+            "reasoningTokens": 39319,
+            "cachedTokens": 19072,
+            "elapsedMs": 288329
+          },
+          "repair": {
+            "calls": 7,
+            "inputTokens": 35779,
+            "outputTokens": 41968,
+            "totalTokens": 77747,
+            "reasoningTokens": 32419,
+            "cachedTokens": 19072,
+            "elapsedMs": 235046
+          }
+        },
+        "rows": [
+          {
+            "label": "三场AB 实验 4-2 动作场 导演提示单 第4集 4-1",
+            "kind": "brief",
+            "inputTokens": 4370,
+            "outputTokens": 2006,
+            "totalTokens": 6376,
+            "reasoningTokens": 1555,
+            "cachedTokens": 384,
+            "elapsedMs": 14387
+          },
+          {
+            "label": "三场AB 实验 4-2 动作场 导演提示单 第4集 4-1",
+            "kind": "brief",
+            "inputTokens": 4370,
+            "outputTokens": 2101,
+            "totalTokens": 6471,
+            "reasoningTokens": 1545,
+            "cachedTokens": 4224,
+            "elapsedMs": 14261
+          },
+          {
+            "label": "三场AB 实验 4-2 动作场 镜头计划 第4集 4-1 1/7",
+            "kind": "draft",
+            "inputTokens": 3718,
+            "outputTokens": 6239,
+            "totalTokens": 9957,
+            "reasoningTokens": 5325,
+            "cachedTokens": 2176,
+            "elapsedMs": 37135
+          },
+          {
+            "label": "三场AB 实验 4-2 动作场 定点修复 第4集 4-1 1/7",
+            "kind": "repair",
+            "inputTokens": 4764,
+            "outputTokens": 4197,
+            "totalTokens": 8961,
+            "reasoningTokens": 3261,
+            "cachedTokens": 2176,
+            "elapsedMs": 23750
+          },
+          {
+            "label": "三场AB 实验 4-2 动作场 镜头计划 第4集 4-1 2/7",
+            "kind": "draft",
+            "inputTokens": 3881,
+            "outputTokens": 10080,
+            "totalTokens": 13961,
+            "reasoningTokens": 8580,
+            "cachedTokens": 2816,
+            "elapsedMs": 62347
+          },
+          {
+            "label": "三场AB 实验 4-2 动作场 定点修复 第4集 4-1 2/7",
+            "kind": "repair",
+            "inputTokens": 5557,
+            "outputTokens": 10098,
+            "totalTokens": 15655,
+            "reasoningTokens": 8342,
+            "cachedTokens": 2816,
+            "elapsedMs": 55483
+          },
+          {
+            "label": "三场AB 实验 4-2 动作场 镜头计划 第4集 4-1 3/7",
+            "kind": "draft",
+            "inputTokens": 3507,
+            "outputTokens": 4302,
+            "totalTokens": 7809,
+            "reasoningTokens": 3173,
+            "cachedTokens": 2816,
+            "elapsedMs": 26375
+          },
+          {
+            "label": "三场AB 实验 4-2 动作场 定点修复 第4集 4-1 3/7",
+            "kind": "repair",
+            "inputTokens": 4740,
+            "outputTokens": 3821,
+            "totalTokens": 8561,
+            "reasoningTokens": 2679,
+            "cachedTokens": 2816,
+            "elapsedMs": 20816
+          },
+          {
+            "label": "三场AB 实验 4-2 动作场 镜头计划 第4集 4-1 4/7",
+            "kind": "draft",
+            "inputTokens": 3929,
+            "outputTokens": 7294,
+            "totalTokens": 11223,
+            "reasoningTokens": 5716,
+            "cachedTokens": 2816,
+            "elapsedMs": 43697
+          },
+          {
+            "label": "三场AB 实验 4-2 动作场 定点修复 第4集 4-1 4/7",
+            "kind": "repair",
+            "inputTokens": 5684,
+            "outputTokens": 5410,
+            "totalTokens": 11094,
+            "reasoningTokens": 3575,
+            "cachedTokens": 2816,
+            "elapsedMs": 28563
+          },
+          {
+            "label": "三场AB 实验 4-2 动作场 镜头计划 第4集 4-1 5/7",
+            "kind": "draft",
+            "inputTokens": 3758,
+            "outputTokens": 7343,
+            "totalTokens": 11101,
+            "reasoningTokens": 6186,
+            "cachedTokens": 2816,
+            "elapsedMs": 44598
+          },
+          {
+            "label": "三场AB 实验 4-2 动作场 定点修复 第4集 4-1 5/7",
+            "kind": "repair",
+            "inputTokens": 5144,
+            "outputTokens": 4785,
+            "totalTokens": 9929,
+            "reasoningTokens": 3492,
+            "cachedTokens": 2816,
+            "elapsedMs": 28404
+          },
+          {
+            "label": "三场AB 实验 4-2 动作场 镜头计划 第4集 4-1 6/7",
+            "kind": "draft",
+            "inputTokens": 3957,
+            "outputTokens": 8988,
+            "totalTokens": 12945,
+            "reasoningTokens": 7563,
+            "cachedTokens": 2816,
+            "elapsedMs": 52179
+          },
+          {
+            "label": "三场AB 实验 4-2 动作场 定点修复 第4集 4-1 6/7",
+            "kind": "repair",
+            "inputTokens": 5568,
+            "outputTokens": 8191,
+            "totalTokens": 13759,
+            "reasoningTokens": 6593,
+            "cachedTokens": 2816,
+            "elapsedMs": 44596
+          },
+          {
+            "label": "三场AB 实验 4-2 动作场 镜头计划 第4集 4-1 7/7",
+            "kind": "draft",
+            "inputTokens": 3386,
+            "outputTokens": 3583,
+            "totalTokens": 6969,
+            "reasoningTokens": 2776,
+            "cachedTokens": 2816,
+            "elapsedMs": 21998
+          },
+          {
+            "label": "三场AB 实验 4-2 动作场 定点修复 第4集 4-1 7/7",
+            "kind": "repair",
+            "inputTokens": 4322,
+            "outputTokens": 5466,
+            "totalTokens": 9788,
+            "reasoningTokens": 4477,
+            "cachedTokens": 2816,
+            "elapsedMs": 33434
+          }
+        ],
+        "cacheHitPct": 60.5,
+        "reasoningPctOfOutput": 79.7,
+        "repairTokenPct": 47.2,
+        "repairTimePct": 42.6,
+        "avgTokensPerCall": 10285
+      },
+      "engineIssues": [
+        {
+          "level": "高",
+          "where": "第4集 shot8 Clip B",
+          "msg": "内容预算约 9.2s，超过 Clip 时长 8s",
+          "source": "experimental-engine"
+        },
+        {
+          "level": "高",
+          "where": "第4集 shot20 Clip A",
+          "msg": "内容预算约 9.2s，超过 Clip 时长 5s",
+          "source": "experimental-engine"
+        },
+        {
+          "level": "高",
+          "where": "第4集 shot20 Clip B",
+          "msg": "没有 sourceBlockIds/actionUnitIds",
+          "source": "experimental-engine"
+        },
+        {
+          "level": "高",
+          "where": "第4集 shot14",
+          "msg": "人物姿势从上一镜“坐”变为“站”，但没有来源动作、时间跳转或省略说明",
+          "source": "experimental-engine"
+        }
+      ],
+      "engineIssuesAvailable": true,
+      "metrics": {
+        "shots": 21,
+        "clips": 40,
+        "duration": 155,
+        "high": 0,
+        "mid": 0,
+        "qcHigh": 0,
+        "qcMid": 0,
+        "sourceDialogues": 12,
+        "coveredDialogues": 12,
+        "dialogueCoveragePct": 100,
+        "issues": []
+      },
+      "text": "4-2-experimental.md"
+    }
+  },
+  {
+    "key": "8-1",
+    "label": "多人调度场",
+    "scene": "Norman Castle Wall 外 未注明",
+    "blocks": 8,
+    "stable": {
+      "usage": {
+        "input_tokens": 2926,
+        "input_tokens_details": {
+          "cached_tokens": 2432
+        },
+        "output_tokens": 8280,
+        "output_tokens_details": {
+          "reasoning_tokens": 7569
+        },
+        "total_tokens": 11206
+      },
+      "elapsedMs": 46456,
+      "metrics": {
+        "shots": 3,
+        "clips": 6,
+        "duration": 32,
+        "high": 0,
+        "mid": 0,
+        "qcHigh": 0,
+        "qcMid": 0,
+        "sourceDialogues": 3,
+        "coveredDialogues": 3,
+        "dialogueCoveragePct": 100,
+        "issues": []
+      },
+      "text": "8-1-stable.md"
+    },
+    "experimental": {
+      "calls": {
+        "total": {
+          "calls": 5,
+          "inputTokens": 17194,
+          "outputTokens": 18758,
+          "totalTokens": 35952,
+          "reasoningTokens": 14242,
+          "cachedTokens": 10368,
+          "elapsedMs": 119854
+        },
+        "byKind": {
+          "brief": {
+            "calls": 1,
+            "inputTokens": 1261,
+            "outputTokens": 891,
+            "totalTokens": 2152,
+            "reasoningTokens": 393,
+            "cachedTokens": 384,
+            "elapsedMs": 7743
+          },
+          "draft": {
+            "calls": 2,
+            "inputTokens": 6828,
+            "outputTokens": 7597,
+            "totalTokens": 14425,
+            "reasoningTokens": 5578,
+            "cachedTokens": 4992,
+            "elapsedMs": 47295
+          },
+          "repair": {
+            "calls": 2,
+            "inputTokens": 9105,
+            "outputTokens": 10270,
+            "totalTokens": 19375,
+            "reasoningTokens": 8271,
+            "cachedTokens": 4992,
+            "elapsedMs": 64816
+          }
+        },
+        "rows": [
+          {
+            "label": "三场AB 实验 8-1 多人调度场 导演提示单 第8集 8-1",
+            "kind": "brief",
+            "inputTokens": 1261,
+            "outputTokens": 891,
+            "totalTokens": 2152,
+            "reasoningTokens": 393,
+            "cachedTokens": 384,
+            "elapsedMs": 7743
+          },
+          {
+            "label": "三场AB 实验 8-1 多人调度场 镜头计划 第8集 8-1 1/2",
+            "kind": "draft",
+            "inputTokens": 3448,
+            "outputTokens": 3775,
+            "totalTokens": 7223,
+            "reasoningTokens": 2876,
+            "cachedTokens": 2176,
+            "elapsedMs": 22486
+          },
+          {
+            "label": "三场AB 实验 8-1 多人调度场 定点修复 第8集 8-1 1/2",
+            "kind": "repair",
+            "inputTokens": 4476,
+            "outputTokens": 3463,
+            "totalTokens": 7939,
+            "reasoningTokens": 2479,
+            "cachedTokens": 2176,
+            "elapsedMs": 20011
+          },
+          {
+            "label": "三场AB 实验 8-1 多人调度场 镜头计划 第8集 8-1 2/2",
+            "kind": "draft",
+            "inputTokens": 3380,
+            "outputTokens": 3822,
+            "totalTokens": 7202,
+            "reasoningTokens": 2702,
+            "cachedTokens": 2816,
+            "elapsedMs": 24809
+          },
+          {
+            "label": "三场AB 实验 8-1 多人调度场 定点修复 第8集 8-1 2/2",
+            "kind": "repair",
+            "inputTokens": 4629,
+            "outputTokens": 6807,
+            "totalTokens": 11436,
+            "reasoningTokens": 5792,
+            "cachedTokens": 2816,
+            "elapsedMs": 44805
+          }
+        ],
+        "cacheHitPct": 60.3,
+        "reasoningPctOfOutput": 75.9,
+        "repairTokenPct": 53.9,
+        "repairTimePct": 54.1,
+        "avgTokensPerCall": 7190
+      },
+      "engineIssues": [
+        {
+          "level": "高",
+          "where": "第8集 shot3 Clip A",
+          "msg": "内容预算约 10.4s，超过 Clip 时长 8s",
+          "source": "experimental-engine"
+        },
+        {
+          "level": "高",
+          "where": "第8集 shot3 Clip B",
+          "msg": "没有 sourceBlockIds/actionUnitIds",
+          "source": "experimental-engine"
+        }
+      ],
+      "engineIssuesAvailable": true,
+      "metrics": {
+        "shots": 5,
+        "clips": 8,
+        "duration": 40,
+        "high": 0,
+        "mid": 0,
+        "qcHigh": 0,
+        "qcMid": 0,
+        "sourceDialogues": 3,
+        "coveredDialogues": 3,
+        "dialogueCoveragePct": 100,
+        "issues": []
+      },
+      "text": "8-1-experimental.md"
+    }
+  }
+]

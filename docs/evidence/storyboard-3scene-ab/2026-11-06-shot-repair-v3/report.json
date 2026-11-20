@@ -1,0 +1,141 @@
+[
+  {
+    "key": "8-1",
+    "label": "多人调度场",
+    "scene": "Norman Castle Wall 外 未注明",
+    "blocks": 8,
+    "stable": {
+      "usage": {
+        "input_tokens": 2926,
+        "input_tokens_details": {
+          "cached_tokens": 2432
+        },
+        "output_tokens": 8280,
+        "output_tokens_details": {
+          "reasoning_tokens": 7569
+        },
+        "total_tokens": 11206
+      },
+      "elapsedMs": 46456,
+      "metrics": {
+        "shots": 3,
+        "clips": 6,
+        "duration": 32,
+        "high": 0,
+        "mid": 0,
+        "qcHigh": 0,
+        "qcMid": 0,
+        "sourceDialogues": 3,
+        "coveredDialogues": 3,
+        "dialogueCoveragePct": 100,
+        "issues": []
+      },
+      "text": "8-1-stable.md"
+    },
+    "experimental": {
+      "calls": {
+        "total": {
+          "calls": 4,
+          "inputTokens": 13020,
+          "outputTokens": 15343,
+          "totalTokens": 28363,
+          "reasoningTokens": 12242,
+          "cachedTokens": 7552,
+          "elapsedMs": 94966
+        },
+        "byKind": {
+          "brief": {
+            "calls": 1,
+            "inputTokens": 1261,
+            "outputTokens": 870,
+            "totalTokens": 2131,
+            "reasoningTokens": 445,
+            "cachedTokens": 1024,
+            "elapsedMs": 6611
+          },
+          "draft": {
+            "calls": 2,
+            "inputTokens": 6904,
+            "outputTokens": 9352,
+            "totalTokens": 16256,
+            "reasoningTokens": 7344,
+            "cachedTokens": 4224,
+            "elapsedMs": 57440
+          },
+          "repair": {
+            "calls": 1,
+            "inputTokens": 4855,
+            "outputTokens": 5121,
+            "totalTokens": 9976,
+            "reasoningTokens": 4453,
+            "cachedTokens": 2304,
+            "elapsedMs": 30915
+          }
+        },
+        "rows": [
+          {
+            "label": "三场AB 实验 8-1 多人调度场 导演提示单 第8集 8-1",
+            "kind": "brief",
+            "inputTokens": 1261,
+            "outputTokens": 870,
+            "totalTokens": 2131,
+            "reasoningTokens": 445,
+            "cachedTokens": 1024,
+            "elapsedMs": 6611
+          },
+          {
+            "label": "三场AB 实验 8-1 多人调度场 镜头计划 第8集 8-1 1/2",
+            "kind": "draft",
+            "inputTokens": 3486,
+            "outputTokens": 4743,
+            "totalTokens": 8229,
+            "reasoningTokens": 3850,
+            "cachedTokens": 1408,
+            "elapsedMs": 29707
+          },
+          {
+            "label": "三场AB 实验 8-1 多人调度场 镜头计划 第8集 8-1 2/2",
+            "kind": "draft",
+            "inputTokens": 3418,
+            "outputTokens": 4609,
+            "totalTokens": 8027,
+            "reasoningTokens": 3494,
+            "cachedTokens": 2816,
+            "elapsedMs": 27733
+          },
+          {
+            "label": "三场AB 实验 8-1 多人调度场 定点修复 第8集 8-1 2/2 r1",
+            "kind": "repair",
+            "inputTokens": 4855,
+            "outputTokens": 5121,
+            "totalTokens": 9976,
+            "reasoningTokens": 4453,
+            "cachedTokens": 2304,
+            "elapsedMs": 30915
+          }
+        ],
+        "cacheHitPct": 58,
+        "reasoningPctOfOutput": 79.8,
+        "repairTokenPct": 35.2,
+        "repairTimePct": 32.6,
+        "avgTokensPerCall": 7091
+      },
+      "engineIssues": [],
+      "engineIssuesAvailable": true,
+      "metrics": {
+        "shots": 5,
+        "clips": 9,
+        "duration": 37,
+        "high": 0,
+        "mid": 0,
+        "qcHigh": 0,
+        "qcMid": 0,
+        "sourceDialogues": 3,
+        "coveredDialogues": 3,
+        "dialogueCoveragePct": 100,
+        "issues": []
+      },
+      "text": "8-1-experimental.md"
+    }
+  }
+]

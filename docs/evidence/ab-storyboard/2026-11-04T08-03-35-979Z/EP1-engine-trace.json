@@ -1,0 +1,2017 @@
+{
+  "episode": 1,
+  "title": "神秘强者降世",
+  "flow2Estimate": 82,
+  "scenes": [
+    {
+      "sceneInput": {
+        "sceneId": "1-1",
+        "episode": "第1集：神秘强者降世",
+        "sceneHeading": "Village 外 未注明",
+        "cast": "村长（Village Chief，着装：粗布冬装）、皇家大魔导师（Royal Archmage，着装：法师长袍）、男弟子（Male Disciple，着装：弟子法袍）、女弟子（Female Disciple，着装：弟子法袍）、亚瑟（Arthur，着装：旅行者装）、黑龙（Dragon，着装：黑龙鳞甲）、村民群像（Villagers，着装：粗布冬装）",
+        "castNames": [
+          "村长",
+          "皇家大魔导师",
+          "男弟子",
+          "女弟子",
+          "亚瑟",
+          "黑龙",
+          "村民群像"
+        ],
+        "previousEnd": "",
+        "nextScene": "",
+        "estimatedSeconds": 88,
+        "blocks": [
+          {
+            "id": "B01",
+            "kind": "action",
+            "text": "△Village。俯瞰被雪覆盖的村庄广场。",
+            "source": "△Village。俯瞰被雪覆盖的村庄广场。"
+          },
+          {
+            "id": "B02",
+            "kind": "action",
+            "text": "△村民群像在雪地上惊慌失措地奔跑。",
+            "source": "△村民群像在雪地上惊慌失措地奔跑。"
+          },
+          {
+            "id": "B03",
+            "kind": "action",
+            "text": "△龙吼声。一只巨大的黑龙在村庄上空飞过，发出咆哮。",
+            "source": "△龙吼声。一只巨大的黑龙在村庄上空飞过，发出咆哮。"
+          },
+          {
+            "id": "B04",
+            "kind": "action",
+            "text": "△爆炸声。黑龙向村庄的房屋喷火，房屋爆炸起火。",
+            "source": "△爆炸声。黑龙向村庄的房屋喷火，房屋爆炸起火。"
+          },
+          {
+            "id": "B05",
+            "kind": "action",
+            "text": "△村长在奔跑的人群中大喊。",
+            "source": "△村长在奔跑的人群中大喊。"
+          },
+          {
+            "id": "B06",
+            "kind": "dialogue",
+            "speaker": "村长",
+            "tone": "惊恐大喊",
+            "text": "Run!",
+            "source": "村长（惊恐大喊）：Run!"
+          },
+          {
+            "id": "B07",
+            "kind": "action",
+            "text": "△一个年轻女子拉着一个老妇人和一个小孩在惊恐地奔跑，黑龙在背景中飞过。",
+            "source": "△一个年轻女子拉着一个老妇人和一个小孩在惊恐地奔跑，黑龙在背景中飞过。"
+          },
+          {
+            "id": "B08",
+            "kind": "action",
+            "text": "△黑龙在空中展翅咆哮，向下喷火。",
+            "source": "△黑龙在空中展翅咆哮，向下喷火。"
+          },
+          {
+            "id": "B09",
+            "kind": "action",
+            "text": "△画面特写一个人的眼睛，充满恐惧。",
+            "source": "△画面特写一个人的眼睛，充满恐惧。"
+          },
+          {
+            "id": "B10",
+            "kind": "dialogue",
+            "speaker": "村长（O.S.）",
+            "tone": "绝望地喊叫",
+            "text": "Oh, no!",
+            "source": "村长（O.S.）（绝望地喊叫）：Oh, no!"
+          },
+          {
+            "id": "B11",
+            "kind": "action",
+            "text": "△画面黑屏后，村长跪在地上，双手捂脸，然后移开双手，看着自己的双手，神情绝望。",
+            "source": "△画面黑屏后，村长跪在地上，双手捂脸，然后移开双手，看着自己的双手，神情绝望。"
+          },
+          {
+            "id": "B12",
+            "kind": "action",
+            "text": "△火光中，皇家大魔导师从燃烧的房屋阴影里走出，站在村长身后，面对着黑龙，双手施展魔法，形成一个蓝色的圆形魔法盾，挡住黑龙喷出的火焰。他大喊。",
+            "source": "△火光中，皇家大魔导师从燃烧的房屋阴影里走出，站在村长身后，面对着黑龙，双手施展魔法，形成一个蓝色的圆形魔法盾，挡住黑龙喷出的火焰。他大喊。"
+          },
+          {
+            "id": "B13",
+            "kind": "dialogue",
+            "speaker": "皇家大魔导师",
+            "tone": "吃力地大喊",
+            "text": "Go now!",
+            "source": "皇家大魔导师（吃力地大喊）：Go now!"
+          },
+          {
+            "id": "B14",
+            "kind": "action",
+            "text": "△村长在地上爬行，回头对大魔导师说话，然后起步逃跑。",
+            "source": "△村长在地上爬行，回头对大魔导师说话，然后起步逃跑。"
+          },
+          {
+            "id": "B15",
+            "kind": "dialogue",
+            "speaker": "村长",
+            "tone": "感激地回应",
+            "text": "Thank you.",
+            "source": "村长（感激地回应）：Thank you."
+          },
+          {
+            "id": "B16",
+            "kind": "action",
+            "text": "△大魔导师的魔法盾被打破，他被冲击力击倒在地上，吐血，痛苦地喊道。",
+            "source": "△大魔导师的魔法盾被打破，他被冲击力击倒在地上，吐血，痛苦地喊道。"
+          },
+          {
+            "id": "B17",
+            "kind": "dialogue",
+            "speaker": "皇家大魔导师",
+            "tone": "痛苦地低吼",
+            "text": "Damn it!",
+            "source": "皇家大魔导师（痛苦地低吼）：Damn it!"
+          },
+          {
+            "id": "B18",
+            "kind": "action",
+            "text": "△大魔导师挣扎着想站起来，嘴角流着血。",
+            "source": "△大魔导师挣扎着想站起来，嘴角流着血。"
+          },
+          {
+            "id": "B19",
+            "kind": "action",
+            "text": "△两个年轻的弟子跑过来扶住他。男弟子拿着一根法杖，喊道。",
+            "source": "△两个年轻的弟子跑过来扶住他。男弟子拿着一根法杖，喊道。"
+          },
+          {
+            "id": "B20",
+            "kind": "dialogue",
+            "speaker": "男弟子",
+            "tone": "焦急地大喊",
+            "text": "Master!",
+            "source": "男弟子（焦急地大喊）：Master!"
+          },
+          {
+            "id": "B21",
+            "kind": "action",
+            "text": "△大魔导师用手擦了擦嘴角的血，对弟子们说。",
+            "source": "△大魔导师用手擦了擦嘴角的血，对弟子们说。"
+          },
+          {
+            "id": "B22",
+            "kind": "dialogue",
+            "speaker": "皇家大魔导师",
+            "tone": "虚弱但坚定地说话",
+            "text": "We have to stop it or everyone here will die!",
+            "source": "皇家大魔导师（虚弱但坚定地说话）：We have to stop it or everyone here will die!"
+          },
+          {
+            "id": "B23",
+            "kind": "action",
+            "text": "△男弟子扶着他，担忧地回答。",
+            "source": "△男弟子扶着他，担忧地回答。"
+          },
+          {
+            "id": "B24",
+            "kind": "dialogue",
+            "speaker": "男弟子",
+            "tone": "担忧地回答",
+            "text": "But Master, this dragon is too strong. We can't beat it.",
+            "source": "男弟子（担忧地回答）：But Master, this dragon is too strong. We can't beat it."
+          },
+          {
+            "id": "B25",
+            "kind": "action",
+            "text": "△画面特写大魔导师沉重的表情，接着是黑龙咆哮的画面。",
+            "source": "△画面特写大魔导师沉重的表情，接着是黑龙咆哮的画面。"
+          },
+          {
+            "id": "B26",
+            "kind": "dialogue",
+            "speaker": "皇家大魔导师",
+            "tone": "语气坚定",
+            "text": "We fight even if we can't win. That's war.",
+            "source": "皇家大魔导师（语气坚定）：We fight even if we can't win. That's war."
+          },
+          {
+            "id": "B27",
+            "kind": "action",
+            "text": "△俯瞰镜头，大魔导师和两个弟子站在广场中央，黑龙在空中盘旋。一个声音传来。",
+            "source": "△俯瞰镜头，大魔导师和两个弟子站在广场中央，黑龙在空中盘旋。一个声音传来。"
+          },
+          {
+            "id": "B28",
+            "kind": "dialogue",
+            "speaker": "亚瑟（O.S.）",
+            "tone": "轻松调侃的语气",
+            "text": "So lively.",
+            "source": "亚瑟（O.S.）（轻松调侃的语气）：So lively."
+          },
+          {
+            "id": "B29",
+            "kind": "action",
+            "text": "△亚瑟手里拿着一个咬了一口的苹果，走过来，微笑着说。",
+            "source": "△亚瑟手里拿着一个咬了一口的苹果，走过来，微笑着说。"
+          },
+          {
+            "id": "B30",
+            "kind": "dialogue",
+            "speaker": "亚瑟",
+            "tone": "微笑调侃",
+            "text": "Is this a tea party? Mind if I join?",
+            "source": "亚瑟（微笑调侃）：Is this a tea party? Mind if I join?"
+          },
+          {
+            "id": "B31",
+            "kind": "action",
+            "text": "△大魔导师和弟子们惊讶地看着他。大魔导师急切地喊道。",
+            "source": "△大魔导师和弟子们惊讶地看着他。大魔导师急切地喊道。"
+          },
+          {
+            "id": "B32",
+            "kind": "dialogue",
+            "speaker": "皇家大魔导师",
+            "tone": "急切地大喊",
+            "text": "Get out of here! It's dangerous!",
+            "source": "皇家大魔导师（急切地大喊）：Get out of here! It's dangerous!"
+          },
+          {
+            "id": "B33",
+            "kind": "action",
+            "text": "△亚瑟继续咬了一口苹果，神情自若。大魔导师继续喊着。",
+            "source": "△亚瑟继续咬了一口苹果，神情自若。大魔导师继续喊着。"
+          },
+          {
+            "id": "B34",
+            "kind": "dialogue",
+            "speaker": "皇家大魔导师",
+            "tone": "继续急切地喊道",
+            "text": "You shouldn't be here.",
+            "source": "皇家大魔导师（继续急切地喊道）：You shouldn't be here."
+          },
+          {
+            "id": "B35",
+            "kind": "action",
+            "text": "△重物落地声、龙吼声。突然黑龙从天而降，落在亚瑟身后咆哮。",
+            "source": "△重物落地声、龙吼声。突然黑龙从天而降，落在亚瑟身后咆哮。"
+          },
+          {
+            "id": "B36",
+            "kind": "dialogue",
+            "speaker": "皇家大魔导师",
+            "tone": "惊恐地大喊",
+            "text": "Look out! Dodge!",
+            "source": "皇家大魔导师（惊恐地大喊）：Look out! Dodge!"
+          },
+          {
+            "id": "B37",
+            "kind": "action",
+            "text": "△亚瑟微微一笑，转过身面对黑龙。",
+            "source": "△亚瑟微微一笑，转过身面对黑龙。"
+          },
+          {
+            "id": "B38",
+            "kind": "action",
+            "text": "△亚瑟把手中的苹果举起来，展示给黑龙看。",
+            "source": "△亚瑟把手中的苹果举起来，展示给黑龙看。"
+          },
+          {
+            "id": "B39",
+            "kind": "action",
+            "text": "△黑龙向亚瑟喷火。亚瑟冷静地看着火焰。",
+            "source": "△黑龙向亚瑟喷火。亚瑟冷静地看着火焰。"
+          },
+          {
+            "id": "B40",
+            "kind": "action",
+            "text": "△亚瑟将手中的苹果用力扔向黑龙。",
+            "source": "△亚瑟将手中的苹果用力扔向黑龙。"
+          },
+          {
+            "id": "B41",
+            "kind": "action",
+            "text": "△击中爆炸声。苹果像炮弹一样飞出，直接击中了黑龙的眼睛，黑龙痛苦地咆哮，被击退飞走。",
+            "source": "△击中爆炸声。苹果像炮弹一样飞出，直接击中了黑龙的眼睛，黑龙痛苦地咆哮，被击退飞走。"
+          },
+          {
+            "id": "B42",
+            "kind": "action",
+            "text": "△大魔导师和弟子们目瞪口呆。",
+            "source": "△大魔导师和弟子们目瞪口呆。"
+          },
+          {
+            "id": "B43",
+            "kind": "dialogue",
+            "speaker": "男弟子",
+            "tone": "难以置信地喃喃自语",
+            "text": "How did he do that?",
+            "source": "男弟子（难以置信地喃喃自语）：How did he do that?"
+          },
+          {
+            "id": "B44",
+            "kind": "action",
+            "text": "△黑龙再次飞回，愤怒地咆哮。",
+            "source": "△黑龙再次飞回，愤怒地咆哮。"
+          },
+          {
+            "id": "B45",
+            "kind": "dialogue",
+            "speaker": "亚瑟",
+            "tone": "自信地微笑",
+            "text": "Time to end this!",
+            "source": "亚瑟（自信地微笑）：Time to end this!"
+          },
+          {
+            "id": "B46",
+            "kind": "action",
+            "text": "△亚瑟弯腰把皮箱放在雪地上。",
+            "source": "△亚瑟弯腰把皮箱放在雪地上。"
+          },
+          {
+            "id": "B47",
+            "kind": "action",
+            "text": "△重击声。亚瑟高高跃起，直接跳到了黑龙的背上，一拳将黑龙打倒在地上。",
+            "source": "△重击声。亚瑟高高跃起，直接跳到了黑龙的背上，一拳将黑龙打倒在地上。"
+          },
+          {
+            "id": "B48",
+            "kind": "dialogue",
+            "speaker": "亚瑟",
+            "tone": "轻松地微笑",
+            "text": "Nothing special.",
+            "source": "亚瑟（轻松地微笑）：Nothing special."
+          },
+          {
+            "id": "B49",
+            "kind": "action",
+            "text": "△黑龙沉重地砸进雪地，挣扎片刻后振翅飞走，消失在乌云中。",
+            "source": "△黑龙沉重地砸进雪地，挣扎片刻后振翅飞走，消失在乌云中。"
+          },
+          {
+            "id": "B50",
+            "kind": "action",
+            "text": "△男弟子看着这一幕，转头问大魔导师。",
+            "source": "△男弟子看着这一幕，转头问大魔导师。"
+          },
+          {
+            "id": "B51",
+            "kind": "dialogue",
+            "speaker": "男弟子",
+            "tone": "兴奋且好奇地询问",
+            "text": "Master, what spell is that? Can I learn it?",
+            "source": "男弟子（兴奋且好奇地询问）：Master, what spell is that? Can I learn it?"
+          },
+          {
+            "id": "B52",
+            "kind": "action",
+            "text": "△大魔导师一巴掌拍在男弟子的头上，生气地训斥道。",
+            "source": "△大魔导师一巴掌拍在男弟子的头上，生气地训斥道。"
+          },
+          {
+            "id": "B53",
+            "kind": "dialogue",
+            "speaker": "皇家大魔导师",
+            "tone": "愤怒地训斥",
+            "text": "Shut up, you idiot! That's not magic. That's pure physical strength from that man.",
+            "source": "皇家大魔导师（愤怒地训斥）：Shut up, you idiot! That's not magic. That's pure physical strength from that man."
+          },
+          {
+            "id": "B54",
+            "kind": "action",
+            "text": "△男弟子捂着头，震惊地睁大眼睛。",
+            "source": "△男弟子捂着头，震惊地睁大眼睛。"
+          },
+          {
+            "id": "B55",
+            "kind": "dialogue",
+            "speaker": "男弟子",
+            "tone": "震惊地喃喃自语",
+            "text": "Physical strength? How is that...",
+            "source": "男弟子（震惊地喃喃自语）：Physical strength? How is that..."
+          },
+          {
+            "id": "B56",
+            "kind": "action",
+            "text": "△亚瑟转过身，对大魔导师和弟子们微笑，准备离开。",
+            "source": "△亚瑟转过身，对大魔导师和弟子们微笑，准备离开。"
+          },
+          {
+            "id": "B57",
+            "kind": "dialogue",
+            "speaker": "亚瑟",
+            "tone": "微笑，挥手",
+            "text": "I'll leave the rest to you. I'm off. Bye.",
+            "source": "亚瑟（微笑，挥手）：I'll leave the rest to you. I'm off. Bye."
+          },
+          {
+            "id": "B58",
+            "kind": "action",
+            "text": "△大魔导师急切地向前迈了一步，伸手喊道。",
+            "source": "△大魔导师急切地向前迈了一步，伸手喊道。"
+          },
+          {
+            "id": "B59",
+            "kind": "dialogue",
+            "speaker": "皇家大魔导师",
+            "tone": "急切",
+            "text": "Wait!",
+            "source": "皇家大魔导师（急切）：Wait!"
+          },
+          {
+            "id": "B60",
+            "kind": "action",
+            "text": "△亚瑟一跃而起，化作一道黑影飞向天空。",
+            "source": "△亚瑟一跃而起，化作一道黑影飞向天空。"
+          },
+          {
+            "id": "B61",
+            "kind": "action",
+            "text": "△女弟子抬头看着天空，双手合十，露出崇拜的神色。",
+            "source": "△女弟子抬头看着天空，双手合十，露出崇拜的神色。"
+          },
+          {
+            "id": "B62",
+            "kind": "dialogue",
+            "speaker": "女弟子",
+            "tone": "崇拜，赞叹",
+            "text": "Oh my god, that's so cool!",
+            "source": "女弟子（崇拜，赞叹）：Oh my god, that's so cool!"
+          }
+        ]
+      },
+      "chunks": [
+        {
+          "chunkIndex": 1,
+          "sceneInput": {
+            "sceneId": "1-1",
+            "episode": "第1集：神秘强者降世",
+            "sceneHeading": "Village 外 未注明",
+            "cast": "村长（Village Chief，着装：粗布冬装）、皇家大魔导师（Royal Archmage，着装：法师长袍）、男弟子（Male Disciple，着装：弟子法袍）、女弟子（Female Disciple，着装：弟子法袍）、亚瑟（Arthur，着装：旅行者装）、黑龙（Dragon，着装：黑龙鳞甲）、村民群像（Villagers，着装：粗布冬装）",
+            "castNames": [
+              "村长",
+              "皇家大魔导师",
+              "男弟子",
+              "女弟子",
+              "亚瑟",
+              "黑龙",
+              "村民群像"
+            ],
+            "previousEnd": "",
+            "nextScene": "皇家大魔导师（虚弱但坚定地说话）：We have to stop it or everyone here will die!\n△男弟子扶着他，担忧地回答。\n男弟子（担忧地回答）：But Master, this dragon is too strong. We can't beat it.\n△画面特写大魔导师沉重的表情，接着是黑龙咆哮的画面。",
+            "estimatedSeconds": 19,
+            "blocks": [
+              {
+                "id": "B01",
+                "kind": "action",
+                "text": "△Village。俯瞰被雪覆盖的村庄广场。",
+                "source": "△Village。俯瞰被雪覆盖的村庄广场。"
+              },
+              {
+                "id": "B02",
+                "kind": "action",
+                "text": "△村民群像在雪地上惊慌失措地奔跑。",
+                "source": "△村民群像在雪地上惊慌失措地奔跑。"
+              },
+              {
+                "id": "B03",
+                "kind": "action",
+                "text": "△龙吼声。一只巨大的黑龙在村庄上空飞过，发出咆哮。",
+                "source": "△龙吼声。一只巨大的黑龙在村庄上空飞过，发出咆哮。"
+              },
+              {
+                "id": "B04",
+                "kind": "action",
+                "text": "△爆炸声。黑龙向村庄的房屋喷火，房屋爆炸起火。",
+                "source": "△爆炸声。黑龙向村庄的房屋喷火，房屋爆炸起火。"
+              },
+              {
+                "id": "B05",
+                "kind": "action",
+                "text": "△村长在奔跑的人群中大喊。",
+                "source": "△村长在奔跑的人群中大喊。"
+              },
+              {
+                "id": "B06",
+                "kind": "dialogue",
+                "speaker": "村长",
+                "tone": "惊恐大喊",
+                "text": "Run!",
+                "source": "村长（惊恐大喊）：Run!"
+              },
+              {
+                "id": "B07",
+                "kind": "action",
+                "text": "△一个年轻女子拉着一个老妇人和一个小孩在惊恐地奔跑，黑龙在背景中飞过。",
+                "source": "△一个年轻女子拉着一个老妇人和一个小孩在惊恐地奔跑，黑龙在背景中飞过。"
+              },
+              {
+                "id": "B08",
+                "kind": "action",
+                "text": "△黑龙在空中展翅咆哮，向下喷火。",
+                "source": "△黑龙在空中展翅咆哮，向下喷火。"
+              },
+              {
+                "id": "B09",
+                "kind": "action",
+                "text": "△画面特写一个人的眼睛，充满恐惧。",
+                "source": "△画面特写一个人的眼睛，充满恐惧。"
+              },
+              {
+                "id": "B10",
+                "kind": "dialogue",
+                "speaker": "村长（O.S.）",
+                "tone": "绝望地喊叫",
+                "text": "Oh, no!",
+                "source": "村长（O.S.）（绝望地喊叫）：Oh, no!"
+              },
+              {
+                "id": "B11",
+                "kind": "action",
+                "text": "△画面黑屏后，村长跪在地上，双手捂脸，然后移开双手，看着自己的双手，神情绝望。",
+                "source": "△画面黑屏后，村长跪在地上，双手捂脸，然后移开双手，看着自己的双手，神情绝望。"
+              },
+              {
+                "id": "B12",
+                "kind": "action",
+                "text": "△火光中，皇家大魔导师从燃烧的房屋阴影里走出，站在村长身后，面对着黑龙，双手施展魔法，形成一个蓝色的圆形魔法盾，挡住黑龙喷出的火焰。他大喊。",
+                "source": "△火光中，皇家大魔导师从燃烧的房屋阴影里走出，站在村长身后，面对着黑龙，双手施展魔法，形成一个蓝色的圆形魔法盾，挡住黑龙喷出的火焰。他大喊。"
+              },
+              {
+                "id": "B13",
+                "kind": "dialogue",
+                "speaker": "皇家大魔导师",
+                "tone": "吃力地大喊",
+                "text": "Go now!",
+                "source": "皇家大魔导师（吃力地大喊）：Go now!"
+              },
+              {
+                "id": "B14",
+                "kind": "action",
+                "text": "△村长在地上爬行，回头对大魔导师说话，然后起步逃跑。",
+                "source": "△村长在地上爬行，回头对大魔导师说话，然后起步逃跑。"
+              },
+              {
+                "id": "B15",
+                "kind": "dialogue",
+                "speaker": "村长",
+                "tone": "感激地回应",
+                "text": "Thank you.",
+                "source": "村长（感激地回应）：Thank you."
+              },
+              {
+                "id": "B16",
+                "kind": "action",
+                "text": "△大魔导师的魔法盾被打破，他被冲击力击倒在地上，吐血，痛苦地喊道。",
+                "source": "△大魔导师的魔法盾被打破，他被冲击力击倒在地上，吐血，痛苦地喊道。"
+              },
+              {
+                "id": "B17",
+                "kind": "dialogue",
+                "speaker": "皇家大魔导师",
+                "tone": "痛苦地低吼",
+                "text": "Damn it!",
+                "source": "皇家大魔导师（痛苦地低吼）：Damn it!"
+              },
+              {
+                "id": "B18",
+                "kind": "action",
+                "text": "△大魔导师挣扎着想站起来，嘴角流着血。",
+                "source": "△大魔导师挣扎着想站起来，嘴角流着血。"
+              },
+              {
+                "id": "B19",
+                "kind": "action",
+                "text": "△两个年轻的弟子跑过来扶住他。男弟子拿着一根法杖，喊道。",
+                "source": "△两个年轻的弟子跑过来扶住他。男弟子拿着一根法杖，喊道。"
+              },
+              {
+                "id": "B20",
+                "kind": "dialogue",
+                "speaker": "男弟子",
+                "tone": "焦急地大喊",
+                "text": "Master!",
+                "source": "男弟子（焦急地大喊）：Master!"
+              },
+              {
+                "id": "B21",
+                "kind": "action",
+                "text": "△大魔导师用手擦了擦嘴角的血，对弟子们说。",
+                "source": "△大魔导师用手擦了擦嘴角的血，对弟子们说。"
+              }
+            ],
+            "chunkIndex": 1,
+            "chunkCount": 6
+          },
+          "finalPlan": {
+            "sceneId": "1-1",
+            "shots": [
+              {
+                "duration": 5,
+                "cast": [
+                  "村民群像",
+                  "黑龙"
+                ],
+                "props": [],
+                "startPosition": "俯视雪覆盖的村庄广场，村民群像散布在广场上；黑龙尚未入画。",
+                "clips": [
+                  {
+                    "duration": 2,
+                    "size": "WS",
+                    "cameraMove": "固定机位",
+                    "visualAction": "俯瞰被雪覆盖的村庄广场，村民群像在雪地上奔跑，互相推挤并向外散开。",
+                    "beat": "建立",
+                    "sourceBlockIds": [
+                      "B01",
+                      "B02"
+                    ]
+                  },
+                  {
+                    "duration": 3,
+                    "size": "CU",
+                    "cameraMove": "仰拍横移",
+                    "visualAction": "巨大黑龙从村庄上空飞过，张口咆哮，随后向房屋喷火，火焰击中屋顶，房屋爆炸起火。",
+                    "beat": "危机",
+                    "sourceBlockIds": [
+                      "B03",
+                      "B04"
+                    ]
+                  }
+                ]
+              },
+              {
+                "duration": 6,
+                "cast": [
+                  "村长",
+                  "村民群像",
+                  "黑龙"
+                ],
+                "props": [],
+                "startPosition": "房屋已起火，黑龙在空中；村民群像在广场上四散奔跑，村长位于奔跑人群前侧。",
+                "clips": [
+                  {
+                    "duration": 2,
+                    "size": "MCU",
+                    "cameraMove": "手持跟拍",
+                    "visualAction": "村长在奔跑的人群中转头面向众人，张大嘴呼喊。",
+                    "beat": "警告",
+                    "sourceBlockIds": [
+                      "B05",
+                      "B06"
+                    ]
+                  },
+                  {
+                    "duration": 2,
+                    "size": "CU",
+                    "cameraMove": "横移跟拍",
+                    "visualAction": "一名年轻女子拉着老妇人和小孩在雪地奔跑，黑龙从背景上空掠过。",
+                    "beat": "混乱",
+                    "sourceBlockIds": [
+                      "B07"
+                    ]
+                  },
+                  {
+                    "duration": 2,
+                    "size": "CU",
+                    "cameraMove": "快速下摇",
+                    "visualAction": "黑龙在空中展翅咆哮，向下方喷火；画面随即切到一名村民睁大的眼睛，瞳孔收缩。",
+                    "beat": "恐惧",
+                    "sourceBlockIds": [
+                      "B08",
+                      "B09"
+                    ]
+                  }
+                ]
+              },
+              {
+                "duration": 5,
+                "cast": [
+                  "村长",
+                  "皇家大魔导师",
+                  "黑龙"
+                ],
+                "props": [],
+                "startPosition": "画面全黑，仅远处燃烧房屋的火光映出村长跪地的轮廓，双手捂脸；黑龙悬在空中。",
+                "clips": [
+                  {
+                    "duration": 2,
+                    "size": "CU",
+                    "cameraMove": "固定机位",
+                    "visualAction": "画面黑屏后，村长跪在雪地上，双手捂住脸，随后移开双手低头看着自己的双手。",
+                    "beat": "重击",
+                    "sourceBlockIds": [
+                      "B10",
+                      "B11"
+                    ]
+                  },
+                  {
+                    "duration": 3,
+                    "size": "MS",
+                    "cameraMove": "缓慢推近",
+                    "visualAction": "火光中，皇家大魔导师从燃烧房屋的阴影里走出，站在村长身后，面向空中的黑龙，双手前推形成蓝色圆形魔法盾，挡住喷来的火焰。",
+                    "beat": "转折",
+                    "sourceBlockIds": [
+                      "B12"
+                    ]
+                  }
+                ]
+              },
+              {
+                "duration": 6,
+                "cast": [
+                  "皇家大魔导师",
+                  "村长"
+                ],
+                "props": [],
+                "startPosition": "皇家大魔导师站在村长身后，双手前推维持蓝色圆形魔法盾，面向空中的黑龙；村长在他身后地上爬行。",
+                "clips": [
+                  {
+                    "duration": 2,
+                    "size": "CU",
+                    "cameraMove": "固定机位",
+                    "visualAction": "皇家大魔导师双手维持魔法盾，面部紧绷，张口大喊。",
+                    "beat": "催促",
+                    "sourceBlockIds": [
+                      "B13"
+                    ]
+                  },
+                  {
+                    "duration": 2,
+                    "size": "CU",
+                    "cameraMove": "手持跟拍",
+                    "visualAction": "村长在地上爬行，回头看向皇家大魔导师，随后起身逃跑。",
+                    "beat": "撤离",
+                    "sourceBlockIds": [
+                      "B14",
+                      "B15"
+                    ]
+                  },
+                  {
+                    "duration": 2,
+                    "size": "CU",
+                    "cameraMove": "快速推近",
+                    "visualAction": "蓝色魔法盾碎裂，皇家大魔导师被冲击力击倒在地，口中吐血。",
+                    "beat": "破防",
+                    "sourceBlockIds": [
+                      "B16"
+                    ]
+                  }
+                ]
+              },
+              {
+                "duration": 5,
+                "cast": [
+                  "皇家大魔导师",
+                  "男弟子",
+                  "女弟子"
+                ],
+                "props": [
+                  "法杖"
+                ],
+                "startPosition": "皇家大魔导师倒在地面，嘴角流血；男弟子与女弟子从画面一侧接近，男弟子手持法杖。",
+                "clips": [
+                  {
+                    "duration": 2,
+                    "size": "ECU",
+                    "cameraMove": "固定机位",
+                    "visualAction": "皇家大魔导师倒在地上，嘴角带血，张口低吼，随后用手撑地挣扎着想站起来。",
+                    "beat": "挣扎",
+                    "sourceBlockIds": [
+                      "B17",
+                      "B18"
+                    ]
+                  },
+                  {
+                    "duration": 3,
+                    "size": "MS",
+                    "cameraMove": "平移",
+                    "visualAction": "两名弟子跑过来扶住他，男弟子一手持法杖，张口大喊；皇家大魔导师用手擦掉嘴角的血，转头看向弟子们。",
+                    "beat": "救援",
+                    "sourceBlockIds": [
+                      "B19",
+                      "B20",
+                      "B21"
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          "finalRaw": "{\n  \"sceneId\": \"1-1\",\n  \"shots\": [\n    {\n      \"duration\": 5,\n      \"cast\": [\"村民群像\", \"黑龙\"],\n      \"props\": [],\n      \"startPosition\": \"俯视雪覆盖的村庄广场，村民群像散布在广场上；黑龙尚未入画。\",\n      \"clips\": [\n        {\n          \"duration\": 2,\n          \"size\": \"WS\",\n          \"cameraMove\": \"固定机位\",\n          \"visualAction\": \"俯瞰被雪覆盖的村庄广场，村民群像在雪地上奔跑，互相推挤并向外散开。\",\n          \"beat\": \"建立\",\n          \"sourceBlockIds\": [\"B01\", \"B02\"]\n        },\n        {\n          \"duration\": 3,\n          \"size\": \"CU\",\n          \"cameraMove\": \"仰拍横移\",\n          \"visualAction\": \"巨大黑龙从村庄上空飞过，张口咆哮，随后向房屋喷火，火焰击中屋顶，房屋爆炸起火。\",\n          \"beat\": \"危机\",\n          \"sourceBlockIds\": [\"B03\", \"B04\"]\n        }\n      ]\n    },\n    {\n      \"duration\": 6,\n      \"cast\": [\"村长\", \"村民群像\", \"黑龙\"],\n      \"props\": [],\n      \"startPosition\": \"房屋已起火，黑龙在空中；村民群像在广场上四散奔跑，村长位于奔跑人群前侧。\",\n      \"clips\": [\n        {\n          \"duration\": 2,\n          \"size\": \"MCU\",\n          \"cameraMove\": \"手持跟拍\",\n          \"visualAction\": \"村长在奔跑的人群中转头面向众人，张大嘴呼喊。\",\n          \"beat\": \"警告\",\n          \"sourceBlockIds\": [\"B05\", \"B06\"]\n        },\n        {\n          \"duration\": 2,\n          \"size\": \"CU\",\n          \"cameraMove\": \"横移跟拍\",\n          \"visualAction\": \"一名年轻女子拉着老妇人和小孩在雪地奔跑，黑龙从背景上空掠过。\",\n          \"beat\": \"混乱\",\n          \"sourceBlockIds\": [\"B07\"]\n        },\n        {\n          \"duration\": 2,\n          \"size\": \"CU\",\n          \"cameraMove\": \"快速下摇\",\n          \"visualAction\": \"黑龙在空中展翅咆哮，向下方喷火；画面随即切到一名村民睁大的眼睛，瞳孔收缩。\",\n          \"beat\": \"恐惧\",\n          \"sourceBlockIds\": [\"B08\", \"B09\"]\n        }\n      ]\n    },\n    {\n      \"duration\": 5,\n      \"cast\": [\"村长\", \"皇家大魔导师\", \"黑龙\"],\n      \"props\": [],\n      \"startPosition\": \"画面全黑，仅远处燃烧房屋的火光映出村长跪地的轮廓，双手捂脸；黑龙悬在空中。\",\n      \"clips\": [\n        {\n          \"duration\": 2,\n          \"size\": \"CU\",\n          \"cameraMove\": \"固定机位\",\n          \"visualAction\": \"画面黑屏后，村长跪在雪地上，双手捂住脸，随后移开双手低头看着自己的双手。\",\n          \"beat\": \"重击\",\n          \"sourceBlockIds\": [\"B10\", \"B11\"]\n        },\n        {\n          \"duration\": 3,\n          \"size\": \"MS\",\n          \"cameraMove\": \"缓慢推近\",\n          \"visualAction\": \"火光中，皇家大魔导师从燃烧房屋的阴影里走出，站在村长身后，面向空中的黑龙，双手前推形成蓝色圆形魔法盾，挡住喷来的火焰。\",\n          \"beat\": \"转折\",\n          \"sourceBlockIds\": [\"B12\"]\n        }\n      ]\n    },\n    {\n      \"duration\": 6,\n      \"cast\": [\"皇家大魔导师\", \"村长\"],\n      \"props\": [],\n      \"startPosition\": \"皇家大魔导师站在村长身后，双手前推维持蓝色圆形魔法盾，面向空中的黑龙；村长在他身后地上爬行。\",\n      \"clips\": [\n        {\n          \"duration\": 2,\n          \"size\": \"CU\",\n          \"cameraMove\": \"固定机位\",\n          \"visualAction\": \"皇家大魔导师双手维持魔法盾，面部紧绷，张口大喊。\",\n          \"beat\": \"催促\",\n          \"sourceBlockIds\": [\"B13\"]\n        },\n        {\n          \"duration\": 2,\n          \"size\": \"CU\",\n          \"cameraMove\": \"手持跟拍\",\n          \"visualAction\": \"村长在地上爬行，回头看向皇家大魔导师，随后起身逃跑。\",\n          \"beat\": \"撤离\",\n          \"sourceBlockIds\": [\"B14\", \"B15\"]\n        },\n        {\n          \"duration\": 2,\n          \"size\": \"CU\",\n          \"cameraMove\": \"快速推近\",\n          \"visualAction\": \"蓝色魔法盾碎裂，皇家大魔导师被冲击力击倒在地，口中吐血。\",\n          \"beat\": \"破防\",\n          \"sourceBlockIds\": [\"B16\"]\n        }\n      ]\n    },\n    {\n      \"duration\": 5,\n      \"cast\": [\"皇家大魔导师\", \"男弟子\", \"女弟子\"],\n      \"props\": [\"法杖\"],\n      \"startPosition\": \"皇家大魔导师倒在地面，嘴角流血；男弟子与女弟子从画面一侧接近，男弟子手持法杖。\",\n      \"clips\": [\n        {\n          \"duration\": 2,\n          \"size\": \"ECU\",\n          \"cameraMove\": \"固定机位\",\n          \"visualAction\": \"皇家大魔导师倒在地上，嘴角带血，张口低吼，随后用手撑地挣扎着想站起来。\",\n          \"beat\": \"挣扎\",\n          \"sourceBlockIds\": [\"B17\", \"B18\"]\n        },\n        {\n          \"duration\": 3,\n          \"size\": \"MS\",\n          \"cameraMove\": \"平移\",\n          \"visualAction\": \"两名弟子跑过来扶住他，男弟子一手持法杖，张口大喊；皇家大魔导师用手擦掉嘴角的血，转头看向弟子们。\",\n          \"beat\": \"救援\",\n          \"sourceBlockIds\": [\"B19\", \"B20\", \"B21\"]\n        }\n      ]\n    }\n  ]\n}",
+          "resumedFrom": "2026-11-04T08-07-31-855Z-AB-新引擎修复-EP1-1-6-r2.json",
+          "attempts": [
+            {
+              "attempt": 1,
+              "label": "AB 新引擎 EP1 1/6 r1",
+              "raw": "{\"sceneId\":\"1-1\",\"shots\":[{\"duration\":5,\"cast\":[\"村民群像\",\"黑龙\"],\"props\":[],\"startPosition\":\"俯瞰雪覆盖的村庄广场，村民群像散布在广场雪地上向四周奔跑，黑龙尚未进入画面。\",\"clips\":[{\"duration\":2,\"size\":\"WS\",\"cameraMove\":\"固定机位\",\"visualAction\":\"俯瞰雪覆盖的村庄广场，村民群像在雪地四散奔跑。\",\"beat\":\"建立\",\"sourceBlockIds\":[\"B01\",\"B02\"]},{\"duration\":3,\"size\":\"WS\",\"cameraMove\":\"快速横移跟拍\",\"visualAction\":\"黑龙从村庄上空飞过并咆哮，向房屋喷出火焰，房屋爆炸起火。\",\"beat\":\"灾难升级\",\"sourceBlockIds\":[\"B03\",\"B04\"]}]},{\"duration\":8,\"cast\":[\"村长\",\"村民群像\",\"黑龙\"],\"props\":[],\"startPosition\":\"村庄房屋起火，黑龙悬停在低空向房屋喷火，村民群像在雪地上奔跑，村长位于人群中间。\",\"clips\":[{\"duration\":2,\"size\":\"MCU\",\"cameraMove\":\"手持跟随\",\"visualAction\":\"村长在奔跑的人群中停步回头，张口大喊。\",\"beat\":\"示警\",\"sourceBlockIds\":[\"B05\",\"B06\"]},{\"duration\":2,\"size\":\"WS\",\"cameraMove\":\"横移跟拍\",\"visualAction\":\"村民群像中一名年轻女子拉着老妇人和小孩奔跑，黑龙在背景上空展翅并向下喷火。\",\"beat\":\"危机扩散\",\"sourceBlockIds\":[\"B07\",\"B08\"]},{\"duration\":2,\"size\":\"ECU\",\"cameraMove\":\"固定机位\",\"visualAction\":\"画面切到一双眼睛的特写，瞳孔收缩。\",\"beat\":\"恐惧反应\",\"sourceBlockIds\":[\"B09\",\"B10\"]},{\"duration\":2,\"size\":\"MCU\",\"cameraMove\":\"固定机位\",\"visualAction\":\"画面黑屏后，村长跪在雪地上双手捂脸，随后移开双手，低头看着自己的双手。\",\"beat\":\"反应\",\"sourceBlockIds\":[\"B11\"]}]},{\"duration\":7,\"cast\":[\"皇家大魔导师\",\"村长\",\"黑龙\"],\"props\":[],\"startPosition\":\"村长跪在雪地上，双手已从脸前移开，面朝黑龙方向；黑龙在空中向房屋喷火；大魔导师位于燃烧房屋的阴影边缘。\",\"clips\":[{\"duration\":3,\"size\":\"MCU\",\"cameraMove\":\"从阴影处跟拍推近\",\"visualAction\":\"大魔导师从燃烧房屋的阴影中走出，站到跪地的村长身后，面朝黑龙，双手施法形成蓝色圆形魔法盾，挡住喷来的火焰，张口大喊。\",\"beat\":\"强者出手\",\"sourceBlockIds\":[\"B12\",\"B13\"]},{\"duration\":2,\"size\":\"MCU\",\"cameraMove\":\"固定机位\",\"visualAction\":\"村长在雪地上爬行，回头看向大魔导师，开口回应，随后转身爬起逃跑。\",\"beat\":\"撤离\",\"sourceBlockIds\":[\"B14\",\"B15\"]},{\"duration\":2,\"size\":\"MCU\",\"cameraMove\":\"手持轻晃\",\"visualAction\":\"蓝色魔法盾碎裂，大魔导师被冲击力击倒在地，口吐血，张口低吼。\",\"beat\":\"逆转\",\"sourceBlockIds\":[\"B16\",\"B17\"]}]},{\"duration\":5,\"cast\":[\"皇家大魔导师\",\"男弟子\",\"女弟子\"],\"props\":[\"法杖\"],\"startPosition\":\"大魔导师仰倒在地，嘴角带血，面朝上方；男弟子和女弟子尚未入画，从右侧接近。\",\"clips\":[{\"duration\":3,\"size\":\"MCU\",\"cameraMove\":\"固定机位\",\"visualAction\":\"大魔导师单手撑地挣扎着站起，男弟子和女弟子从右侧跑入扶住他，男弟子右手持法杖张口大喊。\",\"beat\":\"救援\",\"sourceBlockIds\":[\"B18\",\"B19\",\"B20\"]},{\"duration\":2,\"size\":\"CU\",\"cameraMove\":\"缓慢推近\",\"visualAction\":\"大魔导师抬手擦去嘴角的血，转头看向弟子们，开口说话。\",\"beat\":\"收束/钩子\",\"sourceBlockIds\":[\"B21\"]}]}]}",
+              "status": "completed",
+              "usage": {
+                "input_tokens": 2634,
+                "input_tokens_details": {
+                  "cached_tokens": 2432
+                },
+                "output_tokens": 10154,
+                "output_tokens_details": {
+                  "reasoning_tokens": 9251
+                },
+                "total_tokens": 12788
+              },
+              "elapsedMs": 65515,
+              "resumed": true
+            },
+            {
+              "attempt": 1,
+              "label": "AB 新引擎 EP1 1/6 r1",
+              "raw": "{\n  \"sceneId\": \"1-1\",\n  \"shots\": [\n    {\n      \"duration\": 5,\n      \"cast\": [\"村民群像\", \"黑龙\"],\n      \"props\": [],\n      \"startPosition\": \"俯视雪覆盖的村庄广场，村民群像散布在广场上；黑龙尚未入画。\",\n      \"clips\": [\n        {\n          \"duration\": 2,\n          \"size\": \"WS\",\n          \"cameraMove\": \"固定机位\",\n          \"visualAction\": \"俯瞰被雪覆盖的村庄广场，村民群像在雪地上奔跑，互相推挤并向外散开。\",\n          \"beat\": \"建立\",\n          \"sourceBlockIds\": [\"B01\", \"B02\"]\n        },\n        {\n          \"duration\": 3,\n          \"size\": \"CU\",\n          \"cameraMove\": \"仰拍横移\",\n          \"visualAction\": \"巨大黑龙从村庄上空飞过，张口咆哮，随后向房屋喷火，火焰击中屋顶，房屋爆炸起火。\",\n          \"beat\": \"危机\",\n          \"sourceBlockIds\": [\"B03\", \"B04\"]\n        }\n      ]\n    },\n    {\n      \"duration\": 6,\n      \"cast\": [\"村长\", \"村民群像\", \"黑龙\"],\n      \"props\": [],\n      \"startPosition\": \"房屋已起火，黑龙在空中；村民群像在广场上四散奔跑，村长位于奔跑人群前侧。\",\n      \"clips\": [\n        {\n          \"duration\": 2,\n          \"size\": \"MCU\",\n          \"cameraMove\": \"手持跟拍\",\n          \"visualAction\": \"村长在奔跑的人群中转头面向众人，张大嘴呼喊。\",\n          \"beat\": \"警告\",\n          \"sourceBlockIds\": [\"B05\", \"B06\"]\n        },\n        {\n          \"duration\": 2,\n          \"size\": \"CU\",\n          \"cameraMove\": \"横移跟拍\",\n          \"visualAction\": \"一名年轻女子拉着老妇人和小孩在雪地奔跑，黑龙从背景上空掠过。\",\n          \"beat\": \"混乱\",\n          \"sourceBlockIds\": [\"B07\"]\n        },\n        {\n          \"duration\": 2,\n          \"size\": \"CU\",\n          \"cameraMove\": \"快速下摇\",\n          \"visualAction\": \"黑龙在空中展翅咆哮，向下方喷火；画面随即切到一名村民睁大的眼睛，瞳孔收缩。\",\n          \"beat\": \"恐惧\",\n          \"sourceBlockIds\": [\"B08\", \"B09\"]\n        }\n      ]\n    },\n    {\n      \"duration\": 5,\n      \"cast\": [\"村长\", \"大魔导师\", \"黑龙\"],\n      \"props\": [],\n      \"startPosition\": \"画面全黑，仅远处燃烧房屋的火光映出村长跪地的轮廓，双手捂脸；黑龙悬在空中。\",\n      \"clips\": [\n        {\n          \"duration\": 2,\n          \"size\": \"CU\",\n          \"cameraMove\": \"固定机位\",\n          \"visualAction\": \"画面黑屏后，村长跪在雪地上，双手捂住脸，随后移开双手低头看着自己的双手。\",\n          \"beat\": \"重击\",\n          \"sourceBlockIds\": [\"B10\", \"B11\"]\n        },\n        {\n          \"duration\": 3,\n          \"size\": \"MS\",\n          \"cameraMove\": \"缓慢推近\",\n          \"visualAction\": \"火光中，大魔导师从燃烧房屋的阴影里走出，站在村长身后，面向空中的黑龙，双手前推形成蓝色圆形魔法盾，挡住喷来的火焰。\",\n          \"beat\": \"转折\",\n          \"sourceBlockIds\": [\"B12\"]\n        }\n      ]\n    },\n    {\n      \"duration\": 6,\n      \"cast\": [\"大魔导师\", \"村长\"],\n      \"props\": [],\n      \"startPosition\": \"大魔导师站在村长身后，双手前推维持蓝色圆形魔法盾，面向空中的黑龙；村长在他身后地上爬行。\",\n      \"clips\": [\n        {\n          \"duration\": 2,\n          \"size\": \"CU\",\n          \"cameraMove\": \"固定机位\",\n          \"visualAction\": \"大魔导师双手维持魔法盾，面部紧绷，张口大喊。\",\n          \"beat\": \"催促\",\n          \"sourceBlockIds\": [\"B13\"]\n        },\n        {\n          \"duration\": 2,\n          \"size\": \"CU\",\n          \"cameraMove\": \"手持跟拍\",\n          \"visualAction\": \"村长在地上爬行，回头看向大魔导师，随后起身逃跑。\",\n          \"beat\": \"撤离\",\n          \"sourceBlockIds\": [\"B14\", \"B15\"]\n        },\n        {\n          \"duration\": 2,\n          \"size\": \"CU\",\n          \"cameraMove\": \"快速推近\",\n          \"visualAction\": \"蓝色魔法盾碎裂，大魔导师被冲击力击倒在地，口中吐血。\",\n          \"beat\": \"破防\",\n          \"sourceBlockIds\": [\"B16\"]\n        }\n      ]\n    },\n    {\n      \"duration\": 5,\n      \"cast\": [\"大魔导师\", \"男弟子\", \"女弟子\"],\n      \"props\": [\"法杖\"],\n      \"startPosition\": \"大魔导师倒在地面，嘴角流血；男弟子与女弟子从画面一侧接近，男弟子手持法杖。\",\n      \"clips\": [\n        {\n          \"duration\": 2,\n          \"size\": \"ECU\",\n          \"cameraMove\": \"固定机位\",\n          \"visualAction\": \"大魔导师倒在地上，嘴角带血，张口低吼，随后用手撑地挣扎着想站起来。\",\n          \"beat\": \"挣扎\",\n          \"sourceBlockIds\": [\"B17\", \"B18\"]\n        },\n        {\n          \"duration\": 3,\n          \"size\": \"MS\",\n          \"cameraMove\": \"平移\",\n          \"visualAction\": \"两名弟子跑过来扶住他，男弟子一手持法杖，张口大喊；大魔导师用手擦掉嘴角的血，转头看向弟子们。\",\n          \"beat\": \"救援\",\n          \"sourceBlockIds\": [\"B19\", \"B20\", \"B21\"]\n        }\n      ]\n    }\n  ]\n}",
+              "status": "completed",
+              "usage": {
+                "input_tokens": 2634,
+                "input_tokens_details": {
+                  "cached_tokens": 2432
+                },
+                "output_tokens": 14679,
+                "output_tokens_details": {
+                  "reasoning_tokens": 13365
+                },
+                "total_tokens": 17313
+              },
+              "elapsedMs": 89473,
+              "resumed": true
+            },
+            {
+              "attempt": 2,
+              "label": "AB 新引擎修复 EP1 1/6 r2",
+              "raw": "{\n  \"sceneId\": \"1-1\",\n  \"shots\": [\n    {\n      \"duration\": 5,\n      \"cast\": [\"村民群像\", \"黑龙\"],\n      \"props\": [],\n      \"startPosition\": \"俯视雪覆盖的村庄广场，村民群像散布在广场上；黑龙尚未入画。\",\n      \"clips\": [\n        {\n          \"duration\": 2,\n          \"size\": \"WS\",\n          \"cameraMove\": \"固定机位\",\n          \"visualAction\": \"俯瞰被雪覆盖的村庄广场，村民群像在雪地上奔跑，互相推挤并向外散开。\",\n          \"beat\": \"建立\",\n          \"sourceBlockIds\": [\"B01\", \"B02\"]\n        },\n        {\n          \"duration\": 3,\n          \"size\": \"CU\",\n          \"cameraMove\": \"仰拍横移\",\n          \"visualAction\": \"巨大黑龙从村庄上空飞过，张口咆哮，随后向房屋喷火，火焰击中屋顶，房屋爆炸起火。\",\n          \"beat\": \"危机\",\n          \"sourceBlockIds\": [\"B03\", \"B04\"]\n        }\n      ]\n    },\n    {\n      \"duration\": 6,\n      \"cast\": [\"村长\", \"村民群像\", \"黑龙\"],\n      \"props\": [],\n      \"startPosition\": \"房屋已起火，黑龙在空中；村民群像在广场上四散奔跑，村长位于奔跑人群前侧。\",\n      \"clips\": [\n        {\n          \"duration\": 2,\n          \"size\": \"MCU\",\n          \"cameraMove\": \"手持跟拍\",\n          \"visualAction\": \"村长在奔跑的人群中转头面向众人，张大嘴呼喊。\",\n          \"beat\": \"警告\",\n          \"sourceBlockIds\": [\"B05\", \"B06\"]\n        },\n        {\n          \"duration\": 2,\n          \"size\": \"CU\",\n          \"cameraMove\": \"横移跟拍\",\n          \"visualAction\": \"一名年轻女子拉着老妇人和小孩在雪地奔跑，黑龙从背景上空掠过。\",\n          \"beat\": \"混乱\",\n          \"sourceBlockIds\": [\"B07\"]\n        },\n        {\n          \"duration\": 2,\n          \"size\": \"CU\",\n          \"cameraMove\": \"快速下摇\",\n          \"visualAction\": \"黑龙在空中展翅咆哮，向下方喷火；画面随即切到一名村民睁大的眼睛，瞳孔收缩。\",\n          \"beat\": \"恐惧\",\n          \"sourceBlockIds\": [\"B08\", \"B09\"]\n        }\n      ]\n    },\n    {\n      \"duration\": 5,\n      \"cast\": [\"村长\", \"皇家大魔导师\", \"黑龙\"],\n      \"props\": [],\n      \"startPosition\": \"画面全黑，仅远处燃烧房屋的火光映出村长跪地的轮廓，双手捂脸；黑龙悬在空中。\",\n      \"clips\": [\n        {\n          \"duration\": 2,\n          \"size\": \"CU\",\n          \"cameraMove\": \"固定机位\",\n          \"visualAction\": \"画面黑屏后，村长跪在雪地上，双手捂住脸，随后移开双手低头看着自己的双手。\",\n          \"beat\": \"重击\",\n          \"sourceBlockIds\": [\"B10\", \"B11\"]\n        },\n        {\n          \"duration\": 3,\n          \"size\": \"MS\",\n          \"cameraMove\": \"缓慢推近\",\n          \"visualAction\": \"火光中，皇家大魔导师从燃烧房屋的阴影里走出，站在村长身后，面向空中的黑龙，双手前推形成蓝色圆形魔法盾，挡住喷来的火焰。\",\n          \"beat\": \"转折\",\n          \"sourceBlockIds\": [\"B12\"]\n        }\n      ]\n    },\n    {\n      \"duration\": 6,\n      \"cast\": [\"皇家大魔导师\", \"村长\"],\n      \"props\": [],\n      \"startPosition\": \"皇家大魔导师站在村长身后，双手前推维持蓝色圆形魔法盾，面向空中的黑龙；村长在他身后地上爬行。\",\n      \"clips\": [\n        {\n          \"duration\": 2,\n          \"size\": \"CU\",\n          \"cameraMove\": \"固定机位\",\n          \"visualAction\": \"皇家大魔导师双手维持魔法盾，面部紧绷，张口大喊。\",\n          \"beat\": \"催促\",\n          \"sourceBlockIds\": [\"B13\"]\n        },\n        {\n          \"duration\": 2,\n          \"size\": \"CU\",\n          \"cameraMove\": \"手持跟拍\",\n          \"visualAction\": \"村长在地上爬行，回头看向皇家大魔导师，随后起身逃跑。\",\n          \"beat\": \"撤离\",\n          \"sourceBlockIds\": [\"B14\", \"B15\"]\n        },\n        {\n          \"duration\": 2,\n          \"size\": \"CU\",\n          \"cameraMove\": \"快速推近\",\n          \"visualAction\": \"蓝色魔法盾碎裂，皇家大魔导师被冲击力击倒在地，口中吐血。\",\n          \"beat\": \"破防\",\n          \"sourceBlockIds\": [\"B16\"]\n        }\n      ]\n    },\n    {\n      \"duration\": 5,\n      \"cast\": [\"皇家大魔导师\", \"男弟子\", \"女弟子\"],\n      \"props\": [\"法杖\"],\n      \"startPosition\": \"皇家大魔导师倒在地面，嘴角流血；男弟子与女弟子从画面一侧接近，男弟子手持法杖。\",\n      \"clips\": [\n        {\n          \"duration\": 2,\n          \"size\": \"ECU\",\n          \"cameraMove\": \"固定机位\",\n          \"visualAction\": \"皇家大魔导师倒在地上，嘴角带血，张口低吼，随后用手撑地挣扎着想站起来。\",\n          \"beat\": \"挣扎\",\n          \"sourceBlockIds\": [\"B17\", \"B18\"]\n        },\n        {\n          \"duration\": 3,\n          \"size\": \"MS\",\n          \"cameraMove\": \"平移\",\n          \"visualAction\": \"两名弟子跑过来扶住他，男弟子一手持法杖，张口大喊；皇家大魔导师用手擦掉嘴角的血，转头看向弟子们。\",\n          \"beat\": \"救援\",\n          \"sourceBlockIds\": [\"B19\", \"B20\", \"B21\"]\n        }\n      ]\n    }\n  ]\n}",
+              "status": "completed",
+              "usage": {
+                "input_tokens": 4104,
+                "input_tokens_details": {
+                  "cached_tokens": 896
+                },
+                "output_tokens": 1465,
+                "output_tokens_details": {
+                  "reasoning_tokens": 140
+                },
+                "total_tokens": 5569
+              },
+              "elapsedMs": 5582,
+              "resumed": true
+            }
+          ]
+        },
+        {
+          "chunkIndex": 2,
+          "sceneInput": {
+            "sceneId": "1-1",
+            "episode": "第1集：神秘强者降世",
+            "sceneHeading": "Village 外 未注明",
+            "cast": "村长（Village Chief，着装：粗布冬装）、皇家大魔导师（Royal Archmage，着装：法师长袍）、男弟子（Male Disciple，着装：弟子法袍）、女弟子（Female Disciple，着装：弟子法袍）、亚瑟（Arthur，着装：旅行者装）、黑龙（Dragon，着装：黑龙鳞甲）、村民群像（Villagers，着装：粗布冬装）",
+            "castNames": [
+              "村长",
+              "皇家大魔导师",
+              "男弟子",
+              "女弟子",
+              "亚瑟",
+              "黑龙",
+              "村民群像"
+            ],
+            "previousEnd": "△两个年轻的弟子跑过来扶住他。男弟子拿着一根法杖，喊道。\n男弟子（焦急地大喊）：Master!\n△大魔导师用手擦了擦嘴角的血，对弟子们说。",
+            "nextScene": "亚瑟（微笑调侃）：Is this a tea party? Mind if I join?\n△大魔导师和弟子们惊讶地看着他。大魔导师急切地喊道。\n皇家大魔导师（急切地大喊）：Get out of here! It's dangerous!\n△亚瑟继续咬了一口苹果，神情自若。大魔导师继续喊着。",
+            "estimatedSeconds": 18,
+            "blocks": [
+              {
+                "id": "B22",
+                "kind": "dialogue",
+                "speaker": "皇家大魔导师",
+                "tone": "虚弱但坚定地说话",
+                "text": "We have to stop it or everyone here will die!",
+                "source": "皇家大魔导师（虚弱但坚定地说话）：We have to stop it or everyone here will die!"
+              },
+              {
+                "id": "B23",
+                "kind": "action",
+                "text": "△男弟子扶着他，担忧地回答。",
+                "source": "△男弟子扶着他，担忧地回答。"
+              },
+              {
+                "id": "B24",
+                "kind": "dialogue",
+                "speaker": "男弟子",
+                "tone": "担忧地回答",
+                "text": "But Master, this dragon is too strong. We can't beat it.",
+                "source": "男弟子（担忧地回答）：But Master, this dragon is too strong. We can't beat it."
+              },
+              {
+                "id": "B25",
+                "kind": "action",
+                "text": "△画面特写大魔导师沉重的表情，接着是黑龙咆哮的画面。",
+                "source": "△画面特写大魔导师沉重的表情，接着是黑龙咆哮的画面。"
+              },
+              {
+                "id": "B26",
+                "kind": "dialogue",
+                "speaker": "皇家大魔导师",
+                "tone": "语气坚定",
+                "text": "We fight even if we can't win. That's war.",
+                "source": "皇家大魔导师（语气坚定）：We fight even if we can't win. That's war."
+              },
+              {
+                "id": "B27",
+                "kind": "action",
+                "text": "△俯瞰镜头，大魔导师和两个弟子站在广场中央，黑龙在空中盘旋。一个声音传来。",
+                "source": "△俯瞰镜头，大魔导师和两个弟子站在广场中央，黑龙在空中盘旋。一个声音传来。"
+              },
+              {
+                "id": "B28",
+                "kind": "dialogue",
+                "speaker": "亚瑟（O.S.）",
+                "tone": "轻松调侃的语气",
+                "text": "So lively.",
+                "source": "亚瑟（O.S.）（轻松调侃的语气）：So lively."
+              },
+              {
+                "id": "B29",
+                "kind": "action",
+                "text": "△亚瑟手里拿着一个咬了一口的苹果，走过来，微笑着说。",
+                "source": "△亚瑟手里拿着一个咬了一口的苹果，走过来，微笑着说。"
+              }
+            ],
+            "chunkIndex": 2,
+            "chunkCount": 6
+          },
+          "finalPlan": {
+            "sceneId": "1-1",
+            "shots": [
+              {
+                "duration": 10,
+                "cast": [
+                  "皇家大魔导师",
+                  "男弟子",
+                  "女弟子"
+                ],
+                "props": [
+                  "法杖"
+                ],
+                "startPosition": "广场中央，大魔导师被男弟子从右侧搀扶，嘴角带血，面朝前方；男弟子右手持法杖；女弟子站在大魔导师左后方。",
+                "clips": [
+                  {
+                    "duration": 5,
+                    "size": "MCU",
+                    "cameraMove": "固定机位",
+                    "visualAction": "大魔导师嘴角带血，抬眼开口；男弟子从右侧扶住他的手臂",
+                    "beat": "对白",
+                    "sourceBlockIds": [
+                      "B22",
+                      "B23"
+                    ]
+                  },
+                  {
+                    "duration": 5,
+                    "size": "MCU",
+                    "cameraMove": "固定机位",
+                    "visualAction": "男弟子扶住大魔导师，眉头紧皱，开口回应；女弟子在左后方看向他",
+                    "beat": "对白",
+                    "sourceBlockIds": [
+                      "B24"
+                    ]
+                  }
+                ]
+              },
+              {
+                "duration": 6,
+                "cast": [
+                  "皇家大魔导师",
+                  "男弟子",
+                  "女弟子",
+                  "黑龙"
+                ],
+                "props": [
+                  "法杖"
+                ],
+                "startPosition": "大魔导师仍被男弟子从右侧搀扶，女弟子站在左后方；黑龙在远处空中盘旋。",
+                "clips": [
+                  {
+                    "duration": 2,
+                    "size": "CU",
+                    "cameraMove": "快速上摇",
+                    "visualAction": "大魔导师嘴角带血，眉头紧锁；镜头上摇至空中黑龙张口咆哮",
+                    "beat": "强调",
+                    "sourceBlockIds": [
+                      "B25"
+                    ]
+                  },
+                  {
+                    "duration": 4,
+                    "size": "CU",
+                    "cameraMove": "固定机位",
+                    "visualAction": "大魔导师由男弟子搀扶，抬眼开口",
+                    "beat": "对白",
+                    "sourceBlockIds": [
+                      "B26"
+                    ]
+                  }
+                ]
+              },
+              {
+                "duration": 5,
+                "cast": [
+                  "皇家大魔导师",
+                  "男弟子",
+                  "女弟子",
+                  "黑龙",
+                  "亚瑟"
+                ],
+                "props": [
+                  "法杖",
+                  "苹果"
+                ],
+                "startPosition": "大魔导师仍由男弟子从右侧搀扶，女弟子站在左侧，三人在广场中央；黑龙在空中盘旋；亚瑟在画面右侧外，右手拿着咬了一口的苹果。",
+                "clips": [
+                  {
+                    "duration": 2,
+                    "size": "WS",
+                    "cameraMove": "俯拍固定",
+                    "visualAction": "广场中央大魔导师与男弟子、女弟子，黑龙在空中盘旋",
+                    "beat": "建立",
+                    "sourceBlockIds": [
+                      "B27"
+                    ]
+                  },
+                  {
+                    "duration": 3,
+                    "size": "MCU",
+                    "cameraMove": "跟移",
+                    "visualAction": "亚瑟从画面右侧走入，右手拿着咬了一口的苹果，嘴角上扬",
+                    "beat": "钩子",
+                    "sourceBlockIds": [
+                      "B28",
+                      "B29"
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          "finalRaw": "{\n  \"sceneId\": \"1-1\",\n  \"shots\": [\n    {\n      \"duration\": 10,\n      \"cast\": [\"皇家大魔导师\", \"男弟子\", \"女弟子\"],\n      \"props\": [\"法杖\"],\n      \"startPosition\": \"广场中央，大魔导师被男弟子从右侧搀扶，嘴角带血，面朝前方；男弟子右手持法杖；女弟子站在大魔导师左后方。\",\n      \"clips\": [\n        {\n          \"duration\": 5,\n          \"size\": \"MCU\",\n          \"cameraMove\": \"固定机位\",\n          \"visualAction\": \"大魔导师嘴角带血，抬眼开口；男弟子从右侧扶住他的手臂\",\n          \"beat\": \"对白\",\n          \"sourceBlockIds\": [\"B22\", \"B23\"]\n        },\n        {\n          \"duration\": 5,\n          \"size\": \"MCU\",\n          \"cameraMove\": \"固定机位\",\n          \"visualAction\": \"男弟子扶住大魔导师，眉头紧皱，开口回应；女弟子在左后方看向他\",\n          \"beat\": \"对白\",\n          \"sourceBlockIds\": [\"B24\"]\n        }\n      ]\n    },\n    {\n      \"duration\": 6,\n      \"cast\": [\"皇家大魔导师\", \"男弟子\", \"女弟子\", \"黑龙\"],\n      \"props\": [\"法杖\"],\n      \"startPosition\": \"大魔导师仍被男弟子从右侧搀扶，女弟子站在左后方；黑龙在远处空中盘旋。\",\n      \"clips\": [\n        {\n          \"duration\": 2,\n          \"size\": \"CU\",\n          \"cameraMove\": \"快速上摇\",\n          \"visualAction\": \"大魔导师嘴角带血，眉头紧锁；镜头上摇至空中黑龙张口咆哮\",\n          \"beat\": \"强调\",\n          \"sourceBlockIds\": [\"B25\"]\n        },\n        {\n          \"duration\": 4,\n          \"size\": \"CU\",\n          \"cameraMove\": \"固定机位\",\n          \"visualAction\": \"大魔导师由男弟子搀扶，抬眼开口\",\n          \"beat\": \"对白\",\n          \"sourceBlockIds\": [\"B26\"]\n        }\n      ]\n    },\n    {\n      \"duration\": 5,\n      \"cast\": [\"皇家大魔导师\", \"男弟子\", \"女弟子\", \"黑龙\", \"亚瑟\"],\n      \"props\": [\"法杖\", \"苹果\"],\n      \"startPosition\": \"大魔导师仍由男弟子从右侧搀扶，女弟子站在左侧，三人在广场中央；黑龙在空中盘旋；亚瑟在画面右侧外，右手拿着咬了一口的苹果。\",\n      \"clips\": [\n        {\n          \"duration\": 2,\n          \"size\": \"WS\",\n          \"cameraMove\": \"俯拍固定\",\n          \"visualAction\": \"广场中央大魔导师与男弟子、女弟子，黑龙在空中盘旋\",\n          \"beat\": \"建立\",\n          \"sourceBlockIds\": [\"B27\"]\n        },\n        {\n          \"duration\": 3,\n          \"size\": \"MCU\",\n          \"cameraMove\": \"跟移\",\n          \"visualAction\": \"亚瑟从画面右侧走入，右手拿着咬了一口的苹果，嘴角上扬\",\n          \"beat\": \"钩子\",\n          \"sourceBlockIds\": [\"B28\", \"B29\"]\n        }\n      ]\n    }\n  ]\n}",
+          "resumedFrom": "2026-11-04T08-43-11-027Z-AB-新引擎修复-EP1-2-6-r3.json",
+          "attempts": [
+            {
+              "attempt": 1,
+              "label": "AB 新引擎 EP1 2/6 r1",
+              "raw": "{\n  \"sceneId\": \"1-1\",\n  \"shots\": [\n    {\n      \"duration\": 7,\n      \"cast\": [\"皇家大魔导师\", \"男弟子\", \"女弟子\"],\n      \"props\": [\"法杖\"],\n      \"startPosition\": \"大魔导师被男弟子从右侧搀扶，嘴角带血，面朝前方；男弟子右手持法杖；女弟子站在左后方。\",\n      \"clips\": [\n        {\n          \"duration\": 3,\n          \"size\": \"CU\",\n          \"cameraMove\": \"固定机位\",\n          \"visualAction\": \"大魔导师嘴角带血，抬眼开口\",\n          \"beat\": \"对白\",\n          \"sourceBlockIds\": [\"B22\"]\n        },\n        {\n          \"duration\": 4,\n          \"size\": \"MCU\",\n          \"cameraMove\": \"固定机位\",\n          \"visualAction\": \"男弟子扶住大魔导师手臂，皱眉回应；女弟子在左后方\",\n          \"beat\": \"反应\",\n          \"sourceBlockIds\": [\"B23\", \"B24\"]\n        }\n      ]\n    },\n    {\n      \"duration\": 6,\n      \"cast\": [\"皇家大魔导师\", \"男弟子\", \"女弟子\", \"黑龙\"],\n      \"props\": [\"法杖\"],\n      \"startPosition\": \"大魔导师仍被男弟子从右侧搀扶，女弟子站在左后方；黑龙在远处空中盘旋。\",\n      \"clips\": [\n        {\n          \"duration\": 3,\n          \"size\": \"CU\",\n          \"cameraMove\": \"快速上摇\",\n          \"visualAction\": \"大魔导师嘴角带血，眉头紧锁，镜头快速上摇至空中黑龙张口咆哮\",\n          \"beat\": \"强调\",\n          \"sourceBlockIds\": [\"B25\"]\n        },\n        {\n          \"duration\": 3,\n          \"size\": \"MCU\",\n          \"cameraMove\": \"固定机位\",\n          \"visualAction\": \"大魔导师由男弟子搀扶，女弟子在左后方，他抬眼开口\",\n          \"beat\": \"对白\",\n          \"sourceBlockIds\": [\"B26\"]\n        }\n      ]\n    },\n    {\n      \"duration\": 5,\n      \"cast\": [\"皇家大魔导师\", \"男弟子\", \"女弟子\", \"黑龙\", \"亚瑟\"],\n      \"props\": [\"法杖\", \"苹果\"],\n      \"startPosition\": \"大魔导师仍由男弟子从右侧搀扶，女弟子站在左侧，三人在广场中央；黑龙在空中盘旋；亚瑟在画面右侧画外，右手拿着咬了一口的苹果。\",\n      \"clips\": [\n        {\n          \"duration\": 2,\n          \"size\": \"WS\",\n          \"cameraMove\": \"俯拍固定\",\n          \"visualAction\": \"广场中央大魔导师与男弟子、女弟子，黑龙在空中盘旋\",\n          \"beat\": \"建立\",\n          \"sourceBlockIds\": [\"B27\"]\n        },\n        {\n          \"duration\": 3,\n          \"size\": \"MCU\",\n          \"cameraMove\": \"跟移\",\n          \"visualAction\": \"亚瑟从画面右侧走入，右手拿着咬了一口的苹果，嘴角上扬\",\n          \"beat\": \"钩子\",\n          \"sourceBlockIds\": [\"B28\", \"B29\"]\n        }\n      ]\n    }\n  ]\n}",
+              "status": "completed",
+              "usage": {
+                "input_tokens": 1881,
+                "input_tokens_details": {
+                  "cached_tokens": 1664
+                },
+                "output_tokens": 7280,
+                "output_tokens_details": {
+                  "reasoning_tokens": 6568
+                },
+                "total_tokens": 9161
+              },
+              "elapsedMs": 45105,
+              "resumed": true
+            },
+            {
+              "attempt": 2,
+              "label": "AB 新引擎修复 EP1 2/6 r2",
+              "raw": "{\n  \"sceneId\": \"1-1\",\n  \"shots\": [\n    {\n      \"duration\": 10,\n      \"cast\": [\"皇家大魔导师\", \"男弟子\", \"女弟子\"],\n      \"props\": [\"法杖\"],\n      \"startPosition\": \"广场中央，大魔导师被男弟子从右侧搀扶，嘴角带血，面朝前方；男弟子右手持法杖；女弟子站在大魔导师左后方。\",\n      \"clips\": [\n        {\n          \"duration\": 6,\n          \"size\": \"MCU\",\n          \"cameraMove\": \"固定机位\",\n          \"visualAction\": \"大魔导师嘴角带血，抬眼开口；男弟子从右侧扶住他的手臂\",\n          \"beat\": \"对白\",\n          \"sourceBlockIds\": [\"B22\", \"B23\"]\n        },\n        {\n          \"duration\": 4,\n          \"size\": \"MCU\",\n          \"cameraMove\": \"固定机位\",\n          \"visualAction\": \"男弟子扶住大魔导师，眉头紧皱，开口回应；女弟子在左后方看向他\",\n          \"beat\": \"对白\",\n          \"sourceBlockIds\": [\"B24\"]\n        }\n      ]\n    },\n    {\n      \"duration\": 6,\n      \"cast\": [\"皇家大魔导师\", \"男弟子\", \"女弟子\", \"黑龙\"],\n      \"props\": [\"法杖\"],\n      \"startPosition\": \"大魔导师仍被男弟子从右侧搀扶，女弟子站在左后方；黑龙在远处空中盘旋。\",\n      \"clips\": [\n        {\n          \"duration\": 2,\n          \"size\": \"CU\",\n          \"cameraMove\": \"快速上摇\",\n          \"visualAction\": \"大魔导师嘴角带血，眉头紧锁；镜头上摇至空中黑龙张口咆哮\",\n          \"beat\": \"强调\",\n          \"sourceBlockIds\": [\"B25\"]\n        },\n        {\n          \"duration\": 4,\n          \"size\": \"CU\",\n          \"cameraMove\": \"固定机位\",\n          \"visualAction\": \"大魔导师由男弟子搀扶，抬眼开口\",\n          \"beat\": \"对白\",\n          \"sourceBlockIds\": [\"B26\"]\n        }\n      ]\n    },\n    {\n      \"duration\": 5,\n      \"cast\": [\"皇家大魔导师\", \"男弟子\", \"女弟子\", \"黑龙\", \"亚瑟\"],\n      \"props\": [\"法杖\", \"苹果\"],\n      \"startPosition\": \"大魔导师仍由男弟子从右侧搀扶，女弟子站在左侧，三人在广场中央；黑龙在空中盘旋；亚瑟在画面右侧外，右手拿着咬了一口的苹果。\",\n      \"clips\": [\n        {\n          \"duration\": 2,\n          \"size\": \"WS\",\n          \"cameraMove\": \"俯拍固定\",\n          \"visualAction\": \"广场中央大魔导师与男弟子、女弟子，黑龙在空中盘旋\",\n          \"beat\": \"建立\",\n          \"sourceBlockIds\": [\"B27\"]\n        },\n        {\n          \"duration\": 3,\n          \"size\": \"MCU\",\n          \"cameraMove\": \"跟移\",\n          \"visualAction\": \"亚瑟从画面右侧走入，右手拿着咬了一口的苹果，嘴角上扬\",\n          \"beat\": \"钩子\",\n          \"sourceBlockIds\": [\"B28\", \"B29\"]\n        }\n      ]\n    }\n  ]\n}",
+              "status": "completed",
+              "usage": {
+                "input_tokens": 2721,
+                "input_tokens_details": {
+                  "cached_tokens": 896
+                },
+                "output_tokens": 4362,
+                "output_tokens_details": {
+                  "reasoning_tokens": 3638
+                },
+                "total_tokens": 7083
+              },
+              "elapsedMs": 24483,
+              "resumed": true
+            },
+            {
+              "attempt": 3,
+              "label": "AB 新引擎修复 EP1 2/6 r3",
+              "raw": "{\n  \"sceneId\": \"1-1\",\n  \"shots\": [\n    {\n      \"duration\": 10,\n      \"cast\": [\"皇家大魔导师\", \"男弟子\", \"女弟子\"],\n      \"props\": [\"法杖\"],\n      \"startPosition\": \"广场中央，大魔导师被男弟子从右侧搀扶，嘴角带血，面朝前方；男弟子右手持法杖；女弟子站在大魔导师左后方。\",\n      \"clips\": [\n        {\n          \"duration\": 5,\n          \"size\": \"MCU\",\n          \"cameraMove\": \"固定机位\",\n          \"visualAction\": \"大魔导师嘴角带血，抬眼开口；男弟子从右侧扶住他的手臂\",\n          \"beat\": \"对白\",\n          \"sourceBlockIds\": [\"B22\", \"B23\"]\n        },\n        {\n          \"duration\": 5,\n          \"size\": \"MCU\",\n          \"cameraMove\": \"固定机位\",\n          \"visualAction\": \"男弟子扶住大魔导师，眉头紧皱，开口回应；女弟子在左后方看向他\",\n          \"beat\": \"对白\",\n          \"sourceBlockIds\": [\"B24\"]\n        }\n      ]\n    },\n    {\n      \"duration\": 6,\n      \"cast\": [\"皇家大魔导师\", \"男弟子\", \"女弟子\", \"黑龙\"],\n      \"props\": [\"法杖\"],\n      \"startPosition\": \"大魔导师仍被男弟子从右侧搀扶，女弟子站在左后方；黑龙在远处空中盘旋。\",\n      \"clips\": [\n        {\n          \"duration\": 2,\n          \"size\": \"CU\",\n          \"cameraMove\": \"快速上摇\",\n          \"visualAction\": \"大魔导师嘴角带血，眉头紧锁；镜头上摇至空中黑龙张口咆哮\",\n          \"beat\": \"强调\",\n          \"sourceBlockIds\": [\"B25\"]\n        },\n        {\n          \"duration\": 4,\n          \"size\": \"CU\",\n          \"cameraMove\": \"固定机位\",\n          \"visualAction\": \"大魔导师由男弟子搀扶，抬眼开口\",\n          \"beat\": \"对白\",\n          \"sourceBlockIds\": [\"B26\"]\n        }\n      ]\n    },\n    {\n      \"duration\": 5,\n      \"cast\": [\"皇家大魔导师\", \"男弟子\", \"女弟子\", \"黑龙\", \"亚瑟\"],\n      \"props\": [\"法杖\", \"苹果\"],\n      \"startPosition\": \"大魔导师仍由男弟子从右侧搀扶，女弟子站在左侧，三人在广场中央；黑龙在空中盘旋；亚瑟在画面右侧外，右手拿着咬了一口的苹果。\",\n      \"clips\": [\n        {\n          \"duration\": 2,\n          \"size\": \"WS\",\n          \"cameraMove\": \"俯拍固定\",\n          \"visualAction\": \"广场中央大魔导师与男弟子、女弟子，黑龙在空中盘旋\",\n          \"beat\": \"建立\",\n          \"sourceBlockIds\": [\"B27\"]\n        },\n        {\n          \"duration\": 3,\n          \"size\": \"MCU\",\n          \"cameraMove\": \"跟移\",\n          \"visualAction\": \"亚瑟从画面右侧走入，右手拿着咬了一口的苹果，嘴角上扬\",\n          \"beat\": \"钩子\",\n          \"sourceBlockIds\": [\"B28\", \"B29\"]\n        }\n      ]\n    }\n  ]\n}",
+              "status": "completed",
+              "usage": {
+                "input_tokens": 2671,
+                "input_tokens_details": {
+                  "cached_tokens": 1664
+                },
+                "output_tokens": 989,
+                "output_tokens_details": {
+                  "reasoning_tokens": 265
+                },
+                "total_tokens": 3660
+              },
+              "elapsedMs": 4504,
+              "resumed": true
+            }
+          ]
+        },
+        {
+          "chunkIndex": 3,
+          "sceneInput": {
+            "sceneId": "1-1",
+            "episode": "第1集：神秘强者降世",
+            "sceneHeading": "Village 外 未注明",
+            "cast": "村长（Village Chief，着装：粗布冬装）、皇家大魔导师（Royal Archmage，着装：法师长袍）、男弟子（Male Disciple，着装：弟子法袍）、女弟子（Female Disciple，着装：弟子法袍）、亚瑟（Arthur，着装：旅行者装）、黑龙（Dragon，着装：黑龙鳞甲）、村民群像（Villagers，着装：粗布冬装）",
+            "castNames": [
+              "村长",
+              "皇家大魔导师",
+              "男弟子",
+              "女弟子",
+              "亚瑟",
+              "黑龙",
+              "村民群像"
+            ],
+            "previousEnd": "△俯瞰镜头，大魔导师和两个弟子站在广场中央，黑龙在空中盘旋。一个声音传来。\n亚瑟（O.S.）（轻松调侃的语气）：So lively.\n△亚瑟手里拿着一个咬了一口的苹果，走过来，微笑着说。",
+            "nextScene": "男弟子（难以置信地喃喃自语）：How did he do that?\n△黑龙再次飞回，愤怒地咆哮。\n亚瑟（自信地微笑）：Time to end this!\n△亚瑟弯腰把皮箱放在雪地上。",
+            "estimatedSeconds": 18,
+            "blocks": [
+              {
+                "id": "B30",
+                "kind": "dialogue",
+                "speaker": "亚瑟",
+                "tone": "微笑调侃",
+                "text": "Is this a tea party? Mind if I join?",
+                "source": "亚瑟（微笑调侃）：Is this a tea party? Mind if I join?"
+              },
+              {
+                "id": "B31",
+                "kind": "action",
+                "text": "△大魔导师和弟子们惊讶地看着他。大魔导师急切地喊道。",
+                "source": "△大魔导师和弟子们惊讶地看着他。大魔导师急切地喊道。"
+              },
+              {
+                "id": "B32",
+                "kind": "dialogue",
+                "speaker": "皇家大魔导师",
+                "tone": "急切地大喊",
+                "text": "Get out of here! It's dangerous!",
+                "source": "皇家大魔导师（急切地大喊）：Get out of here! It's dangerous!"
+              },
+              {
+                "id": "B33",
+                "kind": "action",
+                "text": "△亚瑟继续咬了一口苹果，神情自若。大魔导师继续喊着。",
+                "source": "△亚瑟继续咬了一口苹果，神情自若。大魔导师继续喊着。"
+              },
+              {
+                "id": "B34",
+                "kind": "dialogue",
+                "speaker": "皇家大魔导师",
+                "tone": "继续急切地喊道",
+                "text": "You shouldn't be here.",
+                "source": "皇家大魔导师（继续急切地喊道）：You shouldn't be here."
+              },
+              {
+                "id": "B35",
+                "kind": "action",
+                "text": "△重物落地声、龙吼声。突然黑龙从天而降，落在亚瑟身后咆哮。",
+                "source": "△重物落地声、龙吼声。突然黑龙从天而降，落在亚瑟身后咆哮。"
+              },
+              {
+                "id": "B36",
+                "kind": "dialogue",
+                "speaker": "皇家大魔导师",
+                "tone": "惊恐地大喊",
+                "text": "Look out! Dodge!",
+                "source": "皇家大魔导师（惊恐地大喊）：Look out! Dodge!"
+              },
+              {
+                "id": "B37",
+                "kind": "action",
+                "text": "△亚瑟微微一笑，转过身面对黑龙。",
+                "source": "△亚瑟微微一笑，转过身面对黑龙。"
+              },
+              {
+                "id": "B38",
+                "kind": "action",
+                "text": "△亚瑟把手中的苹果举起来，展示给黑龙看。",
+                "source": "△亚瑟把手中的苹果举起来，展示给黑龙看。"
+              },
+              {
+                "id": "B39",
+                "kind": "action",
+                "text": "△黑龙向亚瑟喷火。亚瑟冷静地看着火焰。",
+                "source": "△黑龙向亚瑟喷火。亚瑟冷静地看着火焰。"
+              },
+              {
+                "id": "B40",
+                "kind": "action",
+                "text": "△亚瑟将手中的苹果用力扔向黑龙。",
+                "source": "△亚瑟将手中的苹果用力扔向黑龙。"
+              },
+              {
+                "id": "B41",
+                "kind": "action",
+                "text": "△击中爆炸声。苹果像炮弹一样飞出，直接击中了黑龙的眼睛，黑龙痛苦地咆哮，被击退飞走。",
+                "source": "△击中爆炸声。苹果像炮弹一样飞出，直接击中了黑龙的眼睛，黑龙痛苦地咆哮，被击退飞走。"
+              },
+              {
+                "id": "B42",
+                "kind": "action",
+                "text": "△大魔导师和弟子们目瞪口呆。",
+                "source": "△大魔导师和弟子们目瞪口呆。"
+              }
+            ],
+            "chunkIndex": 3,
+            "chunkCount": 6
+          },
+          "finalPlan": {
+            "sceneId": "1-1",
+            "shots": [
+              {
+                "duration": 8,
+                "cast": [
+                  "亚瑟",
+                  "皇家大魔导师",
+                  "男弟子",
+                  "女弟子"
+                ],
+                "props": [
+                  "苹果"
+                ],
+                "startPosition": "广场中央的雪地上，皇家大魔导师与男弟子、女弟子并排站在一侧，面向亚瑟；亚瑟站在他们对面，右手拿着一个咬过一口的苹果，苹果停在胸前高度。",
+                "clips": [
+                  {
+                    "duration": 4,
+                    "size": "CU",
+                    "cameraMove": "固定机位",
+                    "visualAction": "亚瑟微笑，右手拿着咬过一口的苹果，嘴唇开合。",
+                    "beat": "建立",
+                    "sourceBlockIds": [
+                      "B30"
+                    ]
+                  },
+                  {
+                    "duration": 4,
+                    "size": "MCU",
+                    "cameraMove": "轻微横移",
+                    "visualAction": "皇家大魔导师与男弟子、女弟子睁大眼睛看向亚瑟；皇家大魔导师身体前倾，张口急喊。",
+                    "beat": "反应",
+                    "sourceBlockIds": [
+                      "B31",
+                      "B32"
+                    ]
+                  }
+                ]
+              },
+              {
+                "duration": 5,
+                "cast": [
+                  "亚瑟",
+                  "皇家大魔导师",
+                  "黑龙"
+                ],
+                "props": [
+                  "苹果"
+                ],
+                "startPosition": "亚瑟站在皇家大魔导师对面，右手拿着咬过一口的苹果；皇家大魔导师身体前倾，面朝亚瑟；黑龙在亚瑟后方的空中盘旋。",
+                "clips": [
+                  {
+                    "duration": 3,
+                    "size": "MCU",
+                    "cameraMove": "固定机位",
+                    "visualAction": "亚瑟继续咬了一口苹果，咀嚼；皇家大魔导师在旁张口继续喊。",
+                    "beat": "推进",
+                    "sourceBlockIds": [
+                      "B33",
+                      "B34"
+                    ]
+                  },
+                  {
+                    "duration": 2,
+                    "size": "MCU",
+                    "cameraMove": "快速下摇跟拍",
+                    "visualAction": "黑龙从空中落到亚瑟身后，双翼展开，低头咆哮。",
+                    "beat": "转折",
+                    "sourceBlockIds": [
+                      "B35"
+                    ]
+                  }
+                ]
+              },
+              {
+                "duration": 5,
+                "cast": [
+                  "皇家大魔导师",
+                  "亚瑟",
+                  "黑龙"
+                ],
+                "props": [
+                  "苹果"
+                ],
+                "startPosition": "亚瑟背对黑龙站在雪地上，右手拿着苹果，面朝皇家大魔导师；黑龙停在亚瑟身后，低头张口；皇家大魔导师站在亚瑟前方。",
+                "clips": [
+                  {
+                    "duration": 2,
+                    "size": "CU",
+                    "cameraMove": "轻微推近",
+                    "visualAction": "皇家大魔导师朝亚瑟方向伸长手臂，张口大喊。",
+                    "beat": "警告",
+                    "sourceBlockIds": [
+                      "B36"
+                    ]
+                  },
+                  {
+                    "duration": 3,
+                    "size": "MCU",
+                    "cameraMove": "跟拍转身",
+                    "visualAction": "亚瑟微微一笑，转过身面对黑龙，随后右手举起苹果，将苹果展示在黑龙前方。",
+                    "beat": "反击铺垫",
+                    "sourceBlockIds": [
+                      "B37",
+                      "B38"
+                    ]
+                  }
+                ]
+              },
+              {
+                "duration": 8,
+                "cast": [
+                  "亚瑟",
+                  "黑龙",
+                  "皇家大魔导师",
+                  "男弟子",
+                  "女弟子"
+                ],
+                "props": [
+                  "苹果"
+                ],
+                "startPosition": "亚瑟面对黑龙站在雪地上，右手举着苹果；黑龙在亚瑟前方低身张口；皇家大魔导师与男弟子、女弟子站在亚瑟侧后方。",
+                "clips": [
+                  {
+                    "duration": 2,
+                    "size": "MS",
+                    "cameraMove": "固定机位",
+                    "visualAction": "黑龙朝亚瑟喷出火焰，亚瑟站在原地，眼睛看着火焰。",
+                    "beat": "危机",
+                    "sourceBlockIds": [
+                      "B39"
+                    ]
+                  },
+                  {
+                    "duration": 4,
+                    "size": "MS",
+                    "cameraMove": "快速跟拍",
+                    "visualAction": "亚瑟右手用力将苹果掷出，苹果飞出击中黑龙眼睛，黑龙扭头咆哮并被击退飞走。",
+                    "beat": "高潮",
+                    "sourceBlockIds": [
+                      "B40",
+                      "B41"
+                    ]
+                  },
+                  {
+                    "duration": 2,
+                    "size": "MCU",
+                    "cameraMove": "固定机位",
+                    "visualAction": "皇家大魔导师与男弟子、女弟子站在原地，瞪大眼睛，张口不动。",
+                    "beat": "反应",
+                    "sourceBlockIds": [
+                      "B42"
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          "finalRaw": "{\n  \"sceneId\": \"1-1\",\n  \"shots\": [\n    {\n      \"duration\": 8,\n      \"cast\": [\"亚瑟\", \"皇家大魔导师\", \"男弟子\", \"女弟子\"],\n      \"props\": [\"苹果\"],\n      \"startPosition\": \"广场中央的雪地上，皇家大魔导师与男弟子、女弟子并排站在一侧，面向亚瑟；亚瑟站在他们对面，右手拿着一个咬过一口的苹果，苹果停在胸前高度。\",\n      \"clips\": [\n        {\n          \"duration\": 4,\n          \"size\": \"CU\",\n          \"cameraMove\": \"固定机位\",\n          \"visualAction\": \"亚瑟微笑，右手拿着咬过一口的苹果，嘴唇开合。\",\n          \"beat\": \"建立\",\n          \"sourceBlockIds\": [\"B30\"]\n        },\n        {\n          \"duration\": 4,\n          \"size\": \"MCU\",\n          \"cameraMove\": \"轻微横移\",\n          \"visualAction\": \"皇家大魔导师与男弟子、女弟子睁大眼睛看向亚瑟；皇家大魔导师身体前倾，张口急喊。\",\n          \"beat\": \"反应\",\n          \"sourceBlockIds\": [\"B31\", \"B32\"]\n        }\n      ]\n    },\n    {\n      \"duration\": 5,\n      \"cast\": [\"亚瑟\", \"皇家大魔导师\", \"黑龙\"],\n      \"props\": [\"苹果\"],\n      \"startPosition\": \"亚瑟站在皇家大魔导师对面，右手拿着咬过一口的苹果；皇家大魔导师身体前倾，面朝亚瑟；黑龙在亚瑟后方的空中盘旋。\",\n      \"clips\": [\n        {\n          \"duration\": 3,\n          \"size\": \"MCU\",\n          \"cameraMove\": \"固定机位\",\n          \"visualAction\": \"亚瑟继续咬了一口苹果，咀嚼；皇家大魔导师在旁张口继续喊。\",\n          \"beat\": \"推进\",\n          \"sourceBlockIds\": [\"B33\", \"B34\"]\n        },\n        {\n          \"duration\": 2,\n          \"size\": \"MCU\",\n          \"cameraMove\": \"快速下摇跟拍\",\n          \"visualAction\": \"黑龙从空中落到亚瑟身后，双翼展开，低头咆哮。\",\n          \"beat\": \"转折\",\n          \"sourceBlockIds\": [\"B35\"]\n        }\n      ]\n    },\n    {\n      \"duration\": 5,\n      \"cast\": [\"皇家大魔导师\", \"亚瑟\", \"黑龙\"],\n      \"props\": [\"苹果\"],\n      \"startPosition\": \"亚瑟背对黑龙站在雪地上，右手拿着苹果，面朝皇家大魔导师；黑龙停在亚瑟身后，低头张口；皇家大魔导师站在亚瑟前方。\",\n      \"clips\": [\n        {\n          \"duration\": 2,\n          \"size\": \"CU\",\n          \"cameraMove\": \"轻微推近\",\n          \"visualAction\": \"皇家大魔导师朝亚瑟方向伸长手臂，张口大喊。\",\n          \"beat\": \"警告\",\n          \"sourceBlockIds\": [\"B36\"]\n        },\n        {\n          \"duration\": 3,\n          \"size\": \"MCU\",\n          \"cameraMove\": \"跟拍转身\",\n          \"visualAction\": \"亚瑟微微一笑，转过身面对黑龙，随后右手举起苹果，将苹果展示在黑龙前方。\",\n          \"beat\": \"反击铺垫\",\n          \"sourceBlockIds\": [\"B37\", \"B38\"]\n        }\n      ]\n    },\n    {\n      \"duration\": 8,\n      \"cast\": [\"亚瑟\", \"黑龙\", \"皇家大魔导师\", \"男弟子\", \"女弟子\"],\n      \"props\": [\"苹果\"],\n      \"startPosition\": \"亚瑟面对黑龙站在雪地上，右手举着苹果；黑龙在亚瑟前方低身张口；皇家大魔导师与男弟子、女弟子站在亚瑟侧后方。\",\n      \"clips\": [\n        {\n          \"duration\": 2,\n          \"size\": \"MS\",\n          \"cameraMove\": \"固定机位\",\n          \"visualAction\": \"黑龙朝亚瑟喷出火焰，亚瑟站在原地，眼睛看着火焰。\",\n          \"beat\": \"危机\",\n          \"sourceBlockIds\": [\"B39\"]\n        },\n        {\n          \"duration\": 4,\n          \"size\": \"MS\",\n          \"cameraMove\": \"快速跟拍\",\n          \"visualAction\": \"亚瑟右手用力将苹果掷出，苹果飞出击中黑龙眼睛，黑龙扭头咆哮并被击退飞走。\",\n          \"beat\": \"高潮\",\n          \"sourceBlockIds\": [\"B40\", \"B41\"]\n        },\n        {\n          \"duration\": 2,\n          \"size\": \"MCU\",\n          \"cameraMove\": \"固定机位\",\n          \"visualAction\": \"皇家大魔导师与男弟子、女弟子站在原地，瞪大眼睛，张口不动。\",\n          \"beat\": \"反应\",\n          \"sourceBlockIds\": [\"B42\"]\n        }\n      ]\n    }\n  ]\n}",
+          "resumedFrom": "2026-11-04T08-08-33-912Z-AB-新引擎修复-EP1-3-6-r2.json",
+          "attempts": [
+            {
+              "attempt": 1,
+              "label": "AB 新引擎 EP1 3/6 r1",
+              "raw": "{\n  \"sceneId\": \"1-1\",\n  \"shots\": [\n    {\n      \"duration\": 5,\n      \"cast\": [\"亚瑟\", \"皇家大魔导师\", \"男弟子\", \"女弟子\"],\n      \"props\": [\"苹果\"],\n      \"startPosition\": \"广场中央的雪地上，皇家大魔导师与男弟子、女弟子并排站在一侧，面向亚瑟；亚瑟站在他们对面，右手拿着一个咬过一口的苹果，苹果停在胸前高度。\",\n      \"clips\": [\n        {\n          \"duration\": 3,\n          \"size\": \"CU\",\n          \"cameraMove\": \"固定机位\",\n          \"visualAction\": \"亚瑟微笑，右手拿着咬过一口的苹果，嘴唇开合。\",\n          \"beat\": \"建立\",\n          \"sourceBlockIds\": [\"B30\"]\n        },\n        {\n          \"duration\": 2,\n          \"size\": \"MCU\",\n          \"cameraMove\": \"轻微横移\",\n          \"visualAction\": \"皇家大魔导师与男弟子、女弟子睁大眼睛看向亚瑟；皇家大魔导师身体前倾，张口急喊。\",\n          \"beat\": \"反应\",\n          \"sourceBlockIds\": [\"B31\", \"B32\"]\n        }\n      ]\n    },\n    {\n      \"duration\": 5,\n      \"cast\": [\"亚瑟\", \"皇家大魔导师\", \"黑龙\"],\n      \"props\": [\"苹果\"],\n      \"startPosition\": \"亚瑟站在皇家大魔导师对面，右手拿着咬过一口的苹果；皇家大魔导师身体前倾，面朝亚瑟；黑龙在亚瑟后方的空中盘旋。\",\n      \"clips\": [\n        {\n          \"duration\": 3,\n          \"size\": \"MCU\",\n          \"cameraMove\": \"固定机位\",\n          \"visualAction\": \"亚瑟继续咬了一口苹果，咀嚼；皇家大魔导师在旁张口继续喊。\",\n          \"beat\": \"推进\",\n          \"sourceBlockIds\": [\"B33\", \"B34\"]\n        },\n        {\n          \"duration\": 2,\n          \"size\": \"WS\",\n          \"cameraMove\": \"快速下摇\",\n          \"visualAction\": \"黑龙从空中落到亚瑟身后，双翼展开，低头咆哮。\",\n          \"beat\": \"转折\",\n          \"sourceBlockIds\": [\"B35\"]\n        }\n      ]\n    },\n    {\n      \"duration\": 5,\n      \"cast\": [\"皇家大魔导师\", \"亚瑟\", \"黑龙\"],\n      \"props\": [\"苹果\"],\n      \"startPosition\": \"亚瑟背对黑龙站在雪地上，右手拿着苹果，面朝皇家大魔导师；黑龙停在亚瑟身后，低头张口；皇家大魔导师站在亚瑟前方。\",\n      \"clips\": [\n        {\n          \"duration\": 2,\n          \"size\": \"CU\",\n          \"cameraMove\": \"轻微推近\",\n          \"visualAction\": \"皇家大魔导师朝亚瑟方向伸长手臂，张口大喊。\",\n          \"beat\": \"警告\",\n          \"sourceBlockIds\": [\"B36\"]\n        },\n        {\n          \"duration\": 3,\n          \"size\": \"MCU\",\n          \"cameraMove\": \"跟拍转身\",\n          \"visualAction\": \"亚瑟微微一笑，转过身面对黑龙，随后右手举起苹果，将苹果展示在黑龙前方。\",\n          \"beat\": \"反击铺垫\",\n          \"sourceBlockIds\": [\"B37\", \"B38\"]\n        }\n      ]\n    },\n    {\n      \"duration\": 6,\n      \"cast\": [\"亚瑟\", \"黑龙\", \"皇家大魔导师\", \"男弟子\", \"女弟子\"],\n      \"props\": [\"苹果\"],\n      \"startPosition\": \"亚瑟面对黑龙站在雪地上，右手举着苹果；黑龙在亚瑟前方低身张口；皇家大魔导师与男弟子、女弟子站在亚瑟侧后方。\",\n      \"clips\": [\n        {\n          \"duration\": 2,\n          \"size\": \"MS\",\n          \"cameraMove\": \"固定机位\",\n          \"visualAction\": \"黑龙朝亚瑟喷出火焰，亚瑟站在原地，眼睛看着火焰。\",\n          \"beat\": \"危机\",\n          \"sourceBlockIds\": [\"B39\"]\n        },\n        {\n          \"duration\": 2,\n          \"size\": \"MS\",\n          \"cameraMove\": \"快速跟拍\",\n          \"visualAction\": \"亚瑟右手用力将苹果掷出，苹果飞出击中黑龙眼睛，黑龙扭头咆哮并被击退飞走。\",\n          \"beat\": \"高潮\",\n          \"sourceBlockIds\": [\"B40\", \"B41\"]\n        },\n        {\n          \"duration\": 2,\n          \"size\": \"MCU\",\n          \"cameraMove\": \"固定机位\",\n          \"visualAction\": \"皇家大魔导师与男弟子、女弟子站在原地，瞪大眼睛，张口不动。\",\n          \"beat\": \"反应\",\n          \"sourceBlockIds\": [\"B42\"]\n        }\n      ]\n    }\n  ]\n}",
+              "status": "completed",
+              "usage": {
+                "input_tokens": 2154,
+                "input_tokens_details": {
+                  "cached_tokens": 896
+                },
+                "output_tokens": 6332,
+                "output_tokens_details": {
+                  "reasoning_tokens": 5271
+                },
+                "total_tokens": 8486
+              },
+              "elapsedMs": 37424,
+              "resumed": true
+            },
+            {
+              "attempt": 2,
+              "label": "AB 新引擎修复 EP1 3/6 r2",
+              "raw": "{\n  \"sceneId\": \"1-1\",\n  \"shots\": [\n    {\n      \"duration\": 8,\n      \"cast\": [\"亚瑟\", \"皇家大魔导师\", \"男弟子\", \"女弟子\"],\n      \"props\": [\"苹果\"],\n      \"startPosition\": \"广场中央的雪地上，皇家大魔导师与男弟子、女弟子并排站在一侧，面向亚瑟；亚瑟站在他们对面，右手拿着一个咬过一口的苹果，苹果停在胸前高度。\",\n      \"clips\": [\n        {\n          \"duration\": 4,\n          \"size\": \"CU\",\n          \"cameraMove\": \"固定机位\",\n          \"visualAction\": \"亚瑟微笑，右手拿着咬过一口的苹果，嘴唇开合。\",\n          \"beat\": \"建立\",\n          \"sourceBlockIds\": [\"B30\"]\n        },\n        {\n          \"duration\": 4,\n          \"size\": \"MCU\",\n          \"cameraMove\": \"轻微横移\",\n          \"visualAction\": \"皇家大魔导师与男弟子、女弟子睁大眼睛看向亚瑟；皇家大魔导师身体前倾，张口急喊。\",\n          \"beat\": \"反应\",\n          \"sourceBlockIds\": [\"B31\", \"B32\"]\n        }\n      ]\n    },\n    {\n      \"duration\": 5,\n      \"cast\": [\"亚瑟\", \"皇家大魔导师\", \"黑龙\"],\n      \"props\": [\"苹果\"],\n      \"startPosition\": \"亚瑟站在皇家大魔导师对面，右手拿着咬过一口的苹果；皇家大魔导师身体前倾，面朝亚瑟；黑龙在亚瑟后方的空中盘旋。\",\n      \"clips\": [\n        {\n          \"duration\": 3,\n          \"size\": \"MCU\",\n          \"cameraMove\": \"固定机位\",\n          \"visualAction\": \"亚瑟继续咬了一口苹果，咀嚼；皇家大魔导师在旁张口继续喊。\",\n          \"beat\": \"推进\",\n          \"sourceBlockIds\": [\"B33\", \"B34\"]\n        },\n        {\n          \"duration\": 2,\n          \"size\": \"MCU\",\n          \"cameraMove\": \"快速下摇跟拍\",\n          \"visualAction\": \"黑龙从空中落到亚瑟身后，双翼展开，低头咆哮。\",\n          \"beat\": \"转折\",\n          \"sourceBlockIds\": [\"B35\"]\n        }\n      ]\n    },\n    {\n      \"duration\": 5,\n      \"cast\": [\"皇家大魔导师\", \"亚瑟\", \"黑龙\"],\n      \"props\": [\"苹果\"],\n      \"startPosition\": \"亚瑟背对黑龙站在雪地上，右手拿着苹果，面朝皇家大魔导师；黑龙停在亚瑟身后，低头张口；皇家大魔导师站在亚瑟前方。\",\n      \"clips\": [\n        {\n          \"duration\": 2,\n          \"size\": \"CU\",\n          \"cameraMove\": \"轻微推近\",\n          \"visualAction\": \"皇家大魔导师朝亚瑟方向伸长手臂，张口大喊。\",\n          \"beat\": \"警告\",\n          \"sourceBlockIds\": [\"B36\"]\n        },\n        {\n          \"duration\": 3,\n          \"size\": \"MCU\",\n          \"cameraMove\": \"跟拍转身\",\n          \"visualAction\": \"亚瑟微微一笑，转过身面对黑龙，随后右手举起苹果，将苹果展示在黑龙前方。\",\n          \"beat\": \"反击铺垫\",\n          \"sourceBlockIds\": [\"B37\", \"B38\"]\n        }\n      ]\n    },\n    {\n      \"duration\": 8,\n      \"cast\": [\"亚瑟\", \"黑龙\", \"皇家大魔导师\", \"男弟子\", \"女弟子\"],\n      \"props\": [\"苹果\"],\n      \"startPosition\": \"亚瑟面对黑龙站在雪地上，右手举着苹果；黑龙在亚瑟前方低身张口；皇家大魔导师与男弟子、女弟子站在亚瑟侧后方。\",\n      \"clips\": [\n        {\n          \"duration\": 2,\n          \"size\": \"MS\",\n          \"cameraMove\": \"固定机位\",\n          \"visualAction\": \"黑龙朝亚瑟喷出火焰，亚瑟站在原地，眼睛看着火焰。\",\n          \"beat\": \"危机\",\n          \"sourceBlockIds\": [\"B39\"]\n        },\n        {\n          \"duration\": 4,\n          \"size\": \"MS\",\n          \"cameraMove\": \"快速跟拍\",\n          \"visualAction\": \"亚瑟右手用力将苹果掷出，苹果飞出击中黑龙眼睛，黑龙扭头咆哮并被击退飞走。\",\n          \"beat\": \"高潮\",\n          \"sourceBlockIds\": [\"B40\", \"B41\"]\n        },\n        {\n          \"duration\": 2,\n          \"size\": \"MCU\",\n          \"cameraMove\": \"固定机位\",\n          \"visualAction\": \"皇家大魔导师与男弟子、女弟子站在原地，瞪大眼睛，张口不动。\",\n          \"beat\": \"反应\",\n          \"sourceBlockIds\": [\"B42\"]\n        }\n      ]\n    }\n  ]\n}",
+              "status": "completed",
+              "usage": {
+                "input_tokens": 3337,
+                "input_tokens_details": {
+                  "cached_tokens": 896
+                },
+                "output_tokens": 8491,
+                "output_tokens_details": {
+                  "reasoning_tokens": 7426
+                },
+                "total_tokens": 11828
+              },
+              "elapsedMs": 50082,
+              "resumed": true
+            }
+          ]
+        },
+        {
+          "chunkIndex": 4,
+          "sceneInput": {
+            "sceneId": "1-1",
+            "episode": "第1集：神秘强者降世",
+            "sceneHeading": "Village 外 未注明",
+            "cast": "村长（Village Chief，着装：粗布冬装）、皇家大魔导师（Royal Archmage，着装：法师长袍）、男弟子（Male Disciple，着装：弟子法袍）、女弟子（Female Disciple，着装：弟子法袍）、亚瑟（Arthur，着装：旅行者装）、黑龙（Dragon，着装：黑龙鳞甲）、村民群像（Villagers，着装：粗布冬装）",
+            "castNames": [
+              "村长",
+              "皇家大魔导师",
+              "男弟子",
+              "女弟子",
+              "亚瑟",
+              "黑龙",
+              "村民群像"
+            ],
+            "previousEnd": "△亚瑟将手中的苹果用力扔向黑龙。\n△击中爆炸声。苹果像炮弹一样飞出，直接击中了黑龙的眼睛，黑龙痛苦地咆哮，被击退飞走。\n△大魔导师和弟子们目瞪口呆。",
+            "nextScene": "皇家大魔导师（愤怒地训斥）：Shut up, you idiot! That's not magic. That's pure physical strength from that man.\n△男弟子捂着头，震惊地睁大眼睛。\n男弟子（震惊地喃喃自语）：Physical strength? How is that...\n△亚瑟转过身，对大魔导师和弟子们微笑，准备离开。",
+            "estimatedSeconds": 15,
+            "blocks": [
+              {
+                "id": "B43",
+                "kind": "dialogue",
+                "speaker": "男弟子",
+                "tone": "难以置信地喃喃自语",
+                "text": "How did he do that?",
+                "source": "男弟子（难以置信地喃喃自语）：How did he do that?"
+              },
+              {
+                "id": "B44",
+                "kind": "action",
+                "text": "△黑龙再次飞回，愤怒地咆哮。",
+                "source": "△黑龙再次飞回，愤怒地咆哮。"
+              },
+              {
+                "id": "B45",
+                "kind": "dialogue",
+                "speaker": "亚瑟",
+                "tone": "自信地微笑",
+                "text": "Time to end this!",
+                "source": "亚瑟（自信地微笑）：Time to end this!"
+              },
+              {
+                "id": "B46",
+                "kind": "action",
+                "text": "△亚瑟弯腰把皮箱放在雪地上。",
+                "source": "△亚瑟弯腰把皮箱放在雪地上。"
+              },
+              {
+                "id": "B47",
+                "kind": "action",
+                "text": "△重击声。亚瑟高高跃起，直接跳到了黑龙的背上，一拳将黑龙打倒在地上。",
+                "source": "△重击声。亚瑟高高跃起，直接跳到了黑龙的背上，一拳将黑龙打倒在地上。"
+              },
+              {
+                "id": "B48",
+                "kind": "dialogue",
+                "speaker": "亚瑟",
+                "tone": "轻松地微笑",
+                "text": "Nothing special.",
+                "source": "亚瑟（轻松地微笑）：Nothing special."
+              },
+              {
+                "id": "B49",
+                "kind": "action",
+                "text": "△黑龙沉重地砸进雪地，挣扎片刻后振翅飞走，消失在乌云中。",
+                "source": "△黑龙沉重地砸进雪地，挣扎片刻后振翅飞走，消失在乌云中。"
+              },
+              {
+                "id": "B50",
+                "kind": "action",
+                "text": "△男弟子看着这一幕，转头问大魔导师。",
+                "source": "△男弟子看着这一幕，转头问大魔导师。"
+              },
+              {
+                "id": "B51",
+                "kind": "dialogue",
+                "speaker": "男弟子",
+                "tone": "兴奋且好奇地询问",
+                "text": "Master, what spell is that? Can I learn it?",
+                "source": "男弟子（兴奋且好奇地询问）：Master, what spell is that? Can I learn it?"
+              },
+              {
+                "id": "B52",
+                "kind": "action",
+                "text": "△大魔导师一巴掌拍在男弟子的头上，生气地训斥道。",
+                "source": "△大魔导师一巴掌拍在男弟子的头上，生气地训斥道。"
+              }
+            ],
+            "chunkIndex": 4,
+            "chunkCount": 6
+          },
+          "finalPlan": {
+            "sceneId": "1-1",
+            "shots": [
+              {
+                "duration": 6,
+                "cast": [
+                  "男弟子",
+                  "黑龙",
+                  "亚瑟"
+                ],
+                "props": [
+                  "皮箱"
+                ],
+                "startPosition": "男弟子站在雪地中，身体朝向亚瑟；亚瑟在数步外站立，右手提着皮箱；黑龙位于远处天空，尚未进入近景。",
+                "clips": [
+                  {
+                    "duration": 2,
+                    "size": "CU",
+                    "cameraMove": "固定机位",
+                    "visualAction": "男弟子抬眼看向亚瑟，嘴唇微动。",
+                    "beat": "疑问",
+                    "sourceBlockIds": [
+                      "B43"
+                    ]
+                  },
+                  {
+                    "duration": 2,
+                    "size": "MCU",
+                    "cameraMove": "快速推近",
+                    "visualAction": "黑龙从远处天空俯冲回场，双翼展开，张口咆哮。",
+                    "beat": "转折",
+                    "sourceBlockIds": [
+                      "B44"
+                    ]
+                  },
+                  {
+                    "duration": 2,
+                    "size": "MCU",
+                    "cameraMove": "固定机位",
+                    "visualAction": "亚瑟右手提箱，面向低空黑龙，嘴角上扬，开口说话。",
+                    "beat": "宣告",
+                    "sourceBlockIds": [
+                      "B45"
+                    ]
+                  }
+                ]
+              },
+              {
+                "duration": 6,
+                "cast": [
+                  "亚瑟",
+                  "黑龙"
+                ],
+                "props": [
+                  "皮箱"
+                ],
+                "startPosition": "亚瑟站在雪地，右手提着皮箱，面朝低空悬停的黑龙；黑龙在数步外低空悬停，双翼展开，头部朝向亚瑟。",
+                "clips": [
+                  {
+                    "duration": 2,
+                    "size": "MCU",
+                    "cameraMove": "下摇跟拍",
+                    "visualAction": "亚瑟弯腰，把右手提着的皮箱放到雪地上，手离开箱柄。",
+                    "beat": "准备",
+                    "sourceBlockIds": [
+                      "B46"
+                    ]
+                  },
+                  {
+                    "duration": 2,
+                    "size": "MS",
+                    "cameraMove": "快速跟拍",
+                    "visualAction": "亚瑟从雪地跃起，落到黑龙背上，挥拳向下击中黑龙，黑龙身体砸向雪地。",
+                    "beat": "动作",
+                    "sourceBlockIds": [
+                      "B47"
+                    ]
+                  },
+                  {
+                    "duration": 2,
+                    "size": "MCU",
+                    "cameraMove": "固定机位",
+                    "visualAction": "亚瑟站在倒地的黑龙旁，面带微笑，开口说话。",
+                    "beat": "强调",
+                    "sourceBlockIds": [
+                      "B48"
+                    ]
+                  }
+                ]
+              },
+              {
+                "duration": 9,
+                "cast": [
+                  "黑龙",
+                  "亚瑟",
+                  "男弟子",
+                  "皇家大魔导师"
+                ],
+                "props": [
+                  "皮箱"
+                ],
+                "startPosition": "黑龙倒在雪地中央，亚瑟站在黑龙背旁；皮箱留在亚瑟脚边雪地；男弟子与皇家大魔导师站在数步外，男弟子面朝黑龙，皇家大魔导师在男弟子侧后方。",
+                "clips": [
+                  {
+                    "duration": 2,
+                    "size": "MS",
+                    "cameraMove": "上摇跟拍",
+                    "visualAction": "黑龙在雪地中挣扎，双翼拍地，随后振翅从亚瑟身旁飞起，冲入乌云。",
+                    "beat": "收束",
+                    "sourceBlockIds": [
+                      "B49"
+                    ]
+                  },
+                  {
+                    "duration": 5,
+                    "size": "MCU",
+                    "cameraMove": "固定机位",
+                    "visualAction": "男弟子看向黑龙飞走的方向，随后转头面向皇家大魔导师，嘴唇开合，抬手比划。",
+                    "beat": "询问",
+                    "sourceBlockIds": [
+                      "B50",
+                      "B51"
+                    ]
+                  },
+                  {
+                    "duration": 2,
+                    "size": "MCU",
+                    "cameraMove": "固定机位",
+                    "visualAction": "皇家大魔导师抬手，一巴掌拍在男弟子头上；男弟子头部向一侧偏。",
+                    "beat": "训斥",
+                    "sourceBlockIds": [
+                      "B52"
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          "finalRaw": "{\n  \"sceneId\": \"1-1\",\n  \"shots\": [\n    {\n      \"duration\": 6,\n      \"cast\": [\"男弟子\", \"黑龙\", \"亚瑟\"],\n      \"props\": [\"皮箱\"],\n      \"startPosition\": \"男弟子站在雪地中，身体朝向亚瑟；亚瑟在数步外站立，右手提着皮箱；黑龙位于远处天空，尚未进入近景。\",\n      \"clips\": [\n        {\n          \"duration\": 2,\n          \"size\": \"CU\",\n          \"cameraMove\": \"固定机位\",\n          \"visualAction\": \"男弟子抬眼看向亚瑟，嘴唇微动。\",\n          \"beat\": \"疑问\",\n          \"sourceBlockIds\": [\"B43\"]\n        },\n        {\n          \"duration\": 2,\n          \"size\": \"MCU\",\n          \"cameraMove\": \"快速推近\",\n          \"visualAction\": \"黑龙从远处天空俯冲回场，双翼展开，张口咆哮。\",\n          \"beat\": \"转折\",\n          \"sourceBlockIds\": [\"B44\"]\n        },\n        {\n          \"duration\": 2,\n          \"size\": \"MCU\",\n          \"cameraMove\": \"固定机位\",\n          \"visualAction\": \"亚瑟右手提箱，面向低空黑龙，嘴角上扬，开口说话。\",\n          \"beat\": \"宣告\",\n          \"sourceBlockIds\": [\"B45\"]\n        }\n      ]\n    },\n    {\n      \"duration\": 6,\n      \"cast\": [\"亚瑟\", \"黑龙\"],\n      \"props\": [\"皮箱\"],\n      \"startPosition\": \"亚瑟站在雪地，右手提着皮箱，面朝低空悬停的黑龙；黑龙在数步外低空悬停，双翼展开，头部朝向亚瑟。\",\n      \"clips\": [\n        {\n          \"duration\": 2,\n          \"size\": \"MCU\",\n          \"cameraMove\": \"下摇跟拍\",\n          \"visualAction\": \"亚瑟弯腰，把右手提着的皮箱放到雪地上，手离开箱柄。\",\n          \"beat\": \"准备\",\n          \"sourceBlockIds\": [\"B46\"]\n        },\n        {\n          \"duration\": 2,\n          \"size\": \"MS\",\n          \"cameraMove\": \"快速跟拍\",\n          \"visualAction\": \"亚瑟从雪地跃起，落到黑龙背上，挥拳向下击中黑龙，黑龙身体砸向雪地。\",\n          \"beat\": \"动作\",\n          \"sourceBlockIds\": [\"B47\"]\n        },\n        {\n          \"duration\": 2,\n          \"size\": \"MCU\",\n          \"cameraMove\": \"固定机位\",\n          \"visualAction\": \"亚瑟站在倒地的黑龙旁，面带微笑，开口说话。\",\n          \"beat\": \"强调\",\n          \"sourceBlockIds\": [\"B48\"]\n        }\n      ]\n    },\n    {\n      \"duration\": 9,\n      \"cast\": [\"黑龙\", \"亚瑟\", \"男弟子\", \"皇家大魔导师\"],\n      \"props\": [\"皮箱\"],\n      \"startPosition\": \"黑龙倒在雪地中央，亚瑟站在黑龙背旁；皮箱留在亚瑟脚边雪地；男弟子与皇家大魔导师站在数步外，男弟子面朝黑龙，皇家大魔导师在男弟子侧后方。\",\n      \"clips\": [\n        {\n          \"duration\": 2,\n          \"size\": \"MS\",\n          \"cameraMove\": \"上摇跟拍\",\n          \"visualAction\": \"黑龙在雪地中挣扎，双翼拍地，随后振翅从亚瑟身旁飞起，冲入乌云。\",\n          \"beat\": \"收束\",\n          \"sourceBlockIds\": [\"B49\"]\n        },\n        {\n          \"duration\": 5,\n          \"size\": \"MCU\",\n          \"cameraMove\": \"固定机位\",\n          \"visualAction\": \"男弟子看向黑龙飞走的方向，随后转头面向皇家大魔导师，嘴唇开合，抬手比划。\",\n          \"beat\": \"询问\",\n          \"sourceBlockIds\": [\"B50\", \"B51\"]\n        },\n        {\n          \"duration\": 2,\n          \"size\": \"MCU\",\n          \"cameraMove\": \"固定机位\",\n          \"visualAction\": \"皇家大魔导师抬手，一巴掌拍在男弟子头上；男弟子头部向一侧偏。\",\n          \"beat\": \"训斥\",\n          \"sourceBlockIds\": [\"B52\"]\n        }\n      ]\n    }\n  ]\n}",
+          "resumedFrom": "2026-11-04T08-08-39-931Z-AB-新引擎修复-EP1-4-6-r2.json",
+          "attempts": [
+            {
+              "attempt": 1,
+              "label": "AB 新引擎 EP1 4/6 r1",
+              "raw": "{\n  \"sceneId\": \"1-1\",\n  \"shots\": [\n    {\n      \"duration\": 6,\n      \"cast\": [\"男弟子\", \"黑龙\", \"亚瑟\"],\n      \"props\": [\"皮箱\"],\n      \"startPosition\": \"男弟子站在雪地中，身体朝向亚瑟；亚瑟在数步外站立，右手提着皮箱；黑龙位于远处天空，尚未进入近景。\",\n      \"clips\": [\n        {\n          \"duration\": 2,\n          \"size\": \"CU\",\n          \"cameraMove\": \"固定机位\",\n          \"visualAction\": \"男弟子抬眼看向亚瑟，嘴唇微动。\",\n          \"beat\": \"疑问\",\n          \"sourceBlockIds\": [\"B43\"]\n        },\n        {\n          \"duration\": 2,\n          \"size\": \"MCU\",\n          \"cameraMove\": \"快速推近\",\n          \"visualAction\": \"黑龙从远处天空俯冲回场，双翼展开，张口咆哮。\",\n          \"beat\": \"转折\",\n          \"sourceBlockIds\": [\"B44\"]\n        },\n        {\n          \"duration\": 2,\n          \"size\": \"MCU\",\n          \"cameraMove\": \"固定机位\",\n          \"visualAction\": \"亚瑟右手提箱，面向低空黑龙，嘴角上扬，开口说话。\",\n          \"beat\": \"宣告\",\n          \"sourceBlockIds\": [\"B45\"]\n        }\n      ]\n    },\n    {\n      \"duration\": 6,\n      \"cast\": [\"亚瑟\", \"黑龙\"],\n      \"props\": [\"皮箱\"],\n      \"startPosition\": \"亚瑟站在雪地，右手提着皮箱，面朝低空悬停的黑龙；黑龙在数步外低空悬停，双翼展开，头部朝向亚瑟。\",\n      \"clips\": [\n        {\n          \"duration\": 2,\n          \"size\": \"MCU\",\n          \"cameraMove\": \"下摇跟拍\",\n          \"visualAction\": \"亚瑟弯腰，把右手提着的皮箱放到雪地上，手离开箱柄。\",\n          \"beat\": \"准备\",\n          \"sourceBlockIds\": [\"B46\"]\n        },\n        {\n          \"duration\": 2,\n          \"size\": \"MS\",\n          \"cameraMove\": \"快速跟拍\",\n          \"visualAction\": \"亚瑟从雪地跃起，落到黑龙背上，挥拳向下击中黑龙，黑龙身体砸向雪地。\",\n          \"beat\": \"动作\",\n          \"sourceBlockIds\": [\"B47\"]\n        },\n        {\n          \"duration\": 2,\n          \"size\": \"MCU\",\n          \"cameraMove\": \"固定机位\",\n          \"visualAction\": \"亚瑟站在倒地的黑龙旁，面带微笑，开口说话。\",\n          \"beat\": \"强调\",\n          \"sourceBlockIds\": [\"B48\"]\n        }\n      ]\n    },\n    {\n      \"duration\": 6,\n      \"cast\": [\"黑龙\", \"亚瑟\", \"男弟子\", \"大魔导师\"],\n      \"props\": [\"皮箱\"],\n      \"startPosition\": \"黑龙倒在雪地中央，亚瑟站在黑龙背旁；皮箱留在亚瑟脚边雪地；男弟子与大魔导师站在数步外，男弟子面朝黑龙，大魔导师在男弟子侧后方。\",\n      \"clips\": [\n        {\n          \"duration\": 2,\n          \"size\": \"MS\",\n          \"cameraMove\": \"上摇跟拍\",\n          \"visualAction\": \"黑龙在雪地中挣扎，双翼拍地，随后振翅从亚瑟身旁飞起，冲入乌云。\",\n          \"beat\": \"收束\",\n          \"sourceBlockIds\": [\"B49\"]\n        },\n        {\n          \"duration\": 2,\n          \"size\": \"MCU\",\n          \"cameraMove\": \"固定机位\",\n          \"visualAction\": \"男弟子看向黑龙飞走的方向，随后转头面向大魔导师，嘴唇开合。\",\n          \"beat\": \"询问\",\n          \"sourceBlockIds\": [\"B50\", \"B51\"]\n        },\n        {\n          \"duration\": 2,\n          \"size\": \"MCU\",\n          \"cameraMove\": \"固定机位\",\n          \"visualAction\": \"大魔导师抬手，一巴掌拍在男弟子头上；男弟子头部向一侧偏。\",\n          \"beat\": \"训斥\",\n          \"sourceBlockIds\": [\"B52\"]\n        }\n      ]\n    }\n  ]\n}",
+              "status": "completed",
+              "usage": {
+                "input_tokens": 1977,
+                "input_tokens_details": {
+                  "cached_tokens": 896
+                },
+                "output_tokens": 9444,
+                "output_tokens_details": {
+                  "reasoning_tokens": 8497
+                },
+                "total_tokens": 11421
+              },
+              "elapsedMs": 57178,
+              "resumed": true
+            },
+            {
+              "attempt": 2,
+              "label": "AB 新引擎修复 EP1 4/6 r2",
+              "raw": "{\n  \"sceneId\": \"1-1\",\n  \"shots\": [\n    {\n      \"duration\": 6,\n      \"cast\": [\"男弟子\", \"黑龙\", \"亚瑟\"],\n      \"props\": [\"皮箱\"],\n      \"startPosition\": \"男弟子站在雪地中，身体朝向亚瑟；亚瑟在数步外站立，右手提着皮箱；黑龙位于远处天空，尚未进入近景。\",\n      \"clips\": [\n        {\n          \"duration\": 2,\n          \"size\": \"CU\",\n          \"cameraMove\": \"固定机位\",\n          \"visualAction\": \"男弟子抬眼看向亚瑟，嘴唇微动。\",\n          \"beat\": \"疑问\",\n          \"sourceBlockIds\": [\"B43\"]\n        },\n        {\n          \"duration\": 2,\n          \"size\": \"MCU\",\n          \"cameraMove\": \"快速推近\",\n          \"visualAction\": \"黑龙从远处天空俯冲回场，双翼展开，张口咆哮。\",\n          \"beat\": \"转折\",\n          \"sourceBlockIds\": [\"B44\"]\n        },\n        {\n          \"duration\": 2,\n          \"size\": \"MCU\",\n          \"cameraMove\": \"固定机位\",\n          \"visualAction\": \"亚瑟右手提箱，面向低空黑龙，嘴角上扬，开口说话。\",\n          \"beat\": \"宣告\",\n          \"sourceBlockIds\": [\"B45\"]\n        }\n      ]\n    },\n    {\n      \"duration\": 6,\n      \"cast\": [\"亚瑟\", \"黑龙\"],\n      \"props\": [\"皮箱\"],\n      \"startPosition\": \"亚瑟站在雪地，右手提着皮箱，面朝低空悬停的黑龙；黑龙在数步外低空悬停，双翼展开，头部朝向亚瑟。\",\n      \"clips\": [\n        {\n          \"duration\": 2,\n          \"size\": \"MCU\",\n          \"cameraMove\": \"下摇跟拍\",\n          \"visualAction\": \"亚瑟弯腰，把右手提着的皮箱放到雪地上，手离开箱柄。\",\n          \"beat\": \"准备\",\n          \"sourceBlockIds\": [\"B46\"]\n        },\n        {\n          \"duration\": 2,\n          \"size\": \"MS\",\n          \"cameraMove\": \"快速跟拍\",\n          \"visualAction\": \"亚瑟从雪地跃起，落到黑龙背上，挥拳向下击中黑龙，黑龙身体砸向雪地。\",\n          \"beat\": \"动作\",\n          \"sourceBlockIds\": [\"B47\"]\n        },\n        {\n          \"duration\": 2,\n          \"size\": \"MCU\",\n          \"cameraMove\": \"固定机位\",\n          \"visualAction\": \"亚瑟站在倒地的黑龙旁，面带微笑，开口说话。\",\n          \"beat\": \"强调\",\n          \"sourceBlockIds\": [\"B48\"]\n        }\n      ]\n    },\n    {\n      \"duration\": 9,\n      \"cast\": [\"黑龙\", \"亚瑟\", \"男弟子\", \"皇家大魔导师\"],\n      \"props\": [\"皮箱\"],\n      \"startPosition\": \"黑龙倒在雪地中央，亚瑟站在黑龙背旁；皮箱留在亚瑟脚边雪地；男弟子与皇家大魔导师站在数步外，男弟子面朝黑龙，皇家大魔导师在男弟子侧后方。\",\n      \"clips\": [\n        {\n          \"duration\": 2,\n          \"size\": \"MS\",\n          \"cameraMove\": \"上摇跟拍\",\n          \"visualAction\": \"黑龙在雪地中挣扎，双翼拍地，随后振翅从亚瑟身旁飞起，冲入乌云。\",\n          \"beat\": \"收束\",\n          \"sourceBlockIds\": [\"B49\"]\n        },\n        {\n          \"duration\": 5,\n          \"size\": \"MCU\",\n          \"cameraMove\": \"固定机位\",\n          \"visualAction\": \"男弟子看向黑龙飞走的方向，随后转头面向皇家大魔导师，嘴唇开合，抬手比划。\",\n          \"beat\": \"询问\",\n          \"sourceBlockIds\": [\"B50\", \"B51\"]\n        },\n        {\n          \"duration\": 2,\n          \"size\": \"MCU\",\n          \"cameraMove\": \"固定机位\",\n          \"visualAction\": \"皇家大魔导师抬手，一巴掌拍在男弟子头上；男弟子头部向一侧偏。\",\n          \"beat\": \"训斥\",\n          \"sourceBlockIds\": [\"B52\"]\n        }\n      ]\n    }\n  ]\n}",
+              "status": "completed",
+              "usage": {
+                "input_tokens": 3011,
+                "input_tokens_details": {
+                  "cached_tokens": 896
+                },
+                "output_tokens": 2195,
+                "output_tokens_details": {
+                  "reasoning_tokens": 1238
+                },
+                "total_tokens": 5206
+              },
+              "elapsedMs": 10883,
+              "resumed": true
+            }
+          ]
+        },
+        {
+          "chunkIndex": 5,
+          "sceneInput": {
+            "sceneId": "1-1",
+            "episode": "第1集：神秘强者降世",
+            "sceneHeading": "Village 外 未注明",
+            "cast": "村长（Village Chief，着装：粗布冬装）、皇家大魔导师（Royal Archmage，着装：法师长袍）、男弟子（Male Disciple，着装：弟子法袍）、女弟子（Female Disciple，着装：弟子法袍）、亚瑟（Arthur，着装：旅行者装）、黑龙（Dragon，着装：黑龙鳞甲）、村民群像（Villagers，着装：粗布冬装）",
+            "castNames": [
+              "村长",
+              "皇家大魔导师",
+              "男弟子",
+              "女弟子",
+              "亚瑟",
+              "黑龙",
+              "村民群像"
+            ],
+            "previousEnd": "△男弟子看着这一幕，转头问大魔导师。\n男弟子（兴奋且好奇地询问）：Master, what spell is that? Can I learn it?\n△大魔导师一巴掌拍在男弟子的头上，生气地训斥道。",
+            "nextScene": "女弟子（崇拜，赞叹）：Oh my god, that's so cool!",
+            "estimatedSeconds": 18,
+            "blocks": [
+              {
+                "id": "B53",
+                "kind": "dialogue",
+                "speaker": "皇家大魔导师",
+                "tone": "愤怒地训斥",
+                "text": "Shut up, you idiot! That's not magic. That's pure physical strength from that man.",
+                "source": "皇家大魔导师（愤怒地训斥）：Shut up, you idiot! That's not magic. That's pure physical strength from that man."
+              },
+              {
+                "id": "B54",
+                "kind": "action",
+                "text": "△男弟子捂着头，震惊地睁大眼睛。",
+                "source": "△男弟子捂着头，震惊地睁大眼睛。"
+              },
+              {
+                "id": "B55",
+                "kind": "dialogue",
+                "speaker": "男弟子",
+                "tone": "震惊地喃喃自语",
+                "text": "Physical strength? How is that...",
+                "source": "男弟子（震惊地喃喃自语）：Physical strength? How is that..."
+              },
+              {
+                "id": "B56",
+                "kind": "action",
+                "text": "△亚瑟转过身，对大魔导师和弟子们微笑，准备离开。",
+                "source": "△亚瑟转过身，对大魔导师和弟子们微笑，准备离开。"
+              },
+              {
+                "id": "B57",
+                "kind": "dialogue",
+                "speaker": "亚瑟",
+                "tone": "微笑，挥手",
+                "text": "I'll leave the rest to you. I'm off. Bye.",
+                "source": "亚瑟（微笑，挥手）：I'll leave the rest to you. I'm off. Bye."
+              },
+              {
+                "id": "B58",
+                "kind": "action",
+                "text": "△大魔导师急切地向前迈了一步，伸手喊道。",
+                "source": "△大魔导师急切地向前迈了一步，伸手喊道。"
+              },
+              {
+                "id": "B59",
+                "kind": "dialogue",
+                "speaker": "皇家大魔导师",
+                "tone": "急切",
+                "text": "Wait!",
+                "source": "皇家大魔导师（急切）：Wait!"
+              },
+              {
+                "id": "B60",
+                "kind": "action",
+                "text": "△亚瑟一跃而起，化作一道黑影飞向天空。",
+                "source": "△亚瑟一跃而起，化作一道黑影飞向天空。"
+              },
+              {
+                "id": "B61",
+                "kind": "action",
+                "text": "△女弟子抬头看着天空，双手合十，露出崇拜的神色。",
+                "source": "△女弟子抬头看着天空，双手合十，露出崇拜的神色。"
+              }
+            ],
+            "chunkIndex": 5,
+            "chunkCount": 6
+          },
+          "finalPlan": {
+            "sceneId": "1-1",
+            "shots": [
+              {
+                "duration": 10,
+                "cast": [
+                  "皇家大魔导师",
+                  "男弟子"
+                ],
+                "props": [],
+                "startPosition": "皇家大魔导师与男弟子相对站立，大魔导师右手停在男弟子头顶旁；男弟子头部向一侧偏开，双臂垂在身侧。",
+                "clips": [
+                  {
+                    "duration": 6,
+                    "size": "CU",
+                    "cameraMove": "固定机位",
+                    "visualAction": "皇家大魔导师面向男弟子，开口说话，右手随训斥动作向下压。",
+                    "beat": "冲突",
+                    "sourceBlockIds": [
+                      "B53"
+                    ]
+                  },
+                  {
+                    "duration": 4,
+                    "size": "CU",
+                    "cameraMove": "固定机位",
+                    "visualAction": "男弟子双手抬起捂住头，眼睛睁大，随后嘴唇微动低声开口。",
+                    "beat": "反应",
+                    "sourceBlockIds": [
+                      "B54",
+                      "B55"
+                    ]
+                  }
+                ]
+              },
+              {
+                "duration": 10,
+                "cast": [
+                  "亚瑟",
+                  "皇家大魔导师",
+                  "男弟子"
+                ],
+                "props": [],
+                "startPosition": "男弟子双手捂头站在大魔导师侧后方；皇家大魔导师面朝男弟子方向，右手垂在身侧；亚瑟位于两人侧前方，背对并侧对他们。",
+                "clips": [
+                  {
+                    "duration": 5,
+                    "size": "CU",
+                    "cameraMove": "固定机位",
+                    "visualAction": "亚瑟转头面向大魔导师与男弟子的方向，微笑，抬手挥动，脚步转向外侧。",
+                    "beat": "转折",
+                    "sourceBlockIds": [
+                      "B56",
+                      "B57"
+                    ]
+                  },
+                  {
+                    "duration": 3,
+                    "size": "MCU",
+                    "cameraMove": "固定机位",
+                    "visualAction": "皇家大魔导师向前迈出一步，右手伸向亚瑟方向，开口喊。",
+                    "beat": "阻止",
+                    "sourceBlockIds": [
+                      "B58",
+                      "B59"
+                    ]
+                  },
+                  {
+                    "duration": 2,
+                    "size": "WS",
+                    "cameraMove": "快速上摇",
+                    "visualAction": "亚瑟跃起，身体化作一道黑影向上飞离画面。",
+                    "beat": "钩子",
+                    "sourceBlockIds": [
+                      "B60"
+                    ]
+                  }
+                ]
+              },
+              {
+                "duration": 5,
+                "cast": [
+                  "女弟子"
+                ],
+                "props": [],
+                "startPosition": "女弟子站在原处，面朝天空方向，双手垂在身侧。",
+                "clips": [
+                  {
+                    "duration": 5,
+                    "size": "CU",
+                    "cameraMove": "缓慢推近",
+                    "visualAction": "女弟子抬头望向天空，双手在胸前合十，目光追随天空方向。",
+                    "beat": "反应",
+                    "sourceBlockIds": [
+                      "B61"
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          "finalRaw": "{\n  \"sceneId\": \"1-1\",\n  \"shots\": [\n    {\n      \"duration\": 10,\n      \"cast\": [\"皇家大魔导师\", \"男弟子\"],\n      \"props\": [],\n      \"startPosition\": \"皇家大魔导师与男弟子相对站立，大魔导师右手停在男弟子头顶旁；男弟子头部向一侧偏开，双臂垂在身侧。\",\n      \"clips\": [\n        {\n          \"duration\": 6,\n          \"size\": \"CU\",\n          \"cameraMove\": \"固定机位\",\n          \"visualAction\": \"皇家大魔导师面向男弟子，开口说话，右手随训斥动作向下压。\",\n          \"beat\": \"冲突\",\n          \"sourceBlockIds\": [\"B53\"]\n        },\n        {\n          \"duration\": 4,\n          \"size\": \"CU\",\n          \"cameraMove\": \"固定机位\",\n          \"visualAction\": \"男弟子双手抬起捂住头，眼睛睁大，随后嘴唇微动低声开口。\",\n          \"beat\": \"反应\",\n          \"sourceBlockIds\": [\"B54\", \"B55\"]\n        }\n      ]\n    },\n    {\n      \"duration\": 10,\n      \"cast\": [\"亚瑟\", \"皇家大魔导师\", \"男弟子\"],\n      \"props\": [],\n      \"startPosition\": \"男弟子双手捂头站在大魔导师侧后方；皇家大魔导师面朝男弟子方向，右手垂在身侧；亚瑟位于两人侧前方，背对并侧对他们。\",\n      \"clips\": [\n        {\n          \"duration\": 5,\n          \"size\": \"CU\",\n          \"cameraMove\": \"固定机位\",\n          \"visualAction\": \"亚瑟转头面向大魔导师与男弟子的方向，微笑，抬手挥动，脚步转向外侧。\",\n          \"beat\": \"转折\",\n          \"sourceBlockIds\": [\"B56\", \"B57\"]\n        },\n        {\n          \"duration\": 3,\n          \"size\": \"MCU\",\n          \"cameraMove\": \"固定机位\",\n          \"visualAction\": \"皇家大魔导师向前迈出一步，右手伸向亚瑟方向，开口喊。\",\n          \"beat\": \"阻止\",\n          \"sourceBlockIds\": [\"B58\", \"B59\"]\n        },\n        {\n          \"duration\": 2,\n          \"size\": \"WS\",\n          \"cameraMove\": \"快速上摇\",\n          \"visualAction\": \"亚瑟跃起，身体化作一道黑影向上飞离画面。\",\n          \"beat\": \"钩子\",\n          \"sourceBlockIds\": [\"B60\"]\n        }\n      ]\n    },\n    {\n      \"duration\": 5,\n      \"cast\": [\"女弟子\"],\n      \"props\": [],\n      \"startPosition\": \"女弟子站在原处，面朝天空方向，双手垂在身侧。\",\n      \"clips\": [\n        {\n          \"duration\": 5,\n          \"size\": \"CU\",\n          \"cameraMove\": \"缓慢推近\",\n          \"visualAction\": \"女弟子抬头望向天空，双手在胸前合十，目光追随天空方向。\",\n          \"beat\": \"反应\",\n          \"sourceBlockIds\": [\"B61\"]\n        }\n      ]\n    }\n  ]\n}",
+          "resumedFrom": "2026-11-04T08-09-20-065Z-AB-新引擎修复-EP1-5-6-r2.json",
+          "attempts": [
+            {
+              "attempt": 1,
+              "label": "AB 新引擎 EP1 5/6 r1",
+              "raw": "{\n  \"sceneId\": \"1-1\",\n  \"shots\": [\n    {\n      \"duration\": 6,\n      \"cast\": [\"皇家大魔导师\", \"男弟子\"],\n      \"props\": [],\n      \"startPosition\": \"皇家大魔导师与男弟子相对站立，大魔导师右手停在男弟子头顶旁；男弟子头部向一侧偏开，双臂垂在身侧。\",\n      \"clips\": [\n        {\n          \"duration\": 4,\n          \"size\": \"CU\",\n          \"cameraMove\": \"固定机位\",\n          \"visualAction\": \"皇家大魔导师面向男弟子，开口说话。\",\n          \"beat\": \"冲突\",\n          \"sourceBlockIds\": [\"B53\"]\n        },\n        {\n          \"duration\": 2,\n          \"size\": \"CU\",\n          \"cameraMove\": \"固定机位\",\n          \"visualAction\": \"男弟子双手抬起捂住头，眼睛睁大，随后低声开口。\",\n          \"beat\": \"反应\",\n          \"sourceBlockIds\": [\"B54\", \"B55\"]\n        }\n      ]\n    },\n    {\n      \"duration\": 8,\n      \"cast\": [\"亚瑟\", \"皇家大魔导师\", \"男弟子\"],\n      \"props\": [],\n      \"startPosition\": \"男弟子双手捂头站在大魔导师侧后方；皇家大魔导师面朝男弟子方向，右手垂在身侧；亚瑟位于两人侧前方，背对并侧对他们。\",\n      \"clips\": [\n        {\n          \"duration\": 4,\n          \"size\": \"CU\",\n          \"cameraMove\": \"固定机位\",\n          \"visualAction\": \"亚瑟转头面向大魔导师与男弟子的方向，微笑，抬手挥动，脚步转向外侧。\",\n          \"beat\": \"转折\",\n          \"sourceBlockIds\": [\"B56\", \"B57\"]\n        },\n        {\n          \"duration\": 2,\n          \"size\": \"MCU\",\n          \"cameraMove\": \"固定机位\",\n          \"visualAction\": \"皇家大魔导师向前迈出一步，右手伸向亚瑟方向，开口喊。\",\n          \"beat\": \"阻止\",\n          \"sourceBlockIds\": [\"B58\", \"B59\"]\n        },\n        {\n          \"duration\": 2,\n          \"size\": \"WS\",\n          \"cameraMove\": \"快速上摇\",\n          \"visualAction\": \"亚瑟跃起，身体化作一道黑影向上飞离画面。\",\n          \"beat\": \"钩子\",\n          \"sourceBlockIds\": [\"B60\"]\n        }\n      ]\n    },\n    {\n      \"duration\": 5,\n      \"cast\": [\"女弟子\"],\n      \"props\": [],\n      \"startPosition\": \"女弟子站在原处，面朝天空方向，双手垂在身侧。\",\n      \"clips\": [\n        {\n          \"duration\": 5,\n          \"size\": \"CU\",\n          \"cameraMove\": \"缓慢推近\",\n          \"visualAction\": \"女弟子抬头望向天空，双手在胸前合十。\",\n          \"beat\": \"反应\",\n          \"sourceBlockIds\": [\"B61\"]\n        }\n      ]\n    }\n  ]\n}",
+              "status": "completed",
+              "usage": {
+                "input_tokens": 1869,
+                "input_tokens_details": {
+                  "cached_tokens": 896
+                },
+                "output_tokens": 6263,
+                "output_tokens_details": {
+                  "reasoning_tokens": 5592
+                },
+                "total_tokens": 8132
+              },
+              "elapsedMs": 39348,
+              "resumed": true
+            },
+            {
+              "attempt": 2,
+              "label": "AB 新引擎修复 EP1 5/6 r2",
+              "raw": "{\n  \"sceneId\": \"1-1\",\n  \"shots\": [\n    {\n      \"duration\": 10,\n      \"cast\": [\"皇家大魔导师\", \"男弟子\"],\n      \"props\": [],\n      \"startPosition\": \"皇家大魔导师与男弟子相对站立，大魔导师右手停在男弟子头顶旁；男弟子头部向一侧偏开，双臂垂在身侧。\",\n      \"clips\": [\n        {\n          \"duration\": 6,\n          \"size\": \"CU\",\n          \"cameraMove\": \"固定机位\",\n          \"visualAction\": \"皇家大魔导师面向男弟子，开口说话，右手随训斥动作向下压。\",\n          \"beat\": \"冲突\",\n          \"sourceBlockIds\": [\"B53\"]\n        },\n        {\n          \"duration\": 4,\n          \"size\": \"CU\",\n          \"cameraMove\": \"固定机位\",\n          \"visualAction\": \"男弟子双手抬起捂住头，眼睛睁大，随后嘴唇微动低声开口。\",\n          \"beat\": \"反应\",\n          \"sourceBlockIds\": [\"B54\", \"B55\"]\n        }\n      ]\n    },\n    {\n      \"duration\": 10,\n      \"cast\": [\"亚瑟\", \"皇家大魔导师\", \"男弟子\"],\n      \"props\": [],\n      \"startPosition\": \"男弟子双手捂头站在大魔导师侧后方；皇家大魔导师面朝男弟子方向，右手垂在身侧；亚瑟位于两人侧前方，背对并侧对他们。\",\n      \"clips\": [\n        {\n          \"duration\": 5,\n          \"size\": \"CU\",\n          \"cameraMove\": \"固定机位\",\n          \"visualAction\": \"亚瑟转头面向大魔导师与男弟子的方向，微笑，抬手挥动，脚步转向外侧。\",\n          \"beat\": \"转折\",\n          \"sourceBlockIds\": [\"B56\", \"B57\"]\n        },\n        {\n          \"duration\": 3,\n          \"size\": \"MCU\",\n          \"cameraMove\": \"固定机位\",\n          \"visualAction\": \"皇家大魔导师向前迈出一步，右手伸向亚瑟方向，开口喊。\",\n          \"beat\": \"阻止\",\n          \"sourceBlockIds\": [\"B58\", \"B59\"]\n        },\n        {\n          \"duration\": 2,\n          \"size\": \"WS\",\n          \"cameraMove\": \"快速上摇\",\n          \"visualAction\": \"亚瑟跃起，身体化作一道黑影向上飞离画面。\",\n          \"beat\": \"钩子\",\n          \"sourceBlockIds\": [\"B60\"]\n        }\n      ]\n    },\n    {\n      \"duration\": 5,\n      \"cast\": [\"女弟子\"],\n      \"props\": [],\n      \"startPosition\": \"女弟子站在原处，面朝天空方向，双手垂在身侧。\",\n      \"clips\": [\n        {\n          \"duration\": 5,\n          \"size\": \"CU\",\n          \"cameraMove\": \"缓慢推近\",\n          \"visualAction\": \"女弟子抬头望向天空，双手在胸前合十，目光追随天空方向。\",\n          \"beat\": \"反应\",\n          \"sourceBlockIds\": [\"B61\"]\n        }\n      ]\n    }\n  ]\n}",
+              "status": "completed",
+              "usage": {
+                "input_tokens": 2668,
+                "input_tokens_details": {
+                  "cached_tokens": 896
+                },
+                "output_tokens": 1333,
+                "output_tokens_details": {
+                  "reasoning_tokens": 646
+                },
+                "total_tokens": 4001
+              },
+              "elapsedMs": 6792,
+              "resumed": true
+            }
+          ]
+        },
+        {
+          "chunkIndex": 6,
+          "sceneInput": {
+            "sceneId": "1-1",
+            "episode": "第1集：神秘强者降世",
+            "sceneHeading": "Village 外 未注明",
+            "cast": "村长（Village Chief，着装：粗布冬装）、皇家大魔导师（Royal Archmage，着装：法师长袍）、男弟子（Male Disciple，着装：弟子法袍）、女弟子（Female Disciple，着装：弟子法袍）、亚瑟（Arthur，着装：旅行者装）、黑龙（Dragon，着装：黑龙鳞甲）、村民群像（Villagers，着装：粗布冬装）",
+            "castNames": [
+              "村长",
+              "皇家大魔导师",
+              "男弟子",
+              "女弟子",
+              "亚瑟",
+              "黑龙",
+              "村民群像"
+            ],
+            "previousEnd": "皇家大魔导师（急切）：Wait!\n△亚瑟一跃而起，化作一道黑影飞向天空。\n△女弟子抬头看着天空，双手合十，露出崇拜的神色。",
+            "nextScene": "",
+            "estimatedSeconds": 3,
+            "blocks": [
+              {
+                "id": "B62",
+                "kind": "dialogue",
+                "speaker": "女弟子",
+                "tone": "崇拜，赞叹",
+                "text": "Oh my god, that's so cool!",
+                "source": "女弟子（崇拜，赞叹）：Oh my god, that's so cool!"
+              }
+            ],
+            "chunkIndex": 6,
+            "chunkCount": 6
+          },
+          "finalPlan": {
+            "sceneId": "1-1",
+            "shots": [
+              {
+                "duration": 5,
+                "cast": [
+                  "女弟子"
+                ],
+                "props": [],
+                "startPosition": "村外空地上，女弟子站在画面中央，身体朝向天空方向，抬头仰望，双手在胸前合十。",
+                "clips": [
+                  {
+                    "duration": 5,
+                    "size": "CU",
+                    "cameraMove": "固定机位",
+                    "visualAction": "女弟子保持抬头望天的姿势，双手合十，开口说话。",
+                    "beat": "反应",
+                    "sourceBlockIds": [
+                      "B62"
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          "finalRaw": "{\"sceneId\":\"1-1\",\"shots\":[{\"duration\":5,\"cast\":[\"女弟子\"],\"props\":[],\"startPosition\":\"村外空地上，女弟子站在画面中央，身体朝向天空方向，抬头仰望，双手在胸前合十。\",\"clips\":[{\"duration\":5,\"size\":\"CU\",\"cameraMove\":\"固定机位\",\"visualAction\":\"女弟子保持抬头望天的姿势，双手合十，开口说话。\",\"beat\":\"反应\",\"sourceBlockIds\":[\"B62\"]}]}]}",
+          "resumedFrom": "2026-11-04T08-08-44-058Z-AB-新引擎-EP1-6-6-r1.json",
+          "attempts": [
+            {
+              "attempt": 1,
+              "label": "AB 新引擎 EP1 6/6 r1",
+              "raw": "{\"sceneId\":\"1-1\",\"shots\":[{\"duration\":5,\"cast\":[\"女弟子\"],\"props\":[],\"startPosition\":\"村外空地上，女弟子站在画面中央，身体朝向天空方向，抬头仰望，双手在胸前合十。\",\"clips\":[{\"duration\":5,\"size\":\"CU\",\"cameraMove\":\"固定机位\",\"visualAction\":\"女弟子保持抬头望天的姿势，双手合十，开口说话。\",\"beat\":\"反应\",\"sourceBlockIds\":[\"B62\"]}]}]}",
+              "status": "completed",
+              "usage": {
+                "input_tokens": 1298,
+                "input_tokens_details": {
+                  "cached_tokens": 896
+                },
+                "output_tokens": 483,
+                "output_tokens_details": {
+                  "reasoning_tokens": 373
+                },
+                "total_tokens": 1781
+              },
+              "elapsedMs": 4120,
+              "resumed": true
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,2267 @@
+{
+  "episode": 4,
+  "title": "徒手托陨石",
+  "flow2Estimate": 95,
+  "scenes": [
+    {
+      "sceneInput": {
+        "sceneId": "4-1",
+        "episode": "第4集：徒手托陨石",
+        "sceneHeading": "Border Tavern 内 未注明",
+        "cast": "亚瑟（Arthur，着装：旅行者装）、奥尔德里奇（Aldrick，着装：黑色法袍）、塞琳娜（Selina，着装：贵族女子华贵长裙）、酒馆老板（Tavern Owner，着装：酒馆围裙）、男酒客（Male Patron，着装：粗布衣）",
+        "castNames": [
+          "亚瑟",
+          "奥尔德里奇",
+          "塞琳娜",
+          "酒馆老板",
+          "男酒客"
+        ],
+        "previousEnd": "",
+        "nextScene": "",
+        "estimatedSeconds": 117,
+        "blocks": [
+          {
+            "id": "B01",
+            "kind": "action",
+            "text": "△开门声。酒馆的双扇木门从里面被推开，阳光照进昏暗的酒馆。",
+            "source": "△开门声。酒馆的双扇木门从里面被推开，阳光照进昏暗的酒馆。"
+          },
+          {
+            "id": "B02",
+            "kind": "action",
+            "text": "△亚瑟背着行李，迈步走进酒馆。",
+            "source": "△亚瑟背着行李，迈步走进酒馆。"
+          },
+          {
+            "id": "B03",
+            "kind": "action",
+            "text": "△Border Tavern。酒馆内光线昏暗，奥尔德里奇和塞琳娜坐在一张桌子旁。",
+            "source": "△Border Tavern。酒馆内光线昏暗，奥尔德里奇和塞琳娜坐在一张桌子旁。"
+          },
+          {
+            "id": "B04",
+            "kind": "action",
+            "text": "△亚瑟在酒馆内走动，环顾四周。",
+            "source": "△亚瑟在酒馆内走动，环顾四周。"
+          },
+          {
+            "id": "B05",
+            "kind": "action",
+            "text": "△酒馆老板端着托盘，托盘上有三杯啤酒，快步走过。",
+            "source": "△酒馆老板端着托盘，托盘上有三杯啤酒，快步走过。"
+          },
+          {
+            "id": "B06",
+            "kind": "action",
+            "text": "△滑倒声。酒馆老板脚下一滑，身体向前倾倒。",
+            "source": "△滑倒声。酒馆老板脚下一滑，身体向前倾倒。"
+          },
+          {
+            "id": "B07",
+            "kind": "action",
+            "text": "△托盘上的一杯啤酒飞到空中，啤酒洒了出来。",
+            "source": "△托盘上的一杯啤酒飞到空中，啤酒洒了出来。"
+          },
+          {
+            "id": "B08",
+            "kind": "action",
+            "text": "△奥尔德里奇神色平静地坐在桌旁，伸出右手食指，指尖发出蓝色光芒。",
+            "source": "△奥尔德里奇神色平静地坐在桌旁，伸出右手食指，指尖发出蓝色光芒。"
+          },
+          {
+            "id": "B09",
+            "kind": "action",
+            "text": "△魔法声。飞在空中的啤酒杯和洒出的啤酒在蓝色魔法光芒中静止在半空。",
+            "source": "△魔法声。飞在空中的啤酒杯和洒出的啤酒在蓝色魔法光芒中静止在半空。"
+          },
+          {
+            "id": "B10",
+            "kind": "action",
+            "text": "△奥尔德里奇挥手，一道蓝色魔法能量托住滑倒的酒馆老板，将他稳住；老板踉跄后退，撞在桌边。",
+            "source": "△奥尔德里奇挥手，一道蓝色魔法能量托住滑倒的酒馆老板，将他稳住；老板踉跄后退，撞在桌边。"
+          },
+          {
+            "id": "B11",
+            "kind": "action",
+            "text": "△奥尔德里奇收回手，闭上眼睛。塞琳娜优雅地坐着，神色平静。",
+            "source": "△奥尔德里奇收回手，闭上眼睛。塞琳娜优雅地坐着，神色平静。"
+          },
+          {
+            "id": "B12",
+            "kind": "action",
+            "text": "△亚瑟走到奥尔德里奇和塞琳娜的桌旁。",
+            "source": "△亚瑟走到奥尔德里奇和塞琳娜的桌旁。"
+          },
+          {
+            "id": "B13",
+            "kind": "action",
+            "text": "△亚瑟拉开椅子坐下，将一个金属酒杯放在桌上。",
+            "source": "△亚瑟拉开椅子坐下，将一个金属酒杯放在桌上。"
+          },
+          {
+            "id": "B14",
+            "kind": "action",
+            "text": "△亚瑟看着前方，大声向老板要酒。",
+            "source": "△亚瑟看着前方，大声向老板要酒。"
+          },
+          {
+            "id": "B15",
+            "kind": "dialogue",
+            "speaker": "亚瑟",
+            "tone": "语气随意",
+            "text": "Boss, give me the cheapest beer.",
+            "source": "亚瑟（语气随意）：Boss, give me the cheapest beer."
+          },
+          {
+            "id": "B16",
+            "kind": "action",
+            "text": "△酒馆老板放下抹布，快步端来一扎最便宜的啤酒，倒进亚瑟桌上的金属酒杯里。",
+            "source": "△酒馆老板放下抹布，快步端来一扎最便宜的啤酒，倒进亚瑟桌上的金属酒杯里。"
+          },
+          {
+            "id": "B17",
+            "kind": "action",
+            "text": "△塞琳娜转过头，静静地看着坐在对面的亚瑟。",
+            "source": "△塞琳娜转过头，静静地看着坐在对面的亚瑟。"
+          },
+          {
+            "id": "B18",
+            "kind": "action",
+            "text": "△奥尔德里奇端起自己的酒杯，斜眼看着亚瑟，语气轻蔑地嘲讽。",
+            "source": "△奥尔德里奇端起自己的酒杯，斜眼看着亚瑟，语气轻蔑地嘲讽。"
+          },
+          {
+            "id": "B19",
+            "kind": "dialogue",
+            "speaker": "奥尔德里奇",
+            "tone": "语气傲慢",
+            "text": "Stinking country bumpkin. This is not a place for you. Get out.",
+            "source": "奥尔德里奇（语气傲慢）：Stinking country bumpkin. This is not a place for you. Get out."
+          },
+          {
+            "id": "B20",
+            "kind": "action",
+            "text": "△亚瑟微微一笑，身体前倾，挑衅地看着奥尔德里奇。",
+            "source": "△亚瑟微微一笑，身体前倾，挑衅地看着奥尔德里奇。"
+          },
+          {
+            "id": "B21",
+            "kind": "dialogue",
+            "speaker": "亚瑟",
+            "tone": "面带微笑",
+            "text": "Did you buy this tavern, old man?",
+            "source": "亚瑟（面带微笑）：Did you buy this tavern, old man?"
+          },
+          {
+            "id": "B22",
+            "kind": "action",
+            "text": "△奥尔德里奇神色阴沉下来，紧盯着亚瑟。",
+            "source": "△奥尔德里奇神色阴沉下来，紧盯着亚瑟。"
+          },
+          {
+            "id": "B23",
+            "kind": "action",
+            "text": "△奥尔德里奇将右手放在桌上，手掌中凝聚出一团蓝色的魔法火焰。",
+            "source": "△奥尔德里奇将右手放在桌上，手掌中凝聚出一团蓝色的魔法火焰。"
+          },
+          {
+            "id": "B24",
+            "kind": "action",
+            "text": "△亚瑟看着那团蓝色火焰，脸上露出灿烂的笑容。",
+            "source": "△亚瑟看着那团蓝色火焰，脸上露出灿烂的笑容。"
+          },
+          {
+            "id": "B25",
+            "kind": "action",
+            "text": "△奥尔德里奇托着蓝色火焰，冷冷地看着亚瑟。",
+            "source": "△奥尔德里奇托着蓝色火焰，冷冷地看着亚瑟。"
+          },
+          {
+            "id": "B26",
+            "kind": "action",
+            "text": "△亚瑟伸出双手，在奥尔德里奇手里的蓝色火焰上方晃了晃，仿佛在烤火取暖。",
+            "source": "△亚瑟伸出双手，在奥尔德里奇手里的蓝色火焰上方晃了晃，仿佛在烤火取暖。"
+          },
+          {
+            "id": "B27",
+            "kind": "action",
+            "text": "△塞琳娜伸出右手，挡在奥尔德里奇的手前，出声阻止他。",
+            "source": "△塞琳娜伸出右手，挡在奥尔德里奇的手前，出声阻止他。"
+          },
+          {
+            "id": "B28",
+            "kind": "dialogue",
+            "speaker": "塞琳娜",
+            "tone": "语气严肃",
+            "text": "Enough, Aldric. We didn't book the whole place. Let this gentleman sit.",
+            "source": "塞琳娜（语气严肃）：Enough, Aldric. We didn't book the whole place. Let this gentleman sit."
+          },
+          {
+            "id": "B29",
+            "kind": "action",
+            "text": "△亚瑟开心地笑了起来，靠回椅背上。",
+            "source": "△亚瑟开心地笑了起来，靠回椅背上。"
+          },
+          {
+            "id": "B30",
+            "kind": "dialogue",
+            "speaker": "亚瑟",
+            "tone": "笑着调侃",
+            "text": "Now this lady is reasonable.",
+            "source": "亚瑟（笑着调侃）：Now this lady is reasonable."
+          },
+          {
+            "id": "B31",
+            "kind": "action",
+            "text": "△亚瑟端起桌上的金属酒杯，大口喝起酒来。",
+            "source": "△亚瑟端起桌上的金属酒杯，大口喝起酒来。"
+          },
+          {
+            "id": "B32",
+            "kind": "action",
+            "text": "△亚瑟仰头喝酒，喉咙不断吞咽，酒水顺着脖子流下。",
+            "source": "△亚瑟仰头喝酒，喉咙不断吞咽，酒水顺着脖子流下。"
+          },
+          {
+            "id": "B33",
+            "kind": "action",
+            "text": "△雷声。酒馆外的天空突然变得漆黑，乌云密布，狂风大作。",
+            "source": "△雷声。酒馆外的天空突然变得漆黑，乌云密布，狂风大作。"
+          },
+          {
+            "id": "B34",
+            "kind": "action",
+            "text": "△酒馆外的木质招牌“BORDERLAND TAVERN”在狂风中剧烈摇晃。",
+            "source": "△酒馆外的木质招牌“BORDERLAND TAVERN”在狂风中剧烈摇晃。"
+          },
+          {
+            "id": "B35",
+            "kind": "action",
+            "text": "△酒馆内开始剧烈震动，屋顶落下灰尘，酒客们惊慌失措。",
+            "source": "△酒馆内开始剧烈震动，屋顶落下灰尘，酒客们惊慌失措。"
+          },
+          {
+            "id": "B36",
+            "kind": "action",
+            "text": "△男酒客惊恐地站起身，大声喊叫。",
+            "source": "△男酒客惊恐地站起身，大声喊叫。"
+          },
+          {
+            "id": "B37",
+            "kind": "dialogue",
+            "speaker": "男酒客",
+            "tone": "惊恐大喊",
+            "text": "What is that? Is it the end of the world?!",
+            "source": "男酒客（惊恐大喊）：What is that? Is it the end of the world?!"
+          },
+          {
+            "id": "B38",
+            "kind": "action",
+            "text": "△塞琳娜捂着胸口，震惊地睁大眼睛，抬头看着屋顶。",
+            "source": "△塞琳娜捂着胸口，震惊地睁大眼睛，抬头看着屋顶。"
+          },
+          {
+            "id": "B39",
+            "kind": "action",
+            "text": "△航拍视角下，一颗巨大的燃烧陨石拖着浓烟，正从天空中砸向森林中的酒馆。",
+            "source": "△航拍视角下，一颗巨大的燃烧陨石拖着浓烟，正从天空中砸向森林中的酒馆。"
+          },
+          {
+            "id": "B40",
+            "kind": "action",
+            "text": "△陨石在空中燃烧，发出耀眼的红光，逼近酒馆。",
+            "source": "△陨石在空中燃烧，发出耀眼的红光，逼近酒馆。"
+          },
+          {
+            "id": "B41",
+            "kind": "dialogue",
+            "speaker": "男酒客（O.S.）",
+            "tone": "惊恐大喊",
+            "text": "No! It's a celestial meteor!",
+            "source": "男酒客（O.S.）（惊恐大喊）：No! It's a celestial meteor!"
+          },
+          {
+            "id": "B42",
+            "kind": "action",
+            "text": "△塞琳娜神色更加惊恐，呼吸急促。",
+            "source": "△塞琳娜神色更加惊恐，呼吸急促。"
+          },
+          {
+            "id": "B43",
+            "kind": "action",
+            "text": "△奥尔德里奇站起身，手里拿着法杖，神色慌张地大喊。",
+            "source": "△奥尔德里奇站起身，手里拿着法杖，神色慌张地大喊。"
+          },
+          {
+            "id": "B44",
+            "kind": "dialogue",
+            "speaker": "奥尔德里奇",
+            "tone": "语气惊恐",
+            "text": "Its mass and impact force are terrifying.",
+            "source": "奥尔德里奇（语气惊恐）：Its mass and impact force are terrifying."
+          },
+          {
+            "id": "B45",
+            "kind": "action",
+            "text": "△亚瑟依然平静地坐在桌旁，端着酒杯继续喝酒。",
+            "source": "△亚瑟依然平静地坐在桌旁，端着酒杯继续喝酒。"
+          },
+          {
+            "id": "B46",
+            "kind": "action",
+            "text": "△塞琳娜脸色苍白，绝望地看着前方，奥尔德里奇继续惊恐地大喊。",
+            "source": "△塞琳娜脸色苍白，绝望地看着前方，奥尔德里奇继续惊恐地大喊。"
+          },
+          {
+            "id": "B47",
+            "kind": "dialogue",
+            "speaker": "奥尔德里奇（O.S.）",
+            "tone": "语气绝望",
+            "text": "My magic shield is like paper against it! My lady, there's no escape!",
+            "source": "奥尔德里奇（O.S.）（语气绝望）：My magic shield is like paper against it! My lady, there's no escape!"
+          },
+          {
+            "id": "B48",
+            "kind": "action",
+            "text": "△塞琳娜面部特写，眼神中充满了绝望和恐惧。",
+            "source": "△塞琳娜面部特写，眼神中充满了绝望和恐惧。"
+          },
+          {
+            "id": "B49",
+            "kind": "dialogue",
+            "speaker": "奥尔德里奇（O.S.）",
+            "tone": "焦急",
+            "text": "My lady, there's no escape!",
+            "source": "奥尔德里奇（O.S.）（焦急）：My lady, there's no escape!"
+          },
+          {
+            "id": "B50",
+            "kind": "action",
+            "text": "△亚瑟放下酒杯，站起身，拍了拍衣服，微笑着调侃。",
+            "source": "△亚瑟放下酒杯，站起身，拍了拍衣服，微笑着调侃。"
+          },
+          {
+            "id": "B51",
+            "kind": "dialogue",
+            "speaker": "亚瑟",
+            "tone": "语气轻松",
+            "text": "Mages always make such a fuss. This is just my usual training dumbbell.",
+            "source": "亚瑟（语气轻松）：Mages always make such a fuss. This is just my usual training dumbbell."
+          },
+          {
+            "id": "B52",
+            "kind": "action",
+            "text": "△电流声。亚瑟身上爆发出金色的电光，他屈膝做好起跳准备。",
+            "source": "△电流声。亚瑟身上爆发出金色的电光，他屈膝做好起跳准备。"
+          },
+          {
+            "id": "B53",
+            "kind": "action",
+            "text": "△亚瑟化作一道耀眼的金色光束，瞬间冲破酒馆的屋顶，飞向天空。",
+            "source": "△亚瑟化作一道耀眼的金色光束，瞬间冲破酒馆的屋顶，飞向天空。"
+          },
+          {
+            "id": "B54",
+            "kind": "action",
+            "text": "△亚瑟在空中张开双臂，身体周围环绕着金色的能量光环。",
+            "source": "△亚瑟在空中张开双臂，身体周围环绕着金色的能量光环。"
+          },
+          {
+            "id": "B55",
+            "kind": "action",
+            "text": "△亚瑟迎着巨大的燃烧陨石飞去，身形在陨石面前显得十分渺小。",
+            "source": "△亚瑟迎着巨大的燃烧陨石飞去，身形在陨石面前显得十分渺小。"
+          },
+          {
+            "id": "B56",
+            "kind": "action",
+            "text": "△碰撞声。亚瑟伸出右手，在身前凝聚出一个巨大的金色魔法阵，正面挡住了下落的陨石。",
+            "source": "△碰撞声。亚瑟伸出右手，在身前凝聚出一个巨大的金色魔法阵，正面挡住了下落的陨石。"
+          },
+          {
+            "id": "B57",
+            "kind": "action",
+            "text": "△亚瑟面部特写，他咬紧牙关，神色坚毅，全力抵挡着陨石的冲击。",
+            "source": "△亚瑟面部特写，他咬紧牙关，神色坚毅，全力抵挡着陨石的冲击。"
+          },
+          {
+            "id": "B58",
+            "kind": "action",
+            "text": "△亚瑟托着巨大的陨石，从天空中缓缓降落。",
+            "source": "△亚瑟托着巨大的陨石，从天空中缓缓降落。"
+          },
+          {
+            "id": "B59",
+            "kind": "action",
+            "text": "△重物落地声。亚瑟稳稳地落在地面上，将巨大的陨石轻轻放在酒馆外的空地上，激起一片尘土。",
+            "source": "△重物落地声。亚瑟稳稳地落在地面上，将巨大的陨石轻轻放在酒馆外的空地上，激起一片尘土。"
+          },
+          {
+            "id": "B60",
+            "kind": "action",
+            "text": "△亚瑟拍了拍双手上的灰尘，神色轻松地看着前方。",
+            "source": "△亚瑟拍了拍双手上的灰尘，神色轻松地看着前方。"
+          },
+          {
+            "id": "B61",
+            "kind": "action",
+            "text": "△亚瑟迈步走向站在酒馆门口的塞琳娜。",
+            "source": "△亚瑟迈步走向站在酒馆门口的塞琳娜。"
+          },
+          {
+            "id": "B62",
+            "kind": "action",
+            "text": "△亚瑟走到塞琳娜面前停下，微笑着看着她。",
+            "source": "△亚瑟走到塞琳娜面前停下，微笑着看着她。"
+          },
+          {
+            "id": "B63",
+            "kind": "dialogue",
+            "speaker": "亚瑟",
+            "tone": "温柔微笑",
+            "text": "Thank you for your hospitality, beautiful lady.",
+            "source": "亚瑟（温柔微笑）：Thank you for your hospitality, beautiful lady."
+          },
+          {
+            "id": "B64",
+            "kind": "action",
+            "text": "△塞琳娜愣在原地，呆呆地看着亚瑟，没有说话。",
+            "source": "△塞琳娜愣在原地，呆呆地看着亚瑟，没有说话。"
+          },
+          {
+            "id": "B65",
+            "kind": "action",
+            "text": "△亚瑟微微一笑，双手插进口袋，转过身迈步离去。",
+            "source": "△亚瑟微微一笑，双手插进口袋，转过身迈步离去。"
+          },
+          {
+            "id": "B66",
+            "kind": "action",
+            "text": "△塞琳娜看着亚瑟离去的背影，眼眶湿润，流下一行眼泪，神色无比震惊。",
+            "source": "△塞琳娜看着亚瑟离去的背影，眼眶湿润，流下一行眼泪，神色无比震惊。"
+          },
+          {
+            "id": "B67",
+            "kind": "dialogue",
+            "speaker": "塞琳娜（V.O.）",
+            "tone": "难以置信",
+            "text": "Oh my god... He caught a meteor with his bare hands? What kind of monster is he?",
+            "source": "塞琳娜（V.O.）（难以置信）：Oh my god... He caught a meteor with his bare hands? What kind of monster is he?"
+          },
+          {
+            "id": "B68",
+            "kind": "action",
+            "text": "△奥尔德里奇走到塞琳娜身旁，神色凝重地看着亚瑟离去的方向。",
+            "source": "△奥尔德里奇走到塞琳娜身旁，神色凝重地看着亚瑟离去的方向。"
+          },
+          {
+            "id": "B69",
+            "kind": "dialogue",
+            "speaker": "奥尔德里奇",
+            "tone": "神色凝重",
+            "text": "My lady... This man has not a trace of magic, yet his physical strength is terrifying to this degree.",
+            "source": "奥尔德里奇（神色凝重）：My lady... This man has not a trace of magic, yet his physical strength is terrifying to this degree."
+          },
+          {
+            "id": "B70",
+            "kind": "action",
+            "text": "△奥尔德里奇转头看向塞琳娜，心有余悸地继续说话。",
+            "source": "△奥尔德里奇转头看向塞琳娜，心有余悸地继续说话。"
+          },
+          {
+            "id": "B71",
+            "kind": "dialogue",
+            "speaker": "奥尔德里奇",
+            "tone": "心有余悸",
+            "text": "Thank goodness you stopped me from acting earlier. Or we'd be nothing but ash.",
+            "source": "奥尔德里奇（心有余悸）：Thank goodness you stopped me from acting earlier. Or we'd be nothing but ash."
+          },
+          {
+            "id": "B72",
+            "kind": "action",
+            "text": "△塞琳娜看着亚瑟消失的方向，眼神变得坚定。",
+            "source": "△塞琳娜看着亚瑟消失的方向，眼神变得坚定。"
+          },
+          {
+            "id": "B73",
+            "kind": "dialogue",
+            "speaker": "塞琳娜",
+            "tone": "语气坚定",
+            "text": "Find out who he is. I want to know him.",
+            "source": "塞琳娜（语气坚定）：Find out who he is. I want to know him."
+          }
+        ]
+      },
+      "chunks": [
+        {
+          "chunkIndex": 1,
+          "sceneInput": {
+            "sceneId": "4-1",
+            "episode": "第4集：徒手托陨石",
+            "sceneHeading": "Border Tavern 内 未注明",
+            "cast": "亚瑟（Arthur，着装：旅行者装）、奥尔德里奇（Aldrick，着装：黑色法袍）、塞琳娜（Selina，着装：贵族女子华贵长裙）、酒馆老板（Tavern Owner，着装：酒馆围裙）、男酒客（Male Patron，着装：粗布衣）",
+            "castNames": [
+              "亚瑟",
+              "奥尔德里奇",
+              "塞琳娜",
+              "酒馆老板",
+              "男酒客"
+            ],
+            "previousEnd": "",
+            "nextScene": "奥尔德里奇（语气傲慢）：Stinking country bumpkin. This is not a place for you. Get out.\n△亚瑟微微一笑，身体前倾，挑衅地看着奥尔德里奇。\n亚瑟（面带微笑）：Did you buy this tavern, old man?\n△奥尔德里奇神色阴沉下来，紧盯着亚瑟。",
+            "estimatedSeconds": 17,
+            "blocks": [
+              {
+                "id": "B01",
+                "kind": "action",
+                "text": "△开门声。酒馆的双扇木门从里面被推开，阳光照进昏暗的酒馆。",
+                "source": "△开门声。酒馆的双扇木门从里面被推开，阳光照进昏暗的酒馆。"
+              },
+              {
+                "id": "B02",
+                "kind": "action",
+                "text": "△亚瑟背着行李，迈步走进酒馆。",
+                "source": "△亚瑟背着行李，迈步走进酒馆。"
+              },
+              {
+                "id": "B03",
+                "kind": "action",
+                "text": "△Border Tavern。酒馆内光线昏暗，奥尔德里奇和塞琳娜坐在一张桌子旁。",
+                "source": "△Border Tavern。酒馆内光线昏暗，奥尔德里奇和塞琳娜坐在一张桌子旁。"
+              },
+              {
+                "id": "B04",
+                "kind": "action",
+                "text": "△亚瑟在酒馆内走动，环顾四周。",
+                "source": "△亚瑟在酒馆内走动，环顾四周。"
+              },
+              {
+                "id": "B05",
+                "kind": "action",
+                "text": "△酒馆老板端着托盘，托盘上有三杯啤酒，快步走过。",
+                "source": "△酒馆老板端着托盘，托盘上有三杯啤酒，快步走过。"
+              },
+              {
+                "id": "B06",
+                "kind": "action",
+                "text": "△滑倒声。酒馆老板脚下一滑，身体向前倾倒。",
+                "source": "△滑倒声。酒馆老板脚下一滑，身体向前倾倒。"
+              },
+              {
+                "id": "B07",
+                "kind": "action",
+                "text": "△托盘上的一杯啤酒飞到空中，啤酒洒了出来。",
+                "source": "△托盘上的一杯啤酒飞到空中，啤酒洒了出来。"
+              },
+              {
+                "id": "B08",
+                "kind": "action",
+                "text": "△奥尔德里奇神色平静地坐在桌旁，伸出右手食指，指尖发出蓝色光芒。",
+                "source": "△奥尔德里奇神色平静地坐在桌旁，伸出右手食指，指尖发出蓝色光芒。"
+              },
+              {
+                "id": "B09",
+                "kind": "action",
+                "text": "△魔法声。飞在空中的啤酒杯和洒出的啤酒在蓝色魔法光芒中静止在半空。",
+                "source": "△魔法声。飞在空中的啤酒杯和洒出的啤酒在蓝色魔法光芒中静止在半空。"
+              },
+              {
+                "id": "B10",
+                "kind": "action",
+                "text": "△奥尔德里奇挥手，一道蓝色魔法能量托住滑倒的酒馆老板，将他稳住；老板踉跄后退，撞在桌边。",
+                "source": "△奥尔德里奇挥手，一道蓝色魔法能量托住滑倒的酒馆老板，将他稳住；老板踉跄后退，撞在桌边。"
+              },
+              {
+                "id": "B11",
+                "kind": "action",
+                "text": "△奥尔德里奇收回手，闭上眼睛。塞琳娜优雅地坐着，神色平静。",
+                "source": "△奥尔德里奇收回手，闭上眼睛。塞琳娜优雅地坐着，神色平静。"
+              },
+              {
+                "id": "B12",
+                "kind": "action",
+                "text": "△亚瑟走到奥尔德里奇和塞琳娜的桌旁。",
+                "source": "△亚瑟走到奥尔德里奇和塞琳娜的桌旁。"
+              },
+              {
+                "id": "B13",
+                "kind": "action",
+                "text": "△亚瑟拉开椅子坐下，将一个金属酒杯放在桌上。",
+                "source": "△亚瑟拉开椅子坐下，将一个金属酒杯放在桌上。"
+              },
+              {
+                "id": "B14",
+                "kind": "action",
+                "text": "△亚瑟看着前方，大声向老板要酒。",
+                "source": "△亚瑟看着前方，大声向老板要酒。"
+              },
+              {
+                "id": "B15",
+                "kind": "dialogue",
+                "speaker": "亚瑟",
+                "tone": "语气随意",
+                "text": "Boss, give me the cheapest beer.",
+                "source": "亚瑟（语气随意）：Boss, give me the cheapest beer."
+              },
+              {
+                "id": "B16",
+                "kind": "action",
+                "text": "△酒馆老板放下抹布，快步端来一扎最便宜的啤酒，倒进亚瑟桌上的金属酒杯里。",
+                "source": "△酒馆老板放下抹布，快步端来一扎最便宜的啤酒，倒进亚瑟桌上的金属酒杯里。"
+              },
+              {
+                "id": "B17",
+                "kind": "action",
+                "text": "△塞琳娜转过头，静静地看着坐在对面的亚瑟。",
+                "source": "△塞琳娜转过头，静静地看着坐在对面的亚瑟。"
+              },
+              {
+                "id": "B18",
+                "kind": "action",
+                "text": "△奥尔德里奇端起自己的酒杯，斜眼看着亚瑟，语气轻蔑地嘲讽。",
+                "source": "△奥尔德里奇端起自己的酒杯，斜眼看着亚瑟，语气轻蔑地嘲讽。"
+              }
+            ],
+            "chunkIndex": 1,
+            "chunkCount": 7
+          },
+          "finalPlan": {
+            "sceneId": "4-1",
+            "shots": [
+              {
+                "duration": 7,
+                "cast": [
+                  "亚瑟",
+                  "奥尔德里奇",
+                  "塞琳娜"
+                ],
+                "props": [
+                  "行李"
+                ],
+                "startPosition": "酒馆内光线昏暗，双扇木门紧闭；亚瑟背着行李站在门外，面向木门；奥尔德里奇与塞琳娜并排坐在酒馆内侧桌旁，面向门口方向。",
+                "clips": [
+                  {
+                    "duration": 5,
+                    "size": "WS",
+                    "cameraMove": "固定机位",
+                    "visualAction": "双扇木门从内侧被推开，阳光照进昏暗酒馆；亚瑟背着行李迈步进门，停在门内侧；镜头带到酒馆内侧桌旁，奥尔德里奇与塞琳娜坐在桌旁。",
+                    "beat": "建立",
+                    "sourceBlockIds": [
+                      "B01",
+                      "B02",
+                      "B03"
+                    ]
+                  },
+                  {
+                    "duration": 2,
+                    "size": "CU",
+                    "cameraMove": "跟拍",
+                    "visualAction": "亚瑟在酒馆内走动，头转向左右环顾四周。",
+                    "beat": "跟随",
+                    "sourceBlockIds": [
+                      "B04"
+                    ]
+                  }
+                ]
+              },
+              {
+                "duration": 7,
+                "cast": [
+                  "亚瑟",
+                  "奥尔德里奇",
+                  "塞琳娜",
+                  "酒馆老板"
+                ],
+                "props": [
+                  "托盘",
+                  "啤酒杯"
+                ],
+                "startPosition": "亚瑟停在门内侧，面向酒馆内部；酒馆老板在吧台与客桌间的过道，双手端托盘，托盘上有三杯啤酒，面向过道前方；奥尔德里奇与塞琳娜坐在桌旁，奥尔德里奇右手放在桌面，塞琳娜双手交叠。",
+                "clips": [
+                  {
+                    "duration": 2,
+                    "size": "CU",
+                    "cameraMove": "跟拍",
+                    "visualAction": "酒馆老板双手端托盘快步穿过过道，脚下一滑，身体向前倾倒，托盘倾斜。",
+                    "beat": "触发",
+                    "sourceBlockIds": [
+                      "B05",
+                      "B06"
+                    ]
+                  },
+                  {
+                    "duration": 2,
+                    "size": "CU",
+                    "cameraMove": "快速甩镜至手指",
+                    "visualAction": "托盘上一杯啤酒飞起，酒液洒出；镜头甩向桌旁，奥尔德里奇伸出右手食指，指尖亮起蓝光。",
+                    "beat": "强调",
+                    "sourceBlockIds": [
+                      "B07",
+                      "B08"
+                    ]
+                  },
+                  {
+                    "duration": 3,
+                    "size": "CU",
+                    "cameraMove": "横移跟拍",
+                    "visualAction": "飞杯和酒液在半空静止；奥尔德里奇挥手，蓝色能量托住酒馆老板，老板踉跄后退撞在桌边；奥尔德里奇收回手，闭眼坐回桌旁，塞琳娜双手交叠坐着。",
+                    "beat": "转折",
+                    "sourceBlockIds": [
+                      "B09",
+                      "B10",
+                      "B11"
+                    ]
+                  }
+                ]
+              },
+              {
+                "duration": 9,
+                "cast": [
+                  "亚瑟",
+                  "奥尔德里奇",
+                  "塞琳娜",
+                  "酒馆老板"
+                ],
+                "props": [
+                  "金属酒杯",
+                  "酒扎",
+                  "抹布",
+                  "酒杯"
+                ],
+                "startPosition": "奥尔德里奇闭眼坐在桌旁，右手放在桌面；塞琳娜坐在对面，双手交叠；酒馆老板在桌边站定；亚瑟右手拿着金属酒杯，站在桌旁过道，面向桌子。",
+                "clips": [
+                  {
+                    "duration": 2,
+                    "size": "CU",
+                    "cameraMove": "跟随",
+                    "visualAction": "亚瑟走到桌旁，拉开椅子坐下，将金属酒杯放到桌上。",
+                    "beat": "推进",
+                    "sourceBlockIds": [
+                      "B12",
+                      "B13"
+                    ]
+                  },
+                  {
+                    "duration": 4,
+                    "size": "CU",
+                    "cameraMove": "固定机位",
+                    "visualAction": "亚瑟面向前方，开口向老板要酒。",
+                    "beat": "强调",
+                    "sourceBlockIds": [
+                      "B14",
+                      "B15"
+                    ]
+                  },
+                  {
+                    "duration": 3,
+                    "size": "CU",
+                    "cameraMove": "快速横移",
+                    "visualAction": "酒馆老板放下抹布，快步端来一扎啤酒，将酒倒进金属杯；塞琳娜转头看向亚瑟；奥尔德里奇端起自己的酒杯，斜眼看向亚瑟。",
+                    "beat": "反应",
+                    "sourceBlockIds": [
+                      "B16",
+                      "B17",
+                      "B18"
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          "finalRaw": "{\n  \"sceneId\": \"4-1\",\n  \"shots\": [\n    {\n      \"duration\": 7,\n      \"cast\": [\"亚瑟\", \"奥尔德里奇\", \"塞琳娜\"],\n      \"props\": [\"行李\"],\n      \"startPosition\": \"酒馆内光线昏暗，双扇木门紧闭；亚瑟背着行李站在门外，面向木门；奥尔德里奇与塞琳娜并排坐在酒馆内侧桌旁，面向门口方向。\",\n      \"clips\": [\n        {\n          \"duration\": 5,\n          \"size\": \"WS\",\n          \"cameraMove\": \"固定机位\",\n          \"visualAction\": \"双扇木门从内侧被推开，阳光照进昏暗酒馆；亚瑟背着行李迈步进门，停在门内侧；镜头带到酒馆内侧桌旁，奥尔德里奇与塞琳娜坐在桌旁。\",\n          \"beat\": \"建立\",\n          \"sourceBlockIds\": [\"B01\", \"B02\", \"B03\"]\n        },\n        {\n          \"duration\": 2,\n          \"size\": \"CU\",\n          \"cameraMove\": \"跟拍\",\n          \"visualAction\": \"亚瑟在酒馆内走动，头转向左右环顾四周。\",\n          \"beat\": \"跟随\",\n          \"sourceBlockIds\": [\"B04\"]\n        }\n      ]\n    },\n    {\n      \"duration\": 7,\n      \"cast\": [\"亚瑟\", \"奥尔德里奇\", \"塞琳娜\", \"酒馆老板\"],\n      \"props\": [\"托盘\", \"啤酒杯\"],\n      \"startPosition\": \"亚瑟停在门内侧，面向酒馆内部；酒馆老板在吧台与客桌间的过道，双手端托盘，托盘上有三杯啤酒，面向过道前方；奥尔德里奇与塞琳娜坐在桌旁，奥尔德里奇右手放在桌面，塞琳娜双手交叠。\",\n      \"clips\": [\n        {\n          \"duration\": 2,\n          \"size\": \"CU\",\n          \"cameraMove\": \"跟拍\",\n          \"visualAction\": \"酒馆老板双手端托盘快步穿过过道，脚下一滑，身体向前倾倒，托盘倾斜。\",\n          \"beat\": \"触发\",\n          \"sourceBlockIds\": [\"B05\", \"B06\"]\n        },\n        {\n          \"duration\": 2,\n          \"size\": \"CU\",\n          \"cameraMove\": \"快速甩镜至手指\",\n          \"visualAction\": \"托盘上一杯啤酒飞起，酒液洒出；镜头甩向桌旁，奥尔德里奇伸出右手食指，指尖亮起蓝光。\",\n          \"beat\": \"强调\",\n          \"sourceBlockIds\": [\"B07\", \"B08\"]\n        },\n        {\n          \"duration\": 3,\n          \"size\": \"CU\",\n          \"cameraMove\": \"横移跟拍\",\n          \"visualAction\": \"飞杯和酒液在半空静止；奥尔德里奇挥手，蓝色能量托住酒馆老板，老板踉跄后退撞在桌边；奥尔德里奇收回手，闭眼坐回桌旁，塞琳娜双手交叠坐着。\",\n          \"beat\": \"转折\",\n          \"sourceBlockIds\": [\"B09\", \"B10\", \"B11\"]\n        }\n      ]\n    },\n    {\n      \"duration\": 9,\n      \"cast\": [\"亚瑟\", \"奥尔德里奇\", \"塞琳娜\", \"酒馆老板\"],\n      \"props\": [\"金属酒杯\", \"酒扎\", \"抹布\", \"酒杯\"],\n      \"startPosition\": \"奥尔德里奇闭眼坐在桌旁，右手放在桌面；塞琳娜坐在对面，双手交叠；酒馆老板在桌边站定；亚瑟右手拿着金属酒杯，站在桌旁过道，面向桌子。\",\n      \"clips\": [\n        {\n          \"duration\": 2,\n          \"size\": \"CU\",\n          \"cameraMove\": \"跟随\",\n          \"visualAction\": \"亚瑟走到桌旁，拉开椅子坐下，将金属酒杯放到桌上。\",\n          \"beat\": \"推进\",\n          \"sourceBlockIds\": [\"B12\", \"B13\"]\n        },\n        {\n          \"duration\": 4,\n          \"size\": \"CU\",\n          \"cameraMove\": \"固定机位\",\n          \"visualAction\": \"亚瑟面向前方，开口向老板要酒。\",\n          \"beat\": \"强调\",\n          \"sourceBlockIds\": [\"B14\", \"B15\"]\n        },\n        {\n          \"duration\": 3,\n          \"size\": \"CU\",\n          \"cameraMove\": \"快速横移\",\n          \"visualAction\": \"酒馆老板放下抹布，快步端来一扎啤酒，将酒倒进金属杯；塞琳娜转头看向亚瑟；奥尔德里奇端起自己的酒杯，斜眼看向亚瑟。\",\n          \"beat\": \"反应\",\n          \"sourceBlockIds\": [\"B16\", \"B17\", \"B18\"]\n        }\n      ]\n    }\n  ]\n}",
+          "resumedFrom": "2026-11-04T08-12-44-576Z-AB-新引擎修复-EP4-1-7-r2.json",
+          "attempts": [
+            {
+              "attempt": 1,
+              "label": "AB 新引擎 EP4 1/7 r1",
+              "raw": "{\n  \"sceneId\": \"4-1\",\n  \"shots\": [\n    {\n      \"duration\": 7,\n      \"cast\": [\"亚瑟\", \"奥尔德里奇\", \"塞琳娜\"],\n      \"props\": [\"行李\"],\n      \"startPosition\": \"酒馆内光线昏暗，双扇木门紧闭；亚瑟背着行李站在门外，面向木门；奥尔德里奇与塞琳娜并排坐在酒馆内侧桌旁，面向门口方向。\",\n      \"clips\": [\n        {\n          \"duration\": 5,\n          \"size\": \"WS\",\n          \"cameraMove\": \"固定机位\",\n          \"visualAction\": \"双扇木门从内侧被推开，阳光照进昏暗酒馆；亚瑟背着行李迈步进门，停在门内侧；镜头带到酒馆内侧桌旁，奥尔德里奇与塞琳娜坐在桌旁。\",\n          \"beat\": \"建立\",\n          \"sourceBlockIds\": [\"B01\", \"B02\", \"B03\"]\n        },\n        {\n          \"duration\": 2,\n          \"size\": \"CU\",\n          \"cameraMove\": \"跟拍\",\n          \"visualAction\": \"亚瑟在酒馆内走动，头转向左右环顾四周。\",\n          \"beat\": \"跟随\",\n          \"sourceBlockIds\": [\"B04\"]\n        }\n      ]\n    },\n    {\n      \"duration\": 7,\n      \"cast\": [\"亚瑟\", \"奥尔德里奇\", \"塞琳娜\", \"酒馆老板\"],\n      \"props\": [\"托盘\", \"啤酒杯\"],\n      \"startPosition\": \"亚瑟停在门内侧，面向酒馆内部；酒馆老板在吧台与客桌间的过道，双手端托盘，托盘上有三杯啤酒，面向过道前方；奥尔德里奇与塞琳娜坐在桌旁，奥尔德里奇右手放在桌面，塞琳娜双手交叠。\",\n      \"clips\": [\n        {\n          \"duration\": 2,\n          \"size\": \"CU\",\n          \"cameraMove\": \"跟拍\",\n          \"visualAction\": \"酒馆老板双手端托盘快步穿过过道，脚下一滑，身体向前倾倒，托盘倾斜。\",\n          \"beat\": \"触发\",\n          \"sourceBlockIds\": [\"B05\", \"B06\"]\n        },\n        {\n          \"duration\": 2,\n          \"size\": \"CU\",\n          \"cameraMove\": \"快速甩镜至手指\",\n          \"visualAction\": \"托盘上一杯啤酒飞起，酒液洒出；镜头甩向桌旁，奥尔德里奇伸出右手食指，指尖亮起蓝光。\",\n          \"beat\": \"强调\",\n          \"sourceBlockIds\": [\"B07\", \"B08\"]\n        },\n        {\n          \"duration\": 3,\n          \"size\": \"CU\",\n          \"cameraMove\": \"横移跟拍\",\n          \"visualAction\": \"飞杯和酒液在半空静止；奥尔德里奇挥手，蓝色能量托住酒馆老板，老板踉跄后退撞在桌边；奥尔德里奇收回手，闭眼坐回桌旁，塞琳娜双手交叠坐着。\",\n          \"beat\": \"转折\",\n          \"sourceBlockIds\": [\"B09\", \"B10\", \"B11\"]\n        }\n      ]\n    },\n    {\n      \"duration\": 7,\n      \"cast\": [\"亚瑟\", \"奥尔德里奇\", \"塞琳娜\", \"酒馆老板\"],\n      \"props\": [\"金属酒杯\", \"酒扎\", \"抹布\", \"酒杯\"],\n      \"startPosition\": \"奥尔德里奇闭眼坐在桌旁，右手放在桌面；塞琳娜坐在对面，双手交叠；酒馆老板在桌边站定；亚瑟右手拿着金属酒杯，站在桌旁过道，面向桌子。\",\n      \"clips\": [\n        {\n          \"duration\": 2,\n          \"size\": \"CU\",\n          \"cameraMove\": \"跟随\",\n          \"visualAction\": \"亚瑟走到桌旁，拉开椅子坐下，将金属酒杯放到桌上。\",\n          \"beat\": \"推进\",\n          \"sourceBlockIds\": [\"B12\", \"B13\"]\n        },\n        {\n          \"duration\": 2,\n          \"size\": \"CU\",\n          \"cameraMove\": \"固定机位\",\n          \"visualAction\": \"亚瑟面向前方，开口向老板要酒。\",\n          \"beat\": \"强调\",\n          \"sourceBlockIds\": [\"B14\", \"B15\"]\n        },\n        {\n          \"duration\": 3,\n          \"size\": \"CU\",\n          \"cameraMove\": \"快速横移\",\n          \"visualAction\": \"酒馆老板放下抹布，快步端来一扎啤酒，将酒倒进金属杯；塞琳娜转头看向亚瑟；奥尔德里奇端起自己的酒杯，斜眼看向亚瑟。\",\n          \"beat\": \"反应\",\n          \"sourceBlockIds\": [\"B16\", \"B17\", \"B18\"]\n        }\n      ]\n    }\n  ]\n}",
+              "status": "completed",
+              "usage": {
+                "input_tokens": 2428,
+                "input_tokens_details": {
+                  "cached_tokens": 768
+                },
+                "output_tokens": 6318,
+                "output_tokens_details": {
+                  "reasoning_tokens": 5274
+                },
+                "total_tokens": 8746
+              },
+              "elapsedMs": 38264,
+              "resumed": true
+            },
+            {
+              "attempt": 2,
+              "label": "AB 新引擎修复 EP4 1/7 r2",
+              "raw": "{\n  \"sceneId\": \"4-1\",\n  \"shots\": [\n    {\n      \"duration\": 7,\n      \"cast\": [\"亚瑟\", \"奥尔德里奇\", \"塞琳娜\"],\n      \"props\": [\"行李\"],\n      \"startPosition\": \"酒馆内光线昏暗，双扇木门紧闭；亚瑟背着行李站在门外，面向木门；奥尔德里奇与塞琳娜并排坐在酒馆内侧桌旁，面向门口方向。\",\n      \"clips\": [\n        {\n          \"duration\": 5,\n          \"size\": \"WS\",\n          \"cameraMove\": \"固定机位\",\n          \"visualAction\": \"双扇木门从内侧被推开，阳光照进昏暗酒馆；亚瑟背着行李迈步进门，停在门内侧；镜头带到酒馆内侧桌旁，奥尔德里奇与塞琳娜坐在桌旁。\",\n          \"beat\": \"建立\",\n          \"sourceBlockIds\": [\"B01\", \"B02\", \"B03\"]\n        },\n        {\n          \"duration\": 2,\n          \"size\": \"CU\",\n          \"cameraMove\": \"跟拍\",\n          \"visualAction\": \"亚瑟在酒馆内走动，头转向左右环顾四周。\",\n          \"beat\": \"跟随\",\n          \"sourceBlockIds\": [\"B04\"]\n        }\n      ]\n    },\n    {\n      \"duration\": 7,\n      \"cast\": [\"亚瑟\", \"奥尔德里奇\", \"塞琳娜\", \"酒馆老板\"],\n      \"props\": [\"托盘\", \"啤酒杯\"],\n      \"startPosition\": \"亚瑟停在门内侧，面向酒馆内部；酒馆老板在吧台与客桌间的过道，双手端托盘，托盘上有三杯啤酒，面向过道前方；奥尔德里奇与塞琳娜坐在桌旁，奥尔德里奇右手放在桌面，塞琳娜双手交叠。\",\n      \"clips\": [\n        {\n          \"duration\": 2,\n          \"size\": \"CU\",\n          \"cameraMove\": \"跟拍\",\n          \"visualAction\": \"酒馆老板双手端托盘快步穿过过道，脚下一滑，身体向前倾倒，托盘倾斜。\",\n          \"beat\": \"触发\",\n          \"sourceBlockIds\": [\"B05\", \"B06\"]\n        },\n        {\n          \"duration\": 2,\n          \"size\": \"CU\",\n          \"cameraMove\": \"快速甩镜至手指\",\n          \"visualAction\": \"托盘上一杯啤酒飞起，酒液洒出；镜头甩向桌旁，奥尔德里奇伸出右手食指，指尖亮起蓝光。\",\n          \"beat\": \"强调\",\n          \"sourceBlockIds\": [\"B07\", \"B08\"]\n        },\n        {\n          \"duration\": 3,\n          \"size\": \"CU\",\n          \"cameraMove\": \"横移跟拍\",\n          \"visualAction\": \"飞杯和酒液在半空静止；奥尔德里奇挥手，蓝色能量托住酒馆老板，老板踉跄后退撞在桌边；奥尔德里奇收回手，闭眼坐回桌旁，塞琳娜双手交叠坐着。\",\n          \"beat\": \"转折\",\n          \"sourceBlockIds\": [\"B09\", \"B10\", \"B11\"]\n        }\n      ]\n    },\n    {\n      \"duration\": 9,\n      \"cast\": [\"亚瑟\", \"奥尔德里奇\", \"塞琳娜\", \"酒馆老板\"],\n      \"props\": [\"金属酒杯\", \"酒扎\", \"抹布\", \"酒杯\"],\n      \"startPosition\": \"奥尔德里奇闭眼坐在桌旁，右手放在桌面；塞琳娜坐在对面，双手交叠；酒馆老板在桌边站定；亚瑟右手拿着金属酒杯，站在桌旁过道，面向桌子。\",\n      \"clips\": [\n        {\n          \"duration\": 2,\n          \"size\": \"CU\",\n          \"cameraMove\": \"跟随\",\n          \"visualAction\": \"亚瑟走到桌旁，拉开椅子坐下，将金属酒杯放到桌上。\",\n          \"beat\": \"推进\",\n          \"sourceBlockIds\": [\"B12\", \"B13\"]\n        },\n        {\n          \"duration\": 4,\n          \"size\": \"CU\",\n          \"cameraMove\": \"固定机位\",\n          \"visualAction\": \"亚瑟面向前方，开口向老板要酒。\",\n          \"beat\": \"强调\",\n          \"sourceBlockIds\": [\"B14\", \"B15\"]\n        },\n        {\n          \"duration\": 3,\n          \"size\": \"CU\",\n          \"cameraMove\": \"快速横移\",\n          \"visualAction\": \"酒馆老板放下抹布，快步端来一扎啤酒，将酒倒进金属杯；塞琳娜转头看向亚瑟；奥尔德里奇端起自己的酒杯，斜眼看向亚瑟。\",\n          \"beat\": \"反应\",\n          \"sourceBlockIds\": [\"B16\", \"B17\", \"B18\"]\n        }\n      ]\n    }\n  ]\n}",
+              "status": "completed",
+              "usage": {
+                "input_tokens": 3538,
+                "input_tokens_details": {
+                  "cached_tokens": 896
+                },
+                "output_tokens": 1696,
+                "output_tokens_details": {
+                  "reasoning_tokens": 652
+                },
+                "total_tokens": 5234
+              },
+              "elapsedMs": 8332,
+              "resumed": true
+            }
+          ]
+        },
+        {
+          "chunkIndex": 2,
+          "sceneInput": {
+            "sceneId": "4-1",
+            "episode": "第4集：徒手托陨石",
+            "sceneHeading": "Border Tavern 内 未注明",
+            "cast": "亚瑟（Arthur，着装：旅行者装）、奥尔德里奇（Aldrick，着装：黑色法袍）、塞琳娜（Selina，着装：贵族女子华贵长裙）、酒馆老板（Tavern Owner，着装：酒馆围裙）、男酒客（Male Patron，着装：粗布衣）",
+            "castNames": [
+              "亚瑟",
+              "奥尔德里奇",
+              "塞琳娜",
+              "酒馆老板",
+              "男酒客"
+            ],
+            "previousEnd": "△酒馆老板放下抹布，快步端来一扎最便宜的啤酒，倒进亚瑟桌上的金属酒杯里。\n△塞琳娜转过头，静静地看着坐在对面的亚瑟。\n△奥尔德里奇端起自己的酒杯，斜眼看着亚瑟，语气轻蔑地嘲讽。",
+            "nextScene": "△亚瑟开心地笑了起来，靠回椅背上。\n亚瑟（笑着调侃）：Now this lady is reasonable.\n△亚瑟端起桌上的金属酒杯，大口喝起酒来。\n△亚瑟仰头喝酒，喉咙不断吞咽，酒水顺着脖子流下。",
+            "estimatedSeconds": 20,
+            "blocks": [
+              {
+                "id": "B19",
+                "kind": "dialogue",
+                "speaker": "奥尔德里奇",
+                "tone": "语气傲慢",
+                "text": "Stinking country bumpkin. This is not a place for you. Get out.",
+                "source": "奥尔德里奇（语气傲慢）：Stinking country bumpkin. This is not a place for you. Get out."
+              },
+              {
+                "id": "B20",
+                "kind": "action",
+                "text": "△亚瑟微微一笑，身体前倾，挑衅地看着奥尔德里奇。",
+                "source": "△亚瑟微微一笑，身体前倾，挑衅地看着奥尔德里奇。"
+              },
+              {
+                "id": "B21",
+                "kind": "dialogue",
+                "speaker": "亚瑟",
+                "tone": "面带微笑",
+                "text": "Did you buy this tavern, old man?",
+                "source": "亚瑟（面带微笑）：Did you buy this tavern, old man?"
+              },
+              {
+                "id": "B22",
+                "kind": "action",
+                "text": "△奥尔德里奇神色阴沉下来，紧盯着亚瑟。",
+                "source": "△奥尔德里奇神色阴沉下来，紧盯着亚瑟。"
+              },
+              {
+                "id": "B23",
+                "kind": "action",
+                "text": "△奥尔德里奇将右手放在桌上，手掌中凝聚出一团蓝色的魔法火焰。",
+                "source": "△奥尔德里奇将右手放在桌上，手掌中凝聚出一团蓝色的魔法火焰。"
+              },
+              {
+                "id": "B24",
+                "kind": "action",
+                "text": "△亚瑟看着那团蓝色火焰，脸上露出灿烂的笑容。",
+                "source": "△亚瑟看着那团蓝色火焰，脸上露出灿烂的笑容。"
+              },
+              {
+                "id": "B25",
+                "kind": "action",
+                "text": "△奥尔德里奇托着蓝色火焰，冷冷地看着亚瑟。",
+                "source": "△奥尔德里奇托着蓝色火焰，冷冷地看着亚瑟。"
+              },
+              {
+                "id": "B26",
+                "kind": "action",
+                "text": "△亚瑟伸出双手，在奥尔德里奇手里的蓝色火焰上方晃了晃，仿佛在烤火取暖。",
+                "source": "△亚瑟伸出双手，在奥尔德里奇手里的蓝色火焰上方晃了晃，仿佛在烤火取暖。"
+              },
+              {
+                "id": "B27",
+                "kind": "action",
+                "text": "△塞琳娜伸出右手，挡在奥尔德里奇的手前，出声阻止他。",
+                "source": "△塞琳娜伸出右手，挡在奥尔德里奇的手前，出声阻止他。"
+              },
+              {
+                "id": "B28",
+                "kind": "dialogue",
+                "speaker": "塞琳娜",
+                "tone": "语气严肃",
+                "text": "Enough, Aldric. We didn't book the whole place. Let this gentleman sit.",
+                "source": "塞琳娜（语气严肃）：Enough, Aldric. We didn't book the whole place. Let this gentleman sit."
+              }
+            ],
+            "chunkIndex": 2,
+            "chunkCount": 7
+          },
+          "finalPlan": {
+            "sceneId": "4-1",
+            "shots": [
+              {
+                "duration": 12,
+                "cast": [
+                  "奥尔德里奇",
+                  "亚瑟"
+                ],
+                "props": [],
+                "startPosition": "酒馆桌两侧，奥尔德里奇坐在亚瑟对面，右手搭在桌沿；亚瑟坐在对面，双手放在桌面上，视线朝向奥尔德里奇。",
+                "clips": [
+                  {
+                    "duration": 6,
+                    "size": "CU",
+                    "cameraMove": "固定机位",
+                    "visualAction": "奥尔德里奇抬眼看向对面的亚瑟，开口说话，右手仍搭在桌沿。",
+                    "beat": "施压",
+                    "sourceBlockIds": [
+                      "B19"
+                    ]
+                  },
+                  {
+                    "duration": 2,
+                    "size": "MCU",
+                    "cameraMove": "轻微前推",
+                    "visualAction": "亚瑟微微一笑，身体前倾，视线迎向奥尔德里奇。",
+                    "beat": "挑衅",
+                    "sourceBlockIds": [
+                      "B20"
+                    ]
+                  },
+                  {
+                    "duration": 4,
+                    "size": "CU",
+                    "cameraMove": "固定机位",
+                    "visualAction": "亚瑟看着奥尔德里奇，开口说话。",
+                    "beat": "回应",
+                    "sourceBlockIds": [
+                      "B21"
+                    ]
+                  }
+                ]
+              },
+              {
+                "duration": 9,
+                "cast": [
+                  "奥尔德里奇",
+                  "亚瑟"
+                ],
+                "props": [],
+                "startPosition": "亚瑟身体前倾坐在奥尔德里奇对面；奥尔德里奇右手搭在桌沿，视线朝向亚瑟。",
+                "clips": [
+                  {
+                    "duration": 3,
+                    "size": "CU",
+                    "cameraMove": "下摇至桌面手部",
+                    "visualAction": "奥尔德里奇面部绷紧，盯住亚瑟，随后将右手按到桌面上，掌心凝聚出一团蓝色火焰。",
+                    "beat": "施压",
+                    "sourceBlockIds": [
+                      "B22",
+                      "B23"
+                    ]
+                  },
+                  {
+                    "duration": 2,
+                    "size": "CU",
+                    "cameraMove": "缓慢推近",
+                    "visualAction": "亚瑟看向桌上的蓝色火焰，露出笑容。",
+                    "beat": "反应",
+                    "sourceBlockIds": [
+                      "B24"
+                    ]
+                  },
+                  {
+                    "duration": 2,
+                    "size": "MCU",
+                    "cameraMove": "固定机位",
+                    "visualAction": "奥尔德里奇右手托着蓝色火焰，抬眼看向亚瑟。",
+                    "beat": "对峙",
+                    "sourceBlockIds": [
+                      "B25"
+                    ]
+                  },
+                  {
+                    "duration": 2,
+                    "size": "MCU",
+                    "cameraMove": "固定机位",
+                    "visualAction": "亚瑟双手伸到蓝色火焰上方，来回晃动双手。",
+                    "beat": "挑衅",
+                    "sourceBlockIds": [
+                      "B26"
+                    ]
+                  }
+                ]
+              },
+              {
+                "duration": 8,
+                "cast": [
+                  "塞琳娜",
+                  "奥尔德里奇"
+                ],
+                "props": [],
+                "startPosition": "塞琳娜坐在奥尔德里奇右侧，右手抬至桌面上方；奥尔德里奇右手托着蓝色火焰停在桌面，视线朝向亚瑟方向。",
+                "clips": [
+                  {
+                    "duration": 2,
+                    "size": "ECU",
+                    "cameraMove": "快速横移入画",
+                    "visualAction": "塞琳娜伸出右手，横挡在奥尔德里奇托着火焰的手前。",
+                    "beat": "阻止",
+                    "sourceBlockIds": [
+                      "B27"
+                    ]
+                  },
+                  {
+                    "duration": 6,
+                    "size": "CU",
+                    "cameraMove": "缓慢推近",
+                    "visualAction": "塞琳娜保持右手挡在奥尔德里奇手前，转头看向奥尔德里奇，开口说话。",
+                    "beat": "裁决",
+                    "sourceBlockIds": [
+                      "B28"
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          "finalRaw": "{\n  \"sceneId\": \"4-1\",\n  \"shots\": [\n    {\n      \"duration\": 12,\n      \"cast\": [\"奥尔德里奇\", \"亚瑟\"],\n      \"props\": [],\n      \"startPosition\": \"酒馆桌两侧，奥尔德里奇坐在亚瑟对面，右手搭在桌沿；亚瑟坐在对面，双手放在桌面上，视线朝向奥尔德里奇。\",\n      \"clips\": [\n        {\n          \"duration\": 6,\n          \"size\": \"CU\",\n          \"cameraMove\": \"固定机位\",\n          \"visualAction\": \"奥尔德里奇抬眼看向对面的亚瑟，开口说话，右手仍搭在桌沿。\",\n          \"beat\": \"施压\",\n          \"sourceBlockIds\": [\"B19\"]\n        },\n        {\n          \"duration\": 2,\n          \"size\": \"MCU\",\n          \"cameraMove\": \"轻微前推\",\n          \"visualAction\": \"亚瑟微微一笑，身体前倾，视线迎向奥尔德里奇。\",\n          \"beat\": \"挑衅\",\n          \"sourceBlockIds\": [\"B20\"]\n        },\n        {\n          \"duration\": 4,\n          \"size\": \"CU\",\n          \"cameraMove\": \"固定机位\",\n          \"visualAction\": \"亚瑟看着奥尔德里奇，开口说话。\",\n          \"beat\": \"回应\",\n          \"sourceBlockIds\": [\"B21\"]\n        }\n      ]\n    },\n    {\n      \"duration\": 9,\n      \"cast\": [\"奥尔德里奇\", \"亚瑟\"],\n      \"props\": [],\n      \"startPosition\": \"亚瑟身体前倾坐在奥尔德里奇对面；奥尔德里奇右手搭在桌沿，视线朝向亚瑟。\",\n      \"clips\": [\n        {\n          \"duration\": 3,\n          \"size\": \"CU\",\n          \"cameraMove\": \"下摇至桌面手部\",\n          \"visualAction\": \"奥尔德里奇面部绷紧，盯住亚瑟，随后将右手按到桌面上，掌心凝聚出一团蓝色火焰。\",\n          \"beat\": \"施压\",\n          \"sourceBlockIds\": [\"B22\", \"B23\"]\n        },\n        {\n          \"duration\": 2,\n          \"size\": \"CU\",\n          \"cameraMove\": \"缓慢推近\",\n          \"visualAction\": \"亚瑟看向桌上的蓝色火焰，露出笑容。\",\n          \"beat\": \"反应\",\n          \"sourceBlockIds\": [\"B24\"]\n        },\n        {\n          \"duration\": 2,\n          \"size\": \"MCU\",\n          \"cameraMove\": \"固定机位\",\n          \"visualAction\": \"奥尔德里奇右手托着蓝色火焰，抬眼看向亚瑟。\",\n          \"beat\": \"对峙\",\n          \"sourceBlockIds\": [\"B25\"]\n        },\n        {\n          \"duration\": 2,\n          \"size\": \"MCU\",\n          \"cameraMove\": \"固定机位\",\n          \"visualAction\": \"亚瑟双手伸到蓝色火焰上方，来回晃动双手。\",\n          \"beat\": \"挑衅\",\n          \"sourceBlockIds\": [\"B26\"]\n        }\n      ]\n    },\n    {\n      \"duration\": 8,\n      \"cast\": [\"塞琳娜\", \"奥尔德里奇\"],\n      \"props\": [],\n      \"startPosition\": \"塞琳娜坐在奥尔德里奇右侧，右手抬至桌面上方；奥尔德里奇右手托着蓝色火焰停在桌面，视线朝向亚瑟方向。\",\n      \"clips\": [\n        {\n          \"duration\": 2,\n          \"size\": \"ECU\",\n          \"cameraMove\": \"快速横移入画\",\n          \"visualAction\": \"塞琳娜伸出右手，横挡在奥尔德里奇托着火焰的手前。\",\n          \"beat\": \"阻止\",\n          \"sourceBlockIds\": [\"B27\"]\n        },\n        {\n          \"duration\": 6,\n          \"size\": \"CU\",\n          \"cameraMove\": \"缓慢推近\",\n          \"visualAction\": \"塞琳娜保持右手挡在奥尔德里奇手前，转头看向奥尔德里奇，开口说话。\",\n          \"beat\": \"裁决\",\n          \"sourceBlockIds\": [\"B28\"]\n        }\n      ]\n    }\n  ]\n}",
+          "resumedFrom": "2026-11-04T08-12-46-838Z-AB-新引擎修复-EP4-2-7-r2.json",
+          "attempts": [
+            {
+              "attempt": 1,
+              "label": "AB 新引擎 EP4 2/7 r1",
+              "raw": "{\n  \"sceneId\": \"4-1\",\n  \"shots\": [\n    {\n      \"duration\": 8,\n      \"cast\": [\"奥尔德里奇\", \"亚瑟\"],\n      \"props\": [],\n      \"startPosition\": \"酒馆桌两侧，奥尔德里奇坐在亚瑟对面，右手搭在桌沿；亚瑟坐在对面，双手放在桌面上，视线朝向奥尔德里奇。\",\n      \"clips\": [\n        {\n          \"duration\": 4,\n          \"size\": \"CU\",\n          \"cameraMove\": \"固定机位\",\n          \"visualAction\": \"奥尔德里奇抬眼看向对面的亚瑟，开口说话，右手仍搭在桌沿。\",\n          \"beat\": \"施压\",\n          \"sourceBlockIds\": [\"B19\"]\n        },\n        {\n          \"duration\": 2,\n          \"size\": \"MCU\",\n          \"cameraMove\": \"轻微前推\",\n          \"visualAction\": \"亚瑟微微一笑，身体前倾，视线迎向奥尔德里奇。\",\n          \"beat\": \"挑衅\",\n          \"sourceBlockIds\": [\"B20\"]\n        },\n        {\n          \"duration\": 2,\n          \"size\": \"CU\",\n          \"cameraMove\": \"固定机位\",\n          \"visualAction\": \"亚瑟看着奥尔德里奇，开口说话。\",\n          \"beat\": \"回应\",\n          \"sourceBlockIds\": [\"B21\"]\n        }\n      ]\n    },\n    {\n      \"duration\": 9,\n      \"cast\": [\"奥尔德里奇\", \"亚瑟\"],\n      \"props\": [],\n      \"startPosition\": \"亚瑟身体前倾坐在奥尔德里奇对面；奥尔德里奇右手搭在桌沿，视线朝向亚瑟。\",\n      \"clips\": [\n        {\n          \"duration\": 3,\n          \"size\": \"CU\",\n          \"cameraMove\": \"下摇至桌面手部\",\n          \"visualAction\": \"奥尔德里奇面部绷紧，盯住亚瑟，随后将右手按到桌面上，掌心凝聚出一团蓝色火焰。\",\n          \"beat\": \"施压\",\n          \"sourceBlockIds\": [\"B22\", \"B23\"]\n        },\n        {\n          \"duration\": 2,\n          \"size\": \"CU\",\n          \"cameraMove\": \"缓慢推近\",\n          \"visualAction\": \"亚瑟看向桌上的蓝色火焰，露出笑容。\",\n          \"beat\": \"反应\",\n          \"sourceBlockIds\": [\"B24\"]\n        },\n        {\n          \"duration\": 2,\n          \"size\": \"MCU\",\n          \"cameraMove\": \"固定机位\",\n          \"visualAction\": \"奥尔德里奇右手托着蓝色火焰，抬眼看向亚瑟。\",\n          \"beat\": \"对峙\",\n          \"sourceBlockIds\": [\"B25\"]\n        },\n        {\n          \"duration\": 2,\n          \"size\": \"MCU\",\n          \"cameraMove\": \"固定机位\",\n          \"visualAction\": \"亚瑟双手伸到蓝色火焰上方，来回晃动双手。\",\n          \"beat\": \"挑衅\",\n          \"sourceBlockIds\": [\"B26\"]\n        }\n      ]\n    },\n    {\n      \"duration\": 5,\n      \"cast\": [\"塞琳娜\", \"奥尔德里奇\"],\n      \"props\": [],\n      \"startPosition\": \"塞琳娜坐在奥尔德里奇右侧，右手抬至桌面上方；奥尔德里奇右手托着蓝色火焰停在桌面，视线朝向亚瑟方向。\",\n      \"clips\": [\n        {\n          \"duration\": 2,\n          \"size\": \"ECU\",\n          \"cameraMove\": \"快速横移入画\",\n          \"visualAction\": \"塞琳娜伸出右手，横挡在奥尔德里奇托着火焰的手前。\",\n          \"beat\": \"阻止\",\n          \"sourceBlockIds\": [\"B27\"]\n        },\n        {\n          \"duration\": 3,\n          \"size\": \"CU\",\n          \"cameraMove\": \"缓慢推近\",\n          \"visualAction\": \"塞琳娜保持右手挡在奥尔德里奇手前，转头看向奥尔德里奇，开口说话。\",\n          \"beat\": \"裁决\",\n          \"sourceBlockIds\": [\"B28\"]\n        }\n      ]\n    }\n  ]\n}",
+              "status": "completed",
+              "usage": {
+                "input_tokens": 1981,
+                "input_tokens_details": {
+                  "cached_tokens": 768
+                },
+                "output_tokens": 5140,
+                "output_tokens_details": {
+                  "reasoning_tokens": 4258
+                },
+                "total_tokens": 7121
+              },
+              "elapsedMs": 29929,
+              "resumed": true
+            },
+            {
+              "attempt": 2,
+              "label": "AB 新引擎修复 EP4 2/7 r2",
+              "raw": "{\n  \"sceneId\": \"4-1\",\n  \"shots\": [\n    {\n      \"duration\": 12,\n      \"cast\": [\"奥尔德里奇\", \"亚瑟\"],\n      \"props\": [],\n      \"startPosition\": \"酒馆桌两侧，奥尔德里奇坐在亚瑟对面，右手搭在桌沿；亚瑟坐在对面，双手放在桌面上，视线朝向奥尔德里奇。\",\n      \"clips\": [\n        {\n          \"duration\": 6,\n          \"size\": \"CU\",\n          \"cameraMove\": \"固定机位\",\n          \"visualAction\": \"奥尔德里奇抬眼看向对面的亚瑟，开口说话，右手仍搭在桌沿。\",\n          \"beat\": \"施压\",\n          \"sourceBlockIds\": [\"B19\"]\n        },\n        {\n          \"duration\": 2,\n          \"size\": \"MCU\",\n          \"cameraMove\": \"轻微前推\",\n          \"visualAction\": \"亚瑟微微一笑，身体前倾，视线迎向奥尔德里奇。\",\n          \"beat\": \"挑衅\",\n          \"sourceBlockIds\": [\"B20\"]\n        },\n        {\n          \"duration\": 4,\n          \"size\": \"CU\",\n          \"cameraMove\": \"固定机位\",\n          \"visualAction\": \"亚瑟看着奥尔德里奇，开口说话。\",\n          \"beat\": \"回应\",\n          \"sourceBlockIds\": [\"B21\"]\n        }\n      ]\n    },\n    {\n      \"duration\": 9,\n      \"cast\": [\"奥尔德里奇\", \"亚瑟\"],\n      \"props\": [],\n      \"startPosition\": \"亚瑟身体前倾坐在奥尔德里奇对面；奥尔德里奇右手搭在桌沿，视线朝向亚瑟。\",\n      \"clips\": [\n        {\n          \"duration\": 3,\n          \"size\": \"CU\",\n          \"cameraMove\": \"下摇至桌面手部\",\n          \"visualAction\": \"奥尔德里奇面部绷紧，盯住亚瑟，随后将右手按到桌面上，掌心凝聚出一团蓝色火焰。\",\n          \"beat\": \"施压\",\n          \"sourceBlockIds\": [\"B22\", \"B23\"]\n        },\n        {\n          \"duration\": 2,\n          \"size\": \"CU\",\n          \"cameraMove\": \"缓慢推近\",\n          \"visualAction\": \"亚瑟看向桌上的蓝色火焰，露出笑容。\",\n          \"beat\": \"反应\",\n          \"sourceBlockIds\": [\"B24\"]\n        },\n        {\n          \"duration\": 2,\n          \"size\": \"MCU\",\n          \"cameraMove\": \"固定机位\",\n          \"visualAction\": \"奥尔德里奇右手托着蓝色火焰，抬眼看向亚瑟。\",\n          \"beat\": \"对峙\",\n          \"sourceBlockIds\": [\"B25\"]\n        },\n        {\n          \"duration\": 2,\n          \"size\": \"MCU\",\n          \"cameraMove\": \"固定机位\",\n          \"visualAction\": \"亚瑟双手伸到蓝色火焰上方，来回晃动双手。\",\n          \"beat\": \"挑衅\",\n          \"sourceBlockIds\": [\"B26\"]\n        }\n      ]\n    },\n    {\n      \"duration\": 8,\n      \"cast\": [\"塞琳娜\", \"奥尔德里奇\"],\n      \"props\": [],\n      \"startPosition\": \"塞琳娜坐在奥尔德里奇右侧，右手抬至桌面上方；奥尔德里奇右手托着蓝色火焰停在桌面，视线朝向亚瑟方向。\",\n      \"clips\": [\n        {\n          \"duration\": 2,\n          \"size\": \"ECU\",\n          \"cameraMove\": \"快速横移入画\",\n          \"visualAction\": \"塞琳娜伸出右手，横挡在奥尔德里奇托着火焰的手前。\",\n          \"beat\": \"阻止\",\n          \"sourceBlockIds\": [\"B27\"]\n        },\n        {\n          \"duration\": 6,\n          \"size\": \"CU\",\n          \"cameraMove\": \"缓慢推近\",\n          \"visualAction\": \"塞琳娜保持右手挡在奥尔德里奇手前，转头看向奥尔德里奇，开口说话。\",\n          \"beat\": \"裁决\",\n          \"sourceBlockIds\": [\"B28\"]\n        }\n      ]\n    }\n  ]\n}",
+              "status": "completed",
+              "usage": {
+                "input_tokens": 2991,
+                "input_tokens_details": {
+                  "cached_tokens": 768
+                },
+                "output_tokens": 3406,
+                "output_tokens_details": {
+                  "reasoning_tokens": 2524
+                },
+                "total_tokens": 6397
+              },
+              "elapsedMs": 18925,
+              "resumed": true
+            }
+          ]
+        },
+        {
+          "chunkIndex": 3,
+          "sceneInput": {
+            "sceneId": "4-1",
+            "episode": "第4集：徒手托陨石",
+            "sceneHeading": "Border Tavern 内 未注明",
+            "cast": "亚瑟（Arthur，着装：旅行者装）、奥尔德里奇（Aldrick，着装：黑色法袍）、塞琳娜（Selina，着装：贵族女子华贵长裙）、酒馆老板（Tavern Owner，着装：酒馆围裙）、男酒客（Male Patron，着装：粗布衣）",
+            "castNames": [
+              "亚瑟",
+              "奥尔德里奇",
+              "塞琳娜",
+              "酒馆老板",
+              "男酒客"
+            ],
+            "previousEnd": "△亚瑟伸出双手，在奥尔德里奇手里的蓝色火焰上方晃了晃，仿佛在烤火取暖。\n△塞琳娜伸出右手，挡在奥尔德里奇的手前，出声阻止他。\n塞琳娜（语气严肃）：Enough, Aldric. We didn't book the whole place. Let this gentleman sit.",
+            "nextScene": "奥尔德里奇（语气惊恐）：Its mass and impact force are terrifying.\n△亚瑟依然平静地坐在桌旁，端着酒杯继续喝酒。\n△塞琳娜脸色苍白，绝望地看着前方，奥尔德里奇继续惊恐地大喊。\n奥尔德里奇（O.S.）（语气绝望）：My magic shield is like paper against it! My lady, there's no escape!",
+            "estimatedSeconds": 19,
+            "blocks": [
+              {
+                "id": "B29",
+                "kind": "action",
+                "text": "△亚瑟开心地笑了起来，靠回椅背上。",
+                "source": "△亚瑟开心地笑了起来，靠回椅背上。"
+              },
+              {
+                "id": "B30",
+                "kind": "dialogue",
+                "speaker": "亚瑟",
+                "tone": "笑着调侃",
+                "text": "Now this lady is reasonable.",
+                "source": "亚瑟（笑着调侃）：Now this lady is reasonable."
+              },
+              {
+                "id": "B31",
+                "kind": "action",
+                "text": "△亚瑟端起桌上的金属酒杯，大口喝起酒来。",
+                "source": "△亚瑟端起桌上的金属酒杯，大口喝起酒来。"
+              },
+              {
+                "id": "B32",
+                "kind": "action",
+                "text": "△亚瑟仰头喝酒，喉咙不断吞咽，酒水顺着脖子流下。",
+                "source": "△亚瑟仰头喝酒，喉咙不断吞咽，酒水顺着脖子流下。"
+              },
+              {
+                "id": "B33",
+                "kind": "action",
+                "text": "△雷声。酒馆外的天空突然变得漆黑，乌云密布，狂风大作。",
+                "source": "△雷声。酒馆外的天空突然变得漆黑，乌云密布，狂风大作。"
+              },
+              {
+                "id": "B34",
+                "kind": "action",
+                "text": "△酒馆外的木质招牌“BORDERLAND TAVERN”在狂风中剧烈摇晃。",
+                "source": "△酒馆外的木质招牌“BORDERLAND TAVERN”在狂风中剧烈摇晃。"
+              },
+              {
+                "id": "B35",
+                "kind": "action",
+                "text": "△酒馆内开始剧烈震动，屋顶落下灰尘，酒客们惊慌失措。",
+                "source": "△酒馆内开始剧烈震动，屋顶落下灰尘，酒客们惊慌失措。"
+              },
+              {
+                "id": "B36",
+                "kind": "action",
+                "text": "△男酒客惊恐地站起身，大声喊叫。",
+                "source": "△男酒客惊恐地站起身，大声喊叫。"
+              },
+              {
+                "id": "B37",
+                "kind": "dialogue",
+                "speaker": "男酒客",
+                "tone": "惊恐大喊",
+                "text": "What is that? Is it the end of the world?!",
+                "source": "男酒客（惊恐大喊）：What is that? Is it the end of the world?!"
+              },
+              {
+                "id": "B38",
+                "kind": "action",
+                "text": "△塞琳娜捂着胸口，震惊地睁大眼睛，抬头看着屋顶。",
+                "source": "△塞琳娜捂着胸口，震惊地睁大眼睛，抬头看着屋顶。"
+              },
+              {
+                "id": "B39",
+                "kind": "action",
+                "text": "△航拍视角下，一颗巨大的燃烧陨石拖着浓烟，正从天空中砸向森林中的酒馆。",
+                "source": "△航拍视角下，一颗巨大的燃烧陨石拖着浓烟，正从天空中砸向森林中的酒馆。"
+              },
+              {
+                "id": "B40",
+                "kind": "action",
+                "text": "△陨石在空中燃烧，发出耀眼的红光，逼近酒馆。",
+                "source": "△陨石在空中燃烧，发出耀眼的红光，逼近酒馆。"
+              },
+              {
+                "id": "B41",
+                "kind": "dialogue",
+                "speaker": "男酒客（O.S.）",
+                "tone": "惊恐大喊",
+                "text": "No! It's a celestial meteor!",
+                "source": "男酒客（O.S.）（惊恐大喊）：No! It's a celestial meteor!"
+              },
+              {
+                "id": "B42",
+                "kind": "action",
+                "text": "△塞琳娜神色更加惊恐，呼吸急促。",
+                "source": "△塞琳娜神色更加惊恐，呼吸急促。"
+              },
+              {
+                "id": "B43",
+                "kind": "action",
+                "text": "△奥尔德里奇站起身，手里拿着法杖，神色慌张地大喊。",
+                "source": "△奥尔德里奇站起身，手里拿着法杖，神色慌张地大喊。"
+              }
+            ],
+            "chunkIndex": 3,
+            "chunkCount": 7
+          },
+          "finalPlan": {
+            "sceneId": "4-1",
+            "shots": [
+              {
+                "duration": 5,
+                "cast": [
+                  "亚瑟"
+                ],
+                "props": [
+                  "金属酒杯"
+                ],
+                "startPosition": "亚瑟坐在酒馆桌旁，背靠椅背，右手搭在桌沿，金属酒杯置于桌上正前方。",
+                "clips": [
+                  {
+                    "duration": 3,
+                    "size": "MCU",
+                    "cameraMove": "固定机位",
+                    "visualAction": "亚瑟靠回椅背，笑出声，转头看向塞琳娜方向，开口说话。",
+                    "beat": "建立",
+                    "sourceBlockIds": [
+                      "B29",
+                      "B30"
+                    ]
+                  },
+                  {
+                    "duration": 2,
+                    "size": "CU",
+                    "cameraMove": "缓慢推近",
+                    "visualAction": "亚瑟端起桌上的金属酒杯，仰头大口喝下，喉结上下滚动，酒水沿脖子流下。",
+                    "beat": "强调",
+                    "sourceBlockIds": [
+                      "B31",
+                      "B32"
+                    ]
+                  }
+                ]
+              },
+              {
+                "duration": 5,
+                "cast": [
+                  "男酒客"
+                ],
+                "props": [],
+                "startPosition": "酒馆外天空尚亮，木质招牌固定在门楣上；酒馆内男酒客坐在靠墙桌旁，面朝酒馆中央，双手放在桌上。",
+                "clips": [
+                  {
+                    "duration": 2,
+                    "size": "WS",
+                    "cameraMove": "固定机位",
+                    "visualAction": "酒馆外天空骤然变黑，乌云翻涌，狂风卷动树枝；门楣上的木质招牌“BORDERLAND TAVERN”剧烈摇晃。",
+                    "beat": "转折",
+                    "sourceBlockIds": [
+                      "B33",
+                      "B34"
+                    ]
+                  },
+                  {
+                    "duration": 3,
+                    "size": "MCU",
+                    "cameraMove": "手持轻晃",
+                    "visualAction": "酒馆内剧烈震动，屋顶灰尘落下；男酒客从桌旁站起，张口大喊。",
+                    "beat": "反应",
+                    "sourceBlockIds": [
+                      "B35",
+                      "B36"
+                    ]
+                  }
+                ]
+              },
+              {
+                "duration": 8,
+                "cast": [
+                  "男酒客",
+                  "塞琳娜"
+                ],
+                "props": [],
+                "startPosition": "男酒客站在靠墙桌旁，面朝酒馆中央；塞琳娜坐在桌旁，双手放在桌沿，抬头看向屋顶方向。",
+                "clips": [
+                  {
+                    "duration": 6,
+                    "size": "MCU",
+                    "cameraMove": "固定机位",
+                    "visualAction": "男酒客站在桌旁大喊；塞琳娜坐在桌旁，右手捂住胸口，睁大双眼抬头看向屋顶。",
+                    "beat": "反应",
+                    "sourceBlockIds": [
+                      "B37",
+                      "B38"
+                    ]
+                  },
+                  {
+                    "duration": 2,
+                    "size": "WS",
+                    "cameraMove": "快速下摇",
+                    "visualAction": "航拍视角下，一颗燃烧的陨石拖着浓烟从天空坠向森林中的酒馆，红光逼近屋顶。",
+                    "beat": "钩子",
+                    "sourceBlockIds": [
+                      "B39",
+                      "B40"
+                    ]
+                  }
+                ]
+              },
+              {
+                "duration": 7,
+                "cast": [
+                  "男酒客",
+                  "塞琳娜",
+                  "奥尔德里奇"
+                ],
+                "props": [
+                  "法杖"
+                ],
+                "startPosition": "塞琳娜坐在桌旁，右手捂住胸口，头朝屋顶方向；奥尔德里奇坐在桌旁，法杖靠在手边；男酒客位于画外方向。",
+                "clips": [
+                  {
+                    "duration": 4,
+                    "size": "CU",
+                    "cameraMove": "固定机位",
+                    "visualAction": "塞琳娜呼吸急促，右手仍捂胸口，双眼睁大，肩膀起伏。",
+                    "beat": "压迫",
+                    "sourceBlockIds": [
+                      "B41",
+                      "B42"
+                    ]
+                  },
+                  {
+                    "duration": 3,
+                    "size": "MCU",
+                    "cameraMove": "快速推近",
+                    "visualAction": "奥尔德里奇握着法杖站起，面向前方，张大嘴大喊。",
+                    "beat": "钩子",
+                    "sourceBlockIds": [
+                      "B43"
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          "finalRaw": "{\n  \"sceneId\": \"4-1\",\n  \"shots\": [\n    {\n      \"duration\": 5,\n      \"cast\": [\"亚瑟\"],\n      \"props\": [\"金属酒杯\"],\n      \"startPosition\": \"亚瑟坐在酒馆桌旁，背靠椅背，右手搭在桌沿，金属酒杯置于桌上正前方。\",\n      \"clips\": [\n        {\n          \"duration\": 3,\n          \"size\": \"MCU\",\n          \"cameraMove\": \"固定机位\",\n          \"visualAction\": \"亚瑟靠回椅背，笑出声，转头看向塞琳娜方向，开口说话。\",\n          \"beat\": \"建立\",\n          \"sourceBlockIds\": [\"B29\", \"B30\"]\n        },\n        {\n          \"duration\": 2,\n          \"size\": \"CU\",\n          \"cameraMove\": \"缓慢推近\",\n          \"visualAction\": \"亚瑟端起桌上的金属酒杯，仰头大口喝下，喉结上下滚动，酒水沿脖子流下。\",\n          \"beat\": \"强调\",\n          \"sourceBlockIds\": [\"B31\", \"B32\"]\n        }\n      ]\n    },\n    {\n      \"duration\": 5,\n      \"cast\": [\"男酒客\"],\n      \"props\": [],\n      \"startPosition\": \"酒馆外天空尚亮，木质招牌固定在门楣上；酒馆内男酒客坐在靠墙桌旁，面朝酒馆中央，双手放在桌上。\",\n      \"clips\": [\n        {\n          \"duration\": 2,\n          \"size\": \"WS\",\n          \"cameraMove\": \"固定机位\",\n          \"visualAction\": \"酒馆外天空骤然变黑，乌云翻涌，狂风卷动树枝；门楣上的木质招牌“BORDERLAND TAVERN”剧烈摇晃。\",\n          \"beat\": \"转折\",\n          \"sourceBlockIds\": [\"B33\", \"B34\"]\n        },\n        {\n          \"duration\": 3,\n          \"size\": \"MCU\",\n          \"cameraMove\": \"手持轻晃\",\n          \"visualAction\": \"酒馆内剧烈震动，屋顶灰尘落下；男酒客从桌旁站起，张口大喊。\",\n          \"beat\": \"反应\",\n          \"sourceBlockIds\": [\"B35\", \"B36\"]\n        }\n      ]\n    },\n    {\n      \"duration\": 8,\n      \"cast\": [\"男酒客\", \"塞琳娜\"],\n      \"props\": [],\n      \"startPosition\": \"男酒客站在靠墙桌旁，面朝酒馆中央；塞琳娜坐在桌旁，双手放在桌沿，抬头看向屋顶方向。\",\n      \"clips\": [\n        {\n          \"duration\": 6,\n          \"size\": \"MCU\",\n          \"cameraMove\": \"固定机位\",\n          \"visualAction\": \"男酒客站在桌旁大喊；塞琳娜坐在桌旁，右手捂住胸口，睁大双眼抬头看向屋顶。\",\n          \"beat\": \"反应\",\n          \"sourceBlockIds\": [\"B37\", \"B38\"]\n        },\n        {\n          \"duration\": 2,\n          \"size\": \"WS\",\n          \"cameraMove\": \"快速下摇\",\n          \"visualAction\": \"航拍视角下，一颗燃烧的陨石拖着浓烟从天空坠向森林中的酒馆，红光逼近屋顶。\",\n          \"beat\": \"钩子\",\n          \"sourceBlockIds\": [\"B39\", \"B40\"]\n        }\n      ]\n    },\n    {\n      \"duration\": 7,\n      \"cast\": [\"男酒客\", \"塞琳娜\", \"奥尔德里奇\"],\n      \"props\": [\"法杖\"],\n      \"startPosition\": \"塞琳娜坐在桌旁，右手捂住胸口，头朝屋顶方向；奥尔德里奇坐在桌旁，法杖靠在手边；男酒客位于画外方向。\",\n      \"clips\": [\n        {\n          \"duration\": 4,\n          \"size\": \"CU\",\n          \"cameraMove\": \"固定机位\",\n          \"visualAction\": \"塞琳娜呼吸急促，右手仍捂胸口，双眼睁大，肩膀起伏。\",\n          \"beat\": \"压迫\",\n          \"sourceBlockIds\": [\"B41\", \"B42\"]\n        },\n        {\n          \"duration\": 3,\n          \"size\": \"MCU\",\n          \"cameraMove\": \"快速推近\",\n          \"visualAction\": \"奥尔德里奇握着法杖站起，面向前方，张大嘴大喊。\",\n          \"beat\": \"钩子\",\n          \"sourceBlockIds\": [\"B43\"]\n        }\n      ]\n    }\n  ]\n}",
+          "resumedFrom": "2026-11-04T08-14-13-986Z-AB-新引擎修复-EP4-3-7-r2.json",
+          "attempts": [
+            {
+              "attempt": 1,
+              "label": "AB 新引擎 EP4 3/7 r1",
+              "raw": "{\n  \"sceneId\": \"4-1\",\n  \"shots\": [\n    {\n      \"duration\": 5,\n      \"cast\": [\"亚瑟\"],\n      \"props\": [\"金属酒杯\"],\n      \"startPosition\": \"亚瑟坐在酒馆桌旁，背靠椅背，右手搭在桌沿，金属酒杯置于桌上正前方。\",\n      \"clips\": [\n        {\n          \"duration\": 3,\n          \"size\": \"MCU\",\n          \"cameraMove\": \"固定机位\",\n          \"visualAction\": \"亚瑟靠回椅背，笑出声，转头看向塞琳娜方向，开口说话。\",\n          \"beat\": \"建立\",\n          \"sourceBlockIds\": [\"B29\", \"B30\"]\n        },\n        {\n          \"duration\": 2,\n          \"size\": \"CU\",\n          \"cameraMove\": \"缓慢推近\",\n          \"visualAction\": \"亚瑟端起桌上的金属酒杯，仰头大口喝下，喉结上下滚动，酒水沿脖子流下。\",\n          \"beat\": \"强调\",\n          \"sourceBlockIds\": [\"B31\", \"B32\"]\n        }\n      ]\n    },\n    {\n      \"duration\": 5,\n      \"cast\": [\"男酒客\"],\n      \"props\": [],\n      \"startPosition\": \"酒馆外天空尚亮，木质招牌固定在门楣上；酒馆内男酒客坐在靠墙桌旁，面朝酒馆中央，双手放在桌上。\",\n      \"clips\": [\n        {\n          \"duration\": 2,\n          \"size\": \"WS\",\n          \"cameraMove\": \"固定机位\",\n          \"visualAction\": \"酒馆外天空骤然变黑，乌云翻涌，狂风卷动树枝；门楣上的木质招牌“BORDERLAND TAVERN”剧烈摇晃。\",\n          \"beat\": \"转折\",\n          \"sourceBlockIds\": [\"B33\", \"B34\"]\n        },\n        {\n          \"duration\": 3,\n          \"size\": \"MCU\",\n          \"cameraMove\": \"手持轻晃\",\n          \"visualAction\": \"酒馆内剧烈震动，屋顶灰尘落下；男酒客从桌旁站起，张口大喊。\",\n          \"beat\": \"反应\",\n          \"sourceBlockIds\": [\"B35\", \"B36\"]\n        }\n      ]\n    },\n    {\n      \"duration\": 5,\n      \"cast\": [\"男酒客\", \"塞琳娜\"],\n      \"props\": [],\n      \"startPosition\": \"男酒客站在靠墙桌旁，面朝酒馆中央；塞琳娜坐在桌旁，双手放在桌沿，抬头看向屋顶方向。\",\n      \"clips\": [\n        {\n          \"duration\": 3,\n          \"size\": \"MCU\",\n          \"cameraMove\": \"固定机位\",\n          \"visualAction\": \"男酒客站在桌旁大喊；塞琳娜坐在桌旁，右手捂住胸口，睁大双眼抬头看向屋顶。\",\n          \"beat\": \"反应\",\n          \"sourceBlockIds\": [\"B37\", \"B38\"]\n        },\n        {\n          \"duration\": 2,\n          \"size\": \"WS\",\n          \"cameraMove\": \"快速下摇\",\n          \"visualAction\": \"航拍视角下，一颗燃烧的陨石拖着浓烟从天空坠向森林中的酒馆，红光逼近屋顶。\",\n          \"beat\": \"钩子\",\n          \"sourceBlockIds\": [\"B39\", \"B40\"]\n        }\n      ]\n    },\n    {\n      \"duration\": 5,\n      \"cast\": [\"男酒客\", \"塞琳娜\", \"奥尔德里奇\"],\n      \"props\": [\"法杖\"],\n      \"startPosition\": \"塞琳娜坐在桌旁，右手捂住胸口，头朝屋顶方向；奥尔德里奇坐在桌旁，法杖靠在手边；男酒客位于画外方向。\",\n      \"clips\": [\n        {\n          \"duration\": 2,\n          \"size\": \"CU\",\n          \"cameraMove\": \"固定机位\",\n          \"visualAction\": \"塞琳娜呼吸急促，右手仍捂胸口，双眼睁大，肩膀起伏。\",\n          \"beat\": \"压迫\",\n          \"sourceBlockIds\": [\"B41\", \"B42\"]\n        },\n        {\n          \"duration\": 3,\n          \"size\": \"MCU\",\n          \"cameraMove\": \"快速推近\",\n          \"visualAction\": \"奥尔德里奇握着法杖站起，面向前方，张大嘴大喊。\",\n          \"beat\": \"钩子\",\n          \"sourceBlockIds\": [\"B43\"]\n        }\n      ]\n    }\n  ]\n}",
+              "status": "completed",
+              "usage": {
+                "input_tokens": 2296,
+                "input_tokens_details": {
+                  "cached_tokens": 896
+                },
+                "output_tokens": 10675,
+                "output_tokens_details": {
+                  "reasoning_tokens": 9704
+                },
+                "total_tokens": 12971
+              },
+              "elapsedMs": 65407,
+              "resumed": true
+            },
+            {
+              "attempt": 2,
+              "label": "AB 新引擎修复 EP4 3/7 r2",
+              "raw": "{\n  \"sceneId\": \"4-1\",\n  \"shots\": [\n    {\n      \"duration\": 5,\n      \"cast\": [\"亚瑟\"],\n      \"props\": [\"金属酒杯\"],\n      \"startPosition\": \"亚瑟坐在酒馆桌旁，背靠椅背，右手搭在桌沿，金属酒杯置于桌上正前方。\",\n      \"clips\": [\n        {\n          \"duration\": 3,\n          \"size\": \"MCU\",\n          \"cameraMove\": \"固定机位\",\n          \"visualAction\": \"亚瑟靠回椅背，笑出声，转头看向塞琳娜方向，开口说话。\",\n          \"beat\": \"建立\",\n          \"sourceBlockIds\": [\"B29\", \"B30\"]\n        },\n        {\n          \"duration\": 2,\n          \"size\": \"CU\",\n          \"cameraMove\": \"缓慢推近\",\n          \"visualAction\": \"亚瑟端起桌上的金属酒杯，仰头大口喝下，喉结上下滚动，酒水沿脖子流下。\",\n          \"beat\": \"强调\",\n          \"sourceBlockIds\": [\"B31\", \"B32\"]\n        }\n      ]\n    },\n    {\n      \"duration\": 5,\n      \"cast\": [\"男酒客\"],\n      \"props\": [],\n      \"startPosition\": \"酒馆外天空尚亮，木质招牌固定在门楣上；酒馆内男酒客坐在靠墙桌旁，面朝酒馆中央，双手放在桌上。\",\n      \"clips\": [\n        {\n          \"duration\": 2,\n          \"size\": \"WS\",\n          \"cameraMove\": \"固定机位\",\n          \"visualAction\": \"酒馆外天空骤然变黑，乌云翻涌，狂风卷动树枝；门楣上的木质招牌“BORDERLAND TAVERN”剧烈摇晃。\",\n          \"beat\": \"转折\",\n          \"sourceBlockIds\": [\"B33\", \"B34\"]\n        },\n        {\n          \"duration\": 3,\n          \"size\": \"MCU\",\n          \"cameraMove\": \"手持轻晃\",\n          \"visualAction\": \"酒馆内剧烈震动，屋顶灰尘落下；男酒客从桌旁站起，张口大喊。\",\n          \"beat\": \"反应\",\n          \"sourceBlockIds\": [\"B35\", \"B36\"]\n        }\n      ]\n    },\n    {\n      \"duration\": 8,\n      \"cast\": [\"男酒客\", \"塞琳娜\"],\n      \"props\": [],\n      \"startPosition\": \"男酒客站在靠墙桌旁，面朝酒馆中央；塞琳娜坐在桌旁，双手放在桌沿，抬头看向屋顶方向。\",\n      \"clips\": [\n        {\n          \"duration\": 6,\n          \"size\": \"MCU\",\n          \"cameraMove\": \"固定机位\",\n          \"visualAction\": \"男酒客站在桌旁大喊；塞琳娜坐在桌旁，右手捂住胸口，睁大双眼抬头看向屋顶。\",\n          \"beat\": \"反应\",\n          \"sourceBlockIds\": [\"B37\", \"B38\"]\n        },\n        {\n          \"duration\": 2,\n          \"size\": \"WS\",\n          \"cameraMove\": \"快速下摇\",\n          \"visualAction\": \"航拍视角下，一颗燃烧的陨石拖着浓烟从天空坠向森林中的酒馆，红光逼近屋顶。\",\n          \"beat\": \"钩子\",\n          \"sourceBlockIds\": [\"B39\", \"B40\"]\n        }\n      ]\n    },\n    {\n      \"duration\": 7,\n      \"cast\": [\"男酒客\", \"塞琳娜\", \"奥尔德里奇\"],\n      \"props\": [\"法杖\"],\n      \"startPosition\": \"塞琳娜坐在桌旁，右手捂住胸口，头朝屋顶方向；奥尔德里奇坐在桌旁，法杖靠在手边；男酒客位于画外方向。\",\n      \"clips\": [\n        {\n          \"duration\": 4,\n          \"size\": \"CU\",\n          \"cameraMove\": \"固定机位\",\n          \"visualAction\": \"塞琳娜呼吸急促，右手仍捂胸口，双眼睁大，肩膀起伏。\",\n          \"beat\": \"压迫\",\n          \"sourceBlockIds\": [\"B41\", \"B42\"]\n        },\n        {\n          \"duration\": 3,\n          \"size\": \"MCU\",\n          \"cameraMove\": \"快速推近\",\n          \"visualAction\": \"奥尔德里奇握着法杖站起，面向前方，张大嘴大喊。\",\n          \"beat\": \"钩子\",\n          \"sourceBlockIds\": [\"B43\"]\n        }\n      ]\n    }\n  ]\n}",
+              "status": "completed",
+              "usage": {
+                "input_tokens": 3364,
+                "input_tokens_details": {
+                  "cached_tokens": 896
+                },
+                "output_tokens": 4551,
+                "output_tokens_details": {
+                  "reasoning_tokens": 3580
+                },
+                "total_tokens": 7915
+              },
+              "elapsedMs": 23990,
+              "resumed": true
+            }
+          ]
+        },
+        {
+          "chunkIndex": 4,
+          "sceneInput": {
+            "sceneId": "4-1",
+            "episode": "第4集：徒手托陨石",
+            "sceneHeading": "Border Tavern 内 未注明",
+            "cast": "亚瑟（Arthur，着装：旅行者装）、奥尔德里奇（Aldrick，着装：黑色法袍）、塞琳娜（Selina，着装：贵族女子华贵长裙）、酒馆老板（Tavern Owner，着装：酒馆围裙）、男酒客（Male Patron，着装：粗布衣）",
+            "castNames": [
+              "亚瑟",
+              "奥尔德里奇",
+              "塞琳娜",
+              "酒馆老板",
+              "男酒客"
+            ],
+            "previousEnd": "男酒客（O.S.）（惊恐大喊）：No! It's a celestial meteor!\n△塞琳娜神色更加惊恐，呼吸急促。\n△奥尔德里奇站起身，手里拿着法杖，神色慌张地大喊。",
+            "nextScene": "亚瑟（语气轻松）：Mages always make such a fuss. This is just my usual training dumbbell.\n△电流声。亚瑟身上爆发出金色的电光，他屈膝做好起跳准备。\n△亚瑟化作一道耀眼的金色光束，瞬间冲破酒馆的屋顶，飞向天空。\n△亚瑟在空中张开双臂，身体周围环绕着金色的能量光环。",
+            "estimatedSeconds": 15,
+            "blocks": [
+              {
+                "id": "B44",
+                "kind": "dialogue",
+                "speaker": "奥尔德里奇",
+                "tone": "语气惊恐",
+                "text": "Its mass and impact force are terrifying.",
+                "source": "奥尔德里奇（语气惊恐）：Its mass and impact force are terrifying."
+              },
+              {
+                "id": "B45",
+                "kind": "action",
+                "text": "△亚瑟依然平静地坐在桌旁，端着酒杯继续喝酒。",
+                "source": "△亚瑟依然平静地坐在桌旁，端着酒杯继续喝酒。"
+              },
+              {
+                "id": "B46",
+                "kind": "action",
+                "text": "△塞琳娜脸色苍白，绝望地看着前方，奥尔德里奇继续惊恐地大喊。",
+                "source": "△塞琳娜脸色苍白，绝望地看着前方，奥尔德里奇继续惊恐地大喊。"
+              },
+              {
+                "id": "B47",
+                "kind": "dialogue",
+                "speaker": "奥尔德里奇（O.S.）",
+                "tone": "语气绝望",
+                "text": "My magic shield is like paper against it! My lady, there's no escape!",
+                "source": "奥尔德里奇（O.S.）（语气绝望）：My magic shield is like paper against it! My lady, there's no escape!"
+              },
+              {
+                "id": "B48",
+                "kind": "action",
+                "text": "△塞琳娜面部特写，眼神中充满了绝望和恐惧。",
+                "source": "△塞琳娜面部特写，眼神中充满了绝望和恐惧。"
+              },
+              {
+                "id": "B49",
+                "kind": "dialogue",
+                "speaker": "奥尔德里奇（O.S.）",
+                "tone": "焦急",
+                "text": "My lady, there's no escape!",
+                "source": "奥尔德里奇（O.S.）（焦急）：My lady, there's no escape!"
+              },
+              {
+                "id": "B50",
+                "kind": "action",
+                "text": "△亚瑟放下酒杯，站起身，拍了拍衣服，微笑着调侃。",
+                "source": "△亚瑟放下酒杯，站起身，拍了拍衣服，微笑着调侃。"
+              }
+            ],
+            "chunkIndex": 4,
+            "chunkCount": 7
+          },
+          "finalPlan": {
+            "sceneId": "4-1",
+            "shots": [
+              {
+                "duration": 5,
+                "cast": [
+                  "奥尔德里奇",
+                  "塞琳娜",
+                  "亚瑟"
+                ],
+                "props": [
+                  "法杖",
+                  "酒杯"
+                ],
+                "startPosition": "酒馆内，奥尔德里奇站在长桌右侧，右手握着法杖；塞琳娜坐在长桌左侧的椅子上，双手撑在桌沿；亚瑟独自坐在长桌靠里的一端，右手端着酒杯，停在胸前；三人视线均朝向左前方的窗户方向。",
+                "clips": [
+                  {
+                    "duration": 3,
+                    "size": "MCU",
+                    "cameraMove": "固定机位",
+                    "visualAction": "奥尔德里奇右手握住法杖，左臂朝画面左侧窗户方向摊开，肩背前倾；塞琳娜在桌旁双手撑着桌沿；亚瑟坐在长桌另一端，酒杯停在嘴边。",
+                    "beat": "建立",
+                    "sourceBlockIds": [
+                      "B44"
+                    ]
+                  },
+                  {
+                    "duration": 2,
+                    "size": "MCU",
+                    "cameraMove": "固定机位",
+                    "visualAction": "亚瑟端着酒杯，仰头饮下一口，杯沿离开嘴唇，身体稳稳坐在椅上。",
+                    "beat": "对比",
+                    "sourceBlockIds": [
+                      "B45"
+                    ]
+                  }
+                ]
+              },
+              {
+                "duration": 11,
+                "cast": [
+                  "塞琳娜",
+                  "奥尔德里奇"
+                ],
+                "props": [
+                  "法杖"
+                ],
+                "startPosition": "塞琳娜坐在长桌左侧的椅子上，双手撑着桌沿，面朝左前方；奥尔德里奇站在她右侧，右手握着法杖，身体前倾，同样朝向左前方。",
+                "clips": [
+                  {
+                    "duration": 3,
+                    "size": "MCU",
+                    "cameraMove": "固定机位",
+                    "visualAction": "塞琳娜脸色苍白，双手压住桌沿；奥尔德里奇在她右侧身体前倾，右手握着法杖挥动，面朝左上方的窗口方向。",
+                    "beat": "压迫",
+                    "sourceBlockIds": [
+                      "B46"
+                    ]
+                  },
+                  {
+                    "duration": 6,
+                    "size": "CU",
+                    "cameraMove": "缓慢推近",
+                    "visualAction": "塞琳娜的面部，眼睛睁圆，目光定在左前方不动，胸口快速起伏。",
+                    "beat": "强调",
+                    "sourceBlockIds": [
+                      "B47"
+                    ]
+                  },
+                  {
+                    "duration": 2,
+                    "size": "ECU",
+                    "cameraMove": "固定机位",
+                    "visualAction": "塞琳娜的眼睛，瞳孔收缩，睫毛颤动，视线没有偏移。",
+                    "beat": "强调",
+                    "sourceBlockIds": [
+                      "B48"
+                    ]
+                  }
+                ]
+              },
+              {
+                "duration": 6,
+                "cast": [
+                  "塞琳娜",
+                  "奥尔德里奇",
+                  "亚瑟"
+                ],
+                "props": [
+                  "法杖",
+                  "酒杯"
+                ],
+                "startPosition": "塞琳娜坐在椅子上，面色苍白，视线定在左前方；奥尔德里奇站在她右侧，右手握着法杖，身体前倾；亚瑟坐在长桌靠里的一端，右手把酒杯停在胸前。",
+                "clips": [
+                  {
+                    "duration": 2,
+                    "size": "CU",
+                    "cameraMove": "固定机位",
+                    "visualAction": "塞琳娜的面部，嘴唇微微张开，目光仍然定在左前方；画面右缘，奥尔德里奇抬起的手臂正在挥动。",
+                    "beat": "升级",
+                    "sourceBlockIds": [
+                      "B49"
+                    ]
+                  },
+                  {
+                    "duration": 4,
+                    "size": "MS",
+                    "cameraMove": "固定机位",
+                    "visualAction": "亚瑟把酒杯放到桌面上，双手撑桌站起身，抬手拍了两下衣襟，嘴角上扬，面朝画面左侧。",
+                    "beat": "转折",
+                    "sourceBlockIds": [
+                      "B50"
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          "finalRaw": "{\n  \"sceneId\": \"4-1\",\n  \"shots\": [\n    {\n      \"duration\": 5,\n      \"cast\": [\"奥尔德里奇\", \"塞琳娜\", \"亚瑟\"],\n      \"props\": [\"法杖\", \"酒杯\"],\n      \"startPosition\": \"酒馆内，奥尔德里奇站在长桌右侧，右手握着法杖；塞琳娜坐在长桌左侧的椅子上，双手撑在桌沿；亚瑟独自坐在长桌靠里的一端，右手端着酒杯，停在胸前；三人视线均朝向左前方的窗户方向。\",\n      \"clips\": [\n        {\n          \"duration\": 3,\n          \"size\": \"MCU\",\n          \"cameraMove\": \"固定机位\",\n          \"visualAction\": \"奥尔德里奇右手握住法杖，左臂朝画面左侧窗户方向摊开，肩背前倾；塞琳娜在桌旁双手撑着桌沿；亚瑟坐在长桌另一端，酒杯停在嘴边。\",\n          \"beat\": \"建立\",\n          \"sourceBlockIds\": [\"B44\"]\n        },\n        {\n          \"duration\": 2,\n          \"size\": \"MCU\",\n          \"cameraMove\": \"固定机位\",\n          \"visualAction\": \"亚瑟端着酒杯，仰头饮下一口，杯沿离开嘴唇，身体稳稳坐在椅上。\",\n          \"beat\": \"对比\",\n          \"sourceBlockIds\": [\"B45\"]\n        }\n      ]\n    },\n    {\n      \"duration\": 11,\n      \"cast\": [\"塞琳娜\", \"奥尔德里奇\"],\n      \"props\": [\"法杖\"],\n      \"startPosition\": \"塞琳娜坐在长桌左侧的椅子上，双手撑着桌沿，面朝左前方；奥尔德里奇站在她右侧，右手握着法杖，身体前倾，同样朝向左前方。\",\n      \"clips\": [\n        {\n          \"duration\": 3,\n          \"size\": \"MCU\",\n          \"cameraMove\": \"固定机位\",\n          \"visualAction\": \"塞琳娜脸色苍白，双手压住桌沿；奥尔德里奇在她右侧身体前倾，右手握着法杖挥动，面朝左上方的窗口方向。\",\n          \"beat\": \"压迫\",\n          \"sourceBlockIds\": [\"B46\"]\n        },\n        {\n          \"duration\": 6,\n          \"size\": \"CU\",\n          \"cameraMove\": \"缓慢推近\",\n          \"visualAction\": \"塞琳娜的面部，眼睛睁圆，目光定在左前方不动，胸口快速起伏。\",\n          \"beat\": \"强调\",\n          \"sourceBlockIds\": [\"B47\"]\n        },\n        {\n          \"duration\": 2,\n          \"size\": \"ECU\",\n          \"cameraMove\": \"固定机位\",\n          \"visualAction\": \"塞琳娜的眼睛，瞳孔收缩，睫毛颤动，视线没有偏移。\",\n          \"beat\": \"强调\",\n          \"sourceBlockIds\": [\"B48\"]\n        }\n      ]\n    },\n    {\n      \"duration\": 6,\n      \"cast\": [\"塞琳娜\", \"奥尔德里奇\", \"亚瑟\"],\n      \"props\": [\"法杖\", \"酒杯\"],\n      \"startPosition\": \"塞琳娜坐在椅子上，面色苍白，视线定在左前方；奥尔德里奇站在她右侧，右手握着法杖，身体前倾；亚瑟坐在长桌靠里的一端，右手把酒杯停在胸前。\",\n      \"clips\": [\n        {\n          \"duration\": 2,\n          \"size\": \"CU\",\n          \"cameraMove\": \"固定机位\",\n          \"visualAction\": \"塞琳娜的面部，嘴唇微微张开，目光仍然定在左前方；画面右缘，奥尔德里奇抬起的手臂正在挥动。\",\n          \"beat\": \"升级\",\n          \"sourceBlockIds\": [\"B49\"]\n        },\n        {\n          \"duration\": 4,\n          \"size\": \"MS\",\n          \"cameraMove\": \"固定机位\",\n          \"visualAction\": \"亚瑟把酒杯放到桌面上，双手撑桌站起身，抬手拍了两下衣襟，嘴角上扬，面朝画面左侧。\",\n          \"beat\": \"转折\",\n          \"sourceBlockIds\": [\"B50\"]\n        }\n      ]\n    }\n  ]\n}",
+          "resumedFrom": "2026-11-04T08-43-17-992Z-AB-新引擎修复-EP4-4-7-r3.json",
+          "attempts": [
+            {
+              "attempt": 1,
+              "label": "AB 新引擎 EP4 4/7 r1",
+              "raw": "{\n  \"sceneId\": \"4-1\",\n  \"shots\": [\n    {\n      \"duration\": 6,\n      \"cast\": [\"奥尔德里奇\", \"塞琳娜\", \"亚瑟\"],\n      \"props\": [\"酒杯\"],\n      \"startPosition\": \"酒馆内，奥尔德里奇站在长桌右侧，身体朝向画面左侧的窗户；塞琳娜坐在他左侧的椅子上；亚瑟独自坐在长桌靠里的一端，右手端着酒杯，三人视线均朝向左前方。\",\n      \"clips\": [\n        {\n          \"duration\": 3,\n          \"size\": \"WS\",\n          \"cameraMove\": \"固定机位\",\n          \"visualAction\": \"奥尔德里奇站在长桌右侧，双手朝画面左侧的窗户方向摊开，肩背前倾；塞琳娜坐在椅上，双手扶住桌面；亚瑟在长桌另一端端着酒杯。\",\n          \"beat\": \"建立\",\n          \"sourceBlockIds\": [\"B44\"]\n        },\n        {\n          \"duration\": 3,\n          \"size\": \"MCU\",\n          \"cameraMove\": \"固定机位\",\n          \"visualAction\": \"亚瑟端坐不动，抬手把酒杯送到嘴边，仰头饮下一口，再将杯沿离开嘴唇。\",\n          \"beat\": \"对比\",\n          \"sourceBlockIds\": [\"B45\"]\n        }\n      ]\n    },\n    {\n      \"duration\": 8,\n      \"cast\": [\"塞琳娜\", \"奥尔德里奇\"],\n      \"props\": [],\n      \"startPosition\": \"亚瑟坐在长桌另一端，酒杯停在胸前；塞琳娜坐在椅上，双手撑在桌沿，面朝左前方的窗户；奥尔德里奇站在她右侧，身体前倾，同样朝向左前方。\",\n      \"clips\": [\n        {\n          \"duration\": 2,\n          \"size\": \"MCU\",\n          \"cameraMove\": \"固定机位\",\n          \"visualAction\": \"塞琳娜脸色苍白，双手撑住桌沿，视线越过桌沿望向左前方；奥尔德里奇在她身侧前倾，双手朝窗户方向挥动。\",\n          \"beat\": \"压迫\",\n          \"sourceBlockIds\": [\"B46\"]\n        },\n        {\n          \"duration\": 3,\n          \"size\": \"CU\",\n          \"cameraMove\": \"缓慢推近\",\n          \"visualAction\": \"塞琳娜面部特写，眼睛圆睁，胸口快速起伏，目光定在左前方不动。\",\n          \"beat\": \"强调\",\n          \"sourceBlockIds\": [\"B47\", \"B48\"]\n        },\n        {\n          \"duration\": 3,\n          \"size\": \"MCU\",\n          \"cameraMove\": \"固定机位\",\n          \"visualAction\": \"塞琳娜目光依旧定在左前方；她右侧的奥尔德里奇抬起手臂朝门口方向挥动，身体后仰半步。\",\n          \"beat\": \"升级\",\n          \"sourceBlockIds\": [\"B49\"]\n        }\n      ]\n    },\n    {\n      \"duration\": 5,\n      \"cast\": [\"亚瑟\"],\n      \"props\": [\"酒杯\"],\n      \"startPosition\": \"塞琳娜坐在椅上，视线定在左前方；奥尔德里奇站在她右侧，手臂抬起朝门口方向；亚瑟在长桌另一端，酒杯停在胸前。\",\n      \"clips\": [\n        {\n          \"duration\": 5,\n          \"size\": \"MS\",\n          \"cameraMove\": \"上摇跟拍\",\n          \"visualAction\": \"亚瑟把酒杯放到桌面上，双手撑桌站起身，抬手拍了两下衣襟，嘴角上扬，面朝画面左侧。\",\n          \"beat\": \"转折\",\n          \"sourceBlockIds\": [\"B50\"]\n        }\n      ]\n    }\n  ]\n}",
+              "status": "completed",
+              "usage": {
+                "input_tokens": 1787,
+                "input_tokens_details": {
+                  "cached_tokens": 896
+                },
+                "output_tokens": 3319,
+                "output_tokens_details": {
+                  "reasoning_tokens": 2533
+                },
+                "total_tokens": 5106
+              },
+              "elapsedMs": 19120,
+              "resumed": true
+            },
+            {
+              "attempt": 2,
+              "label": "AB 新引擎修复 EP4 4/7 r2",
+              "raw": "{\n  \"sceneId\": \"4-1\",\n  \"shots\": [\n    {\n      \"duration\": 5,\n      \"cast\": [\"奥尔德里奇\", \"塞琳娜\", \"亚瑟\"],\n      \"props\": [\"法杖\", \"酒杯\"],\n      \"startPosition\": \"酒馆内，奥尔德里奇站在长桌右侧，右手握着法杖；塞琳娜坐在长桌左侧的椅子上，双手撑在桌沿；亚瑟独自坐在长桌靠里的一端，右手端着酒杯，停在胸前；三人视线均朝向左前方的窗户方向。\",\n      \"clips\": [\n        {\n          \"duration\": 3,\n          \"size\": \"MCU\",\n          \"cameraMove\": \"固定机位\",\n          \"visualAction\": \"奥尔德里奇右手握住法杖，左臂朝画面左侧窗户方向摊开，肩背前倾；塞琳娜在桌旁双手撑着桌沿；亚瑟坐在长桌另一端，酒杯停在嘴边。\",\n          \"beat\": \"建立\",\n          \"sourceBlockIds\": [\"B44\"]\n        },\n        {\n          \"duration\": 2,\n          \"size\": \"MCU\",\n          \"cameraMove\": \"固定机位\",\n          \"visualAction\": \"亚瑟端着酒杯，仰头饮下一口，杯沿离开嘴唇，身体稳稳坐在椅上。\",\n          \"beat\": \"对比\",\n          \"sourceBlockIds\": [\"B45\"]\n        }\n      ]\n    },\n    {\n      \"duration\": 9,\n      \"cast\": [\"塞琳娜\", \"奥尔德里奇\"],\n      \"props\": [\"法杖\"],\n      \"startPosition\": \"塞琳娜坐在长桌左侧的椅子上，双手撑着桌沿，面朝左前方；奥尔德里奇站在她右侧，右手握着法杖，身体前倾，同样朝向左前方。\",\n      \"clips\": [\n        {\n          \"duration\": 3,\n          \"size\": \"MCU\",\n          \"cameraMove\": \"固定机位\",\n          \"visualAction\": \"塞琳娜脸色苍白，双手压住桌沿；奥尔德里奇在她右侧身体前倾，右手握着法杖挥动，面朝左上方的窗口方向。\",\n          \"beat\": \"压迫\",\n          \"sourceBlockIds\": [\"B46\"]\n        },\n        {\n          \"duration\": 4,\n          \"size\": \"CU\",\n          \"cameraMove\": \"缓慢推近\",\n          \"visualAction\": \"塞琳娜的面部，眼睛睁圆，目光定在左前方不动，胸口快速起伏。\",\n          \"beat\": \"强调\",\n          \"sourceBlockIds\": [\"B47\"]\n        },\n        {\n          \"duration\": 2,\n          \"size\": \"ECU\",\n          \"cameraMove\": \"固定机位\",\n          \"visualAction\": \"塞琳娜的眼睛，瞳孔收缩，睫毛颤动，视线没有偏移。\",\n          \"beat\": \"强调\",\n          \"sourceBlockIds\": [\"B48\"]\n        }\n      ]\n    },\n    {\n      \"duration\": 6,\n      \"cast\": [\"塞琳娜\", \"奥尔德里奇\", \"亚瑟\"],\n      \"props\": [\"法杖\", \"酒杯\"],\n      \"startPosition\": \"塞琳娜坐在椅子上，面色苍白，视线定在左前方；奥尔德里奇站在她右侧，右手握着法杖，身体前倾；亚瑟坐在长桌靠里的一端，右手把酒杯停在胸前。\",\n      \"clips\": [\n        {\n          \"duration\": 2,\n          \"size\": \"CU\",\n          \"cameraMove\": \"固定机位\",\n          \"visualAction\": \"塞琳娜的面部，嘴唇微微张开，目光仍然定在左前方；画面右缘，奥尔德里奇抬起的手臂正在挥动。\",\n          \"beat\": \"升级\",\n          \"sourceBlockIds\": [\"B49\"]\n        },\n        {\n          \"duration\": 4,\n          \"size\": \"MS\",\n          \"cameraMove\": \"固定机位\",\n          \"visualAction\": \"亚瑟把酒杯放到桌面上，双手撑桌站起身，抬手拍了两下衣襟，嘴角上扬，面朝画面左侧。\",\n          \"beat\": \"转折\",\n          \"sourceBlockIds\": [\"B50\"]\n        }\n      ]\n    }\n  ]\n}",
+              "status": "completed",
+              "usage": {
+                "input_tokens": 2685,
+                "input_tokens_details": {
+                  "cached_tokens": 896
+                },
+                "output_tokens": 8027,
+                "output_tokens_details": {
+                  "reasoning_tokens": 7144
+                },
+                "total_tokens": 10712
+              },
+              "elapsedMs": 45193,
+              "resumed": true
+            },
+            {
+              "attempt": 3,
+              "label": "AB 新引擎修复 EP4 4/7 r3",
+              "raw": "{\n  \"sceneId\": \"4-1\",\n  \"shots\": [\n    {\n      \"duration\": 5,\n      \"cast\": [\"奥尔德里奇\", \"塞琳娜\", \"亚瑟\"],\n      \"props\": [\"法杖\", \"酒杯\"],\n      \"startPosition\": \"酒馆内，奥尔德里奇站在长桌右侧，右手握着法杖；塞琳娜坐在长桌左侧的椅子上，双手撑在桌沿；亚瑟独自坐在长桌靠里的一端，右手端着酒杯，停在胸前；三人视线均朝向左前方的窗户方向。\",\n      \"clips\": [\n        {\n          \"duration\": 3,\n          \"size\": \"MCU\",\n          \"cameraMove\": \"固定机位\",\n          \"visualAction\": \"奥尔德里奇右手握住法杖，左臂朝画面左侧窗户方向摊开，肩背前倾；塞琳娜在桌旁双手撑着桌沿；亚瑟坐在长桌另一端，酒杯停在嘴边。\",\n          \"beat\": \"建立\",\n          \"sourceBlockIds\": [\"B44\"]\n        },\n        {\n          \"duration\": 2,\n          \"size\": \"MCU\",\n          \"cameraMove\": \"固定机位\",\n          \"visualAction\": \"亚瑟端着酒杯，仰头饮下一口，杯沿离开嘴唇，身体稳稳坐在椅上。\",\n          \"beat\": \"对比\",\n          \"sourceBlockIds\": [\"B45\"]\n        }\n      ]\n    },\n    {\n      \"duration\": 11,\n      \"cast\": [\"塞琳娜\", \"奥尔德里奇\"],\n      \"props\": [\"法杖\"],\n      \"startPosition\": \"塞琳娜坐在长桌左侧的椅子上，双手撑着桌沿，面朝左前方；奥尔德里奇站在她右侧，右手握着法杖，身体前倾，同样朝向左前方。\",\n      \"clips\": [\n        {\n          \"duration\": 3,\n          \"size\": \"MCU\",\n          \"cameraMove\": \"固定机位\",\n          \"visualAction\": \"塞琳娜脸色苍白，双手压住桌沿；奥尔德里奇在她右侧身体前倾，右手握着法杖挥动，面朝左上方的窗口方向。\",\n          \"beat\": \"压迫\",\n          \"sourceBlockIds\": [\"B46\"]\n        },\n        {\n          \"duration\": 6,\n          \"size\": \"CU\",\n          \"cameraMove\": \"缓慢推近\",\n          \"visualAction\": \"塞琳娜的面部，眼睛睁圆，目光定在左前方不动，胸口快速起伏。\",\n          \"beat\": \"强调\",\n          \"sourceBlockIds\": [\"B47\"]\n        },\n        {\n          \"duration\": 2,\n          \"size\": \"ECU\",\n          \"cameraMove\": \"固定机位\",\n          \"visualAction\": \"塞琳娜的眼睛，瞳孔收缩，睫毛颤动，视线没有偏移。\",\n          \"beat\": \"强调\",\n          \"sourceBlockIds\": [\"B48\"]\n        }\n      ]\n    },\n    {\n      \"duration\": 6,\n      \"cast\": [\"塞琳娜\", \"奥尔德里奇\", \"亚瑟\"],\n      \"props\": [\"法杖\", \"酒杯\"],\n      \"startPosition\": \"塞琳娜坐在椅子上，面色苍白，视线定在左前方；奥尔德里奇站在她右侧，右手握着法杖，身体前倾；亚瑟坐在长桌靠里的一端，右手把酒杯停在胸前。\",\n      \"clips\": [\n        {\n          \"duration\": 2,\n          \"size\": \"CU\",\n          \"cameraMove\": \"固定机位\",\n          \"visualAction\": \"塞琳娜的面部，嘴唇微微张开，目光仍然定在左前方；画面右缘，奥尔德里奇抬起的手臂正在挥动。\",\n          \"beat\": \"升级\",\n          \"sourceBlockIds\": [\"B49\"]\n        },\n        {\n          \"duration\": 4,\n          \"size\": \"MS\",\n          \"cameraMove\": \"固定机位\",\n          \"visualAction\": \"亚瑟把酒杯放到桌面上，双手撑桌站起身，抬手拍了两下衣襟，嘴角上扬，面朝画面左侧。\",\n          \"beat\": \"转折\",\n          \"sourceBlockIds\": [\"B50\"]\n        }\n      ]\n    }\n  ]\n}",
+              "status": "completed",
+              "usage": {
+                "input_tokens": 2736,
+                "input_tokens_details": {
+                  "cached_tokens": 1664
+                },
+                "output_tokens": 1401,
+                "output_tokens_details": {
+                  "reasoning_tokens": 518
+                },
+                "total_tokens": 4137
+              },
+              "elapsedMs": 6899,
+              "resumed": true
+            }
+          ]
+        },
+        {
+          "chunkIndex": 5,
+          "sceneInput": {
+            "sceneId": "4-1",
+            "episode": "第4集：徒手托陨石",
+            "sceneHeading": "Border Tavern 内 未注明",
+            "cast": "亚瑟（Arthur，着装：旅行者装）、奥尔德里奇（Aldrick，着装：黑色法袍）、塞琳娜（Selina，着装：贵族女子华贵长裙）、酒馆老板（Tavern Owner，着装：酒馆围裙）、男酒客（Male Patron，着装：粗布衣）",
+            "castNames": [
+              "亚瑟",
+              "奥尔德里奇",
+              "塞琳娜",
+              "酒馆老板",
+              "男酒客"
+            ],
+            "previousEnd": "△塞琳娜面部特写，眼神中充满了绝望和恐惧。\n奥尔德里奇（O.S.）（焦急）：My lady, there's no escape!\n△亚瑟放下酒杯，站起身，拍了拍衣服，微笑着调侃。",
+            "nextScene": "△塞琳娜看着亚瑟离去的背影，眼眶湿润，流下一行眼泪，神色无比震惊。\n塞琳娜（V.O.）（难以置信）：Oh my god... He caught a meteor with his bare hands? What kind of monster is he?\n△奥尔德里奇走到塞琳娜身旁，神色凝重地看着亚瑟离去的方向。\n奥尔德里奇（神色凝重）：My lady... This man has not a trace of magic, yet his physical strength is terrifying to this degree.",
+            "estimatedSeconds": 20,
+            "blocks": [
+              {
+                "id": "B51",
+                "kind": "dialogue",
+                "speaker": "亚瑟",
+                "tone": "语气轻松",
+                "text": "Mages always make such a fuss. This is just my usual training dumbbell.",
+                "source": "亚瑟（语气轻松）：Mages always make such a fuss. This is just my usual training dumbbell."
+              },
+              {
+                "id": "B52",
+                "kind": "action",
+                "text": "△电流声。亚瑟身上爆发出金色的电光，他屈膝做好起跳准备。",
+                "source": "△电流声。亚瑟身上爆发出金色的电光，他屈膝做好起跳准备。"
+              },
+              {
+                "id": "B53",
+                "kind": "action",
+                "text": "△亚瑟化作一道耀眼的金色光束，瞬间冲破酒馆的屋顶，飞向天空。",
+                "source": "△亚瑟化作一道耀眼的金色光束，瞬间冲破酒馆的屋顶，飞向天空。"
+              },
+              {
+                "id": "B54",
+                "kind": "action",
+                "text": "△亚瑟在空中张开双臂，身体周围环绕着金色的能量光环。",
+                "source": "△亚瑟在空中张开双臂，身体周围环绕着金色的能量光环。"
+              },
+              {
+                "id": "B55",
+                "kind": "action",
+                "text": "△亚瑟迎着巨大的燃烧陨石飞去，身形在陨石面前显得十分渺小。",
+                "source": "△亚瑟迎着巨大的燃烧陨石飞去，身形在陨石面前显得十分渺小。"
+              },
+              {
+                "id": "B56",
+                "kind": "action",
+                "text": "△碰撞声。亚瑟伸出右手，在身前凝聚出一个巨大的金色魔法阵，正面挡住了下落的陨石。",
+                "source": "△碰撞声。亚瑟伸出右手，在身前凝聚出一个巨大的金色魔法阵，正面挡住了下落的陨石。"
+              },
+              {
+                "id": "B57",
+                "kind": "action",
+                "text": "△亚瑟面部特写，他咬紧牙关，神色坚毅，全力抵挡着陨石的冲击。",
+                "source": "△亚瑟面部特写，他咬紧牙关，神色坚毅，全力抵挡着陨石的冲击。"
+              },
+              {
+                "id": "B58",
+                "kind": "action",
+                "text": "△亚瑟托着巨大的陨石，从天空中缓缓降落。",
+                "source": "△亚瑟托着巨大的陨石，从天空中缓缓降落。"
+              },
+              {
+                "id": "B59",
+                "kind": "action",
+                "text": "△重物落地声。亚瑟稳稳地落在地面上，将巨大的陨石轻轻放在酒馆外的空地上，激起一片尘土。",
+                "source": "△重物落地声。亚瑟稳稳地落在地面上，将巨大的陨石轻轻放在酒馆外的空地上，激起一片尘土。"
+              },
+              {
+                "id": "B60",
+                "kind": "action",
+                "text": "△亚瑟拍了拍双手上的灰尘，神色轻松地看着前方。",
+                "source": "△亚瑟拍了拍双手上的灰尘，神色轻松地看着前方。"
+              },
+              {
+                "id": "B61",
+                "kind": "action",
+                "text": "△亚瑟迈步走向站在酒馆门口的塞琳娜。",
+                "source": "△亚瑟迈步走向站在酒馆门口的塞琳娜。"
+              },
+              {
+                "id": "B62",
+                "kind": "action",
+                "text": "△亚瑟走到塞琳娜面前停下，微笑着看着她。",
+                "source": "△亚瑟走到塞琳娜面前停下，微笑着看着她。"
+              },
+              {
+                "id": "B63",
+                "kind": "dialogue",
+                "speaker": "亚瑟",
+                "tone": "温柔微笑",
+                "text": "Thank you for your hospitality, beautiful lady.",
+                "source": "亚瑟（温柔微笑）：Thank you for your hospitality, beautiful lady."
+              },
+              {
+                "id": "B64",
+                "kind": "action",
+                "text": "△塞琳娜愣在原地，呆呆地看着亚瑟，没有说话。",
+                "source": "△塞琳娜愣在原地，呆呆地看着亚瑟，没有说话。"
+              },
+              {
+                "id": "B65",
+                "kind": "action",
+                "text": "△亚瑟微微一笑，双手插进口袋，转过身迈步离去。",
+                "source": "△亚瑟微微一笑，双手插进口袋，转过身迈步离去。"
+              }
+            ],
+            "chunkIndex": 5,
+            "chunkCount": 7
+          },
+          "finalPlan": {
+            "sceneId": "4-1",
+            "shots": [
+              {
+                "duration": 8,
+                "cast": [
+                  "亚瑟"
+                ],
+                "props": [],
+                "startPosition": "亚瑟站在酒馆内桌旁，面向前方，双手自然下垂。",
+                "clips": [
+                  {
+                    "duration": 6,
+                    "size": "CU",
+                    "cameraMove": "缓慢推近",
+                    "visualAction": "亚瑟站在酒馆内，看着前方开口说话，双手自然垂在身侧。",
+                    "beat": "对白",
+                    "sourceBlockIds": [
+                      "B51"
+                    ]
+                  },
+                  {
+                    "duration": 2,
+                    "size": "MS",
+                    "cameraMove": "快速跟随上摇",
+                    "visualAction": "亚瑟身上爆出金色电光，屈膝起跳，化作金色光束冲破酒馆屋顶飞向天空。",
+                    "beat": "动作爆点",
+                    "sourceBlockIds": [
+                      "B52",
+                      "B53"
+                    ]
+                  }
+                ]
+              },
+              {
+                "duration": 6,
+                "cast": [
+                  "亚瑟"
+                ],
+                "props": [],
+                "startPosition": "亚瑟已冲出酒馆屋顶，置身夜空中，身体周围残留金色电光，双臂收在身侧，面朝上方陨石方向。",
+                "clips": [
+                  {
+                    "duration": 2,
+                    "size": "WS",
+                    "cameraMove": "仰拍跟随",
+                    "visualAction": "亚瑟在夜空中张开双臂，金色能量光环环绕身体，迎着巨大燃烧陨石飞去，身形在陨石前显得渺小。",
+                    "beat": "建立",
+                    "sourceBlockIds": [
+                      "B54",
+                      "B55"
+                    ]
+                  },
+                  {
+                    "duration": 2,
+                    "size": "MCU",
+                    "cameraMove": "快速推近",
+                    "visualAction": "亚瑟伸出右手，在身前凝聚出巨大金色魔法阵，正面挡住下落的陨石。",
+                    "beat": "强调",
+                    "sourceBlockIds": [
+                      "B56"
+                    ]
+                  },
+                  {
+                    "duration": 2,
+                    "size": "CU",
+                    "cameraMove": "固定机位",
+                    "visualAction": "亚瑟咬紧牙关，全力抵挡陨石冲击。",
+                    "beat": "强调",
+                    "sourceBlockIds": [
+                      "B57"
+                    ]
+                  }
+                ]
+              },
+              {
+                "duration": 12,
+                "cast": [
+                  "亚瑟",
+                  "塞琳娜"
+                ],
+                "props": [
+                  "陨石"
+                ],
+                "startPosition": "亚瑟悬在酒馆上空，右手抵住巨大陨石底部，身体微屈，面朝下方酒馆外空地；塞琳娜站在酒馆门口，面向天空。",
+                "clips": [
+                  {
+                    "duration": 3,
+                    "size": "LS",
+                    "cameraMove": "跟拍下降",
+                    "visualAction": "亚瑟托着巨大陨石从空中缓缓降落，稳稳落地，将陨石放在酒馆外空地上，尘土扬起。",
+                    "beat": "动作结果",
+                    "sourceBlockIds": [
+                      "B58",
+                      "B59"
+                    ]
+                  },
+                  {
+                    "duration": 2,
+                    "size": "MCU",
+                    "cameraMove": "固定机位",
+                    "visualAction": "亚瑟拍了拍双手上的灰尘，神色轻松地看向前方。",
+                    "beat": "过渡",
+                    "sourceBlockIds": [
+                      "B60"
+                    ]
+                  },
+                  {
+                    "duration": 2,
+                    "size": "MCU",
+                    "cameraMove": "横向跟移",
+                    "visualAction": "亚瑟迈步走向站在酒馆门口的塞琳娜，停在她面前，微笑看着她。",
+                    "beat": "关系",
+                    "sourceBlockIds": [
+                      "B61",
+                      "B62"
+                    ]
+                  },
+                  {
+                    "duration": 3,
+                    "size": "CU",
+                    "cameraMove": "缓慢推近",
+                    "visualAction": "亚瑟看着塞琳娜，开口说话。",
+                    "beat": "对白",
+                    "sourceBlockIds": [
+                      "B63"
+                    ]
+                  },
+                  {
+                    "duration": 2,
+                    "size": "MCU",
+                    "cameraMove": "轻微后拉",
+                    "visualAction": "塞琳娜呆立原地，看着亚瑟；亚瑟微微一笑，双手插进口袋，转身迈步离去。",
+                    "beat": "反应钩子",
+                    "sourceBlockIds": [
+                      "B64",
+                      "B65"
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          "finalRaw": "{\n  \"sceneId\": \"4-1\",\n  \"shots\": [\n    {\n      \"duration\": 8,\n      \"cast\": [\"亚瑟\"],\n      \"props\": [],\n      \"startPosition\": \"亚瑟站在酒馆内桌旁，面向前方，双手自然下垂。\",\n      \"clips\": [\n        {\n          \"duration\": 6,\n          \"size\": \"CU\",\n          \"cameraMove\": \"缓慢推近\",\n          \"visualAction\": \"亚瑟站在酒馆内，看着前方开口说话，双手自然垂在身侧。\",\n          \"beat\": \"对白\",\n          \"sourceBlockIds\": [\"B51\"]\n        },\n        {\n          \"duration\": 2,\n          \"size\": \"MS\",\n          \"cameraMove\": \"快速跟随上摇\",\n          \"visualAction\": \"亚瑟身上爆出金色电光，屈膝起跳，化作金色光束冲破酒馆屋顶飞向天空。\",\n          \"beat\": \"动作爆点\",\n          \"sourceBlockIds\": [\"B52\", \"B53\"]\n        }\n      ]\n    },\n    {\n      \"duration\": 6,\n      \"cast\": [\"亚瑟\"],\n      \"props\": [],\n      \"startPosition\": \"亚瑟已冲出酒馆屋顶，置身夜空中，身体周围残留金色电光，双臂收在身侧，面朝上方陨石方向。\",\n      \"clips\": [\n        {\n          \"duration\": 2,\n          \"size\": \"WS\",\n          \"cameraMove\": \"仰拍跟随\",\n          \"visualAction\": \"亚瑟在夜空中张开双臂，金色能量光环环绕身体，迎着巨大燃烧陨石飞去，身形在陨石前显得渺小。\",\n          \"beat\": \"建立\",\n          \"sourceBlockIds\": [\"B54\", \"B55\"]\n        },\n        {\n          \"duration\": 2,\n          \"size\": \"MCU\",\n          \"cameraMove\": \"快速推近\",\n          \"visualAction\": \"亚瑟伸出右手，在身前凝聚出巨大金色魔法阵，正面挡住下落的陨石。\",\n          \"beat\": \"强调\",\n          \"sourceBlockIds\": [\"B56\"]\n        },\n        {\n          \"duration\": 2,\n          \"size\": \"CU\",\n          \"cameraMove\": \"固定机位\",\n          \"visualAction\": \"亚瑟咬紧牙关，全力抵挡陨石冲击。\",\n          \"beat\": \"强调\",\n          \"sourceBlockIds\": [\"B57\"]\n        }\n      ]\n    },\n    {\n      \"duration\": 12,\n      \"cast\": [\"亚瑟\", \"塞琳娜\"],\n      \"props\": [\"陨石\"],\n      \"startPosition\": \"亚瑟悬在酒馆上空，右手抵住巨大陨石底部，身体微屈，面朝下方酒馆外空地；塞琳娜站在酒馆门口，面向天空。\",\n      \"clips\": [\n        {\n          \"duration\": 3,\n          \"size\": \"LS\",\n          \"cameraMove\": \"跟拍下降\",\n          \"visualAction\": \"亚瑟托着巨大陨石从空中缓缓降落，稳稳落地，将陨石放在酒馆外空地上，尘土扬起。\",\n          \"beat\": \"动作结果\",\n          \"sourceBlockIds\": [\"B58\", \"B59\"]\n        },\n        {\n          \"duration\": 2,\n          \"size\": \"MCU\",\n          \"cameraMove\": \"固定机位\",\n          \"visualAction\": \"亚瑟拍了拍双手上的灰尘，神色轻松地看向前方。\",\n          \"beat\": \"过渡\",\n          \"sourceBlockIds\": [\"B60\"]\n        },\n        {\n          \"duration\": 2,\n          \"size\": \"MCU\",\n          \"cameraMove\": \"横向跟移\",\n          \"visualAction\": \"亚瑟迈步走向站在酒馆门口的塞琳娜，停在她面前，微笑看着她。\",\n          \"beat\": \"关系\",\n          \"sourceBlockIds\": [\"B61\", \"B62\"]\n        },\n        {\n          \"duration\": 3,\n          \"size\": \"CU\",\n          \"cameraMove\": \"缓慢推近\",\n          \"visualAction\": \"亚瑟看着塞琳娜，开口说话。\",\n          \"beat\": \"对白\",\n          \"sourceBlockIds\": [\"B63\"]\n        },\n        {\n          \"duration\": 2,\n          \"size\": \"MCU\",\n          \"cameraMove\": \"轻微后拉\",\n          \"visualAction\": \"塞琳娜呆立原地，看着亚瑟；亚瑟微微一笑，双手插进口袋，转身迈步离去。\",\n          \"beat\": \"反应钩子\",\n          \"sourceBlockIds\": [\"B64\", \"B65\"]\n        }\n      ]\n    }\n  ]\n}",
+          "resumedFrom": "2026-11-04T08-14-50-742Z-AB-新引擎修复-EP4-5-7-r2.json",
+          "attempts": [
+            {
+              "attempt": 1,
+              "label": "AB 新引擎 EP4 5/7 r1",
+              "raw": "{\n  \"sceneId\": \"4-1\",\n  \"shots\": [\n    {\n      \"duration\": 6,\n      \"cast\": [\"亚瑟\"],\n      \"props\": [],\n      \"startPosition\": \"亚瑟站在酒馆内桌旁，面向前方，双手自然下垂。\",\n      \"clips\": [\n        {\n          \"duration\": 4,\n          \"size\": \"CU\",\n          \"cameraMove\": \"缓慢推近\",\n          \"visualAction\": \"亚瑟站在酒馆内，看着前方开口说话。\",\n          \"beat\": \"对白\",\n          \"sourceBlockIds\": [\"B51\"]\n        },\n        {\n          \"duration\": 2,\n          \"size\": \"MS\",\n          \"cameraMove\": \"快速跟随上摇\",\n          \"visualAction\": \"亚瑟身上爆出金色电光，屈膝起跳，化作金色光束冲破酒馆屋顶飞向天空。\",\n          \"beat\": \"动作爆点\",\n          \"sourceBlockIds\": [\"B52\", \"B53\"]\n        }\n      ]\n    },\n    {\n      \"duration\": 6,\n      \"cast\": [\"亚瑟\"],\n      \"props\": [],\n      \"startPosition\": \"亚瑟已冲出酒馆屋顶，置身夜空中，身体周围残留金色电光，双臂收在身侧，面朝上方陨石方向。\",\n      \"clips\": [\n        {\n          \"duration\": 2,\n          \"size\": \"WS\",\n          \"cameraMove\": \"仰拍跟随\",\n          \"visualAction\": \"亚瑟在夜空中张开双臂，金色能量光环环绕身体，迎着巨大燃烧陨石飞去，身形在陨石前显得渺小。\",\n          \"beat\": \"建立\",\n          \"sourceBlockIds\": [\"B54\", \"B55\"]\n        },\n        {\n          \"duration\": 2,\n          \"size\": \"MCU\",\n          \"cameraMove\": \"快速推近\",\n          \"visualAction\": \"亚瑟伸出右手，在身前凝聚出巨大金色魔法阵，正面挡住下落的陨石。\",\n          \"beat\": \"强调\",\n          \"sourceBlockIds\": [\"B56\"]\n        },\n        {\n          \"duration\": 2,\n          \"size\": \"CU\",\n          \"cameraMove\": \"固定机位\",\n          \"visualAction\": \"亚瑟咬紧牙关，全力抵挡陨石冲击。\",\n          \"beat\": \"强调\",\n          \"sourceBlockIds\": [\"B57\"]\n        }\n      ]\n    },\n    {\n      \"duration\": 12,\n      \"cast\": [\"亚瑟\", \"塞琳娜\"],\n      \"props\": [\"陨石\"],\n      \"startPosition\": \"亚瑟悬在酒馆上空，右手抵住巨大陨石底部，身体微屈，面朝下方酒馆外空地；塞琳娜站在酒馆门口，面向天空。\",\n      \"clips\": [\n        {\n          \"duration\": 3,\n          \"size\": \"LS\",\n          \"cameraMove\": \"跟拍下降\",\n          \"visualAction\": \"亚瑟托着巨大陨石从空中缓缓降落，稳稳落地，将陨石放在酒馆外空地上，尘土扬起。\",\n          \"beat\": \"动作结果\",\n          \"sourceBlockIds\": [\"B58\", \"B59\"]\n        },\n        {\n          \"duration\": 2,\n          \"size\": \"MCU\",\n          \"cameraMove\": \"固定机位\",\n          \"visualAction\": \"亚瑟拍了拍双手上的灰尘，神色轻松地看向前方。\",\n          \"beat\": \"过渡\",\n          \"sourceBlockIds\": [\"B60\"]\n        },\n        {\n          \"duration\": 2,\n          \"size\": \"MCU\",\n          \"cameraMove\": \"横向跟移\",\n          \"visualAction\": \"亚瑟迈步走向站在酒馆门口的塞琳娜，停在她面前，微笑看着她。\",\n          \"beat\": \"关系\",\n          \"sourceBlockIds\": [\"B61\", \"B62\"]\n        },\n        {\n          \"duration\": 3,\n          \"size\": \"CU\",\n          \"cameraMove\": \"缓慢推近\",\n          \"visualAction\": \"亚瑟看着塞琳娜，开口说话。\",\n          \"beat\": \"对白\",\n          \"sourceBlockIds\": [\"B63\"]\n        },\n        {\n          \"duration\": 2,\n          \"size\": \"MCU\",\n          \"cameraMove\": \"轻微后拉\",\n          \"visualAction\": \"塞琳娜呆立原地，看着亚瑟；亚瑟微微一笑，双手插进口袋，转身迈步离去。\",\n          \"beat\": \"反应钩子\",\n          \"sourceBlockIds\": [\"B64\", \"B65\"]\n        }\n      ]\n    }\n  ]\n}",
+              "status": "completed",
+              "usage": {
+                "input_tokens": 2343,
+                "input_tokens_details": {
+                  "cached_tokens": 896
+                },
+                "output_tokens": 9351,
+                "output_tokens_details": {
+                  "reasoning_tokens": 8364
+                },
+                "total_tokens": 11694
+              },
+              "elapsedMs": 53161,
+              "resumed": true
+            },
+            {
+              "attempt": 2,
+              "label": "AB 新引擎修复 EP4 5/7 r2",
+              "raw": "{\n  \"sceneId\": \"4-1\",\n  \"shots\": [\n    {\n      \"duration\": 8,\n      \"cast\": [\"亚瑟\"],\n      \"props\": [],\n      \"startPosition\": \"亚瑟站在酒馆内桌旁，面向前方，双手自然下垂。\",\n      \"clips\": [\n        {\n          \"duration\": 6,\n          \"size\": \"CU\",\n          \"cameraMove\": \"缓慢推近\",\n          \"visualAction\": \"亚瑟站在酒馆内，看着前方开口说话，双手自然垂在身侧。\",\n          \"beat\": \"对白\",\n          \"sourceBlockIds\": [\"B51\"]\n        },\n        {\n          \"duration\": 2,\n          \"size\": \"MS\",\n          \"cameraMove\": \"快速跟随上摇\",\n          \"visualAction\": \"亚瑟身上爆出金色电光，屈膝起跳，化作金色光束冲破酒馆屋顶飞向天空。\",\n          \"beat\": \"动作爆点\",\n          \"sourceBlockIds\": [\"B52\", \"B53\"]\n        }\n      ]\n    },\n    {\n      \"duration\": 6,\n      \"cast\": [\"亚瑟\"],\n      \"props\": [],\n      \"startPosition\": \"亚瑟已冲出酒馆屋顶，置身夜空中，身体周围残留金色电光，双臂收在身侧，面朝上方陨石方向。\",\n      \"clips\": [\n        {\n          \"duration\": 2,\n          \"size\": \"WS\",\n          \"cameraMove\": \"仰拍跟随\",\n          \"visualAction\": \"亚瑟在夜空中张开双臂，金色能量光环环绕身体，迎着巨大燃烧陨石飞去，身形在陨石前显得渺小。\",\n          \"beat\": \"建立\",\n          \"sourceBlockIds\": [\"B54\", \"B55\"]\n        },\n        {\n          \"duration\": 2,\n          \"size\": \"MCU\",\n          \"cameraMove\": \"快速推近\",\n          \"visualAction\": \"亚瑟伸出右手，在身前凝聚出巨大金色魔法阵，正面挡住下落的陨石。\",\n          \"beat\": \"强调\",\n          \"sourceBlockIds\": [\"B56\"]\n        },\n        {\n          \"duration\": 2,\n          \"size\": \"CU\",\n          \"cameraMove\": \"固定机位\",\n          \"visualAction\": \"亚瑟咬紧牙关，全力抵挡陨石冲击。\",\n          \"beat\": \"强调\",\n          \"sourceBlockIds\": [\"B57\"]\n        }\n      ]\n    },\n    {\n      \"duration\": 12,\n      \"cast\": [\"亚瑟\", \"塞琳娜\"],\n      \"props\": [\"陨石\"],\n      \"startPosition\": \"亚瑟悬在酒馆上空，右手抵住巨大陨石底部，身体微屈，面朝下方酒馆外空地；塞琳娜站在酒馆门口，面向天空。\",\n      \"clips\": [\n        {\n          \"duration\": 3,\n          \"size\": \"LS\",\n          \"cameraMove\": \"跟拍下降\",\n          \"visualAction\": \"亚瑟托着巨大陨石从空中缓缓降落，稳稳落地，将陨石放在酒馆外空地上，尘土扬起。\",\n          \"beat\": \"动作结果\",\n          \"sourceBlockIds\": [\"B58\", \"B59\"]\n        },\n        {\n          \"duration\": 2,\n          \"size\": \"MCU\",\n          \"cameraMove\": \"固定机位\",\n          \"visualAction\": \"亚瑟拍了拍双手上的灰尘，神色轻松地看向前方。\",\n          \"beat\": \"过渡\",\n          \"sourceBlockIds\": [\"B60\"]\n        },\n        {\n          \"duration\": 2,\n          \"size\": \"MCU\",\n          \"cameraMove\": \"横向跟移\",\n          \"visualAction\": \"亚瑟迈步走向站在酒馆门口的塞琳娜，停在她面前，微笑看着她。\",\n          \"beat\": \"关系\",\n          \"sourceBlockIds\": [\"B61\", \"B62\"]\n        },\n        {\n          \"duration\": 3,\n          \"size\": \"CU\",\n          \"cameraMove\": \"缓慢推近\",\n          \"visualAction\": \"亚瑟看着塞琳娜，开口说话。\",\n          \"beat\": \"对白\",\n          \"sourceBlockIds\": [\"B63\"]\n        },\n        {\n          \"duration\": 2,\n          \"size\": \"MCU\",\n          \"cameraMove\": \"轻微后拉\",\n          \"visualAction\": \"塞琳娜呆立原地，看着亚瑟；亚瑟微微一笑，双手插进口袋，转身迈步离去。\",\n          \"beat\": \"反应钩子\",\n          \"sourceBlockIds\": [\"B64\", \"B65\"]\n        }\n      ]\n    }\n  ]\n}",
+              "status": "completed",
+              "usage": {
+                "input_tokens": 3396,
+                "input_tokens_details": {
+                  "cached_tokens": 896
+                },
+                "output_tokens": 1483,
+                "output_tokens_details": {
+                  "reasoning_tokens": 489
+                },
+                "total_tokens": 4879
+              },
+              "elapsedMs": 6410,
+              "resumed": true
+            }
+          ]
+        },
+        {
+          "chunkIndex": 6,
+          "sceneInput": {
+            "sceneId": "4-1",
+            "episode": "第4集：徒手托陨石",
+            "sceneHeading": "Border Tavern 内 未注明",
+            "cast": "亚瑟（Arthur，着装：旅行者装）、奥尔德里奇（Aldrick，着装：黑色法袍）、塞琳娜（Selina，着装：贵族女子华贵长裙）、酒馆老板（Tavern Owner，着装：酒馆围裙）、男酒客（Male Patron，着装：粗布衣）",
+            "castNames": [
+              "亚瑟",
+              "奥尔德里奇",
+              "塞琳娜",
+              "酒馆老板",
+              "男酒客"
+            ],
+            "previousEnd": "亚瑟（温柔微笑）：Thank you for your hospitality, beautiful lady.\n△塞琳娜愣在原地，呆呆地看着亚瑟，没有说话。\n△亚瑟微微一笑，双手插进口袋，转过身迈步离去。",
+            "nextScene": "奥尔德里奇（心有余悸）：Thank goodness you stopped me from acting earlier. Or we'd be nothing but ash.\n△塞琳娜看着亚瑟消失的方向，眼神变得坚定。\n塞琳娜（语气坚定）：Find out who he is. I want to know him.",
+            "estimatedSeconds": 18,
+            "blocks": [
+              {
+                "id": "B66",
+                "kind": "action",
+                "text": "△塞琳娜看着亚瑟离去的背影，眼眶湿润，流下一行眼泪，神色无比震惊。",
+                "source": "△塞琳娜看着亚瑟离去的背影，眼眶湿润，流下一行眼泪，神色无比震惊。"
+              },
+              {
+                "id": "B67",
+                "kind": "dialogue",
+                "speaker": "塞琳娜（V.O.）",
+                "tone": "难以置信",
+                "text": "Oh my god... He caught a meteor with his bare hands? What kind of monster is he?",
+                "source": "塞琳娜（V.O.）（难以置信）：Oh my god... He caught a meteor with his bare hands? What kind of monster is he?"
+              },
+              {
+                "id": "B68",
+                "kind": "action",
+                "text": "△奥尔德里奇走到塞琳娜身旁，神色凝重地看着亚瑟离去的方向。",
+                "source": "△奥尔德里奇走到塞琳娜身旁，神色凝重地看着亚瑟离去的方向。"
+              },
+              {
+                "id": "B69",
+                "kind": "dialogue",
+                "speaker": "奥尔德里奇",
+                "tone": "神色凝重",
+                "text": "My lady... This man has not a trace of magic, yet his physical strength is terrifying to this degree.",
+                "source": "奥尔德里奇（神色凝重）：My lady... This man has not a trace of magic, yet his physical strength is terrifying to this degree."
+              },
+              {
+                "id": "B70",
+                "kind": "action",
+                "text": "△奥尔德里奇转头看向塞琳娜，心有余悸地继续说话。",
+                "source": "△奥尔德里奇转头看向塞琳娜，心有余悸地继续说话。"
+              }
+            ],
+            "chunkIndex": 6,
+            "chunkCount": 7
+          },
+          "finalPlan": {
+            "sceneId": "4-1",
+            "shots": [
+              {
+                "duration": 10,
+                "cast": [
+                  "塞琳娜"
+                ],
+                "props": [],
+                "startPosition": "塞琳娜站在酒馆内原位，身体朝向画面右侧门口，双手垂在身侧，视线投向门外。",
+                "clips": [
+                  {
+                    "duration": 2,
+                    "size": "ECU",
+                    "cameraMove": "固定机位",
+                    "visualAction": "塞琳娜面朝画面右侧门口，眼眶湿润，一行眼泪滑下脸颊，嘴唇微张，双眼睁大。",
+                    "beat": "强调",
+                    "sourceBlockIds": [
+                      "B66"
+                    ]
+                  },
+                  {
+                    "duration": 8,
+                    "size": "CU",
+                    "cameraMove": "固定机位",
+                    "visualAction": "塞琳娜保持面朝门口，泪痕未干，嘴唇轻颤，视线没有移开。",
+                    "beat": "内心独白",
+                    "sourceBlockIds": [
+                      "B67"
+                    ]
+                  }
+                ]
+              },
+              {
+                "duration": 12,
+                "cast": [
+                  "塞琳娜",
+                  "奥尔德里奇"
+                ],
+                "props": [],
+                "startPosition": "塞琳娜仍站在原位，面朝画面右侧门口，脸颊带泪；奥尔德里奇位于她左侧两步处，身体朝向右前方门口，右手垂在身侧。",
+                "clips": [
+                  {
+                    "duration": 2,
+                    "size": "MS",
+                    "cameraMove": "固定机位",
+                    "visualAction": "奥尔德里奇从画面左侧走入，来到塞琳娜身旁停步，转头看向右侧门口。",
+                    "beat": "建立",
+                    "sourceBlockIds": [
+                      "B68"
+                    ]
+                  },
+                  {
+                    "duration": 8,
+                    "size": "CU",
+                    "cameraMove": "轻微推近",
+                    "visualAction": "奥尔德里奇侧脸朝门口，眉头压低，嘴唇开合，视线停在门外方向。",
+                    "beat": "强调",
+                    "sourceBlockIds": [
+                      "B69"
+                    ]
+                  },
+                  {
+                    "duration": 2,
+                    "size": "MCU",
+                    "cameraMove": "固定机位",
+                    "visualAction": "奥尔德里奇转向塞琳娜，肩部略前倾，嘴唇继续开合，视线落在她脸上。",
+                    "beat": "延续",
+                    "sourceBlockIds": [
+                      "B70"
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          "finalRaw": "{\"sceneId\":\"4-1\",\"shots\":[{\"duration\":10,\"cast\":[\"塞琳娜\"],\"props\":[],\"startPosition\":\"塞琳娜站在酒馆内原位，身体朝向画面右侧门口，双手垂在身侧，视线投向门外。\",\"clips\":[{\"duration\":2,\"size\":\"ECU\",\"cameraMove\":\"固定机位\",\"visualAction\":\"塞琳娜面朝画面右侧门口，眼眶湿润，一行眼泪滑下脸颊，嘴唇微张，双眼睁大。\",\"beat\":\"强调\",\"sourceBlockIds\":[\"B66\"]},{\"duration\":8,\"size\":\"CU\",\"cameraMove\":\"固定机位\",\"visualAction\":\"塞琳娜保持面朝门口，泪痕未干，嘴唇轻颤，视线没有移开。\",\"beat\":\"内心独白\",\"sourceBlockIds\":[\"B67\"]}]},{\"duration\":12,\"cast\":[\"塞琳娜\",\"奥尔德里奇\"],\"props\":[],\"startPosition\":\"塞琳娜仍站在原位，面朝画面右侧门口，脸颊带泪；奥尔德里奇位于她左侧两步处，身体朝向右前方门口，右手垂在身侧。\",\"clips\":[{\"duration\":2,\"size\":\"MS\",\"cameraMove\":\"固定机位\",\"visualAction\":\"奥尔德里奇从画面左侧走入，来到塞琳娜身旁停步，转头看向右侧门口。\",\"beat\":\"建立\",\"sourceBlockIds\":[\"B68\"]},{\"duration\":8,\"size\":\"CU\",\"cameraMove\":\"轻微推近\",\"visualAction\":\"奥尔德里奇侧脸朝门口，眉头压低，嘴唇开合，视线停在门外方向。\",\"beat\":\"强调\",\"sourceBlockIds\":[\"B69\"]},{\"duration\":2,\"size\":\"MCU\",\"cameraMove\":\"固定机位\",\"visualAction\":\"奥尔德里奇转向塞琳娜，肩部略前倾，嘴唇继续开合，视线落在她脸上。\",\"beat\":\"延续\",\"sourceBlockIds\":[\"B70\"]}]}]}",
+          "resumedFrom": "2026-11-04T08-14-40-129Z-AB-新引擎修复-EP4-6-7-r2.json",
+          "attempts": [
+            {
+              "attempt": 1,
+              "label": "AB 新引擎 EP4 6/7 r1",
+              "raw": "{\"sceneId\":\"4-1\",\"shots\":[{\"duration\":8,\"cast\":[\"塞琳娜\"],\"props\":[],\"startPosition\":\"塞琳娜站在酒馆内原位，身体朝向画面右侧门口，双手垂在身侧，视线投向门外。\",\"clips\":[{\"duration\":2,\"size\":\"ECU\",\"cameraMove\":\"固定机位\",\"visualAction\":\"塞琳娜面朝画面右侧门口，眼眶湿润，一行眼泪滑下脸颊，嘴唇微张，双眼睁大。\",\"beat\":\"强调\",\"sourceBlockIds\":[\"B66\"]},{\"duration\":6,\"size\":\"CU\",\"cameraMove\":\"固定机位\",\"visualAction\":\"塞琳娜保持面朝门口，泪痕未干，嘴唇轻颤，视线没有移开。\",\"beat\":\"内心独白\",\"sourceBlockIds\":[\"B67\"]}]},{\"duration\":10,\"cast\":[\"塞琳娜\",\"奥尔德里奇\"],\"props\":[],\"startPosition\":\"塞琳娜仍站在原位，面朝画面右侧门口，脸颊带泪；奥尔德里奇位于她左侧两步处，身体朝向右前方门口，右手垂在身侧。\",\"clips\":[{\"duration\":2,\"size\":\"MS\",\"cameraMove\":\"固定机位\",\"visualAction\":\"奥尔德里奇从画面左侧走入，来到塞琳娜身旁停步，转头看向右侧门口。\",\"beat\":\"建立\",\"sourceBlockIds\":[\"B68\"]},{\"duration\":6,\"size\":\"CU\",\"cameraMove\":\"轻微推近\",\"visualAction\":\"奥尔德里奇侧脸朝门口，眉头压低，嘴唇开合，视线停在门外方向。\",\"beat\":\"强调\",\"sourceBlockIds\":[\"B69\"]},{\"duration\":2,\"size\":\"MCU\",\"cameraMove\":\"固定机位\",\"visualAction\":\"奥尔德里奇转向塞琳娜，肩部略前倾，嘴唇继续开合，视线落在她脸上。\",\"beat\":\"延续\",\"sourceBlockIds\":[\"B70\"]}]}]}",
+              "status": "completed",
+              "usage": {
+                "input_tokens": 1666,
+                "input_tokens_details": {
+                  "cached_tokens": 896
+                },
+                "output_tokens": 3624,
+                "output_tokens_details": {
+                  "reasoning_tokens": 3220
+                },
+                "total_tokens": 5290
+              },
+              "elapsedMs": 23215,
+              "resumed": true
+            },
+            {
+              "attempt": 2,
+              "label": "AB 新引擎修复 EP4 6/7 r2",
+              "raw": "{\"sceneId\":\"4-1\",\"shots\":[{\"duration\":10,\"cast\":[\"塞琳娜\"],\"props\":[],\"startPosition\":\"塞琳娜站在酒馆内原位，身体朝向画面右侧门口，双手垂在身侧，视线投向门外。\",\"clips\":[{\"duration\":2,\"size\":\"ECU\",\"cameraMove\":\"固定机位\",\"visualAction\":\"塞琳娜面朝画面右侧门口，眼眶湿润，一行眼泪滑下脸颊，嘴唇微张，双眼睁大。\",\"beat\":\"强调\",\"sourceBlockIds\":[\"B66\"]},{\"duration\":8,\"size\":\"CU\",\"cameraMove\":\"固定机位\",\"visualAction\":\"塞琳娜保持面朝门口，泪痕未干，嘴唇轻颤，视线没有移开。\",\"beat\":\"内心独白\",\"sourceBlockIds\":[\"B67\"]}]},{\"duration\":12,\"cast\":[\"塞琳娜\",\"奥尔德里奇\"],\"props\":[],\"startPosition\":\"塞琳娜仍站在原位，面朝画面右侧门口，脸颊带泪；奥尔德里奇位于她左侧两步处，身体朝向右前方门口，右手垂在身侧。\",\"clips\":[{\"duration\":2,\"size\":\"MS\",\"cameraMove\":\"固定机位\",\"visualAction\":\"奥尔德里奇从画面左侧走入，来到塞琳娜身旁停步，转头看向右侧门口。\",\"beat\":\"建立\",\"sourceBlockIds\":[\"B68\"]},{\"duration\":8,\"size\":\"CU\",\"cameraMove\":\"轻微推近\",\"visualAction\":\"奥尔德里奇侧脸朝门口，眉头压低，嘴唇开合，视线停在门外方向。\",\"beat\":\"强调\",\"sourceBlockIds\":[\"B69\"]},{\"duration\":2,\"size\":\"MCU\",\"cameraMove\":\"固定机位\",\"visualAction\":\"奥尔德里奇转向塞琳娜，肩部略前倾，嘴唇继续开合，视线落在她脸上。\",\"beat\":\"延续\",\"sourceBlockIds\":[\"B70\"]}]}]}",
+              "status": "completed",
+              "usage": {
+                "input_tokens": 2167,
+                "input_tokens_details": {
+                  "cached_tokens": 896
+                },
+                "output_tokens": 580,
+                "output_tokens_details": {
+                  "reasoning_tokens": 176
+                },
+                "total_tokens": 2747
+              },
+              "elapsedMs": 2918,
+              "resumed": true
+            }
+          ]
+        },
+        {
+          "chunkIndex": 7,
+          "sceneInput": {
+            "sceneId": "4-1",
+            "episode": "第4集：徒手托陨石",
+            "sceneHeading": "Border Tavern 内 未注明",
+            "cast": "亚瑟（Arthur，着装：旅行者装）、奥尔德里奇（Aldrick，着装：黑色法袍）、塞琳娜（Selina，着装：贵族女子华贵长裙）、酒馆老板（Tavern Owner，着装：酒馆围裙）、男酒客（Male Patron，着装：粗布衣）",
+            "castNames": [
+              "亚瑟",
+              "奥尔德里奇",
+              "塞琳娜",
+              "酒馆老板",
+              "男酒客"
+            ],
+            "previousEnd": "△奥尔德里奇走到塞琳娜身旁，神色凝重地看着亚瑟离去的方向。\n奥尔德里奇（神色凝重）：My lady... This man has not a trace of magic, yet his physical strength is terrifying to this degree.\n△奥尔德里奇转头看向塞琳娜，心有余悸地继续说话。",
+            "nextScene": "",
+            "estimatedSeconds": 12,
+            "blocks": [
+              {
+                "id": "B71",
+                "kind": "dialogue",
+                "speaker": "奥尔德里奇",
+                "tone": "心有余悸",
+                "text": "Thank goodness you stopped me from acting earlier. Or we'd be nothing but ash.",
+                "source": "奥尔德里奇（心有余悸）：Thank goodness you stopped me from acting earlier. Or we'd be nothing but ash."
+              },
+              {
+                "id": "B72",
+                "kind": "action",
+                "text": "△塞琳娜看着亚瑟消失的方向，眼神变得坚定。",
+                "source": "△塞琳娜看着亚瑟消失的方向，眼神变得坚定。"
+              },
+              {
+                "id": "B73",
+                "kind": "dialogue",
+                "speaker": "塞琳娜",
+                "tone": "语气坚定",
+                "text": "Find out who he is. I want to know him.",
+                "source": "塞琳娜（语气坚定）：Find out who he is. I want to know him."
+              }
+            ],
+            "chunkIndex": 7,
+            "chunkCount": 7
+          },
+          "finalPlan": {
+            "sceneId": "4-1",
+            "shots": [
+              {
+                "duration": 6,
+                "cast": [
+                  "奥尔德里奇",
+                  "塞琳娜"
+                ],
+                "props": [],
+                "startPosition": "酒馆内，奥尔德里奇站在塞琳娜身侧，身体半转向她；塞琳娜面向奥尔德里奇，二人相距一臂，亚瑟已离开画面。",
+                "clips": [
+                  {
+                    "duration": 6,
+                    "size": "MCU",
+                    "cameraMove": "缓慢推近",
+                    "visualAction": "奥尔德里奇转头正对塞琳娜，肩膀微沉，双手垂在身侧，嘴唇开合。",
+                    "beat": "对话",
+                    "sourceBlockIds": [
+                      "B71"
+                    ]
+                  }
+                ]
+              },
+              {
+                "duration": 7,
+                "cast": [
+                  "塞琳娜",
+                  "奥尔德里奇"
+                ],
+                "props": [],
+                "startPosition": "承接上一镜：奥尔德里奇面向塞琳娜，双手垂在身侧；塞琳娜也面向奥尔德里奇，二人仍相距一臂。",
+                "clips": [
+                  {
+                    "duration": 2,
+                    "size": "MCU",
+                    "cameraMove": "固定机位",
+                    "visualAction": "塞琳娜从奥尔德里奇脸上移开视线，转头望向亚瑟消失的门口方向，目光停住，下颌收紧。",
+                    "beat": "反应",
+                    "sourceBlockIds": [
+                      "B72"
+                    ]
+                  },
+                  {
+                    "duration": 5,
+                    "size": "CU",
+                    "cameraMove": "缓慢推近",
+                    "visualAction": "塞琳娜转回脸面向奥尔德里奇，抬起下巴，嘴唇开合。",
+                    "beat": "决定",
+                    "sourceBlockIds": [
+                      "B73"
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          "finalRaw": "{\"sceneId\":\"4-1\",\"shots\":[{\"duration\":6,\"cast\":[\"奥尔德里奇\",\"塞琳娜\"],\"props\":[],\"startPosition\":\"酒馆内，奥尔德里奇站在塞琳娜身侧，身体半转向她；塞琳娜面向奥尔德里奇，二人相距一臂，亚瑟已离开画面。\",\"clips\":[{\"duration\":6,\"size\":\"MCU\",\"cameraMove\":\"缓慢推近\",\"visualAction\":\"奥尔德里奇转头正对塞琳娜，肩膀微沉，双手垂在身侧，嘴唇开合。\",\"beat\":\"对话\",\"sourceBlockIds\":[\"B71\"]}]},{\"duration\":7,\"cast\":[\"塞琳娜\",\"奥尔德里奇\"],\"props\":[],\"startPosition\":\"承接上一镜：奥尔德里奇面向塞琳娜，双手垂在身侧；塞琳娜也面向奥尔德里奇，二人仍相距一臂。\",\"clips\":[{\"duration\":2,\"size\":\"MCU\",\"cameraMove\":\"固定机位\",\"visualAction\":\"塞琳娜从奥尔德里奇脸上移开视线，转头望向亚瑟消失的门口方向，目光停住，下颌收紧。\",\"beat\":\"反应\",\"sourceBlockIds\":[\"B72\"]},{\"duration\":5,\"size\":\"CU\",\"cameraMove\":\"缓慢推近\",\"visualAction\":\"塞琳娜转回脸面向奥尔德里奇，抬起下巴，嘴唇开合。\",\"beat\":\"决定\",\"sourceBlockIds\":[\"B73\"]}]}]}",
+          "resumedFrom": "2026-11-04T08-43-17-218Z-AB-新引擎修复-EP4-7-7-r3.json",
+          "attempts": [
+            {
+              "attempt": 1,
+              "label": "AB 新引擎 EP4 7/7 r1",
+              "raw": "{\"sceneId\":\"4-1\",\"shots\":[{\"duration\":5,\"cast\":[\"奥尔德里奇\",\"塞琳娜\"],\"props\":[],\"startPosition\":\"酒馆内，奥尔德里奇站在塞琳娜身侧，身体半转向她；塞琳娜面向奥尔德里奇，二人相距一臂，亚瑟已离开画面。\",\"clips\":[{\"duration\":5,\"size\":\"MCU\",\"cameraMove\":\"缓慢推近\",\"visualAction\":\"奥尔德里奇转头正对塞琳娜，肩膀微沉，双手垂在身侧，嘴唇开合。\",\"beat\":\"对话\",\"sourceBlockIds\":[\"B71\"]}]},{\"duration\":7,\"cast\":[\"塞琳娜\",\"奥尔德里奇\"],\"props\":[],\"startPosition\":\"承接上一镜：奥尔德里奇面向塞琳娜，双手垂在身侧；塞琳娜也面向奥尔德里奇，二人仍相距一臂。\",\"clips\":[{\"duration\":3,\"size\":\"MCU\",\"cameraMove\":\"固定机位\",\"visualAction\":\"塞琳娜从奥尔德里奇脸上移开视线，转头望向亚瑟消失的门口方向，目光停住，下颌收紧。\",\"beat\":\"反应\",\"sourceBlockIds\":[\"B72\"]},{\"duration\":4,\"size\":\"CU\",\"cameraMove\":\"缓慢推近\",\"visualAction\":\"塞琳娜转回脸面向奥尔德里奇，抬起下巴，嘴唇开合。\",\"beat\":\"决定\",\"sourceBlockIds\":[\"B73\"]}]}]}",
+              "status": "completed",
+              "usage": {
+                "input_tokens": 1447,
+                "input_tokens_details": {
+                  "cached_tokens": 896
+                },
+                "output_tokens": 1906,
+                "output_tokens_details": {
+                  "reasoning_tokens": 1602
+                },
+                "total_tokens": 3353
+              },
+              "elapsedMs": 12224,
+              "resumed": true
+            },
+            {
+              "attempt": 2,
+              "label": "AB 新引擎修复 EP4 7/7 r2",
+              "raw": "{\"sceneId\":\"4-1\",\"shots\":[{\"duration\":6,\"cast\":[\"奥尔德里奇\",\"塞琳娜\"],\"props\":[],\"startPosition\":\"酒馆内，奥尔德里奇站在塞琳娜身侧，身体半转向她；塞琳娜面向奥尔德里奇，二人相距一臂，亚瑟已离开画面。\",\"clips\":[{\"duration\":6,\"size\":\"MCU\",\"cameraMove\":\"缓慢推近\",\"visualAction\":\"奥尔德里奇转头正对塞琳娜，肩膀微沉，双手垂在身侧，嘴唇开合。\",\"beat\":\"对话\",\"sourceBlockIds\":[\"B71\"]}]},{\"duration\":6,\"cast\":[\"塞琳娜\",\"奥尔德里奇\"],\"props\":[],\"startPosition\":\"承接上一镜：奥尔德里奇面向塞琳娜，双手垂在身侧；塞琳娜也面向奥尔德里奇，二人仍相距一臂。\",\"clips\":[{\"duration\":3,\"size\":\"MCU\",\"cameraMove\":\"固定机位\",\"visualAction\":\"塞琳娜从奥尔德里奇脸上移开视线，转头望向亚瑟消失的门口方向，目光停住，下颌收紧。\",\"beat\":\"反应\",\"sourceBlockIds\":[\"B72\"]},{\"duration\":3,\"size\":\"CU\",\"cameraMove\":\"缓慢推近\",\"visualAction\":\"塞琳娜转回脸面向奥尔德里奇，抬起下巴，嘴唇开合。\",\"beat\":\"决定\",\"sourceBlockIds\":[\"B73\"]}]}]}",
+              "status": "completed",
+              "usage": {
+                "input_tokens": 1817,
+                "input_tokens_details": {
+                  "cached_tokens": 896
+                },
+                "output_tokens": 662,
+                "output_tokens_details": {
+                  "reasoning_tokens": 358
+                },
+                "total_tokens": 2479
+              },
+              "elapsedMs": 4238,
+              "resumed": true
+            },
+            {
+              "attempt": 3,
+              "label": "AB 新引擎修复 EP4 7/7 r3",
+              "raw": "{\"sceneId\":\"4-1\",\"shots\":[{\"duration\":6,\"cast\":[\"奥尔德里奇\",\"塞琳娜\"],\"props\":[],\"startPosition\":\"酒馆内，奥尔德里奇站在塞琳娜身侧，身体半转向她；塞琳娜面向奥尔德里奇，二人相距一臂，亚瑟已离开画面。\",\"clips\":[{\"duration\":6,\"size\":\"MCU\",\"cameraMove\":\"缓慢推近\",\"visualAction\":\"奥尔德里奇转头正对塞琳娜，肩膀微沉，双手垂在身侧，嘴唇开合。\",\"beat\":\"对话\",\"sourceBlockIds\":[\"B71\"]}]},{\"duration\":7,\"cast\":[\"塞琳娜\",\"奥尔德里奇\"],\"props\":[],\"startPosition\":\"承接上一镜：奥尔德里奇面向塞琳娜，双手垂在身侧；塞琳娜也面向奥尔德里奇，二人仍相距一臂。\",\"clips\":[{\"duration\":2,\"size\":\"MCU\",\"cameraMove\":\"固定机位\",\"visualAction\":\"塞琳娜从奥尔德里奇脸上移开视线，转头望向亚瑟消失的门口方向，目光停住，下颌收紧。\",\"beat\":\"反应\",\"sourceBlockIds\":[\"B72\"]},{\"duration\":5,\"size\":\"CU\",\"cameraMove\":\"缓慢推近\",\"visualAction\":\"塞琳娜转回脸面向奥尔德里奇，抬起下巴，嘴唇开合。\",\"beat\":\"决定\",\"sourceBlockIds\":[\"B73\"]}]}]}",
+              "status": "completed",
+              "usage": {
+                "input_tokens": 1817,
+                "input_tokens_details": {
+                  "cached_tokens": 1280
+                },
+                "output_tokens": 1014,
+                "output_tokens_details": {
+                  "reasoning_tokens": 710
+                },
+                "total_tokens": 2831
+              },
+              "elapsedMs": 6124,
+              "resumed": true
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,1925 @@
+{
+  "sceneId": "1-1",
+  "sceneHeading": "Village 外 未注明",
+  "policy": "flexible6",
+  "chunkSeconds": 20,
+  "concurrency": 2,
+  "replayedFrom": null,
+  "sourceBlocks": 62,
+  "estimatedSeconds": 88,
+  "directorBriefValidation": {
+    "issues": []
+  },
+  "chunks": [
+    {
+      "ordinal": 1,
+      "blocks": 21,
+      "estimatedSeconds": 19,
+      "attempts": 2,
+      "usage": {
+        "input_tokens": 10487,
+        "output_tokens": 34194,
+        "total_tokens": 44681,
+        "reasoning_tokens": 30068,
+        "cached_tokens": 2688
+      },
+      "validation": {
+        "shots": 4,
+        "clips": 10,
+        "blocks": 21,
+        "widePct": 30,
+        "overloadedClips": 0,
+        "totalDuration": 29
+      },
+      "director": {
+        "schemaVersion": 2,
+        "shots": 4,
+        "completeShots": 4,
+        "completePct": 100,
+        "purpose": 4,
+        "storyFunction": 4,
+        "validStoryFunction": 4,
+        "startState": 4,
+        "stateChange": 4,
+        "endState": 4,
+        "cameraReason": 4,
+        "continuityNote": 4,
+        "hasDirectorBrief": false,
+        "hasSceneGeography": false
+      },
+      "actionAudit": {
+        "issues": [],
+        "shots": [
+          {
+            "shot": 1,
+            "sourceBlockCount": 4,
+            "clipCount": 2,
+            "totalClipSeconds": 6,
+            "averageClipSeconds": 3,
+            "stateClauses": 1,
+            "fastActionCount": 6,
+            "turnCount": 0,
+            "complexAction": false,
+            "compoundCameraClips": []
+          },
+          {
+            "shot": 2,
+            "sourceBlockCount": 7,
+            "clipCount": 4,
+            "totalClipSeconds": 12,
+            "averageClipSeconds": 3,
+            "stateClauses": 3,
+            "fastActionCount": 3,
+            "turnCount": 2,
+            "complexAction": false,
+            "compoundCameraClips": []
+          },
+          {
+            "shot": 3,
+            "sourceBlockCount": 4,
+            "clipCount": 2,
+            "totalClipSeconds": 5,
+            "averageClipSeconds": 2.5,
+            "stateClauses": 2,
+            "fastActionCount": 0,
+            "turnCount": 1,
+            "complexAction": false,
+            "compoundCameraClips": []
+          },
+          {
+            "shot": 4,
+            "sourceBlockCount": 6,
+            "clipCount": 2,
+            "totalClipSeconds": 6,
+            "averageClipSeconds": 3,
+            "stateClauses": 3,
+            "fastActionCount": 14,
+            "turnCount": 8,
+            "complexAction": false,
+            "compoundCameraClips": []
+          }
+        ],
+        "complexShots": 0,
+        "compoundCameraMoves": 0
+      },
+      "issues": []
+    },
+    {
+      "ordinal": 2,
+      "blocks": 8,
+      "estimatedSeconds": 18,
+      "attempts": 2,
+      "usage": {
+        "input_tokens": 8375,
+        "output_tokens": 14896,
+        "total_tokens": 23271,
+        "reasoning_tokens": 12058,
+        "cached_tokens": 2560
+      },
+      "validation": {
+        "shots": 4,
+        "clips": 6,
+        "blocks": 8,
+        "widePct": 16.7,
+        "overloadedClips": 0,
+        "totalDuration": 24
+      },
+      "director": {
+        "schemaVersion": 2,
+        "shots": 4,
+        "completeShots": 4,
+        "completePct": 100,
+        "purpose": 4,
+        "storyFunction": 4,
+        "validStoryFunction": 4,
+        "startState": 4,
+        "stateChange": 4,
+        "endState": 4,
+        "cameraReason": 4,
+        "continuityNote": 4,
+        "hasDirectorBrief": false,
+        "hasSceneGeography": false
+      },
+      "actionAudit": {
+        "issues": [],
+        "shots": [
+          {
+            "shot": 1,
+            "sourceBlockCount": 1,
+            "clipCount": 1,
+            "totalClipSeconds": 5,
+            "averageClipSeconds": 5,
+            "stateClauses": 1,
+            "fastActionCount": 0,
+            "turnCount": 1,
+            "complexAction": false,
+            "compoundCameraClips": []
+          },
+          {
+            "shot": 2,
+            "sourceBlockCount": 2,
+            "clipCount": 1,
+            "totalClipSeconds": 6,
+            "averageClipSeconds": 6,
+            "stateClauses": 1,
+            "fastActionCount": 1,
+            "turnCount": 2,
+            "complexAction": false,
+            "compoundCameraClips": []
+          },
+          {
+            "shot": 3,
+            "sourceBlockCount": 2,
+            "clipCount": 2,
+            "totalClipSeconds": 7,
+            "averageClipSeconds": 3.5,
+            "stateClauses": 2,
+            "fastActionCount": 0,
+            "turnCount": 2,
+            "complexAction": false,
+            "compoundCameraClips": []
+          },
+          {
+            "shot": 4,
+            "sourceBlockCount": 3,
+            "clipCount": 2,
+            "totalClipSeconds": 6,
+            "averageClipSeconds": 3,
+            "stateClauses": 2,
+            "fastActionCount": 0,
+            "turnCount": 1,
+            "complexAction": false,
+            "compoundCameraClips": []
+          }
+        ],
+        "complexShots": 0,
+        "compoundCameraMoves": 0
+      },
+      "issues": []
+    },
+    {
+      "ordinal": 3,
+      "blocks": 13,
+      "estimatedSeconds": 18,
+      "attempts": 2,
+      "usage": {
+        "input_tokens": 9780,
+        "output_tokens": 17193,
+        "total_tokens": 26973,
+        "reasoning_tokens": 12415,
+        "cached_tokens": 3840
+      },
+      "validation": {
+        "shots": 5,
+        "clips": 10,
+        "blocks": 13,
+        "widePct": 20,
+        "overloadedClips": 2,
+        "totalDuration": 28
+      },
+      "director": {
+        "schemaVersion": 2,
+        "shots": 5,
+        "completeShots": 5,
+        "completePct": 100,
+        "purpose": 5,
+        "storyFunction": 5,
+        "validStoryFunction": 5,
+        "startState": 5,
+        "stateChange": 5,
+        "endState": 5,
+        "cameraReason": 5,
+        "continuityNote": 5,
+        "hasDirectorBrief": false,
+        "hasSceneGeography": false
+      },
+      "actionAudit": {
+        "issues": [],
+        "shots": [
+          {
+            "shot": 1,
+            "sourceBlockCount": 3,
+            "clipCount": 2,
+            "totalClipSeconds": 5,
+            "averageClipSeconds": 2.5,
+            "stateClauses": 1,
+            "fastActionCount": 0,
+            "turnCount": 0,
+            "complexAction": false,
+            "compoundCameraClips": []
+          },
+          {
+            "shot": 2,
+            "sourceBlockCount": 3,
+            "clipCount": 2,
+            "totalClipSeconds": 6,
+            "averageClipSeconds": 3,
+            "stateClauses": 2,
+            "fastActionCount": 0,
+            "turnCount": 0,
+            "complexAction": false,
+            "compoundCameraClips": []
+          },
+          {
+            "shot": 3,
+            "sourceBlockCount": 3,
+            "clipCount": 2,
+            "totalClipSeconds": 5,
+            "averageClipSeconds": 2.5,
+            "stateClauses": 2,
+            "fastActionCount": 2,
+            "turnCount": 2,
+            "complexAction": false,
+            "compoundCameraClips": []
+          },
+          {
+            "shot": 4,
+            "sourceBlockCount": 3,
+            "clipCount": 3,
+            "totalClipSeconds": 7,
+            "averageClipSeconds": 2.33,
+            "stateClauses": 1,
+            "fastActionCount": 14,
+            "turnCount": 6,
+            "complexAction": false,
+            "compoundCameraClips": []
+          },
+          {
+            "shot": 5,
+            "sourceBlockCount": 1,
+            "clipCount": 1,
+            "totalClipSeconds": 5,
+            "averageClipSeconds": 5,
+            "stateClauses": 1,
+            "fastActionCount": 0,
+            "turnCount": 0,
+            "complexAction": false,
+            "compoundCameraClips": []
+          }
+        ],
+        "complexShots": 0,
+        "compoundCameraMoves": 0
+      },
+      "issues": [
+        {
+          "level": "高",
+          "where": "1-1 shot1 Clip A",
+          "msg": "内容预算约 4.0s，超过 Clip 时长 2s"
+        },
+        {
+          "level": "高",
+          "where": "1-1 shot1 Clip B",
+          "msg": "内容预算约 3.6s，超过 Clip 时长 3s"
+        }
+      ]
+    },
+    {
+      "ordinal": 4,
+      "blocks": 10,
+      "estimatedSeconds": 15,
+      "attempts": 2,
+      "usage": {
+        "input_tokens": 9017,
+        "output_tokens": 14397,
+        "total_tokens": 23414,
+        "reasoning_tokens": 10793,
+        "cached_tokens": 3840
+      },
+      "validation": {
+        "shots": 5,
+        "clips": 10,
+        "blocks": 10,
+        "widePct": 20,
+        "overloadedClips": 0,
+        "totalDuration": 31
+      },
+      "director": {
+        "schemaVersion": 2,
+        "shots": 5,
+        "completeShots": 5,
+        "completePct": 100,
+        "purpose": 5,
+        "storyFunction": 5,
+        "validStoryFunction": 5,
+        "startState": 5,
+        "stateChange": 5,
+        "endState": 5,
+        "cameraReason": 5,
+        "continuityNote": 5,
+        "hasDirectorBrief": false,
+        "hasSceneGeography": false
+      },
+      "actionAudit": {
+        "issues": [],
+        "shots": [
+          {
+            "shot": 1,
+            "sourceBlockCount": 2,
+            "clipCount": 2,
+            "totalClipSeconds": 5,
+            "averageClipSeconds": 2.5,
+            "stateClauses": 1,
+            "fastActionCount": 0,
+            "turnCount": 0,
+            "complexAction": false,
+            "compoundCameraClips": []
+          },
+          {
+            "shot": 2,
+            "sourceBlockCount": 3,
+            "clipCount": 3,
+            "totalClipSeconds": 9,
+            "averageClipSeconds": 3,
+            "stateClauses": 1,
+            "fastActionCount": 6,
+            "turnCount": 0,
+            "complexAction": false,
+            "compoundCameraClips": []
+          },
+          {
+            "shot": 3,
+            "sourceBlockCount": 2,
+            "clipCount": 2,
+            "totalClipSeconds": 6,
+            "averageClipSeconds": 3,
+            "stateClauses": 1,
+            "fastActionCount": 1,
+            "turnCount": 0,
+            "complexAction": false,
+            "compoundCameraClips": []
+          },
+          {
+            "shot": 4,
+            "sourceBlockCount": 2,
+            "clipCount": 2,
+            "totalClipSeconds": 6,
+            "averageClipSeconds": 3,
+            "stateClauses": 1,
+            "fastActionCount": 0,
+            "turnCount": 0,
+            "complexAction": false,
+            "compoundCameraClips": []
+          },
+          {
+            "shot": 5,
+            "sourceBlockCount": 1,
+            "clipCount": 1,
+            "totalClipSeconds": 5,
+            "averageClipSeconds": 5,
+            "stateClauses": 1,
+            "fastActionCount": 0,
+            "turnCount": 0,
+            "complexAction": false,
+            "compoundCameraClips": []
+          }
+        ],
+        "complexShots": 0,
+        "compoundCameraMoves": 0
+      },
+      "issues": []
+    },
+    {
+      "ordinal": 5,
+      "blocks": 9,
+      "estimatedSeconds": 18,
+      "attempts": 2,
+      "usage": {
+        "input_tokens": 8270,
+        "output_tokens": 12806,
+        "total_tokens": 21076,
+        "reasoning_tokens": 9808,
+        "cached_tokens": 3840
+      },
+      "validation": {
+        "shots": 4,
+        "clips": 7,
+        "blocks": 9,
+        "widePct": 14.3,
+        "overloadedClips": 0,
+        "totalDuration": 25
+      },
+      "director": {
+        "schemaVersion": 2,
+        "shots": 4,
+        "completeShots": 4,
+        "completePct": 100,
+        "purpose": 4,
+        "storyFunction": 4,
+        "validStoryFunction": 4,
+        "startState": 4,
+        "stateChange": 4,
+        "endState": 4,
+        "cameraReason": 4,
+        "continuityNote": 4,
+        "hasDirectorBrief": false,
+        "hasSceneGeography": false
+      },
+      "actionAudit": {
+        "issues": [],
+        "shots": [
+          {
+            "shot": 1,
+            "sourceBlockCount": 2,
+            "clipCount": 2,
+            "totalClipSeconds": 8,
+            "averageClipSeconds": 4,
+            "stateClauses": 1,
+            "fastActionCount": 0,
+            "turnCount": 0,
+            "complexAction": false,
+            "compoundCameraClips": []
+          },
+          {
+            "shot": 2,
+            "sourceBlockCount": 3,
+            "clipCount": 2,
+            "totalClipSeconds": 7,
+            "averageClipSeconds": 3.5,
+            "stateClauses": 1,
+            "fastActionCount": 2,
+            "turnCount": 3,
+            "complexAction": false,
+            "compoundCameraClips": []
+          },
+          {
+            "shot": 3,
+            "sourceBlockCount": 2,
+            "clipCount": 1,
+            "totalClipSeconds": 5,
+            "averageClipSeconds": 5,
+            "stateClauses": 2,
+            "fastActionCount": 0,
+            "turnCount": 0,
+            "complexAction": false,
+            "compoundCameraClips": []
+          },
+          {
+            "shot": 4,
+            "sourceBlockCount": 2,
+            "clipCount": 2,
+            "totalClipSeconds": 5,
+            "averageClipSeconds": 2.5,
+            "stateClauses": 1,
+            "fastActionCount": 2,
+            "turnCount": 0,
+            "complexAction": false,
+            "compoundCameraClips": []
+          }
+        ],
+        "complexShots": 0,
+        "compoundCameraMoves": 0
+      },
+      "issues": []
+    },
+    {
+      "ordinal": 6,
+      "blocks": 1,
+      "estimatedSeconds": 3,
+      "attempts": 1,
+      "usage": {
+        "input_tokens": 2903,
+        "output_tokens": 988,
+        "total_tokens": 3891,
+        "reasoning_tokens": 719,
+        "cached_tokens": 1920
+      },
+      "validation": {
+        "shots": 1,
+        "clips": 1,
+        "blocks": 1,
+        "widePct": 0,
+        "overloadedClips": 0,
+        "totalDuration": 5
+      },
+      "director": {
+        "schemaVersion": 2,
+        "shots": 1,
+        "completeShots": 1,
+        "completePct": 100,
+        "purpose": 1,
+        "storyFunction": 1,
+        "validStoryFunction": 1,
+        "startState": 1,
+        "stateChange": 1,
+        "endState": 1,
+        "cameraReason": 1,
+        "continuityNote": 1,
+        "hasDirectorBrief": false,
+        "hasSceneGeography": false
+      },
+      "actionAudit": {
+        "issues": [],
+        "shots": [
+          {
+            "shot": 1,
+            "sourceBlockCount": 1,
+            "clipCount": 1,
+            "totalClipSeconds": 5,
+            "averageClipSeconds": 5,
+            "stateClauses": 2,
+            "fastActionCount": 0,
+            "turnCount": 1,
+            "complexAction": false,
+            "compoundCameraClips": []
+          }
+        ],
+        "complexShots": 0,
+        "compoundCameraMoves": 0
+      },
+      "issues": []
+    }
+  ],
+  "preRepairDirectorStats": {
+    "schemaVersion": 2,
+    "shots": 23,
+    "completeShots": 23,
+    "completePct": 100,
+    "purpose": 23,
+    "storyFunction": 23,
+    "validStoryFunction": 23,
+    "startState": 23,
+    "stateChange": 23,
+    "endState": 23,
+    "cameraReason": 23,
+    "continuityNote": 23,
+    "hasDirectorBrief": true,
+    "hasSceneGeography": true
+  },
+  "directorStats": {
+    "schemaVersion": 2,
+    "shots": 23,
+    "completeShots": 23,
+    "completePct": 100,
+    "purpose": 23,
+    "storyFunction": 23,
+    "validStoryFunction": 23,
+    "startState": 23,
+    "stateChange": 23,
+    "endState": 23,
+    "cameraReason": 23,
+    "continuityNote": 23,
+    "hasDirectorBrief": true,
+    "hasSceneGeography": true
+  },
+  "actionAudit": {
+    "issues": [],
+    "shots": [
+      {
+        "shot": 1,
+        "sourceBlockCount": 4,
+        "clipCount": 2,
+        "totalClipSeconds": 6,
+        "averageClipSeconds": 3,
+        "stateClauses": 1,
+        "fastActionCount": 6,
+        "turnCount": 0,
+        "complexAction": false,
+        "compoundCameraClips": []
+      },
+      {
+        "shot": 2,
+        "sourceBlockCount": 7,
+        "clipCount": 4,
+        "totalClipSeconds": 13,
+        "averageClipSeconds": 3.25,
+        "stateClauses": 3,
+        "fastActionCount": 3,
+        "turnCount": 2,
+        "complexAction": false,
+        "compoundCameraClips": []
+      },
+      {
+        "shot": 3,
+        "sourceBlockCount": 4,
+        "clipCount": 2,
+        "totalClipSeconds": 6,
+        "averageClipSeconds": 3,
+        "stateClauses": 2,
+        "fastActionCount": 0,
+        "turnCount": 1,
+        "complexAction": false,
+        "compoundCameraClips": []
+      },
+      {
+        "shot": 4,
+        "sourceBlockCount": 6,
+        "clipCount": 2,
+        "totalClipSeconds": 7,
+        "averageClipSeconds": 3.5,
+        "stateClauses": 3,
+        "fastActionCount": 14,
+        "turnCount": 8,
+        "complexAction": false,
+        "compoundCameraClips": []
+      },
+      {
+        "shot": 5,
+        "sourceBlockCount": 1,
+        "clipCount": 1,
+        "totalClipSeconds": 5,
+        "averageClipSeconds": 5,
+        "stateClauses": 1,
+        "fastActionCount": 0,
+        "turnCount": 1,
+        "complexAction": false,
+        "compoundCameraClips": []
+      },
+      {
+        "shot": 6,
+        "sourceBlockCount": 2,
+        "clipCount": 1,
+        "totalClipSeconds": 7,
+        "averageClipSeconds": 7,
+        "stateClauses": 1,
+        "fastActionCount": 1,
+        "turnCount": 2,
+        "complexAction": false,
+        "compoundCameraClips": []
+      },
+      {
+        "shot": 7,
+        "sourceBlockCount": 2,
+        "clipCount": 2,
+        "totalClipSeconds": 8,
+        "averageClipSeconds": 4,
+        "stateClauses": 2,
+        "fastActionCount": 0,
+        "turnCount": 2,
+        "complexAction": false,
+        "compoundCameraClips": []
+      },
+      {
+        "shot": 8,
+        "sourceBlockCount": 3,
+        "clipCount": 2,
+        "totalClipSeconds": 6,
+        "averageClipSeconds": 3,
+        "stateClauses": 2,
+        "fastActionCount": 0,
+        "turnCount": 1,
+        "complexAction": false,
+        "compoundCameraClips": []
+      },
+      {
+        "shot": 9,
+        "sourceBlockCount": 3,
+        "clipCount": 2,
+        "totalClipSeconds": 10,
+        "averageClipSeconds": 5,
+        "stateClauses": 1,
+        "fastActionCount": 0,
+        "turnCount": 0,
+        "complexAction": false,
+        "compoundCameraClips": []
+      },
+      {
+        "shot": 10,
+        "sourceBlockCount": 3,
+        "clipCount": 2,
+        "totalClipSeconds": 7,
+        "averageClipSeconds": 3.5,
+        "stateClauses": 2,
+        "fastActionCount": 0,
+        "turnCount": 0,
+        "complexAction": false,
+        "compoundCameraClips": []
+      },
+      {
+        "shot": 11,
+        "sourceBlockCount": 3,
+        "clipCount": 2,
+        "totalClipSeconds": 6,
+        "averageClipSeconds": 3,
+        "stateClauses": 2,
+        "fastActionCount": 2,
+        "turnCount": 2,
+        "complexAction": false,
+        "compoundCameraClips": []
+      },
+      {
+        "shot": 12,
+        "sourceBlockCount": 3,
+        "clipCount": 3,
+        "totalClipSeconds": 7,
+        "averageClipSeconds": 2.33,
+        "stateClauses": 1,
+        "fastActionCount": 14,
+        "turnCount": 6,
+        "complexAction": false,
+        "compoundCameraClips": []
+      },
+      {
+        "shot": 13,
+        "sourceBlockCount": 1,
+        "clipCount": 1,
+        "totalClipSeconds": 5,
+        "averageClipSeconds": 5,
+        "stateClauses": 1,
+        "fastActionCount": 0,
+        "turnCount": 0,
+        "complexAction": false,
+        "compoundCameraClips": []
+      },
+      {
+        "shot": 14,
+        "sourceBlockCount": 2,
+        "clipCount": 2,
+        "totalClipSeconds": 6,
+        "averageClipSeconds": 3,
+        "stateClauses": 1,
+        "fastActionCount": 0,
+        "turnCount": 0,
+        "complexAction": false,
+        "compoundCameraClips": []
+      },
+      {
+        "shot": 15,
+        "sourceBlockCount": 3,
+        "clipCount": 3,
+        "totalClipSeconds": 10,
+        "averageClipSeconds": 3.33,
+        "stateClauses": 1,
+        "fastActionCount": 6,
+        "turnCount": 0,
+        "complexAction": false,
+        "compoundCameraClips": []
+      },
+      {
+        "shot": 16,
+        "sourceBlockCount": 2,
+        "clipCount": 2,
+        "totalClipSeconds": 6,
+        "averageClipSeconds": 3,
+        "stateClauses": 1,
+        "fastActionCount": 1,
+        "turnCount": 0,
+        "complexAction": false,
+        "compoundCameraClips": []
+      },
+      {
+        "shot": 17,
+        "sourceBlockCount": 2,
+        "clipCount": 2,
+        "totalClipSeconds": 7,
+        "averageClipSeconds": 3.5,
+        "stateClauses": 1,
+        "fastActionCount": 0,
+        "turnCount": 0,
+        "complexAction": false,
+        "compoundCameraClips": []
+      },
+      {
+        "shot": 18,
+        "sourceBlockCount": 1,
+        "clipCount": 1,
+        "totalClipSeconds": 5,
+        "averageClipSeconds": 5,
+        "stateClauses": 1,
+        "fastActionCount": 0,
+        "turnCount": 0,
+        "complexAction": false,
+        "compoundCameraClips": []
+      },
+      {
+        "shot": 19,
+        "sourceBlockCount": 2,
+        "clipCount": 2,
+        "totalClipSeconds": 9,
+        "averageClipSeconds": 4.5,
+        "stateClauses": 1,
+        "fastActionCount": 0,
+        "turnCount": 0,
+        "complexAction": false,
+        "compoundCameraClips": []
+      },
+      {
+        "shot": 20,
+        "sourceBlockCount": 3,
+        "clipCount": 2,
+        "totalClipSeconds": 9,
+        "averageClipSeconds": 4.5,
+        "stateClauses": 1,
+        "fastActionCount": 2,
+        "turnCount": 3,
+        "complexAction": false,
+        "compoundCameraClips": []
+      },
+      {
+        "shot": 21,
+        "sourceBlockCount": 2,
+        "clipCount": 1,
+        "totalClipSeconds": 5,
+        "averageClipSeconds": 5,
+        "stateClauses": 2,
+        "fastActionCount": 0,
+        "turnCount": 0,
+        "complexAction": false,
+        "compoundCameraClips": []
+      },
+      {
+        "shot": 22,
+        "sourceBlockCount": 2,
+        "clipCount": 2,
+        "totalClipSeconds": 5,
+        "averageClipSeconds": 2.5,
+        "stateClauses": 1,
+        "fastActionCount": 2,
+        "turnCount": 0,
+        "complexAction": false,
+        "compoundCameraClips": []
+      },
+      {
+        "shot": 23,
+        "sourceBlockCount": 1,
+        "clipCount": 1,
+        "totalClipSeconds": 5,
+        "averageClipSeconds": 5,
+        "stateClauses": 2,
+        "fastActionCount": 0,
+        "turnCount": 1,
+        "complexAction": false,
+        "compoundCameraClips": []
+      }
+    ],
+    "complexShots": 0,
+    "compoundCameraMoves": 0
+  },
+  "planValidation": {
+    "issues": [],
+    "stats": {
+      "shots": 23,
+      "clips": 44,
+      "blocks": 62,
+      "widePct": 20.5,
+      "overloadedClips": 0,
+      "totalDuration": 160
+    }
+  },
+  "storyboardValidation": {
+    "issues": [],
+    "stats": {
+      "episodes": 1,
+      "shots": 23,
+      "clips": 44,
+      "high": 0,
+      "mid": 0
+    }
+  },
+  "contentQc": [],
+  "arbitration": {
+    "groups": [
+      {
+        "no": 1,
+        "duration": 81,
+        "status": "fit",
+        "firstShotIndex": 0,
+        "lastShotIndex": 10,
+        "shots": [
+          {
+            "duration": 6,
+            "purpose": "用俯瞰广场和黑龙喷火把村庄从雪地奔逃推入房屋起火，让观众先看清逃生空间再感到威胁压顶。",
+            "storyFunction": "establish",
+            "cast": [
+              "村民群像",
+              "黑龙"
+            ],
+            "props": [],
+            "startState": "雪覆村庄广场俯瞰可见，低矮房屋围出空阔雪地；村民群像散布在广场雪地上向画外奔跑；黑龙尚未入画。",
+            "stateChange": "黑龙从村庄上空飞过并咆哮，向下方房屋喷火，房屋爆炸起火。",
+            "endState": "村庄广场一侧房屋燃烧，村民群像继续向画外奔跑；黑龙在村庄上空。",
+            "cameraReason": "高位俯瞰先交代广场与逃生方向，再横向跟拍让黑龙从画外压入上空，交代威胁尺度。",
+            "continuityNote": "场首。建立雪覆村庄广场、村民群像向画外奔逃；结尾房屋起火，黑龙留在村庄上空。",
+            "clips": [
+              {
+                "duration": 3,
+                "size": "WS",
+                "cameraMove": "固定机位",
+                "visualAction": "俯瞰被雪覆盖的村庄广场，村民群像在雪地上惊慌奔跑，向画外移动。",
+                "beat": "建立",
+                "sourceBlockIds": [
+                  "B01",
+                  "B02"
+                ]
+              },
+              {
+                "duration": 3,
+                "size": "WS",
+                "cameraMove": "横向跟拍",
+                "visualAction": "一只巨大的黑龙在村庄上空飞过并张口咆哮，向下方房屋喷出火焰，房屋爆炸起火。",
+                "beat": "压力",
+                "sourceBlockIds": [
+                  "B03",
+                  "B04"
+                ]
+              }
+            ],
+            "shotIndex": 1,
+            "sourceIndex": 0
+          },
+          {
+            "duration": 13,
+            "purpose": "让村长喊出撤离、黑龙继续喷火、恐惧眼睛和画外绝望喊声把奔逃压到村长跪地绝望。",
+            "storyFunction": "pressure",
+            "cast": [
+              "村长",
+              "村民群像",
+              "黑龙"
+            ],
+            "props": [],
+            "startState": "承接广场一侧房屋燃烧、黑龙在上空；村民群像在雪地上向画外奔逃，村长在人群中。",
+            "stateChange": "村长在奔逃人群中张口喊出撤离命令；黑龙再次展翅咆哮向下喷火，画面切到一只恐惧眼睛和画外喊声，随后黑屏转为村长跪地捂脸、移开双手看手。",
+            "endState": "村长跪在雪地广场上，双手从脸前移开垂在身前，低头看着自己的手；周围房屋燃烧，黑龙在村庄上空。",
+            "cameraReason": "先用近景让撤离命令落在村长面部，再以横向跟拍保持逃生线，最后用极近眼睛和黑屏转场把压力收束到村长跪地的绝望反应。",
+            "continuityNote": "承接房屋起火、黑龙在上空和村民向画外奔逃；本镜含黑屏转场，结尾村长已跪在雪地、双手从脸前移开。",
+            "clips": [
+              {
+                "duration": 3,
+                "size": "MCU",
+                "cameraMove": "固定机位",
+                "visualAction": "村长在奔逃的人群中张口大喊，身体朝画外，周围村民继续奔跑。",
+                "beat": "命令",
+                "sourceBlockIds": [
+                  "B05",
+                  "B06"
+                ]
+              },
+              {
+                "duration": 4,
+                "size": "WS",
+                "cameraMove": "横向跟拍",
+                "visualAction": "一名年轻女子拉着一名老妇人和一个小孩在雪地上向画外奔跑；黑龙在背景上空展翅咆哮，向下喷火。",
+                "beat": "压力",
+                "sourceBlockIds": [
+                  "B07",
+                  "B08"
+                ]
+              },
+              {
+                "duration": 3,
+                "size": "ECU",
+                "cameraMove": "快速推近",
+                "visualAction": "画面切到一只眼睛的特写，眼睛睁大，瞳孔收缩。",
+                "beat": "强调",
+                "sourceBlockIds": [
+                  "B09",
+                  "B10"
+                ]
+              },
+              {
+                "duration": 3,
+                "size": "MCU",
+                "cameraMove": "固定机位",
+                "visualAction": "画面先黑屏，随后村长跪在雪地上，双手捂脸；他移开双手，低头看着自己的手。",
+                "beat": "转折",
+                "sourceBlockIds": [
+                  "B11"
+                ]
+              }
+            ],
+            "shotIndex": 2,
+            "sourceIndex": 1
+          },
+          {
+            "duration": 6,
+            "purpose": "让大魔导师从火光中现身挡火，为跪地的村长创造逃跑机会。",
+            "storyFunction": "shift",
+            "cast": [
+              "村长",
+              "皇家大魔导师",
+              "黑龙"
+            ],
+            "props": [],
+            "startState": "承接村长跪在雪地广场、双手垂在身前、低头看手；黑龙在村庄上空，房屋燃烧；大魔导师尚未入画。",
+            "stateChange": "大魔导师从燃烧房屋阴影走出，站到村长身后面向黑龙，双手施法形成蓝色圆形魔法盾挡住火焰并大喊；村长爬行回头道谢后起身向画外逃跑。",
+            "endState": "大魔导师站在广场中央，面向黑龙，前方蓝色圆形魔法盾挡住火焰；村长已起身向画外跑出，不在大魔导师身旁。",
+            "cameraReason": "用中近景缓慢推近让蓝色盾牌在火焰前成形，并保持大魔导师喊话的面部可读；再固定中近景接住村长回头道谢与起身逃跑。",
+            "continuityNote": "承接村长跪在雪地、双手垂在身前；大魔导师从燃烧房屋阴影入画。结尾大魔导师持盾面向黑龙，村长已向画外跑出。",
+            "clips": [
+              {
+                "duration": 3,
+                "size": "MCU",
+                "cameraMove": "缓慢推近",
+                "visualAction": "火光中，皇家大魔导师从燃烧房屋的阴影里走出，站到村长身后，面向黑龙；他双手施法，一个蓝色圆形魔法盾成形，挡住黑龙喷出的火焰；他张口大喊。",
+                "beat": "转折",
+                "sourceBlockIds": [
+                  "B12",
+                  "B13"
+                ]
+              },
+              {
+                "duration": 3,
+                "size": "MCU",
+                "cameraMove": "固定机位",
+                "visualAction": "村长在雪地上爬行，回头看向大魔导师并开口，随后起身向画外奔跑。",
+                "beat": "反应",
+                "sourceBlockIds": [
+                  "B14",
+                  "B15"
+                ]
+              }
+            ],
+            "shotIndex": 3,
+            "sourceIndex": 2
+          },
+          {
+            "duration": 7,
+            "purpose": "让魔法盾破裂、大魔导师倒地，再被弟子扶住，把救场者推入重伤但仍要开口的状态。",
+            "storyFunction": "impact",
+            "cast": [
+              "皇家大魔导师",
+              "男弟子",
+              "女弟子",
+              "村长",
+              "黑龙"
+            ],
+            "props": [
+              "法杖"
+            ],
+            "startState": "大魔导师站在广场中央，面向黑龙，前方蓝色圆形魔法盾仍成形；村长已跑出画外，黑龙在上空。",
+            "stateChange": "魔法盾被打破，大魔导师被冲击力击倒吐血并低吼；他挣扎站起时，男弟子和女弟子跑来一左一右扶住他，男弟子右手持法杖；大魔导师擦去嘴角血面对弟子开口。",
+            "endState": "大魔导师被男弟子和女弟子一左一右扶住，半站于雪地广场；男弟子右手持法杖；大魔导师嘴角血被擦过，面对弟子开口。",
+            "cameraReason": "盾破处用固定机位承接冲击，再推近弟子扶住大魔导师的动作，收束到伤情和法杖落点。",
+            "continuityNote": "承接大魔导师在广场中央持盾、村长已跑出画外；盾破后大魔导师倒地，弟子入画扶住。结尾法杖在男弟子右手，大魔导师被扶住面对弟子开口。",
+            "clips": [
+              {
+                "duration": 3,
+                "size": "MCU",
+                "cameraMove": "固定机位",
+                "visualAction": "蓝色圆形魔法盾破裂，冲击力将皇家大魔导师击倒在雪地上，他口中吐血并张口低吼。",
+                "beat": "冲击",
+                "sourceBlockIds": [
+                  "B16",
+                  "B17"
+                ]
+              },
+              {
+                "duration": 4,
+                "size": "MCU",
+                "cameraMove": "缓慢推近",
+                "visualAction": "大魔导师挣扎着想站起，嘴角流着血；男弟子和女弟子跑入，一左一右扶住他；男弟子右手持法杖张口大喊；大魔导师用手擦去嘴角的血，面对弟子开口。",
+                "beat": "收束",
+                "sourceBlockIds": [
+                  "B18",
+                  "B19",
+                  "B20",
+                  "B21"
+                ]
+              }
+            ],
+            "shotIndex": 4,
+            "sourceIndex": 3
+          },
+          {
+            "duration": 5,
+            "purpose": "用皇家大魔导师的危机宣言把“必须阻止黑龙”的生死压力立住，让观众知道败局已定但仍要死战。",
+            "storyFunction": "pressure",
+            "cast": [
+              "皇家大魔导师",
+              "男弟子",
+              "女弟子",
+              "黑龙"
+            ],
+            "props": [],
+            "startState": "皇家大魔导师在广场中央被男弟子从侧后方扶着，嘴角带血，身体前倾；他面向弟子方向，黑龙尚未入画。",
+            "stateChange": "皇家大魔导师从虚弱喘息到抬眼开口，把必须阻止黑龙的决意说出口。",
+            "endState": "皇家大魔导师仍被画外手臂扶着，视线落在弟子方向，嘴唇闭合，身体未离开原地。",
+            "cameraReason": "固定近景贴近他带血的嘴角和眼神，让危机宣言压到观众面前。",
+            "continuityNote": "接上一段：男弟子与女弟子跑入扶住皇家大魔导师，皇家大魔导师擦去嘴角血迹；本段场首保持广场中央、皇家大魔导师虚弱被扶、男弟子在侧的状态。",
+            "clips": [
+              {
+                "duration": 5,
+                "size": "CU",
+                "cameraMove": "固定机位",
+                "visualAction": "皇家大魔导师嘴角带血，被画外手臂扶着，抬眼面向弟子方向开口。",
+                "beat": "压力",
+                "sourceBlockIds": [
+                  "B22"
+                ]
+              }
+            ],
+            "shotIndex": 5,
+            "sourceIndex": 4
+          },
+          {
+            "duration": 7,
+            "purpose": "用男弟子的担忧回答暴露“打不过”的绝境，把压力顶回皇家大魔导师。",
+            "storyFunction": "pressure",
+            "cast": [
+              "男弟子",
+              "皇家大魔导师"
+            ],
+            "props": [],
+            "startState": "男弟子站在皇家大魔导师侧后方，双手扶着皇家大魔导师手臂；皇家大魔导师肩臂入画，男弟子面向他。",
+            "stateChange": "男弟子从扶住的状态转为皱眉开口，回答时视线不敢离开皇家大魔导师。",
+            "endState": "男弟子仍扶着皇家大魔导师，眉头紧皱，嘴唇闭合，视线停在皇家大魔导师脸上。",
+            "cameraReason": "近景压住男弟子的犹豫和扶持动作，让“无法战胜”从贴身关系里说出来。",
+            "continuityNote": "接上一镜：皇家大魔导师仍在广场中央被男弟子扶着；本镜把男弟子作为回答者推近，结束在他继续扶持、视线不离开皇家大魔导师。",
+            "clips": [
+              {
+                "duration": 7,
+                "size": "CU",
+                "cameraMove": "固定机位",
+                "visualAction": "男弟子双手扶着皇家大魔导师手臂，眉头皱起，面向皇家大魔导师开口回答。",
+                "beat": "反应",
+                "sourceBlockIds": [
+                  "B23",
+                  "B24"
+                ]
+              }
+            ],
+            "shotIndex": 6,
+            "sourceIndex": 5
+          },
+          {
+            "duration": 8,
+            "purpose": "用沉重表情与黑龙咆哮的对照，把皇家大魔导师从短暂动摇推到“不胜也战”的决断。",
+            "storyFunction": "shift",
+            "cast": [
+              "皇家大魔导师",
+              "黑龙",
+              "男弟子"
+            ],
+            "props": [],
+            "startState": "皇家大魔导师仍在广场中央被画外手臂扶着，脸侧带血，视线从男弟子方向移向空中黑龙方向。",
+            "stateChange": "皇家大魔导师先露出沉重表情，空中黑龙咆哮压来，随后他抬眼坚定回应。",
+            "endState": "皇家大魔导师站稳，面朝空中黑龙方向，眼神坚定，嘴唇闭合。",
+            "cameraReason": "先以近景贴住沉重表情，再让黑龙咆哮占据空间，最后回到皇家大魔导师近景收束决断。",
+            "continuityNote": "接上一镜：男弟子的担忧回答刚落，皇家大魔导师仍在扶持中；本镜结束时他面朝空中黑龙方向，决意已定，交给下一镜的广场俯瞰。",
+            "clips": [
+              {
+                "duration": 3,
+                "size": "CU",
+                "cameraMove": "固定机位",
+                "visualAction": "皇家大魔导师沉重表情的特写短暂停留，随即画面切到黑龙在空中盘旋咆哮。",
+                "beat": "压迫",
+                "sourceBlockIds": [
+                  "B25"
+                ]
+              },
+              {
+                "duration": 5,
+                "size": "CU",
+                "cameraMove": "缓慢推近",
+                "visualAction": "皇家大魔导师抬眼面向空中黑龙方向，开口回应，身体在扶持中站稳。",
+                "beat": "转折",
+                "sourceBlockIds": [
+                  "B26"
+                ]
+              }
+            ],
+            "shotIndex": 7,
+            "sourceIndex": 6
+          },
+          {
+            "duration": 6,
+            "purpose": "用俯瞰交代广场绝境与黑龙制空，再用画外调侃和亚瑟持苹果入场把注意力转向新的介入者。",
+            "storyFunction": "shift",
+            "cast": [
+              "皇家大魔导师",
+              "男弟子",
+              "女弟子",
+              "黑龙",
+              "亚瑟"
+            ],
+            "props": [
+              "苹果"
+            ],
+            "startState": "俯瞰广场中央，皇家大魔导师与男弟子、女弟子站在雪地中；黑龙在上空盘旋；亚瑟尚未入画。",
+            "stateChange": "画外传来亚瑟的轻松声音，随后亚瑟手持咬过一口的苹果从广场一侧走入画面并微笑。",
+            "endState": "亚瑟站在广场一侧，手举咬过一口的苹果，面向广场中央；黑龙仍在上空，皇家大魔导师与两名弟子留在原地。",
+            "cameraReason": "用俯瞰先交代三方空间和黑龙制空权，再切到亚瑟入场，明确他插入冲突线一侧的位置。",
+            "continuityNote": "接上一镜：皇家大魔导师已面朝空中黑龙方向；本镜回到广场全貌，交代黑龙仍在空中，并让亚瑟从画外进入。结束时亚瑟持苹果站在广场一侧，为下一段问答留出位置。",
+            "clips": [
+              {
+                "duration": 3,
+                "size": "WS",
+                "cameraMove": "固定机位",
+                "visualAction": "俯瞰广场中央，皇家大魔导师与男弟子、女弟子站在雪地中，黑龙在上空盘旋。",
+                "beat": "建立",
+                "sourceBlockIds": [
+                  "B27"
+                ]
+              },
+              {
+                "duration": 3,
+                "size": "MCU",
+                "cameraMove": "固定机位",
+                "visualAction": "亚瑟手持咬过一口的苹果从广场一侧走入画面，微笑着面向广场中央。",
+                "beat": "转折",
+                "sourceBlockIds": [
+                  "B28",
+                  "B29"
+                ]
+              }
+            ],
+            "shotIndex": 8,
+            "sourceIndex": 7
+          },
+          {
+            "duration": 10,
+            "purpose": "亚瑟以调侃方式介入，大魔导师和弟子从戒备转为急切警告，观众得知亚瑟不属于撤离人群。",
+            "storyFunction": "establish",
+            "cast": [
+              "亚瑟",
+              "皇家大魔导师",
+              "男弟子",
+              "女弟子",
+              "黑龙"
+            ],
+            "props": [
+              "苹果"
+            ],
+            "startState": "场首：雪覆村庄广场，大魔导师与两名弟子站在广场中央偏左，面朝画面右侧；黑龙在广场上空盘旋；亚瑟从画面右侧走入，右手持咬过一口的苹果，身体朝向众人。",
+            "stateChange": "亚瑟走近并开口，大魔导师身体前倾并抬手警告，两名弟子站在身后僵住。",
+            "endState": "亚瑟停在广场中央偏右，右手持苹果，身体朝向左侧的大魔导师；大魔导师站在广场中央偏左，身体前倾、右手抬起朝向亚瑟；两名弟子站在大魔导师身后；黑龙仍在广场上空盘旋。",
+            "cameraReason": "先从亚瑟一侧缓慢横移让他进入既有空间，再切固定近景让警告压向观众，同时保持大魔导师在左、亚瑟在右的轴线。",
+            "continuityNote": "场首。继承上一段：大魔导师与两名弟子在广场中央，黑龙在空中，亚瑟右手持咬过的苹果从画面右侧走入；本镜结束保持大魔导师一方的左侧位置和亚瑟的右侧位置。",
+            "clips": [
+              {
+                "duration": 5,
+                "size": "MCU",
+                "cameraMove": "缓慢横移",
+                "visualAction": "亚瑟从画面右侧走入，右手持咬过一口的苹果，边走边开口。",
+                "beat": "建立",
+                "sourceBlockIds": [
+                  "B30"
+                ]
+              },
+              {
+                "duration": 5,
+                "size": "MCU",
+                "cameraMove": "固定机位",
+                "visualAction": "大魔导师身体前倾，右手抬起朝亚瑟方向挥动并喊话；两名弟子站在他身后，身体僵住。",
+                "beat": "警告",
+                "sourceBlockIds": [
+                  "B31",
+                  "B32"
+                ]
+              }
+            ],
+            "shotIndex": 9,
+            "sourceIndex": 8
+          },
+          {
+            "duration": 7,
+            "purpose": "亚瑟咬苹果的无畏反应被黑龙落地打断，威胁从空中压到亚瑟身后。",
+            "storyFunction": "pressure",
+            "cast": [
+              "亚瑟",
+              "皇家大魔导师",
+              "黑龙"
+            ],
+            "props": [
+              "苹果"
+            ],
+            "startState": "亚瑟停在广场中央偏右，右手持咬过一口的苹果，身体朝向左侧的大魔导师；大魔导师站在广场中央偏左，身体前倾、右手抬起朝向亚瑟；黑龙在广场上空盘旋。",
+            "stateChange": "亚瑟咬下苹果，大魔导师继续喊话；黑龙从空中落下，停在亚瑟右后方。",
+            "endState": "亚瑟站在广场中央偏右，右手持苹果，身体朝向左侧大魔导师，背对右后方的黑龙；黑龙落在亚瑟右后方，双翼展开并张嘴咆哮；大魔导师站在广场中央偏左，身体前倾、右手抬起。",
+            "cameraReason": "先固定近景捕捉咬苹果的连续动作，黑龙落下时下摇跟随，让威胁从画面上方压到亚瑟身后。",
+            "continuityNote": "承接上一镜：亚瑟在右、大魔导师在左，苹果仍在亚瑟右手；本镜把黑龙从空中落到亚瑟右后方，下一镜必须保持亚瑟背对黑龙。",
+            "clips": [
+              {
+                "duration": 4,
+                "size": "CU",
+                "cameraMove": "固定机位",
+                "visualAction": "亚瑟把苹果送到嘴边咬下，咀嚼；大魔导师身体前倾，右手抬起继续喊话。",
+                "beat": "压力",
+                "sourceBlockIds": [
+                  "B33",
+                  "B34"
+                ]
+              },
+              {
+                "duration": 3,
+                "size": "WS",
+                "cameraMove": "下摇跟随",
+                "visualAction": "黑龙从广场上空俯冲落下，落在亚瑟右后方，双翼展开，朝亚瑟方向张嘴咆哮；亚瑟保持背对黑龙。",
+                "beat": "转折",
+                "sourceBlockIds": [
+                  "B35"
+                ]
+              }
+            ],
+            "shotIndex": 10,
+            "sourceIndex": 9
+          },
+          {
+            "duration": 6,
+            "purpose": "大魔导师的警告把注意力推向身后，亚瑟转身并向黑龙展示苹果，冲突中心转到亚瑟。",
+            "storyFunction": "shift",
+            "cast": [
+              "亚瑟",
+              "皇家大魔导师",
+              "黑龙"
+            ],
+            "props": [
+              "苹果"
+            ],
+            "startState": "亚瑟站在广场中央偏右，右手持苹果，身体朝向左侧大魔导师，背对右后方的黑龙；黑龙落在亚瑟右后方，双翼展开并张嘴咆哮；大魔导师站在广场中央偏左，身体前倾、右手抬起。",
+            "stateChange": "大魔导师朝亚瑟挥手喊话；亚瑟转身面向黑龙，并把右手苹果举到身前展示。",
+            "endState": "亚瑟站在广场中央偏右，身体转向画面右侧的黑龙，右手把咬过的苹果举在身前；黑龙落在亚瑟右侧，双翼展开，面向亚瑟；大魔导师在画面左侧，身体前倾、右手抬起。",
+            "cameraReason": "先固定大魔导师的警告，再在亚瑟转身时轻微横移跟随，保持亚瑟与黑龙的连线留在画面右侧。",
+            "continuityNote": "承接上一镜：黑龙在亚瑟右后方，亚瑟背对黑龙；本镜完成亚瑟转身并举起苹果，下一镜必须保持亚瑟面向右侧黑龙、苹果在右手。",
+            "clips": [
+              {
+                "duration": 3,
+                "size": "MCU",
+                "cameraMove": "固定机位",
+                "visualAction": "大魔导师朝亚瑟方向挥手喊话，视线越过他看向身后黑龙；亚瑟背对黑龙站在画面右侧。",
+                "beat": "警告",
+                "sourceBlockIds": [
+                  "B36"
+                ]
+              },
+              {
+                "duration": 3,
+                "size": "MCU",
+                "cameraMove": "轻微横移",
+                "visualAction": "亚瑟微微一笑，转身面向画面右侧的黑龙，右手把咬过的苹果举到身前。",
+                "beat": "转折",
+                "sourceBlockIds": [
+                  "B37",
+                  "B38"
+                ]
+              }
+            ],
+            "shotIndex": 11,
+            "sourceIndex": 10
+          }
+        ]
+      },
+      {
+        "no": 2,
+        "duration": 79,
+        "status": "fit",
+        "firstShotIndex": 11,
+        "lastShotIndex": 22,
+        "shots": [
+          {
+            "duration": 7,
+            "purpose": "黑龙喷火逼近时，亚瑟用苹果反击并击退黑龙，完成力量反转。",
+            "storyFunction": "impact",
+            "cast": [
+              "亚瑟",
+              "黑龙"
+            ],
+            "props": [
+              "苹果"
+            ],
+            "startState": "亚瑟站在广场中央偏右，身体转向画面右侧的黑龙，右手把咬过的苹果举在身前；黑龙落在亚瑟右侧，双翼展开，面向亚瑟；大魔导师在画面左侧，身体前倾、右手抬起。",
+            "stateChange": "黑龙向亚瑟喷火，亚瑟掷出苹果，苹果击中黑龙眼睛，黑龙被击退飞离原地。",
+            "endState": "亚瑟站在广场中央偏右，右手刚完成投掷、手臂朝画面右侧伸出；黑龙被击退到广场右上方空中，头部后仰、双翼展开，远离亚瑟；苹果已离手。",
+            "cameraReason": "固定镜头让火焰与投掷动作保持同一轴线，投掷瞬间推近到手臂与苹果，击中后用跟摇展示黑龙被击退的方向。",
+            "continuityNote": "承接上一镜：亚瑟面向右侧黑龙、苹果举在身前；本镜让黑龙喷火后，苹果离手击中龙眼，黑龙退到右上方空中。",
+            "clips": [
+              {
+                "duration": 2,
+                "size": "MCU",
+                "cameraMove": "固定机位",
+                "visualAction": "黑龙张嘴向亚瑟喷出火焰，火焰从画面右侧压向亚瑟；亚瑟站在原地，右手仍举着苹果，视线看向火焰。",
+                "beat": "攻击",
+                "sourceBlockIds": [
+                  "B39"
+                ]
+              },
+              {
+                "duration": 2,
+                "size": "CU",
+                "cameraMove": "快速推近",
+                "visualAction": "亚瑟手臂后拉，将右手苹果用力掷向画面右侧。",
+                "beat": "投掷",
+                "sourceBlockIds": [
+                  "B40"
+                ]
+              },
+              {
+                "duration": 3,
+                "size": "MS",
+                "cameraMove": "跟摇",
+                "visualAction": "苹果飞出并击中黑龙眼睛位置，黑龙头部后仰、双翼展开，身体被击退离开广场上空。",
+                "beat": "击中",
+                "sourceBlockIds": [
+                  "B41"
+                ]
+              }
+            ],
+            "shotIndex": 1,
+            "sourceIndex": 11
+          },
+          {
+            "duration": 5,
+            "purpose": "用大魔导师与弟子的僵住反应确认黑龙被击退，并放大亚瑟刚才动作的不可思议。",
+            "storyFunction": "aftermath",
+            "cast": [
+              "皇家大魔导师",
+              "男弟子",
+              "女弟子",
+              "亚瑟",
+              "黑龙"
+            ],
+            "props": [],
+            "startState": "大魔导师与两名弟子站在广场中央偏左，面朝画面右侧；亚瑟在画面右侧画外，黑龙已退向右上方空中，苹果已离手。",
+            "stateChange": "大魔导师与两名弟子保持僵住姿态，眼睛睁大，视线跟随黑龙退去的方向。",
+            "endState": "大魔导师与两名弟子仍站在原地，面朝画面右侧，身体僵住、眼睛睁大，视线跟随黑龙退去的右上方。",
+            "cameraReason": "固定中近景，让三人僵住的反应成为画面主体，不再引入新动作。",
+            "continuityNote": "承接上一镜：黑龙退向右上方、苹果已离手；本镜切到左侧大魔导师与弟子，亚瑟留在画面右侧画外。",
+            "clips": [
+              {
+                "duration": 5,
+                "size": "MCU",
+                "cameraMove": "固定机位",
+                "visualAction": "大魔导师与两名弟子僵在原地，眼睛睁大，身体朝向画面右侧，目光朝右上方移动；无人移动。",
+                "beat": "余波",
+                "sourceBlockIds": [
+                  "B42"
+                ]
+              }
+            ],
+            "shotIndex": 2,
+            "sourceIndex": 12
+          },
+          {
+            "duration": 6,
+            "purpose": "用男弟子的疑问和黑龙重新压回，把短暂胜利翻回威胁，让观众知道危机没有结束。",
+            "storyFunction": "pressure",
+            "cast": [
+              "男弟子",
+              "黑龙",
+              "皇家大魔导师",
+              "亚瑟"
+            ],
+            "props": [],
+            "startState": "场首连接上一段结尾：苹果刚击中龙眼，黑龙向远处退去，皇家大魔导师与弟子目瞪口呆。男弟子站在弟子群前，视线朝向黑龙退去的方向；亚瑟在广场中央，左手提皮箱；黑龙在远处空中。",
+            "stateChange": "男弟子低声疑问后，黑龙头部从乌云中重新压回广场上空咆哮，危机恢复。",
+            "endState": "黑龙头部重新压回广场上空咆哮；男弟子站在弟子群前；亚瑟仍站在广场中央，左手提皮箱，视线转向黑龙。",
+            "cameraReason": "近景先锁男弟子的疑问，再用龙眼与龙口特写把威胁直接压回画面，避免用全景重复龙飞回。",
+            "continuityNote": "场首承上一段结尾：苹果刚击中龙眼，黑龙向远处退去，皇家大魔导师与弟子目瞪口呆。本镜结束把“黑龙重新压回广场上空、亚瑟在广场中央左手提皮箱”交给下一镜。",
+            "clips": [
+              {
+                "duration": 3,
+                "size": "CU",
+                "cameraMove": "固定机位",
+                "visualAction": "男弟子站在弟子群前，嘴唇开合，视线偏向黑龙退去的方向。",
+                "beat": "建立",
+                "sourceBlockIds": [
+                  "B43"
+                ]
+              },
+              {
+                "duration": 3,
+                "size": "ECU",
+                "cameraMove": "快速下压",
+                "visualAction": "黑龙眼部与张开的龙口从画面上方压入，雪粒被气流卷起。",
+                "beat": "强调",
+                "sourceBlockIds": [
+                  "B44"
+                ]
+              }
+            ],
+            "shotIndex": 3,
+            "sourceIndex": 13
+          },
+          {
+            "duration": 10,
+            "purpose": "让亚瑟在说话后放下皮箱并跃起击倒黑龙，完成他从旁观者到终结者的权力翻转。",
+            "storyFunction": "shift",
+            "cast": [
+              "亚瑟",
+              "黑龙"
+            ],
+            "props": [
+              "皮箱"
+            ],
+            "startState": "亚瑟站在广场中央，左手提皮箱，面朝上空黑龙；黑龙在广场上空咆哮。",
+            "stateChange": "亚瑟开口后弯腰把皮箱放到雪地，随即跃起落到黑龙背上，一拳将黑龙打倒。",
+            "endState": "皮箱留在雪地上；亚瑟落在倒地的黑龙背上，右拳贴在龙背；黑龙身体砸在雪地。",
+            "cameraReason": "用近景交代亚瑟的决定，特写皮箱落点确认他主动卸下行李，最后用全景一次看清跃起落背出拳的空间关系。",
+            "continuityNote": "承接上一镜黑龙重新压回上空、亚瑟在中央左手提皮箱；本镜结束把皮箱留在雪地、亚瑟落在倒地龙背交给下一镜。",
+            "clips": [
+              {
+                "duration": 3,
+                "size": "MCU",
+                "cameraMove": "固定机位",
+                "visualAction": "亚瑟面向画外上空，开口说话，右手抬起。",
+                "beat": "推进",
+                "sourceBlockIds": [
+                  "B45"
+                ]
+              },
+              {
+                "duration": 3,
+                "size": "CU",
+                "cameraMove": "下摇",
+                "visualAction": "亚瑟弯腰，左手将皮箱放到雪地上，箱底压入积雪。",
+                "beat": "细节",
+                "sourceBlockIds": [
+                  "B46"
+                ]
+              },
+              {
+                "duration": 4,
+                "size": "WS",
+                "cameraMove": "跟随上摇",
+                "visualAction": "亚瑟从雪地屈膝跃起，落到黑龙背上，右拳砸向龙背，黑龙身体向雪地砸下。",
+                "beat": "高潮",
+                "sourceBlockIds": [
+                  "B47"
+                ]
+              }
+            ],
+            "shotIndex": 4,
+            "sourceIndex": 14
+          },
+          {
+            "duration": 6,
+            "purpose": "用亚瑟的轻松回应和黑龙逃离，确认亚瑟的绝对优势并把胜利结果留在雪地上。",
+            "storyFunction": "aftermath",
+            "cast": [
+              "亚瑟",
+              "黑龙"
+            ],
+            "props": [],
+            "startState": "亚瑟位于倒地的黑龙背上，黑龙伏在雪地；皮箱在雪地上。",
+            "stateChange": "亚瑟在龙背上开口后，黑龙在雪地挣扎振翅飞走，亚瑟落到雪地站立。",
+            "endState": "黑龙已消失在乌云中；亚瑟站在雪地上，皮箱留在旁边。",
+            "cameraReason": "近景接住亚瑟的轻松反应，再用固定全景看龙挣扎飞离，让胜利结果落在空间里。",
+            "continuityNote": "承接亚瑟在倒地龙背、皮箱在雪地；本镜结束黑龙消失乌云、亚瑟落到雪地站立、皮箱仍在旁。",
+            "clips": [
+              {
+                "duration": 2,
+                "size": "CU",
+                "cameraMove": "固定机位",
+                "visualAction": "亚瑟站在龙背上，嘴角上扬，开口说话。",
+                "beat": "反应",
+                "sourceBlockIds": [
+                  "B48"
+                ]
+              },
+              {
+                "duration": 4,
+                "size": "WS",
+                "cameraMove": "固定机位",
+                "visualAction": "黑龙在雪地挣扎，双翼展开拍地，身体离地飞起，穿过乌云消失；亚瑟落到雪地站立。",
+                "beat": "结果",
+                "sourceBlockIds": [
+                  "B49"
+                ]
+              }
+            ],
+            "shotIndex": 5,
+            "sourceIndex": 15
+          },
+          {
+            "duration": 7,
+            "purpose": "让男弟子把观众疑问转向皇家大魔导师，制造对“那是什么”的追问。",
+            "storyFunction": "reaction",
+            "cast": [
+              "男弟子",
+              "皇家大魔导师",
+              "亚瑟",
+              "黑龙"
+            ],
+            "props": [],
+            "startState": "男弟子站在皇家大魔导师一侧，视线朝向黑龙消失的天空；皇家大魔导师站在广场中央，面朝亚瑟与龙消失的方向。",
+            "stateChange": "男弟子从黑龙消失的天空方向转头，面向皇家大魔导师开口询问。",
+            "endState": "男弟子面向皇家大魔导师，嘴唇停下等待回答；皇家大魔导师转向男弟子。",
+            "cameraReason": "固定近景跟随男弟子转头，保持他与皇家大魔导师的问答轴线。",
+            "continuityNote": "承接黑龙消失、亚瑟与皮箱在广场中央雪地，男弟子在一侧；本镜结束男弟子已转向皇家大魔导师并开口。",
+            "clips": [
+              {
+                "duration": 2,
+                "size": "MCU",
+                "cameraMove": "固定机位",
+                "visualAction": "男弟子从天空方向转头，看向皇家大魔导师。",
+                "beat": "转折",
+                "sourceBlockIds": [
+                  "B50"
+                ]
+              },
+              {
+                "duration": 5,
+                "size": "MCU",
+                "cameraMove": "轻推",
+                "visualAction": "男弟子面向皇家大魔导师，嘴唇开合，双手抬起。",
+                "beat": "强调",
+                "sourceBlockIds": [
+                  "B51"
+                ]
+              }
+            ],
+            "shotIndex": 6,
+            "sourceIndex": 16
+          },
+          {
+            "duration": 5,
+            "purpose": "用皇家大魔导师拍头制止男弟子的追问，把下一场训斥的情绪起点建立起来。",
+            "storyFunction": "pressure",
+            "cast": [
+              "皇家大魔导师",
+              "男弟子"
+            ],
+            "props": [],
+            "startState": "男弟子面向皇家大魔导师等待回答，皇家大魔导师站在他面前。",
+            "stateChange": "皇家大魔导师抬手一巴掌拍在男弟子头顶，男弟子头部向下偏。",
+            "endState": "男弟子低头，皇家大魔导师右手掌停在男弟子头顶，保持训斥姿态。",
+            "cameraReason": "固定近景让巴掌落点清楚，不切走。",
+            "continuityNote": "承接男弟子面向皇家大魔导师等待回答；本镜结束男弟子低头、皇家大魔导师手掌停在其头顶，可直接接下一场训斥台词。",
+            "clips": [
+              {
+                "duration": 5,
+                "size": "MCU",
+                "cameraMove": "固定机位",
+                "visualAction": "皇家大魔导师抬起右手，一巴掌拍在男弟子头顶，男弟子头部向下偏。",
+                "beat": "落点",
+                "sourceBlockIds": [
+                  "B52"
+                ]
+              }
+            ],
+            "shotIndex": 7,
+            "sourceIndex": 17
+          },
+          {
+            "duration": 9,
+            "purpose": "大魔导师训斥男弟子，男弟子捂头受击，观众明确那不是魔法而是肉体力量。",
+            "storyFunction": "detail",
+            "cast": [
+              "皇家大魔导师",
+              "男弟子"
+            ],
+            "props": [],
+            "startState": "广场中央，皇家大魔导师右手刚从男弟子头顶收回，站在男弟子前方；男弟子低头站在原处。",
+            "stateChange": "训斥落下，男弟子从低头受击转为双手捂头、睁大眼。",
+            "endState": "男弟子双手捂住头顶，睁大眼站在原处；皇家大魔导师站在其前方，右臂收回至胸前。",
+            "cameraReason": "用贴近的近景固定画面，让训斥和受击反应紧接发生，突出信息纠正。",
+            "continuityNote": "承接上一段：大魔导师巴掌刚落；本镜结束男弟子双手捂头，大魔导师在其前方。",
+            "clips": [
+              {
+                "duration": 7,
+                "size": "CU",
+                "cameraMove": "固定机位",
+                "visualAction": "皇家大魔导师面对男弟子，右臂收回胸前，身体前倾，开口训斥。",
+                "beat": "强调",
+                "sourceBlockIds": [
+                  "B53"
+                ]
+              },
+              {
+                "duration": 2,
+                "size": "CU",
+                "cameraMove": "固定机位",
+                "visualAction": "男弟子双手捂住头顶，眼睛睁大，身体微微后仰。",
+                "beat": "反应",
+                "sourceBlockIds": [
+                  "B54"
+                ]
+              }
+            ],
+            "shotIndex": 8,
+            "sourceIndex": 18
+          },
+          {
+            "duration": 9,
+            "purpose": "男弟子低声质疑，亚瑟随即转身微笑告别，观众感到他要把残局丢下离开。",
+            "storyFunction": "shift",
+            "cast": [
+              "男弟子",
+              "亚瑟",
+              "皇家大魔导师",
+              "女弟子"
+            ],
+            "props": [],
+            "startState": "男弟子双手捂头站在广场中央；亚瑟背对众人，位于广场中央偏右；皇家大魔导师与女弟子在画左。",
+            "stateChange": "男弟子低声重复质问后，亚瑟转身面向众人，微笑挥手告别。",
+            "endState": "亚瑟面朝众人，右手抬起挥动，身体侧向村外；男弟子仍捂着头在画中前景，皇家大魔导师与女弟子在画左。",
+            "cameraReason": "先用近景压住男弟子的疑问，再让亚瑟的转身和挥手成为新的视觉中心。",
+            "continuityNote": "承接男弟子双手捂头；本镜结束亚瑟已面向众人挥手，男弟子仍在画中前景。",
+            "clips": [
+              {
+                "duration": 3,
+                "size": "CU",
+                "cameraMove": "固定机位",
+                "visualAction": "男弟子双手捂头，嘴唇微动，视线朝画左的皇家大魔导师。",
+                "beat": "反应",
+                "sourceBlockIds": [
+                  "B55"
+                ]
+              },
+              {
+                "duration": 6,
+                "size": "CU",
+                "cameraMove": "固定机位",
+                "visualAction": "亚瑟转身面向画左众人，微笑，右手抬起挥动，身体转向村外。",
+                "beat": "转折",
+                "sourceBlockIds": [
+                  "B56",
+                  "B57"
+                ]
+              }
+            ],
+            "shotIndex": 9,
+            "sourceIndex": 19
+          },
+          {
+            "duration": 5,
+            "purpose": "大魔导师上前伸手喊停，把亚瑟的离开变成未完成的拦截。",
+            "storyFunction": "pressure",
+            "cast": [
+              "皇家大魔导师",
+              "亚瑟"
+            ],
+            "props": [],
+            "startState": "亚瑟面朝众人，右手抬起挥动，身体侧向村外；皇家大魔导师在画左前方，重心在后脚。",
+            "stateChange": "皇家大魔导师向前迈一步并伸出右臂，开口喊停；亚瑟保持背对画右前景。",
+            "endState": "皇家大魔导师前脚踏出，右臂伸向画右亚瑟方向，手掌张开；亚瑟背对镜头站在画右前景，尚未离地。",
+            "cameraReason": "快速推近放大迈步和伸手的拦截感，让喊停压到亚瑟背影上。",
+            "continuityNote": "承接亚瑟挥手告别；本镜结束大魔导师前脚踏出、右臂伸出，亚瑟仍在画右前景未离地。",
+            "clips": [
+              {
+                "duration": 5,
+                "size": "CU",
+                "cameraMove": "快速推近",
+                "visualAction": "皇家大魔导师从画左向前迈出一步，右臂伸向画右的亚瑟，开口喊停。",
+                "beat": "施压",
+                "sourceBlockIds": [
+                  "B58",
+                  "B59"
+                ]
+              }
+            ],
+            "shotIndex": 10,
+            "sourceIndex": 20
+          },
+          {
+            "duration": 5,
+            "purpose": "亚瑟化作黑影飞走，女弟子仰望合十，把离场定格为崇拜。",
+            "storyFunction": "exit",
+            "cast": [
+              "亚瑟",
+              "女弟子"
+            ],
+            "props": [],
+            "startState": "亚瑟背对镜头站在画右前景，双膝微屈；女弟子在画左后方地面，头部朝上。",
+            "stateChange": "亚瑟跃起化作黑影飞向天空，女弟子抬头双手合十露出崇拜。",
+            "endState": "亚瑟化作黑影升至村庄上空并向远处飞去；女弟子保持抬头、双手合十，视线追随天空。",
+            "cameraReason": "广角交代离场轨迹，再切近景收在女弟子仰望合十的反应上。",
+            "continuityNote": "承接大魔导师伸手未及；本镜结束亚瑟已离场，女弟子保持抬头合十。",
+            "clips": [
+              {
+                "duration": 3,
+                "size": "WS",
+                "cameraMove": "固定机位",
+                "visualAction": "亚瑟从广场地面跃起，身体化作一道黑影冲向天空。",
+                "beat": "离场",
+                "sourceBlockIds": [
+                  "B60"
+                ]
+              },
+              {
+                "duration": 2,
+                "size": "CU",
+                "cameraMove": "固定机位",
+                "visualAction": "女弟子抬头看天，双手合十，眼睛睁大。",
+                "beat": "反应",
+                "sourceBlockIds": [
+                  "B61"
+                ]
+              }
+            ],
+            "shotIndex": 11,
+            "sourceIndex": 21
+          },
+          {
+            "duration": 5,
+            "purpose": "用女弟子的仰望与赞叹，确认亚瑟飞离后在场者仍处在震惊崇拜中，并收束本场反应。",
+            "storyFunction": "reaction",
+            "cast": [
+              "女弟子",
+              "亚瑟"
+            ],
+            "props": [],
+            "startState": "女弟子站在雪覆村庄广场，双手合十，抬头望向亚瑟飞离后的天空；亚瑟已不在画面内。",
+            "stateChange": "女弟子在仰望中说出赞叹，随后停止说话，仍保持合十仰望。",
+            "endState": "女弟子仍站在广场，双手合十，抬头望向天空，嘴唇合拢，视线保持向上。",
+            "cameraReason": "缓慢推近女弟子面部，让赞叹落在她的神态和仰望方向上，收束本场反应。",
+            "continuityNote": "场尾。承接上一段女弟子抬头合十看天空；本镜结束在她仍合十仰望，亚瑟已离场。",
+            "clips": [
+              {
+                "duration": 5,
+                "size": "CU",
+                "cameraMove": "缓慢推近",
+                "visualAction": "女弟子双手合十，抬头望向天空，开口说话；说完仍保持仰望。",
+                "beat": "反应",
+                "sourceBlockIds": [
+                  "B62"
+                ]
+              }
+            ],
+            "shotIndex": 12,
+            "sourceIndex": 22
+          }
+        ]
+      }
+    ],
+    "issues": [],
+    "stats": {
+      "episodes": 2,
+      "totalDuration": 160,
+      "inWindow": 2,
+      "short": 0,
+      "over": 0
+    }
+  },
+  "repairs": [
+    "Clip ? 时长 2→3 秒",
+    "shot 时长 12→13 秒",
+    "Clip ? 时长 2→3 秒",
+    "shot 时长 5→6 秒",
+    "从源块补回人物「村长」",
+    "从源块补回人物「黑龙」",
+    "Clip ? 时长 2→3 秒",
+    "shot 时长 6→7 秒",
+    "从源块补回人物「男弟子」",
+    "从源块补回人物「女弟子」",
+    "从源块补回人物「黑龙」",
+    "Clip ? 时长 6→7 秒",
+    "shot 时长 6→7 秒",
+    "从源块补回人物「男弟子」",
+    "Clip ? 时长 4→5 秒",
+    "shot 时长 7→8 秒",
+    "从源块补回人物「黑龙」",
+    "Clip ? 时长 2→5 秒",
+    "Clip ? 时长 3→5 秒",
+    "shot 时长 5→10 秒",
+    "Clip ? 时长 3→4 秒",
+    "shot 时长 6→7 秒",
+    "Clip ? 时长 2→3 秒",
+    "shot 时长 5→6 秒",
+    "从源块补回人物「亚瑟」",
+    "从源块补回人物「黑龙」",
+    "从源块补回人物「皇家大魔导师」",
+    "从源块补回人物「亚瑟」",
+    "Clip ? 时长 2→3 秒",
+    "shot 时长 5→6 秒",
+    "Clip ? 时长 2→3 秒",
+    "shot 时长 9→10 秒",
+    "从源块补回人物「亚瑟」",
+    "从源块补回人物「黑龙」",
+    "Clip ? 时长 4→5 秒",
+    "shot 时长 6→7 秒",
+    "Clip ? 时长 6→7 秒",
+    "shot 时长 8→9 秒",
+    "Clip ? 时长 2→3 秒",
+    "Clip ? 时长 5→6 秒",
+    "shot 时长 7→9 秒",
+    "从源块补回人物「亚瑟」"
+  ],
+  "usage": {
+    "input_tokens": 53872,
+    "output_tokens": 95729,
+    "total_tokens": 149601,
+    "reasoning_tokens": 76662,
+    "cached_tokens": 23552
+  },
+  "elapsedMs": 545594
+}

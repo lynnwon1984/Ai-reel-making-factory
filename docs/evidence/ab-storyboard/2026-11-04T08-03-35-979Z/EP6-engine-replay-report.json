@@ -1,0 +1,637 @@
+{
+  "episode": 6,
+  "title": "退婚风波与病弱长女",
+  "flow2Estimate": 83,
+  "noCastShots": 0,
+  "totalDuration": 123,
+  "planValidation": [
+    {
+      "issues": [],
+      "stats": {
+        "shots": 15,
+        "clips": 32,
+        "blocks": 50,
+        "widePct": 15.6,
+        "overloadedClips": 0,
+        "totalDuration": 123
+      }
+    }
+  ],
+  "outputValidation": {
+    "issues": [],
+    "stats": {
+      "episodes": 1,
+      "shots": 15,
+      "clips": 32,
+      "high": 0,
+      "mid": 0
+    }
+  },
+  "qc": [],
+  "arbitration": {
+    "episodes": 2,
+    "totalDuration": 123,
+    "inWindow": 1,
+    "short": 1,
+    "over": 0
+  },
+  "repairs": [
+    "Clip ? 时长 4→5 秒",
+    "shot 时长 9→10 秒",
+    "从源块补回人物「乔安娜」",
+    "Clip ? 时长 6→7 秒",
+    "含台词的 MS 改为 MCU",
+    "shot 时长 11→12 秒",
+    "从源块补回人物「亚瑟」",
+    "Clip ? 时长 5→6 秒",
+    "shot 时长 7→8 秒",
+    "Clip ? 时长 3→4 秒",
+    "Clip ? 时长 4→5 秒",
+    "Clip ? 时长 2→3 秒",
+    "shot 时长 9→12 秒",
+    "Clip ? 时长 2→3 秒",
+    "Clip ? 时长 2→3 秒",
+    "Clip ? 时长 2→3 秒",
+    "Clip ? 时长 4→5 秒",
+    "shot 时长 14→18 秒",
+    "Clip ? 时长 2→3 秒",
+    "shot 时长 5→6 秒",
+    "Clip ? 时长 5→6 秒",
+    "shot 时长 5→6 秒",
+    "Clip ? 时长 2→3 秒",
+    "shot 时长 6→7 秒",
+    "shot 时长 18 超过 15，在 Clip 边界拆为 10 + 8 秒"
+  ],
+  "scenes": [
+    {
+      "sceneId": "6-1",
+      "before": {
+        "issues": [],
+        "stats": {
+          "shots": 14,
+          "clips": 32,
+          "blocks": 50,
+          "widePct": 18.8,
+          "overloadedClips": 0,
+          "totalDuration": 110
+        }
+      },
+      "plans": [
+        {
+          "plan": {
+            "sceneId": "6-1",
+            "shots": [
+              {
+                "duration": 9,
+                "cast": [
+                  "亚瑟",
+                  "乔安娜",
+                  "诺曼伯爵",
+                  "诺曼伯爵夫人"
+                ],
+                "props": [
+                  "红色宝石法杖"
+                ],
+                "startPosition": "亚瑟站在大厅中央偏左，面向右侧的乔安娜；乔安娜站在右侧，右手持红色宝石法杖；诺曼伯爵与伯爵夫人并排站在后方偏右，面向亚瑟。",
+                "clips": [
+                  {
+                    "duration": 5,
+                    "size": "CU",
+                    "cameraMove": "固定机位",
+                    "visualAction": "亚瑟站在大厅中央偏左，目光落在右侧画外，面部平静，视线不移动。",
+                    "beat": "反问",
+                    "sourceBlockIds": [
+                      "B01",
+                      "B02"
+                    ]
+                  },
+                  {
+                    "duration": 4,
+                    "size": "MCU",
+                    "cameraMove": "固定机位",
+                    "visualAction": "诺曼伯爵与伯爵夫人并排站在后方偏右，目光朝向亚瑟；乔安娜站在右侧，抬起下巴，嘴角上扬，红色宝石法杖竖在身侧。",
+                    "beat": "嘲讽",
+                    "sourceBlockIds": [
+                      "B03",
+                      "B04",
+                      "B05"
+                    ]
+                  }
+                ]
+              },
+              {
+                "duration": 11,
+                "cast": [
+                  "亚瑟"
+                ],
+                "props": [
+                  "婚约"
+                ],
+                "startPosition": "亚瑟站在大厅中央偏左，面向右侧画外，右手拿着婚约。",
+                "clips": [
+                  {
+                    "duration": 6,
+                    "size": "MCU",
+                    "cameraMove": "缓慢推近",
+                    "visualAction": "亚瑟目光转向右侧画外，右手拿着婚约，随后嘴唇开合，目光平稳。",
+                    "beat": "总结",
+                    "sourceBlockIds": [
+                      "B06",
+                      "B07"
+                    ]
+                  },
+                  {
+                    "duration": 5,
+                    "size": "MS",
+                    "cameraMove": "跟拍后拉",
+                    "visualAction": "亚瑟转身背向右侧，右手握着婚约，迈步走向大门，边走边转头看向右侧画外。",
+                    "beat": "离去钩子",
+                    "sourceBlockIds": [
+                      "B08",
+                      "B09",
+                      "B10"
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          "artifact": "runs/artifacts/2026-11-04T08-42-15-557Z-AB-新引擎修复-EP6-1-5-r3.json",
+          "attempt": 3
+        },
+        {
+          "plan": {
+            "sceneId": "6-1",
+            "shots": [
+              {
+                "duration": 10,
+                "cast": [
+                  "亚瑟"
+                ],
+                "props": [
+                  "婚约"
+                ],
+                "startPosition": "亚瑟已走到大厅门内侧数步处，身体半侧向大门，右手垂握婚约，头转向厅内方向",
+                "clips": [
+                  {
+                    "duration": 8,
+                    "size": "MCU",
+                    "cameraMove": "侧后方跟移",
+                    "visualAction": "亚瑟朝大门方向迈步，脚步不停，右手握着婚约垂在身侧，头半转向身后，说话时下巴微抬，脚步节奏放缓",
+                    "beat": "推进",
+                    "sourceBlockIds": [
+                      "B11"
+                    ]
+                  },
+                  {
+                    "duration": 2,
+                    "size": "CU",
+                    "cameraMove": "固定机位",
+                    "visualAction": "亚瑟回头瞥了一眼，嘴角上扬，随即转回头继续迈步",
+                    "beat": "强调",
+                    "sourceBlockIds": [
+                      "B12"
+                    ]
+                  }
+                ]
+              },
+              {
+                "duration": 5,
+                "cast": [
+                  "诺曼伯爵"
+                ],
+                "props": [],
+                "startPosition": "亚瑟已停在门口侧身向外；诺曼伯爵立于大厅中央，正面朝大门方向，双臂垂在身侧",
+                "clips": [
+                  {
+                    "duration": 5,
+                    "size": "MCU",
+                    "cameraMove": "快速推近",
+                    "visualAction": "诺曼伯爵朝大门方向张口大喊，身体前倾，双手握拳抬起至胸前，面部绷紧",
+                    "beat": "转折",
+                    "sourceBlockIds": [
+                      "B13",
+                      "B14"
+                    ]
+                  }
+                ]
+              },
+              {
+                "duration": 7,
+                "cast": [
+                  "诺曼伯爵",
+                  "诺曼伯爵夫人"
+                ],
+                "props": [],
+                "startPosition": "诺曼伯爵立于大厅中央面向大门，双手握拳停在胸前；伯爵夫人站在他右侧两步外，正面朝向伯爵",
+                "clips": [
+                  {
+                    "duration": 5,
+                    "size": "CU",
+                    "cameraMove": "固定机位",
+                    "visualAction": "诺曼伯爵朝大门方向提高声音，下颌紧绷，握拳的手向前一送，肩背绷起",
+                    "beat": "升级",
+                    "sourceBlockIds": [
+                      "B15"
+                    ]
+                  },
+                  {
+                    "duration": 2,
+                    "size": "MS",
+                    "cameraMove": "横向跟移",
+                    "visualAction": "伯爵夫人从伯爵右侧走近，身体侧倾，头凑到他耳边",
+                    "beat": "连接",
+                    "sourceBlockIds": [
+                      "B16"
+                    ]
+                  }
+                ]
+              },
+              {
+                "duration": 5,
+                "cast": [
+                  "诺曼伯爵",
+                  "诺曼伯爵夫人"
+                ],
+                "props": [],
+                "startPosition": "伯爵夫人贴着伯爵右耳，身体侧向伯爵；诺曼伯爵正面朝前方，双手已放低至身侧",
+                "clips": [
+                  {
+                    "duration": 3,
+                    "size": "CU",
+                    "cameraMove": "固定机位",
+                    "visualAction": "伯爵夫人嘴唇贴近伯爵耳边低声说话，眼睛朝前方瞟去",
+                    "beat": "强调",
+                    "sourceBlockIds": [
+                      "B17"
+                    ]
+                  },
+                  {
+                    "duration": 2,
+                    "size": "MCU",
+                    "cameraMove": "缓慢推近",
+                    "visualAction": "诺曼伯爵头部微侧，视线转向身旁的伯爵夫人，眉头松开",
+                    "beat": "钩子",
+                    "sourceBlockIds": [
+                      "B18"
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          "artifact": "runs/artifacts/2026-11-04T08-39-26-946Z-AB-新引擎修复-EP6-2-5-r2.json",
+          "attempt": 2
+        },
+        {
+          "plan": {
+            "sceneId": "6-1",
+            "shots": [
+              {
+                "duration": 9,
+                "cast": [
+                  "诺曼伯爵",
+                  "诺曼伯爵夫人"
+                ],
+                "props": [],
+                "startPosition": "诺曼伯爵与伯爵夫人并肩站在桌旁，伯爵夫人侧身贴近伯爵耳边，伯爵身体朝向前方，二人视线朝向大厅中央。",
+                "clips": [
+                  {
+                    "duration": 3,
+                    "size": "MCU",
+                    "cameraMove": "固定机位",
+                    "visualAction": "伯爵夫人侧身凑近伯爵耳边，嘴唇贴近，伯爵侧头倾听。",
+                    "beat": "密谋",
+                    "sourceBlockIds": [
+                      "B19",
+                      "B20"
+                    ]
+                  },
+                  {
+                    "duration": 4,
+                    "size": "CU",
+                    "cameraMove": "缓慢推近",
+                    "visualAction": "伯爵夫人的嘴唇贴近伯爵耳边继续低语，目光斜向大厅一侧。",
+                    "beat": "强调",
+                    "sourceBlockIds": [
+                      "B21"
+                    ]
+                  },
+                  {
+                    "duration": 2,
+                    "size": "MCU",
+                    "cameraMove": "固定机位",
+                    "visualAction": "诺曼伯爵微微点头，嘴唇微动。",
+                    "beat": "反应",
+                    "sourceBlockIds": [
+                      "B22",
+                      "B23"
+                    ]
+                  }
+                ]
+              },
+              {
+                "duration": 14,
+                "cast": [
+                  "罗莎琳德",
+                  "诺曼伯爵",
+                  "诺曼伯爵夫人",
+                  "亚瑟"
+                ],
+                "props": [
+                  "手帕"
+                ],
+                "startPosition": "诺曼伯爵与伯爵夫人仍站在桌旁，伯爵夫人贴近伯爵耳边；亚瑟站在大厅中；大厅木质大门紧闭，罗莎琳德在门外。",
+                "clips": [
+                  {
+                    "duration": 2,
+                    "size": "WS",
+                    "cameraMove": "固定机位",
+                    "visualAction": "大厅的木质大门缓缓向内打开，阳光和雪花从门缝涌入。",
+                    "beat": "建立",
+                    "sourceBlockIds": [
+                      "B24"
+                    ]
+                  },
+                  {
+                    "duration": 2,
+                    "size": "MS",
+                    "cameraMove": "跟拍",
+                    "visualAction": "罗莎琳德迈进大门，裙摆随步伐飘动，右手拿着一块手帕。",
+                    "beat": "进入",
+                    "sourceBlockIds": [
+                      "B25",
+                      "B26"
+                    ]
+                  },
+                  {
+                    "duration": 2,
+                    "size": "CU",
+                    "cameraMove": "缓慢推近",
+                    "visualAction": "罗莎琳德正面近景，金发垂落，眉眼下垂，嘴唇轻抿。",
+                    "beat": "强调",
+                    "sourceBlockIds": [
+                      "B27"
+                    ]
+                  },
+                  {
+                    "duration": 2,
+                    "size": "MCU",
+                    "cameraMove": "横移",
+                    "visualAction": "桌旁的诺曼伯爵与伯爵夫人转头看向门口；亚瑟站在大厅中转头看向门口。",
+                    "beat": "反应",
+                    "sourceBlockIds": [
+                      "B28",
+                      "B29"
+                    ]
+                  },
+                  {
+                    "duration": 2,
+                    "size": "MCU",
+                    "cameraMove": "缓慢推近",
+                    "visualAction": "罗莎琳德站在大门口看向大厅内，忽然用手帕捂住嘴，肩膀随咳嗽起伏，手帕上出现鲜红血迹。",
+                    "beat": "转折",
+                    "sourceBlockIds": [
+                      "B30",
+                      "B31"
+                    ]
+                  },
+                  {
+                    "duration": 4,
+                    "size": "CU",
+                    "cameraMove": "快速推近",
+                    "visualAction": "亚瑟睁大眼睛，视线固定在罗莎琳德身上。",
+                    "beat": "钩子",
+                    "sourceBlockIds": [
+                      "B32",
+                      "B33"
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          "artifact": "runs/artifacts/2026-11-04T08-42-20-302Z-AB-新引擎修复-EP6-3-5-r2.json",
+          "attempt": 2
+        },
+        {
+          "plan": {
+            "sceneId": "6-1",
+            "shots": [
+              {
+                "duration": 9,
+                "cast": [
+                  "亚瑟",
+                  "罗莎琳德"
+                ],
+                "props": [
+                  "手帕"
+                ],
+                "startPosition": "罗莎琳德站在门边，左手将染血手帕捂在嘴前，嘴角带血；亚瑟站在她对面，目光朝向罗莎琳德。",
+                "clips": [
+                  {
+                    "duration": 4,
+                    "size": "CU",
+                    "cameraMove": "固定机位",
+                    "visualAction": "亚瑟站在原处，目光落在罗莎琳德脸上，眉头收紧。",
+                    "beat": "观察",
+                    "sourceBlockIds": [
+                      "B34",
+                      "B35"
+                    ]
+                  },
+                  {
+                    "duration": 5,
+                    "size": "CU",
+                    "cameraMove": "缓慢推近",
+                    "visualAction": "罗莎琳德左手拿开捂嘴的手帕，嘴角带血，低头看向掌中的手帕。",
+                    "beat": "强调",
+                    "sourceBlockIds": [
+                      "B36",
+                      "B37"
+                    ]
+                  }
+                ]
+              },
+              {
+                "duration": 8,
+                "cast": [
+                  "亚瑟",
+                  "罗莎琳德",
+                  "诺曼伯爵夫人"
+                ],
+                "props": [
+                  "手帕"
+                ],
+                "startPosition": "罗莎琳德站在门边，左手将染血手帕摊在掌中，嘴角带血，低头看向手帕；亚瑟站在她对面，目光朝向手帕；诺曼伯爵夫人站在侧后方，面向罗莎琳德。",
+                "clips": [
+                  {
+                    "duration": 6,
+                    "size": "ECU",
+                    "cameraMove": "缓慢推近",
+                    "visualAction": "罗莎琳德左手掌中的染血手帕摊开，血迹呈放射状。",
+                    "beat": "信息强调",
+                    "sourceBlockIds": [
+                      "B38",
+                      "B39",
+                      "B40"
+                    ]
+                  },
+                  {
+                    "duration": 2,
+                    "size": "CU",
+                    "cameraMove": "横移跟拍",
+                    "visualAction": "诺曼伯爵夫人唇角提起，右脚前迈，朝罗莎琳德方向移动。",
+                    "beat": "转折",
+                    "sourceBlockIds": [
+                      "B41"
+                    ]
+                  }
+                ]
+              },
+              {
+                "duration": 5,
+                "cast": [
+                  "诺曼伯爵夫人",
+                  "罗莎琳德"
+                ],
+                "props": [
+                  "手帕"
+                ],
+                "startPosition": "罗莎琳德站在门边，左手垂在身侧握着染血手帕，肩头低垂，面向诺曼伯爵夫人；诺曼伯爵夫人位于她前方两步处，身体朝向她，右脚前迈。",
+                "clips": [
+                  {
+                    "duration": 2,
+                    "size": "CU",
+                    "cameraMove": "固定机位",
+                    "visualAction": "诺曼伯爵夫人面向罗莎琳德开口，右脚继续前迈。",
+                    "beat": "对白",
+                    "sourceBlockIds": [
+                      "B42"
+                    ]
+                  },
+                  {
+                    "duration": 3,
+                    "size": "CU",
+                    "cameraMove": "固定机位",
+                    "visualAction": "罗莎琳德肩头低垂站在门边；诺曼伯爵夫人走到她面前，伸手拉住她的右手。",
+                    "beat": "反应",
+                    "sourceBlockIds": [
+                      "B43",
+                      "B44"
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          "artifact": "runs/artifacts/2026-11-04T08-41-34-325Z-AB-新引擎修复-EP6-4-5-r2.json",
+          "attempt": 2
+        },
+        {
+          "plan": {
+            "sceneId": "6-1",
+            "shots": [
+              {
+                "duration": 5,
+                "cast": [
+                  "诺曼伯爵夫人",
+                  "罗莎琳德"
+                ],
+                "props": [],
+                "startPosition": "诺曼伯爵夫人站在门边，右手握着罗莎琳德的手；罗莎琳德站在她右侧半步之后，二人面向厅内。",
+                "clips": [
+                  {
+                    "duration": 5,
+                    "size": "CU",
+                    "cameraMove": "缓慢推近",
+                    "visualAction": "伯爵夫人侧头对着身侧的罗莎琳德开口，握着她的手，另一只手朝厅内抬起。",
+                    "beat": "虚伪宣告",
+                    "sourceBlockIds": [
+                      "B45"
+                    ]
+                  }
+                ]
+              },
+              {
+                "duration": 6,
+                "cast": [
+                  "诺曼伯爵夫人",
+                  "罗莎琳德"
+                ],
+                "props": [],
+                "startPosition": "伯爵夫人仍握着罗莎琳德的手，二人面向厅内，罗莎琳德位于其右侧半步之后。",
+                "clips": [
+                  {
+                    "duration": 2,
+                    "size": "MS",
+                    "cameraMove": "跟移",
+                    "visualAction": "伯爵夫人牵着罗莎琳德向厅内迈步走去，罗莎琳德被带着跟上半步。",
+                    "beat": "带入",
+                    "sourceBlockIds": [
+                      "B46"
+                    ]
+                  },
+                  {
+                    "duration": 2,
+                    "size": "CU",
+                    "cameraMove": "固定机位",
+                    "visualAction": "伯爵夫人停步，转头看向厅内一侧，抬起手指向那个方向。",
+                    "beat": "指示",
+                    "sourceBlockIds": [
+                      "B47"
+                    ]
+                  },
+                  {
+                    "duration": 2,
+                    "size": "黑场",
+                    "cameraMove": "固定机位",
+                    "visualAction": "画面切至全黑。",
+                    "beat": "转场",
+                    "sourceBlockIds": [
+                      "B48"
+                    ]
+                  }
+                ]
+              },
+              {
+                "duration": 7,
+                "cast": [
+                  "诺曼伯爵",
+                  "诺曼伯爵夫人",
+                  "罗莎琳德"
+                ],
+                "props": [],
+                "startPosition": "黑场结束，诺曼伯爵与伯爵夫人并排站在厅中，面向前方；罗莎琳德站在二人对面数步之外，面向他们。",
+                "clips": [
+                  {
+                    "duration": 2,
+                    "size": "MS",
+                    "cameraMove": "固定机位",
+                    "visualAction": "诺曼伯爵与伯爵夫人并排站立，面向前方。",
+                    "beat": "建立",
+                    "sourceBlockIds": [
+                      "B49"
+                    ]
+                  },
+                  {
+                    "duration": 5,
+                    "size": "CU",
+                    "cameraMove": "缓慢推近",
+                    "visualAction": "诺曼伯爵正面开口，视线落向对面的罗莎琳德。",
+                    "beat": "宣告",
+                    "sourceBlockIds": [
+                      "B50"
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          "artifact": "runs/artifacts/2026-11-04T08-41-09-646Z-AB-新引擎修复-EP6-5-5-r2.json",
+          "attempt": 2
+        }
+      ]
+    }
+  ]
+}

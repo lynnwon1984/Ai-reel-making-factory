@@ -1,0 +1,288 @@
+[
+  {
+    "key": "4-2",
+    "label": "动作场",
+    "scene": "Norman Castle Courtyard 外 未注明",
+    "blocks": 36,
+    "stable": {
+      "usage": {
+        "input_tokens": 3471,
+        "input_tokens_details": {
+          "cached_tokens": 2432
+        },
+        "output_tokens": 15280,
+        "output_tokens_details": {
+          "reasoning_tokens": 12675
+        },
+        "total_tokens": 18751
+      },
+      "elapsedMs": 86471,
+      "metrics": {
+        "shots": 12,
+        "clips": 21,
+        "duration": 130,
+        "high": 0,
+        "mid": 0,
+        "qcHigh": 1,
+        "qcMid": 0,
+        "sourceDialogues": 12,
+        "coveredDialogues": 12,
+        "dialogueCoveragePct": 100,
+        "issues": [
+          {
+            "level": "高",
+            "where": "第4集 分镜07 ClipC",
+            "rule": "台词篡改",
+            "evidence": "产出「亚瑟:（无台词）」在原文中找不到",
+            "source": "engine"
+          }
+        ]
+      },
+      "text": "4-2-stable.md"
+    },
+    "experimental": {
+      "calls": {
+        "total": {
+          "calls": 16,
+          "inputTokens": 75452,
+          "outputTokens": 72597,
+          "totalTokens": 148049,
+          "reasoningTokens": 56475,
+          "cachedTokens": 48768,
+          "elapsedMs": 420181
+        },
+        "byKind": {
+          "brief": {
+            "calls": 1,
+            "inputTokens": 4370,
+            "outputTokens": 2819,
+            "totalTokens": 7189,
+            "reasoningTokens": 2323,
+            "cachedTokens": 4224,
+            "elapsedMs": 17531
+          },
+          "draft": {
+            "calls": 7,
+            "inputTokens": 26493,
+            "outputTokens": 46089,
+            "totalTokens": 72582,
+            "reasoningTokens": 37297,
+            "cachedTokens": 19968,
+            "elapsedMs": 270687
+          },
+          "repair": {
+            "calls": 8,
+            "inputTokens": 44589,
+            "outputTokens": 23689,
+            "totalTokens": 68278,
+            "reasoningTokens": 16855,
+            "cachedTokens": 24576,
+            "elapsedMs": 131963
+          }
+        },
+        "rows": [
+          {
+            "label": "三场AB 实验 4-2 动作场 导演提示单 第4集 4-1",
+            "kind": "brief",
+            "inputTokens": 4370,
+            "outputTokens": 2819,
+            "totalTokens": 7189,
+            "reasoningTokens": 2323,
+            "cachedTokens": 4224,
+            "elapsedMs": 17531
+          },
+          {
+            "label": "三场AB 实验 4-2 动作场 镜头计划 第4集 4-1 1/7",
+            "kind": "draft",
+            "inputTokens": 3769,
+            "outputTokens": 5879,
+            "totalTokens": 9648,
+            "reasoningTokens": 4736,
+            "cachedTokens": 2304,
+            "elapsedMs": 34345
+          },
+          {
+            "label": "三场AB 实验 4-2 动作场 定点修复 第4集 4-1 1/7 r1",
+            "kind": "repair",
+            "inputTokens": 5589,
+            "outputTokens": 5160,
+            "totalTokens": 10749,
+            "reasoningTokens": 4537,
+            "cachedTokens": 2432,
+            "elapsedMs": 31600
+          },
+          {
+            "label": "三场AB 实验 4-2 动作场 定点修复 第4集 4-1 1/7 r2",
+            "kind": "repair",
+            "inputTokens": 5861,
+            "outputTokens": 5227,
+            "totalTokens": 11088,
+            "reasoningTokens": 3498,
+            "cachedTokens": 3712,
+            "elapsedMs": 26718
+          },
+          {
+            "label": "三场AB 实验 4-2 动作场 镜头计划 第4集 4-1 2/7",
+            "kind": "draft",
+            "inputTokens": 3932,
+            "outputTokens": 6105,
+            "totalTokens": 10037,
+            "reasoningTokens": 4771,
+            "cachedTokens": 2944,
+            "elapsedMs": 37009
+          },
+          {
+            "label": "三场AB 实验 4-2 动作场 定点修复 第4集 4-1 2/7 r1",
+            "kind": "repair",
+            "inputTokens": 5916,
+            "outputTokens": 1667,
+            "totalTokens": 7583,
+            "reasoningTokens": 896,
+            "cachedTokens": 3072,
+            "elapsedMs": 9831
+          },
+          {
+            "label": "三场AB 实验 4-2 动作场 镜头计划 第4集 4-1 3/7",
+            "kind": "draft",
+            "inputTokens": 3558,
+            "outputTokens": 7381,
+            "totalTokens": 10939,
+            "reasoningTokens": 6152,
+            "cachedTokens": 2944,
+            "elapsedMs": 43209
+          },
+          {
+            "label": "三场AB 实验 4-2 动作场 定点修复 第4集 4-1 3/7 r1",
+            "kind": "repair",
+            "inputTokens": 5315,
+            "outputTokens": 703,
+            "totalTokens": 6018,
+            "reasoningTokens": 137,
+            "cachedTokens": 3072,
+            "elapsedMs": 3419
+          },
+          {
+            "label": "三场AB 实验 4-2 动作场 镜头计划 第4集 4-1 4/7",
+            "kind": "draft",
+            "inputTokens": 3980,
+            "outputTokens": 7027,
+            "totalTokens": 11007,
+            "reasoningTokens": 5653,
+            "cachedTokens": 2944,
+            "elapsedMs": 40153
+          },
+          {
+            "label": "三场AB 实验 4-2 动作场 定点修复 第4集 4-1 4/7 r1",
+            "kind": "repair",
+            "inputTokens": 5479,
+            "outputTokens": 1012,
+            "totalTokens": 6491,
+            "reasoningTokens": 383,
+            "cachedTokens": 3072,
+            "elapsedMs": 5647
+          },
+          {
+            "label": "三场AB 实验 4-2 动作场 镜头计划 第4集 4-1 5/7",
+            "kind": "draft",
+            "inputTokens": 3809,
+            "outputTokens": 5417,
+            "totalTokens": 9226,
+            "reasoningTokens": 4125,
+            "cachedTokens": 2944,
+            "elapsedMs": 30954
+          },
+          {
+            "label": "三场AB 实验 4-2 动作场 定点修复 第4集 4-1 5/7 r1",
+            "kind": "repair",
+            "inputTokens": 5330,
+            "outputTokens": 2577,
+            "totalTokens": 7907,
+            "reasoningTokens": 2015,
+            "cachedTokens": 3072,
+            "elapsedMs": 14864
+          },
+          {
+            "label": "三场AB 实验 4-2 动作场 镜头计划 第4集 4-1 6/7",
+            "kind": "draft",
+            "inputTokens": 4008,
+            "outputTokens": 9393,
+            "totalTokens": 13401,
+            "reasoningTokens": 7949,
+            "cachedTokens": 2944,
+            "elapsedMs": 54484
+          },
+          {
+            "label": "三场AB 实验 4-2 动作场 定点修复 第4集 4-1 6/7 r1",
+            "kind": "repair",
+            "inputTokens": 6141,
+            "outputTokens": 5259,
+            "totalTokens": 11400,
+            "reasoningTokens": 3973,
+            "cachedTokens": 3072,
+            "elapsedMs": 27699
+          },
+          {
+            "label": "三场AB 实验 4-2 动作场 镜头计划 第4集 4-1 7/7",
+            "kind": "draft",
+            "inputTokens": 3437,
+            "outputTokens": 4887,
+            "totalTokens": 8324,
+            "reasoningTokens": 3911,
+            "cachedTokens": 2944,
+            "elapsedMs": 30533
+          },
+          {
+            "label": "三场AB 实验 4-2 动作场 定点修复 第4集 4-1 7/7 r1",
+            "kind": "repair",
+            "inputTokens": 4958,
+            "outputTokens": 2084,
+            "totalTokens": 7042,
+            "reasoningTokens": 1416,
+            "cachedTokens": 3072,
+            "elapsedMs": 12185
+          }
+        ],
+        "cacheHitPct": 64.6,
+        "reasoningPctOfOutput": 77.8,
+        "repairTokenPct": 46.1,
+        "repairTimePct": 31.4,
+        "avgTokensPerCall": 9253
+      },
+      "engineIssues": [
+        {
+          "level": "高",
+          "where": "第4集 4-1",
+          "msg": "动作微单元重复引用：B32.4",
+          "source": "experimental-engine"
+        },
+        {
+          "level": "高",
+          "where": "第4集 shot2",
+          "msg": "动作密度过高：3 个 Clip / 7s，平均 2.33s，检测到 2 个状态分句。按 Seedance 2.0 官方指南，应在动作/剧情转折处拆镜；不要把时长直接填满 15 秒。",
+          "source": "experimental-engine"
+        },
+        {
+          "level": "高",
+          "where": "第4集 shot18 / shot19",
+          "msg": "两个镜头重复引用 1 个源动作/台词，同一内容被拍了两遍",
+          "source": "experimental-engine"
+        }
+      ],
+      "engineIssuesAvailable": true,
+      "metrics": {
+        "shots": 20,
+        "clips": 40,
+        "duration": 156,
+        "high": 0,
+        "mid": 0,
+        "qcHigh": 0,
+        "qcMid": 0,
+        "sourceDialogues": 12,
+        "coveredDialogues": 12,
+        "dialogueCoveragePct": 100,
+        "issues": []
+      },
+      "text": "4-2-experimental.md"
+    }
+  }
+]
