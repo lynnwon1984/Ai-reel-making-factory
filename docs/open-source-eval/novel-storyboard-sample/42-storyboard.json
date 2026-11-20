@@ -1,0 +1,224 @@
+{
+  "source": "4-2 动作场（评估切片）",
+  "aspectRatio": "9:16",
+  "promptLang": "en",
+  "episodes": [
+    {
+      "ep": 4,
+      "segments": [
+        {
+          "id": "E04-01",
+          "sceneIndex": 1,
+          "blocking": "亚瑟在画面左侧三分之一，从画左向画面中央走来；休斯坐在画面右侧的木箱上，两个仆人在休斯左后方的低凳上；亚瑟与休斯相距约五步，中间是覆雪的空地，魔法木柴堆在休斯身后靠墙。",
+          "soundscape": "夜风掠过雪面，靴底踩雪的咯吱声，远处柴堆在风里轻微作响。",
+          "music": "低音弦乐持续铺底，速度缓慢。",
+          "h3Prompt": "How the reference pictures align with the target video — Picture 1 (from Shot 1) aligns with the 0.00-second mark of the target video; Picture 2 (from Shot 2) aligns with the 3.00-second mark of the target video; Picture 3 (from Shot 3) aligns with the 6.00-second mark of the target video.\n\nintegrated_multimodal_description:\n[Shot 1] The camera follows <Picture 1>: a broad-shouldered young man in a dark travel cloak strides in from the left across a snow-covered castle courtyard at night, boots kicking up powder, breath visible in the cold; the camera holds a steady tracking shot beside him.\n[Shot 2] At 00:03.000, the camera cuts to <Picture 2>: he stops at the centre of the yard and turns to face right, chest out, shoulders squared; the camera holds a static shot.\n[Shot 3] At 00:06.000, the camera cuts to <Picture 3>: a slow push in toward his jaw as he calls out, mouth opening, a young man with a steady, carrying voice says (S1) <d>[English] Hey, give me the magic firewood!</d>\n\noverall_soundscape: Night wind over snow, boots crunching, a low fire crackling somewhere behind.\nnon_diegetic_music: Low sustained strings, slow tempo.",
+          "cuts": [
+            {
+              "beats": [
+                1,
+                1
+              ],
+              "seconds": 3,
+              "size": "wide",
+              "camera": "Tracking Shot",
+              "characters": [
+                "亚瑟"
+              ],
+              "frame": "全景。夜晚的城堡庭院，地面积雪被踩出深痕。亚瑟穿深色旅行斗篷，从画面左侧大步走入，右肩在前，斗篷下摆被风掀起，呼出的白气清晰可见；画面右侧远处坐着休斯和两个仆人。",
+              "shot": "镜头沿雪地左侧跟拍一名穿深色旅行斗篷的高大青年，他从画左大步走入庭院，靴底踢起雪粉，呼出的白气在冷空气里散开。",
+              "lens": "35mm 标准，中等景深",
+              "cameraPosition": "亚瑟 + 平视，略侧后方",
+              "composition": "三分法",
+              "eyeline": "前方庭院",
+              "focus": "锁定亚瑟上半身",
+              "stability": "stable"
+            },
+            {
+              "beats": [
+                2,
+                2
+              ],
+              "seconds": 3,
+              "size": "medium",
+              "camera": "Static Shot",
+              "characters": [
+                "亚瑟"
+              ],
+              "frame": "中景。亚瑟站在庭院中央的雪地上，双脚分开站定，胸口前挺，下颌抬起，视线朝画面右侧；背景是覆雪的墙和码放整齐的魔法木柴。",
+              "shot": "镜头固定，一名穿深色旅行斗篷的高大青年在庭院中央停步，转身面向画面右侧，双脚分开站定，胸口前挺，下颌抬起，视线越过前景落向右侧。",
+              "lens": "50mm 标准，中浅景深",
+              "cameraPosition": "亚瑟 + 平视正面",
+              "composition": "中心构图",
+              "eyeline": "右侧休斯",
+              "focus": "锁定亚瑟面部",
+              "stability": "stable"
+            },
+            {
+              "beats": [
+                3,
+                3
+              ],
+              "seconds": 2,
+              "size": "close",
+              "camera": "Push In",
+              "characters": [
+                "亚瑟"
+              ],
+              "frame": "特写。亚瑟的下颌与嘴唇占据画面中部，嘴张开向外喊话，颈部肌肉绷起，身后雪地被虚化。",
+              "shot": "镜头小幅缓推向青年的下颌，他张口向外喊话，颈部肌肉绷起，画面停在嘴唇与下颌。",
+              "lens": "85mm 长焦，浅景深",
+              "cameraPosition": "亚瑟 + 平视，略仰",
+              "composition": "中心构图",
+              "eyeline": "前方",
+              "focus": "锁定嘴唇与下颌",
+              "stability": "stable"
+            }
+          ]
+        },
+        {
+          "id": "E04-02",
+          "sceneIndex": 1,
+          "blocking": "休斯坐在画面右侧的木箱上，面朝画面左侧的亚瑟，右手举着一串烤肉；亚瑟站在画面左侧边缘，不在焦内；两个仆人在休斯左后方低凳上，身体略前倾。",
+          "soundscape": "夜风，雪地里的轻微摩擦声，烤肉油脂滴在炭火上的细响。",
+          "music": "低音弦乐转成断续的拨弦，带一点轻蔑的节奏。",
+          "h3Prompt": "How the reference pictures align with the target video — Picture 1 (from Shot 1) aligns with the 0.00-second mark of the target video; Picture 2 (from Shot 2) aligns with the 3.00-second mark of the target video; Picture 3 (from Shot 3) aligns with the 6.00-second mark of the target video.\n\nintegrated_multimodal_description:\n[Shot 1] The camera holds <Picture 1>: a heavy-set quartermaster in a fur-lined uniform sits on a wooden crate at the right of the snowy yard, a skewer of roast meat in his right hand, and he turns his head toward the left with a dismissive smirk; the camera holds a static shot.\n[Shot 2] At 00:03.000, the camera cuts to <Picture 2>: a close view of his face as he speaks, chewing lazily, eyes narrowed; the camera holds a static shot. A middle-aged man with a rasping, mocking voice says (S1) <d>[English] Firewood? For that dying useless young lady?</d>\n[Shot 3] At 00:06.000, the camera cuts to <Picture 3>: a slow push in as he leans back and spreads his arms, still holding the skewer; the same man says (S1) <d>[English] Oh, oh my god, don't waste our precious resources.</d>\n\noverall_soundscape: Night wind, snow shifting, fat dripping onto coals.\nnon_diegetic_music: Plucked low strings, dry and mocking.",
+          "cuts": [
+            {
+              "beats": [
+                4,
+                4
+              ],
+              "seconds": 3,
+              "size": "medium",
+              "camera": "Static Shot",
+              "characters": [
+                "休斯",
+                "两个仆人"
+              ],
+              "frame": "中景。休斯穿毛领军需官制服，坐在画面右侧的木箱上，右手举着一串烤肉，转头看向画面左侧，嘴角带笑；两个仆人坐在他左后方的低凳上，身后是码放整齐的魔法木柴。",
+              "shot": "镜头固定，一名穿毛领军需官制服的壮年男子坐在木箱上，右手举着烤肉串，转头看向画面左侧，嘴角向下撇出一个笑；他身后两个穿仆人服的人坐在低凳上，身体略前倾，背景是整齐的木柴堆。",
+              "lens": "50mm 标准，中景深",
+              "cameraPosition": "休斯 + 平视，略侧",
+              "composition": "三分法",
+              "eyeline": "左侧亚瑟",
+              "focus": "锁定休斯面部",
+              "stability": "stable"
+            },
+            {
+              "beats": [
+                5,
+                5
+              ],
+              "seconds": 3,
+              "size": "close",
+              "camera": "Static Shot",
+              "characters": [
+                "休斯"
+              ],
+              "frame": "特写。休斯的脸占据画面中部，嘴里还在咀嚼，眼睛眯起，视线偏向画面左侧，背景木柴堆被虚化。",
+              "shot": "镜头固定，一名穿毛领军需官制服的壮年男子的脸占满画面，他慢慢嚼着嘴里的肉，眼睛眯起，视线斜向画面左侧。",
+              "lens": "85mm 长焦，极浅景深",
+              "cameraPosition": "休斯 + 平视正面",
+              "composition": "中心构图",
+              "eyeline": "左侧亚瑟",
+              "focus": "锁定双眼",
+              "stability": "stable"
+            },
+            {
+              "beats": [
+                6,
+                6
+              ],
+              "seconds": 3,
+              "size": "close",
+              "camera": "Push In",
+              "characters": [
+                "休斯"
+              ],
+              "frame": "特写。休斯上身略向后靠，双臂向外摊开，右手仍举着烤肉串，脸上是夸张的轻蔑表情，雪地在画面下缘虚化。",
+              "shot": "镜头小幅缓推，穿毛领军需官制服的壮年男子上身向后靠，双臂向外摊开，右手仍举着烤肉串，肩膀随说话的节奏上下起伏。",
+              "lens": "85mm 长焦，浅景深",
+              "cameraPosition": "休斯 + 平视正面",
+              "composition": "中心构图",
+              "eyeline": "左侧亚瑟",
+              "focus": "锁定面部",
+              "stability": "stable"
+            }
+          ]
+        },
+        {
+          "id": "E04-03",
+          "sceneIndex": 1,
+          "blocking": "亚瑟在画面左侧前景，面朝画面右侧；休斯在画面右侧中景，从坐姿起身，两人相距约五步；两个仆人在休斯身后低凳上，身体前倾。",
+          "soundscape": "夜风压低，木箱受力时的轻响，火焰燃起的低鸣。",
+          "music": "弦乐渐强，加入低频鼓点。",
+          "h3Prompt": "How the reference pictures align with the target video — Picture 1 (from Shot 1) aligns with the 0.00-second mark of the target video; Picture 2 (from Shot 2) aligns with the 3.00-second mark of the target video; Picture 3 (from Shot 3) aligns with the 5.00-second mark of the target video.\n\nintegrated_multimodal_description:\n[Shot 1] The camera holds <Picture 1>: a slow push in on the young man in the dark cloak, his jaw tight and eyes fixed to the right; the camera holds a static shot.\n[Shot 2] At 00:03.000, the camera cuts to <Picture 2> with a fast push in: an extreme close-up of his eyes as his brow lowers, and he speaks in a low, cold voice (S1) <d>[English] What did you just say?</d>\n[Shot 3] At 00:05.000, the camera cuts to <Picture 3> with a tilt up: the quartermaster pushes himself up off the crate and raises his right palm, a ball of fire gathering above it.\n\noverall_soundscape: Wind drops, wood creaks under weight, a low roar as the flame catches.\nnon_diegetic_music: Strings swell, a low drum enters.",
+          "cuts": [
+            {
+              "beats": [
+                7,
+                7
+              ],
+              "seconds": 3,
+              "size": "close",
+              "camera": "Static Shot",
+              "characters": [
+                "亚瑟"
+              ],
+              "frame": "特写。亚瑟的脸在画面左侧三分之二，眉头压低，下颌绷紧，眼睛直直看向画面右侧，背景雪地被虚化。",
+              "shot": "镜头固定，一名穿深色旅行斗篷的高大青年面部占满画面左侧，眉头压低，下颌绷紧，眼睛一眨不眨地看向画面右侧。",
+              "lens": "85mm 长焦，极浅景深",
+              "cameraPosition": "亚瑟 + 平视，略侧",
+              "composition": "三分法",
+              "eyeline": "右侧休斯",
+              "focus": "锁定双眼",
+              "stability": "slight-shake"
+            },
+            {
+              "beats": [
+                8,
+                8
+              ],
+              "seconds": 2,
+              "size": "extreme-close",
+              "camera": "Push In",
+              "characters": [
+                "亚瑟"
+              ],
+              "frame": "大特写。亚瑟的双眼占据画面中部，睫毛与瞳孔清晰，眼睑缓缓下压，眼角肌肉收紧。",
+              "shot": "镜头快速轻推，一双眼睛占满画面，眼睑缓缓下压，眼角肌肉收紧，瞳孔在冷光里缩了一下。",
+              "lens": "100mm 微距，极浅景深",
+              "cameraPosition": "亚瑟 + 平视正面",
+              "composition": "中心构图",
+              "eyeline": "右侧休斯",
+              "focus": "锁定瞳孔",
+              "stability": "stable"
+            },
+            {
+              "beats": [
+                9,
+                9
+              ],
+              "seconds": 3,
+              "size": "medium",
+              "camera": "Tilt Up",
+              "characters": [
+                "休斯",
+                "两个仆人"
+              ],
+              "frame": "中景。休斯从画面右侧的木箱上站起，右手掌心向上，一团橙红色火焰在掌心上方凝聚，光照亮他的下颌与胸前制服；两个仆人在他身后仰头看着。",
+              "shot": "镜头自下而上轻摇，一名穿毛领军需官制服的壮年男子从木箱上撑起身体站直，右手掌心向上抬起，一团橙红的火焰在掌上聚拢，火光把他的下颌与胸前制服照亮；他身后两个人仰着头。",
+              "lens": "35mm 标准，中等景深",
+              "cameraPosition": "休斯 + 仰视 20°",
+              "composition": "三分法",
+              "eyeline": "掌中火焰",
+              "focus": "锁定掌心火焰",
+              "stability": "slight-shake"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

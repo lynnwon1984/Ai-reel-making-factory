@@ -1,0 +1,62 @@
+{
+  "source": "4-2 切片",
+  "episodes": [
+    {
+      "ep": 4,
+      "title": "教训恶霸军需官",
+      "targetSeconds": 22,
+      "hook": "",
+      "cliff": "",
+      "beatsClaimed": [],
+      "scenes": [
+        {
+          "sceneId": "4-2",
+          "lighting": "夜晚",
+          "characters": [
+            "亚瑟",
+            "休斯",
+            "两个仆人"
+          ],
+          "props": [],
+          "flow": [
+            {
+              "action": "场景切换。夜晚的城堡庭院。雪地上，亚瑟大步走来。"
+            },
+            {
+              "action": "亚瑟停下脚步，看着前方，大声喊话。"
+            },
+            {
+              "speaker": "亚瑟",
+              "line": "Hey, give me the magic firewood!",
+              "delivery": ""
+            },
+            {
+              "action": "军需官休斯坐在一旁，手里拿着一串烤肉正在吃，转头看向亚瑟，不屑地笑，背景里有一堆整齐的魔法木柴。"
+            },
+            {
+              "speaker": "休斯",
+              "line": "Firewood? For that dying useless young lady?",
+              "delivery": ""
+            },
+            {
+              "speaker": "休斯",
+              "line": "Oh, oh my god, don't waste our precious resources.",
+              "delivery": ""
+            },
+            {
+              "action": "亚瑟神色冷峻，盯着休斯。"
+            },
+            {
+              "speaker": "亚瑟",
+              "line": "What did you just say?",
+              "delivery": ""
+            },
+            {
+              "action": "休斯站起身，右手掌心凝聚出一团火焰，嚣张地对亚瑟大喊。"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,113 @@
+[
+  {
+    "segment": "E04-01",
+    "seconds": 8,
+    "cuts": 3,
+    "prompt": "/tmp/sd-out/E04-01/seedance.md",
+    "attachments": [
+      {
+        "ref": "@图片1",
+        "label": "4-2",
+        "kind": "sheet",
+        "path": "/tmp/sd-out/E04-01/ref-1.png",
+        "source": "4-2-sheet.png",
+        "present": false
+      },
+      {
+        "ref": "@图片2",
+        "label": "亚瑟",
+        "kind": "sheet",
+        "path": "/tmp/sd-out/E04-01/ref-2.png",
+        "source": "亚瑟-sheet.png",
+        "present": false
+      }
+    ],
+    "missing": [
+      "/tmp/sd-out/E04-01/ref-1.png",
+      "/tmp/sd-out/E04-01/ref-2.png"
+    ]
+  },
+  {
+    "segment": "E04-02",
+    "seconds": 9,
+    "cuts": 3,
+    "prompt": "/tmp/sd-out/E04-02/seedance.md",
+    "attachments": [
+      {
+        "ref": "@图片1",
+        "label": "4-2",
+        "kind": "sheet",
+        "path": "/tmp/sd-out/E04-02/ref-1.png",
+        "source": "4-2-sheet.png",
+        "present": false
+      },
+      {
+        "ref": "@图片2",
+        "label": "休斯",
+        "kind": "sheet",
+        "path": "/tmp/sd-out/E04-02/ref-2.png",
+        "source": "休斯-sheet.png",
+        "present": false
+      },
+      {
+        "ref": "@图片3",
+        "label": "两个仆人",
+        "kind": "sheet",
+        "path": "/tmp/sd-out/E04-02/ref-3.png",
+        "source": "两个仆人-sheet.png",
+        "present": false
+      }
+    ],
+    "missing": [
+      "/tmp/sd-out/E04-02/ref-1.png",
+      "/tmp/sd-out/E04-02/ref-2.png",
+      "/tmp/sd-out/E04-02/ref-3.png"
+    ]
+  },
+  {
+    "segment": "E04-03",
+    "seconds": 8,
+    "cuts": 3,
+    "prompt": "/tmp/sd-out/E04-03/seedance.md",
+    "attachments": [
+      {
+        "ref": "@图片1",
+        "label": "4-2",
+        "kind": "sheet",
+        "path": "/tmp/sd-out/E04-03/ref-1.png",
+        "source": "4-2-sheet.png",
+        "present": false
+      },
+      {
+        "ref": "@图片2",
+        "label": "亚瑟",
+        "kind": "sheet",
+        "path": "/tmp/sd-out/E04-03/ref-2.png",
+        "source": "亚瑟-sheet.png",
+        "present": false
+      },
+      {
+        "ref": "@图片3",
+        "label": "休斯",
+        "kind": "sheet",
+        "path": "/tmp/sd-out/E04-03/ref-3.png",
+        "source": "休斯-sheet.png",
+        "present": false
+      },
+      {
+        "ref": "@图片4",
+        "label": "两个仆人",
+        "kind": "sheet",
+        "path": "/tmp/sd-out/E04-03/ref-4.png",
+        "source": "两个仆人-sheet.png",
+        "present": false
+      }
+    ],
+    "missing": [
+      "/tmp/sd-out/E04-03/ref-1.png",
+      "/tmp/sd-out/E04-03/ref-2.png",
+      "/tmp/sd-out/E04-03/ref-3.png",
+      "/tmp/sd-out/E04-03/ref-4.png"
+    ]
+  }
+]
