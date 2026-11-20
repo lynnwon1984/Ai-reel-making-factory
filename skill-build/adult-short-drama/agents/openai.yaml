@@ -1,0 +1,4 @@
+interface:
+  display_name: "成人向短剧生产"
+  short_description: "面向日本与欧美的20分钟18+高比例单事件情欲短剧与双语剧本生产助手"
+  default_prompt: "使用 $adult-short-drama 根据以下设定创作一个约20分钟的18+单事件情欲剧本。"

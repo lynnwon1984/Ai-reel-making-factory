@@ -1,0 +1,4 @@
+interface:
+  display_name: "影视剧本质检"
+  short_description: "审查20分钟成人影视剧本的时长、同意、镜头与连续性"
+  default_prompt: "使用 $screen-script-qc 审查这份20分钟成人影视剧本，先运行自动检查再列语义问题。"

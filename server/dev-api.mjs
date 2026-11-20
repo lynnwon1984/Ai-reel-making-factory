@@ -133,6 +133,7 @@ export function apiMiddleware(root) {
 
     try {
       const upstream = await fetch(UPSTREAM, {
+        signal: AbortSignal.timeout(Number(process.env.MODEL_TIMEOUT_MS || 600000)),
         method: "POST",
         headers: {
           "content-type": "application/json",

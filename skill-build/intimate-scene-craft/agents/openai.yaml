@@ -1,0 +1,4 @@
+interface:
+  display_name: "亲密场景工坊"
+  short_description: "为小说与影视剧本编写细腻清晰的18+成人亲密场景与动作节拍"
+  default_prompt: "使用 $intimate-scene-craft 根据以下人物和情境写一场18+亲密戏。"

@@ -7,7 +7,13 @@
     "dev": "vite",
     "build": "vite build && node scripts/prepare-sites-build.mjs",
     "preview": "vite preview",
-    "test:unit": "node --test tests/split-engine.test.mjs tests/handoff.test.mjs tests/checklist.test.mjs tests/validate.test.mjs tests/chunked.test.mjs tests/artifact.test.mjs tests/storyboard.test.mjs tests/relay.test.mjs tests/qc.test.mjs tests/qc-engine.test.mjs tests/qc-verify.test.mjs tests/normalize.test.mjs",
+    "plan:scene": "node scripts/scene-plan-smoke.mjs",
+    "plan:director": "node scripts/director-plan-pilot.mjs",
+    "storyboard:ab": "node scripts/ab-storyboard-smoke.mjs",
+    "storyboard:ab:replay": "node scripts/replay-ab-engine.mjs",
+    "storyboard:ab:3scene": "node scripts/storyboard-3scene-ab.mjs",
+    "storyboard:shot:replay": "node scripts/replay-shot-repair-run.mjs",
+    "test:unit": "node --test tests/split-engine.test.mjs tests/handoff.test.mjs tests/checklist.test.mjs tests/clean-engine.test.mjs tests/validate.test.mjs tests/costume-cleanup.test.mjs tests/chunked.test.mjs tests/artifact.test.mjs tests/storyboard.test.mjs tests/eos-adapter.test.mjs tests/delivery-package.test.mjs tests/action-units.test.mjs tests/duration-calibration.test.mjs tests/episode-resolution.test.mjs tests/run-metrics.test.mjs tests/shot-repair.test.mjs tests/experimental-engine.test.mjs tests/scene-engine.test.mjs tests/relay.test.mjs tests/qc.test.mjs tests/qc-engine.test.mjs tests/qc-verify.test.mjs tests/normalize.test.mjs tests/stage-prompt-guard.test.mjs tests/stage-bible-guard.test.mjs tests/stage-scene-plan-guard.test.mjs tests/stage-scene-guard.test.mjs",
     "test:sites": "node --test tests/sites-worker.test.mjs"
   },
   "dependencies": {

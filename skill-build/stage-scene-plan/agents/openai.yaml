@@ -1,0 +1,4 @@
+interface:
+  display_name: "舞台场景施工图"
+  short_description: "把舞台作品拆成可写作、可演、可验收且连续的分场施工图"
+  default_prompt: "使用 $stage-scene-plan 把故事圣经拆成可执行的场景卡。"

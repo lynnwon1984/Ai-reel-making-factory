@@ -1,0 +1,4 @@
+interface:
+  display_name: "小说写作"
+  short_description: "从构思到单章正文、续写与连续性校验的完整小说生产助手"
+  default_prompt: "使用 $novel-writing 根据以下设定和章节卡写一章小说正文。"

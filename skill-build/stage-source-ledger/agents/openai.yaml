@@ -1,0 +1,4 @@
+interface:
+  display_name: "舞台素材事实账本"
+  short_description: "提取故事事实、全量对白、媒介风险并建立可追溯的舞台改编账本"
+  default_prompt: "使用 $stage-source-ledger 把这段故事拆成可追溯的事实账本。"
