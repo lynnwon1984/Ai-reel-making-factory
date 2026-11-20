@@ -24,6 +24,7 @@ import qcPrompt from "./prompts/qc-storyboard.md?raw";
 import { parseQc, countByLevel, collectBatchIssues, topIssues, hasHigh, sortIssues } from "./qc.js";
 import { runEngineQc } from "./qc-engine.js";
 import { auditStateChain } from "./state-chain.js";
+import { auditBlocking } from "./blocking.js";
 import { normalizeStoryboard } from "./normalize.js";
 import { verifyModelIssues } from "./qc-verify.js";
 import { buildDeliveryPackage } from "./delivery-package.js";
@@ -295,7 +296,7 @@ export function StoryboardFlow() {
   const ledger = useMemo(() => buildLedger(parsed), [parsed]);
   const modelQcIssues = useMemo(() => collectBatchIssues(state.batches), [state.batches]);
   const engineIssues = useMemo(
-    () => [...runEngineQc(state.text, output), ...auditStateChain(output)],
+    () => [...runEngineQc(state.text, output), ...auditStateChain(output), ...auditBlocking(output)],
     [state.text, output],
   );
   const experimentalIssues = useMemo(
@@ -545,7 +546,7 @@ export function StoryboardFlow() {
         }
 
         // 引擎能判的高危（台词篡改）同样立刻停，不等检查点
-        const engIssues = [...runEngineQc(body, text), ...auditStateChain(text)];
+        const engIssues = [...runEngineQc(body, text), ...auditStateChain(text), ...auditBlocking(text)];
         if (hasHigh([...engIssues, ...issues])) {
           patch({ stage: "paused", pausedAt: acc.length, pauseReason: "qc" });
           return;
