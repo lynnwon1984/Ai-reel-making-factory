@@ -1,0 +1,96 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "scene-plan-v2.schema.json",
+  "title": "导演版单场分镜计划",
+  "type": "object",
+  "required": ["schemaVersion", "sceneId", "shots"],
+  "properties": {
+    "schemaVersion": { "const": 2 },
+    "sceneId": { "type": "string", "minLength": 1 },
+    "directorBrief": {
+      "$ref": "director-brief-v1.schema.json#/properties/directorBrief"
+    },
+    "sceneGeography": {
+      "$ref": "director-brief-v1.schema.json#/properties/sceneGeography"
+    },
+    "shots": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "duration",
+          "purpose",
+          "storyFunction",
+          "cast",
+          "props",
+          "startState",
+          "stateChange",
+          "endState",
+          "cameraReason",
+          "continuityNote",
+          "clips"
+        ],
+        "properties": {
+          "duration": { "type": "integer", "minimum": 5, "maximum": 15 },
+          "purpose": { "type": "string", "minLength": 1 },
+          "storyFunction": {
+            "enum": [
+              "establish",
+              "power",
+              "pressure",
+              "detail",
+              "reaction",
+              "shift",
+              "impact",
+              "aftermath",
+              "exit"
+            ]
+          },
+          "cast": {
+            "type": "array",
+            "items": { "type": "string", "minLength": 1 }
+          },
+          "props": {
+            "type": "array",
+            "items": { "type": "string", "minLength": 1 }
+          },
+          "startState": { "type": "string", "minLength": 1 },
+          "stateChange": { "type": "string", "minLength": 1 },
+          "endState": { "type": "string", "minLength": 1 },
+          "cameraReason": { "type": "string", "minLength": 1 },
+          "continuityNote": { "type": "string", "minLength": 1 },
+          "clips": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "required": [
+                "duration",
+                "size",
+                "cameraMove",
+                "visualAction",
+                "sourceBlockIds"
+              ],
+              "properties": {
+                "duration": { "type": "integer", "minimum": 2, "maximum": 15 },
+                "size": { "type": "string", "minLength": 1 },
+                "cameraMove": { "type": "string", "minLength": 1 },
+                "visualAction": { "type": "string", "minLength": 1 },
+                "beat": { "type": "string" },
+                "sourceBlockIds": {
+                  "type": "array",
+                  "minItems": 1,
+                  "items": { "type": "string", "pattern": "^B[0-9]+$" }
+                }
+              },
+              "additionalProperties": true
+            }
+          }
+        },
+        "additionalProperties": true
+      }
+    }
+  },
+  "additionalProperties": true
+}

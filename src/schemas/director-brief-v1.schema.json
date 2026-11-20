@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "director-brief-v1.schema.json",
+  "title": "单场导演提示单",
+  "type": "object",
+  "required": ["directorBrief", "sceneGeography"],
+  "properties": {
+    "directorBrief": {
+      "type": "object",
+      "required": [
+        "dramaticQuestion",
+        "desire",
+        "obstacle",
+        "powerBefore",
+        "powerAfter",
+        "informationReveal",
+        "visualCore",
+        "keyProp",
+        "startHook",
+        "endHook"
+      ],
+      "properties": {
+        "dramaticQuestion": { "type": "string", "minLength": 1 },
+        "desire": { "type": "string", "minLength": 1 },
+        "obstacle": { "type": "string", "minLength": 1 },
+        "powerBefore": { "type": "string", "minLength": 1 },
+        "powerAfter": { "type": "string", "minLength": 1 },
+        "informationReveal": { "type": "string", "minLength": 1 },
+        "visualCore": { "type": "string", "minLength": 1 },
+        "keyProp": { "type": "string", "minLength": 1 },
+        "startHook": { "type": "string", "minLength": 1 },
+        "endHook": { "type": "string", "minLength": 1 }
+      },
+      "additionalProperties": true
+    },
+    "sceneGeography": {
+      "type": "object",
+      "required": ["anchors", "powerPosition", "axis", "workingSide"],
+      "properties": {
+        "anchors": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "powerPosition": { "type": "string", "minLength": 1 },
+        "axis": { "type": "string", "minLength": 1 },
+        "workingSide": { "type": "string", "minLength": 1 }
+      },
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": true
+}

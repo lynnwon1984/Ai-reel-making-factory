@@ -34,6 +34,14 @@ test("引擎：台词被改写 → 高危台词篡改", () => {
   assert.match(hit.evidence, /Go away/);
 });
 
+test("引擎：整句台词漏掉 → 高危漏台词", () => {
+  const out = OUT_OK.replace('\nEN: 村长（O.S.）: "Thank you."', "");
+  const hit = runEngineQc(SRC, out).find((i) => i.rule === "漏台词");
+  assert.ok(hit);
+  assert.equal(hit.level, "高");
+  assert.match(hit.evidence, /thankyou/);
+});
+
 test("引擎：凭空多出来的人物 → 高危新增人物", () => {
   const out = OUT_OK.replace(
     "人物：村长（Village Chief，着装：粗布冬装）",

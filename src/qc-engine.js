@@ -1,4 +1,5 @@
 import { parseStoryboard } from "./storyboard.js";
+import { bigramSimilarity, flattenText } from "./text-similarity.js";
 
 /**
  * 确定性质检引擎：能算出来的都算出来，不调模型、可复现。
@@ -6,11 +7,7 @@ import { parseStoryboard } from "./storyboard.js";
  */
 
 /** 去掉标点、空白、引号，统一小写，用于包含性比对 */
-export function flatten(text) {
-  return String(text || "")
-    .toLowerCase()
-    .replace(/[^\p{L}\p{N}]+/gu, "");
-}
+export { flattenText as flatten } from "./text-similarity.js";
 
 const pad = (n) => String(n).padStart(2, "0");
 
@@ -22,11 +19,19 @@ function sourceDialogues(src) {
   const out = [];
   for (const raw of String(src || "").split(/\r?\n/)) {
     const line = raw.trim();
-    if (!line || line.startsWith("△")) continue;
+    if (
+      !line ||
+      line.startsWith("△") ||
+      /^第\s*\d+\s*集(?:\s*[：:]|$)/.test(line) ||
+      /^\d+\s*-\s*\d+\s+/.test(line) ||
+      /^人物\s*[：:]/.test(line)
+    ) {
+      continue;
+    }
     const m = line.match(/^\*{0,2}([^：:*\n]{1,24})\*{0,2}\s*(?:（[^）]*）)?\s*[：:]\s*(.+)$/);
     if (!m) continue;
     const text = m[2].replace(/^["“「]|["”」]$/g, "").trim();
-    const key = flatten(text);
+    const key = flattenText(text);
     if (key) out.push(key);
   }
   return out;
@@ -39,7 +44,7 @@ function sourceDialogues(src) {
  * changed = 找不到
  */
 export function classifyDialogue(text, srcList) {
-  const key = flatten(text);
+  const key = flattenText(text);
   if (!key) return "exact";
   if (srcList.some((s) => s.includes(key))) return "exact";
 
@@ -57,25 +62,9 @@ export function classifyDialogue(text, srcList) {
   return parts > 1 ? "merged" : "exact";
 }
 
-/** 相邻 Clip 的机位描述相似度（字符二元组 Jaccard） */
-function similarity(a, b) {
-  const grams = (s) => {
-    const t = flatten(s);
-    const out = new Set();
-    for (let i = 0; i < t.length - 1; i += 1) out.add(t.slice(i, i + 2));
-    return out;
-  };
-  const A = grams(a);
-  const B = grams(b);
-  if (!A.size || !B.size) return 0;
-  let inter = 0;
-  for (const g of A) if (B.has(g)) inter += 1;
-  return inter / (A.size + B.size - inter);
-}
-
 export function runEngineQc(sourceText, outputText) {
   const issues = [];
-  const flatSrc = flatten(sourceText);
+  const flatSrc = flattenText(sourceText);
   const srcList = sourceDialogues(sourceText);
   const parsed = parseStoryboard(outputText);
   if (!flatSrc || !parsed.episodes.length) return issues;
@@ -112,7 +101,7 @@ export function runEngineQc(sourceText, outputText) {
       // 2) 人物：产出里出现的人，原文提都没提过
       // 「酒客群像」原文写「酒客」属于同一批人，尾部子串命中就算已知
       for (const c of shot.cast) {
-        const key = flatten(c.name);
+        const key = flattenText(c.name);
         if (!key) continue;
         const known =
           flatSrc.includes(key) ||
@@ -133,7 +122,7 @@ export function runEngineQc(sourceText, outputText) {
           .split("的")
           .pop()
           .replace(/^[0-9一二三四五六七八九十百千]+[个只把杯扎瓶盒张份条根块串]?/, "");
-        const key = flatten(head) || flatten(name);
+        const key = flattenText(head) || flattenText(name);
         // 中文里「烤肉串 / 一串烤肉」「粥碗 / 一碗热粥」只是换了个说法。
         // 只要道具名里有字在原文出现过，就不算凭空新增（宁可漏报，不要误报）。
         const known = key.length < 2 || [...key].some((ch) => flatSrc.includes(ch));
@@ -146,7 +135,7 @@ export function runEngineQc(sourceText, outputText) {
       for (let i = 1; i < shot.clips.length; i += 1) {
         const prev = shot.clips[i - 1];
         const cur = shot.clips[i];
-        const s = similarity(prev.camera, cur.camera);
+        const s = bigramSimilarity(prev.camera, cur.camera);
         if (s >= 0.75) {
           add(
             "中",
@@ -165,6 +154,33 @@ export function runEngineQc(sourceText, outputText) {
         }
       }
     }
+  }
+
+  const outputDialogueKeys = new Set(
+    parsed.episodes.flatMap((ep) =>
+      ep.shots.flatMap((shot) =>
+        shot.clips.flatMap((clip) =>
+          clip.dialogue.map((line) => flattenText(line.text)),
+        ),
+      ),
+    ),
+  );
+  const missingDialogues = [...new Set(srcList)].filter(
+    (sourceKey) =>
+      ![...outputDialogueKeys].some(
+        (outputKey) =>
+          outputKey === sourceKey ||
+          outputKey.includes(sourceKey) ||
+          sourceKey.includes(outputKey),
+      ),
+  );
+  for (const sourceKey of missingDialogues) {
+    add(
+      "高",
+      "全集",
+      "漏台词",
+      `原文台词「${sourceKey}」没有出现在产出中`,
+    );
   }
 
   return issues;

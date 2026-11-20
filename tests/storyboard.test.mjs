@@ -58,6 +58,21 @@ test("解析：集 / shot / Clip 三层都能拆出来", () => {
   assert.equal(p.episodes[0].shots[0].clips[0].size, "CU");
 });
 
+test("解析：兼容 Markdown 集标题", () => {
+  const text = `## 第2集：测试
+【分镜01】
+[shot01 | 时长：8秒 | 场景：A | 人物：村长 | 道具：无]
+人物空间位置：
+村长站着。
+Clip A | 时长：8秒 | 景别：MS
+CAMERA: 固定机位 / MS. 村长抬头。
+`;
+  const parsed = parseStoryboard(text);
+  assert.equal(parsed.episodes.length, 1);
+  assert.equal(parsed.episodes[0].no, 2);
+  assert.equal(parsed.episodes[0].shots.length, 1);
+});
+
 test("解析：人物栏能拆出中文名 / 英文名 / 着装", () => {
   const one = parseCastItem("村长（Village Chief，着装：粗布冬装）");
   assert.deepEqual(one, { name: "村长", full: "Village Chief", dress: "粗布冬装" });
@@ -201,6 +216,28 @@ test("常量：Clip 区间与单 shot 上限符合规范", () => {
   assert.equal(CLIP_MIN, 4);
   assert.equal(CLIP_MAX, 15);
   assert.equal(MAX_CLIPS_PER_SHOT, 3);
+});
+
+test("校验器：可切换为 6 Clip / 2 秒下限策略", () => {
+  const clips = ["A", "B", "C", "D", "E", "F"]
+    .map(
+      (letter) =>
+        `Clip ${letter} | 时长：2秒 | 景别：CU\nCAMERA: 固定机位 / CU. 人物动作${letter}。`,
+    )
+    .join("\n");
+  const text = `第1集
+【分镜01】
+[shot01 | 时长：12秒 | 场景：街口 外 夜 | 人物：村长 | 道具：无]
+人物空间位置：
+村长站在街口。
+${clips}`;
+  const parsed = parseStoryboard(text);
+  assert.ok(validateStoryboard(parsed).issues.length > 0);
+  assert.equal(
+    validateStoryboard(parsed, { shotMin: 5, shotMax: 15, clipMin: 2, clipMax: 8, maxClips: 6 })
+      .issues.length,
+    0,
+  );
 });
 
 /* ---------------- 分批 ---------------- */

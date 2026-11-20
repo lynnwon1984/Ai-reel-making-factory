@@ -43,6 +43,11 @@ const RE_EN = /^EN\s*[：:]\s*(.*)$/;
 const RE_POS = /^人物空间位置\s*[：:]?\s*$/;
 
 const trim = (s) => String(s ?? "").trim();
+const plainHeading = (s) =>
+  trim(s)
+    .replace(/^#{1,6}\s+/, "")
+    .replace(/^\*\*(.*)\*\*$/, "$1")
+    .trim();
 
 function parseFields(raw) {
   const out = {};
@@ -99,7 +104,7 @@ export function parseStoryboard(text) {
   let expectPos = false;
 
   for (const rawLine of String(text || "").split(/\r?\n/)) {
-    const line = trim(rawLine);
+    const line = plainHeading(rawLine);
     if (!line) continue;
     let m;
 
@@ -182,9 +187,14 @@ export function parseStoryboard(text) {
 
 /* ---------------- 2. 校验 ---------------- */
 
-export function validateStoryboard(parsed) {
+export function validateStoryboard(parsed, policy = {}) {
   const issues = [];
   const add = (level, where, msg) => issues.push({ level, where, msg });
+  const shotMin = Number(policy.shotMin) || SHOT_MIN;
+  const shotMax = Number(policy.shotMax) || SHOT_MAX;
+  const clipMin = Number(policy.clipMin) || CLIP_MIN;
+  const clipMax = Number(policy.clipMax) || CLIP_MAX;
+  const maxClipsPerShot = Number(policy.maxClips) || MAX_CLIPS_PER_SHOT;
 
   let shots = 0;
   let clips = 0;
@@ -206,15 +216,15 @@ export function validateStoryboard(parsed) {
         add("中", where, "缺少人物");
       }
       if (s.duration === null) add("高", where, "表头没写时长");
-      else if (s.duration < SHOT_MIN || s.duration > SHOT_MAX) {
-        add("高", where, `shot 时长 ${s.duration}s 不在 ${SHOT_MIN}–${SHOT_MAX}s`);
+      else if (s.duration < shotMin || s.duration > shotMax) {
+        add("高", where, `shot 时长 ${s.duration}s 不在 ${shotMin}–${shotMax}s`);
       }
 
       const letters = s.clips.map((c) => c.letter).join("");
       const want = s.clips.map((_, i) => String.fromCharCode(65 + i)).join("");
       if (letters !== want) add("中", where, `Clip 字母不是 A 起连续：${letters || "（无）"}`);
-      if (s.clips.length > MAX_CLIPS_PER_SHOT) {
-        add("高", where, `Clip 数 ${s.clips.length} 超过上限 ${MAX_CLIPS_PER_SHOT}`);
+      if (s.clips.length > maxClipsPerShot) {
+        add("高", where, `Clip 数 ${s.clips.length} 超过上限 ${maxClipsPerShot}`);
       }
 
       const sum = s.clips.reduce((a, c) => a + (c.duration ?? 0), 0);
@@ -225,8 +235,8 @@ export function validateStoryboard(parsed) {
       for (const c of s.clips) {
         clips += 1;
         if (c.duration === null) add("高", `${where} Clip ${c.letter}`, "没写时长");
-        else if (c.duration < CLIP_MIN || c.duration > CLIP_MAX) {
-          add("高", `${where} Clip ${c.letter}`, `Clip 时长 ${c.duration}s 不在 ${CLIP_MIN}–${CLIP_MAX}s`);
+        else if (c.duration < clipMin || c.duration > clipMax) {
+          add("高", `${where} Clip ${c.letter}`, `Clip 时长 ${c.duration}s 不在 ${clipMin}–${clipMax}s`);
         }
         if (!c.size) add("中", `${where} Clip ${c.letter}`, "缺少景别");
         if (!c.camera) add("中", `${where} Clip ${c.letter}`, "缺少 CAMERA 行");
@@ -395,7 +405,8 @@ export function splitEpisodes(text) {
   const preamble = [];
   for (const line of lines) {
     // 只认真正的集标题：「第11集：标题」，不认「第11集后半缺失：…」这种正文
-    const m = line.match(/^\s*(?:\*\*)?第\s*(\d+)\s*集(?:\s*[：:].*?)?\s*(?:\*\*)?\s*$/);
+    const heading = plainHeading(line);
+    const m = heading.match(/^第\s*(\d+)\s*集(?:\s*[：:].*?)?\s*$/);
     if (m) {
       if (cur) eps.push(cur);
       cur = { no: Number(m[1]), lines: [line] };
